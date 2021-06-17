@@ -1,5 +1,5 @@
 import React from "react";
-import "./sidenav.css"
+import "./Layout/css/sidenav.css"
 import {Navbar} from "react-bootstrap";
 
 const Main = () => {
