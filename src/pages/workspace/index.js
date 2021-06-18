@@ -6,7 +6,7 @@ import {Paper, Tab, Tabs} from "@material-ui/core";
 
 const Workspace = () => {
     return (
-        <div className="content">
+        <div>
             <Paper position="static">
                 <Tabs value="test" centered>
                     <Tab label="board" value="test">test</Tab>

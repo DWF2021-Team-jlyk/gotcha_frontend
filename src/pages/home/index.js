@@ -2,21 +2,15 @@ import React from "react";
 import "../../layout/css/Layout.css";
 import WorkSpaceCard from "../../components/WorkSpaceCard";
 import {Button, Card, Row} from "react-bootstrap";
+import {Box} from "@material-ui/core";
 
-const Home = () => {
+const Home = ({classes}) => {
     return (
-        <div className="content">
-            <Row>
+        <Box>
+            <Box>
                 <WorkSpaceCard title="test"/>
-                <WorkSpaceCard title="test"/>
-                <WorkSpaceCard title="test"/>
-                <WorkSpaceCard title="test"/>
-                <WorkSpaceCard title="test"/>
-                <WorkSpaceCard title="test"/>
-                <WorkSpaceCard title="test"/>
-                <WorkSpaceCard title="test"/>
-            </Row>
-        </div>
+            </Box>
+        </Box>
     )
 }
 
