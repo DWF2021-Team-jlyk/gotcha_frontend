@@ -114,7 +114,7 @@ const Sidebar = () => {
         <ListItemIcon>
           <InboxIcon />
         </ListItemIcon>
-        <ListItemText primary="Admin WorkSpace" />
+        <ListItemText primary="WorkSpace" />
         {open3 ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
 
