@@ -5,14 +5,25 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #212529;
+    color: #fff;
     overflow-x: hidden;
     padding-top: 20px;
 
     color: white;
 }
 
+<<<<<<< HEAD:src/layout/css/Layout.css
+.content {
+    margin-left: 220px; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+.header {
+=======
 .main {
+>>>>>>> origin/main:src/sidenav.css
     margin-left: 220px; /* Same as the width of the sidenav */
     font-size: 28px; /* Increased text to enable scrolling */
     padding: 0px 10px;
