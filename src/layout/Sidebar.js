@@ -9,100 +9,127 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import StarBorder from "@material-ui/icons/StarBorder";
+import {makeStyles} from "@material-ui/core/styles";
 
-const Sidebar = ({classes}) => {
-    const [open1, setOpen1] = React.useState(true); //열릴 때 true
-    const [open2, setOpen2] = React.useState(true); //열릴 때 true
-    const [open3, setOpen3] = React.useState(true); //열릴 때 true
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: 250,
+    backgroundColor: theme.palette.primary.light,
+    color: theme.palette.background.paper,
+  },
+  nested: {
+    paddingLeft: theme.spacing(4),
+  },
 
-    const handleClick1 = () => {
-        setOpen1(!open1);
-    };
+  navName: {
+    paddingTop: 20,
+    paddingBottom: 15,
+    color: theme.palette.background.paper,
+    fontSize: "1.75rem",
+  },
+  sub: {
+    paddingBottom: 20,
+  },
+}));
 
-    const handleClick2 = () => {
-        setOpen2(!open2);
-    };
+const Sidebar = () => {
+  const classes = useStyles();
+  const [open1, setOpen1] = React.useState(true); //열릴 때 true
+  const [open2, setOpen2] = React.useState(true); //열릴 때 true
+  const [open3, setOpen3] = React.useState(true); //열릴 때 true
 
-    const handleClick3 = () => {
-        setOpen3(!open3);
-    };
+  const handleClick1 = () => {
+    setOpen1(!open1);
+  };
 
-    return (
-        <nav className={classes.sidebar}>
-            <List
-                component="nav"
-                aria-labelledby="nested-list-subheader"
-                subheader={
-                    <ListSubheader className={classes.navName} component="div" id="nested-list-subheader">
-                        WorkSpace List
-                    </ListSubheader>
-                }
-                className={classes.sidebar}
-            >
-                <ListItem button onClick={handleClick1}>
-                    <ListItemIcon>
-                        <StarBorder/>
-                    </ListItemIcon>
-                    <ListItemText primary="즐겨찾기"/>
-                    {open1 ? <ExpandLess/> : <ExpandMore/>}
-                    {/*             true        false*/}
-                </ListItem>
+  const handleClick2 = () => {
+    setOpen2(!open2);
+  };
 
-                <Collapse className={classes.sub} in={open1} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
-                        <ListItem button className={classes.nested}>
-                            <ListItemText primary="workSpace1"/>
-                        </ListItem>
+  const handleClick3 = () => {
+    setOpen3(!open3);
+  };
 
-                        <ListItem button className={classes.nested}>
-                            <ListItemText primary="workSpace2"/>
-                        </ListItem>
-                    </List>
-                </Collapse>
+  return (
+    <div >
+    <List
+      component="nav"
+      aria-labelledby="nested-list-subheader"
+      subheader={
+        <ListSubheader
+          className={classes.navName}
+          component="div"
+          id="nested-list-subheader"
+        >
+          WorkSpace List
+        </ListSubheader>
+      }
+      className={classes.root}
+    >
+      <ListItem button onClick={handleClick1}>
+        <ListItemIcon>
+          <StarBorder />
+        </ListItemIcon>
+        <ListItemText primary="즐겨찾기" />
+        {open1 ? <ExpandLess /> : <ExpandMore />}
+        {/*             true        false*/}
+      </ListItem>
 
-                <ListItem button onClick={handleClick2}>
-                    <ListItemIcon>
-                        <InboxIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary="Admin WorkSpace"/>
-                    {open2 ? <ExpandLess/> : <ExpandMore/>}
-                    {/*             true        false*/}
-                </ListItem>
+      <Collapse className={classes.sub} in={open1} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem button className={classes.nested}>
+            <ListItemText primary="workSpace1" />
+          </ListItem>
 
-                <Collapse className={classes.sub} in={open2} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
-                        <ListItem button className={classes.nested}>
-                            <ListItemText primary="workSpace1"/>
-                        </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemText primary="workSpace2" />
+          </ListItem>
+        </List>
+      </Collapse>
 
-                        <ListItem button className={classes.nested}>
-                            <ListItemText primary="workSpace2"/>
-                        </ListItem>
-                    </List>
-                </Collapse>
+      <ListItem button onClick={handleClick2}>
+        <ListItemIcon>
+          <InboxIcon />
+        </ListItemIcon>
+        <ListItemText primary="Admin WorkSpace" />
+        {open2 ? <ExpandLess /> : <ExpandMore />}
+        {/*             true        false*/}
+      </ListItem>
 
-                <ListItem button onClick={handleClick3}>
-                    <ListItemIcon>
-                        <InboxIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary="WorkSpace"/>
-                    {open3 ? <ExpandLess/> : <ExpandMore/>}
-                </ListItem>
+      <Collapse className={classes.sub} in={open2} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem button className={classes.nested}>
+            <ListItemText primary="workSpace1" />
+          </ListItem>
 
-                <Collapse className={classes.sub} in={open3} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
-                        <ListItem button className={classes.nested}>
-                            <ListItemText primary="workSpace1"/>
-                        </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemText primary="workSpace2" />
+          </ListItem>
+        </List>
+      </Collapse>
 
-                        <ListItem button className={classes.nested}>
-                            <ListItemText primary="workSpace2"/>
-                        </ListItem>
-                    </List>
-                </Collapse>
-            </List>
-        </nav>
-    );
+      <ListItem button onClick={handleClick3}>
+        <ListItemIcon>
+          <InboxIcon />
+        </ListItemIcon>
+        <ListItemText primary="WorkSpace" />
+        {open3 ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+
+      <Collapse className={classes.sub} in={open3} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem button className={classes.nested}>
+            <ListItemText primary="workSpace1" />
+          </ListItem>
+
+          <ListItem button className={classes.nested}>
+            <ListItemText primary="workSpace2" />
+          </ListItem>
+        </List>
+      </Collapse>
+    </List>
+    </div>
+  );
 };
 
 export default Sidebar;
