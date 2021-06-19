@@ -14,30 +14,27 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import StarBorder from "@material-ui/icons/StarBorder";
 
 const useStyles = makeStyles((theme) => ({
-  
+
+
   root: {
     width: 250,
     backgroundColor: theme.palette.primary.light,
     color: theme.palette.background.paper,
-
   },
   nested: {
     paddingLeft: theme.spacing(4),
   },
 
-  navName:{
+  navName: {
     paddingTop: 20,
-    paddingBottom:15,
-    color:theme.palette.background.paper,
-    fontSize:'1.75rem'
-  }
-  ,
-  sub:{
-    paddingBottom:20,
-  }
-  
+    paddingBottom: 15,
+    color: theme.palette.background.paper,
+    fontSize: "1.75rem",
+  },
+  sub: {
+    paddingBottom: 20,
+  },
 }));
-
 
 const Sidebar = () => {
   const classes = useStyles();
@@ -58,11 +55,16 @@ const Sidebar = () => {
   };
 
   return (
+    <div >
     <List
       component="nav"
       aria-labelledby="nested-list-subheader"
       subheader={
-        <ListSubheader className={classes.navName} component="div" id="nested-list-subheader">
+        <ListSubheader
+          className={classes.navName}
+          component="div"
+          id="nested-list-subheader"
+        >
           WorkSpace List
         </ListSubheader>
       }
@@ -114,7 +116,7 @@ const Sidebar = () => {
         <ListItemIcon>
           <InboxIcon />
         </ListItemIcon>
-        <ListItemText primary="                                                                  WorkSpace" />
+        <ListItemText primary="WorkSpace" />
         {open3 ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
 
@@ -130,6 +132,7 @@ const Sidebar = () => {
         </List>
       </Collapse>
     </List>
+    </div>
   );
 };
 
