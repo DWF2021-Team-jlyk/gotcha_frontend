@@ -17,7 +17,8 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
-
+import {BrowserRouter as Router, Link, Route } from "react-router-dom";
+import Login from "../../pages/user/Login";
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -129,18 +130,21 @@ export default function Header(props) {
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
+    <Router>
+      <Menu
+        anchorEl={anchorEl}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        id={menuId}
+        keepMounted
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
+        open={isMenuOpen}
+        onClose={handleMenuClose}
+      >
+        <Link to="/login"><MenuItem onClick={handleMenuClose}>Profile</MenuItem></Link>
+        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      </Menu>
+      <Route path="/login" component={Login}/>
+    </Router>
   );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
