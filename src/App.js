@@ -1,9 +1,8 @@
 import React from "react";
-import Sidebar from "./layout/Sidebar";
+import Sidebar from "./layout/Sidebar/index";
 import Home from "./pages/home";
 import Header from "./layout/Header";
 import Workspace from "./pages/workspace";
-import {fade, makeStyles} from "@material-ui/core/styles";
 
 const style = {
     display: "flex"
@@ -28,10 +27,10 @@ const App = () => {
                 <div>
                     <div>
                         <Home/>
+                        <Workspace/>
                     </div>
                 </div>
             </div>
-            <Workspace/>
         </>
     )
 }

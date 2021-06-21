@@ -16,6 +16,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import {Add} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -210,7 +211,11 @@ export default function Header(props) {
                         <div className={classes.grow}/>
 
                         <div className={classes.sectionDesktop}>
-
+                            <IconButton
+                                color="inherit"
+                            >
+                                <Add/>
+                            </IconButton>
                             <IconButton
                                 aria-label="show 17 new notifications"
                                 color="inherit"
