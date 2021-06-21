@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useCallback} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -20,7 +20,7 @@ import { Link } from 'react-router-dom';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      {'Copyright ©'}
       {/* <Link color="inherit" href="https://material-ui.com/">
         Your Website
       </Link>{' '} */}
@@ -53,6 +53,10 @@ const useStyles = makeStyles((theme) => ({
 
 function Join() {
   const classes = useStyles();
+  const [email, setEmail] = useState('');
+  const onChange = useCallback(e=>{
+    setEmail(e.target.value);
+  }, []);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -65,7 +69,7 @@ function Join() {
         <Typography component="h1" variant="h5">
           회원가입
         </Typography>
-        <form className={classes.form} onSubmit={JoinCheck} method='post'>
+        <form className={classes.form} onSubmit={JoinCheck} method='get'>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -75,7 +79,9 @@ function Join() {
                 id="email"
                 label="Email Address"
                 name="email"
+                value={email}
                 autoComplete="email"
+                onChange={onChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -116,7 +122,8 @@ function Join() {
   );
 }
 
-function JoinCheck() {
+function JoinCheck(props) {
+  console.log(props);
 }
 
 export default Join;
