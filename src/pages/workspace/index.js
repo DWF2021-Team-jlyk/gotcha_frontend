@@ -9,7 +9,7 @@ const Workspace = () => {
         <div className="content">
             <Paper position="static">
                 <Tabs value="test" centered>
-                    <Tab label="board" value="test">test</Tab>
+                    <Tab label="WorkSpace" value="test">test</Tab>
                     <Tab label="calender" value="test">test</Tab>
                     <Tab label="Notification" value="test">test</Tab>
                 </Tabs>

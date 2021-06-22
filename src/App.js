@@ -3,22 +3,24 @@ import Sidebar from "./layout/Sidebar";
 import Home from "./pages/home";
 import Header from "./layout/Header";
 import Workspace from "./pages/workspace";
+import Board from "./pages/workspace/Board";
 
 const style = {
     display:"flex"
 }
 
-const headerWidth = {
-    width: 1680
-}
 
 const side ={
     background:'#7986cb'
 }
 
+const horizontal = {
+  width:1920,
+  overflowX:"scroll"
+}
+
 
 const App = ()=>{
-   
 
     return (
         <>
@@ -32,14 +34,17 @@ const App = ()=>{
         <div>
       
           <div>
-            <Home />
+            <Home/>
           </div>
         </div>
       </div>
+        <Workspace/>
 
-        
+        <div style={horizontal}>
+          <Board/>
+        </div>
 
-        <Workspace/> 
+
         </>
     )
 }
