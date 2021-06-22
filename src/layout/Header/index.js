@@ -11,12 +11,12 @@ import Typography from "@material-ui/core/Typography";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import {Add} from "@material-ui/icons";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -184,16 +184,21 @@ export default function Header(props) {
             <ElevationScroll {...props}>
                 <AppBar>
                     <Toolbar>
-                        <IconButton
-                            edge="start"
-                            className={classes.menuButton}
-                            color="inherit"
-                            aria-label="open drawer"
+                        <Typography
+                            className={classes.title}
+                            variant="h6"
+                            noWrap
                         >
-                            <MenuIcon/>
-                        </IconButton>
-                        <Typography className={classes.title} variant="h6" noWrap>
-                            Gotcha
+                            <Link
+                                style={{
+                                    color:"inherit",
+                                    textDecoration:"none",
+                                    underline:"none"
+                                }}
+                                to="/"
+                            >
+                                Gotcha
+                            </Link>
                         </Typography>
                         <div className={classes.search}>
                             <div className={classes.searchIcon}>

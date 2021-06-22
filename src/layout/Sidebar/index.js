@@ -3,8 +3,6 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
 import {makeStyles} from "@material-ui/core/styles";
 import MainList from "./MainList";
-import listContent from "../../DumiData/AppInitData";
-import AppInitData from "../../DumiData/AppInitData";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,7 +27,9 @@ const useStyles = makeStyles((theme) => ({
 
 const Sidebar = ({admin, fav, member}) => {
     const classes = useStyles();
-    const [subListData, setsubListData] = useState(AppInitData);
+    const [subListData, setsubListData] = useState({
+        admin, fav, member
+    });
 
 
     return (
@@ -47,11 +47,9 @@ const Sidebar = ({admin, fav, member}) => {
             }
             className={classes.root}
         >
-            {/*{*/}
-            {/*    listContent.map((value, index) => {*/}
-            {/*        return <MainList key={index} classes={classes} listContent={value}/>*/}
-            {/*    })*/}
-            {/*}*/}
+            <MainList category="FAVORITE" classes={classes} workspaces={fav}/>
+            <MainList category="ADMIN" classes={classes} workspaces={admin}/>
+            <MainList category="MEMBER" classes={classes} workspaces={member}/>
         </List>
     );
 };

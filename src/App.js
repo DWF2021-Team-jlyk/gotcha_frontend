@@ -3,42 +3,51 @@ import Sidebar from "./layout/Sidebar/index";
 import Home from "./pages/home";
 import Header from "./layout/Header";
 import Workspace from "./pages/workspace";
-import Board from "./pages/workspace/Board";
+import {Route, Switch} from "react-router-dom"
 import AppInitData from "./DumiData/AppInitData";
 
 const style = {
     display: "flex"
 }
-
-
 const side = {
     background: '#7986cb'
 }
 
 const horizontal = {
-  width:1920,
-  overflowX:"scroll"
+    width: 1920,
+    overflowX: "scroll"
 }
 const App = () => {
-    const [workspaceData, setWorkspaceData] = useState(
-        AppInitData.admin,
-        AppInitData.member,
-        AppInitData.fav,
+    const [adminWorkSpace, setAdminWorkSpace] = useState(
+        AppInitData.admin
     );
+    const [memberWorkSpace, setMemberWorkSpace] = useState(
+        AppInitData.member
+    );
+    const [favWorkSpace, setFavWorkSpace] = useState(
+        AppInitData.fav
+    )
     return (
         <>
             <Header/>
             <div style={style}>
                 <div style={side}>
-                    <Sidebar/>
+                    <Sidebar
+                        admin={adminWorkSpace}
+                        fav={favWorkSpace}
+                        member={memberWorkSpace}
+                    />
                 </div>
                 <div>
                     <div>
-                        <Home/>
-                        <Workspace/>
+                        <Route exact path="/" component={Home}/>
+                        <Route exact path="/workspace" component={Workspace}/>
                     </div>
                 </div>
             </div>
+            <footer>
+                this is footer
+            </footer>
         </>
     )
 }

@@ -1,9 +1,9 @@
 import {Button, Col, Form, Modal, ModalBody, ModalFooter, ModalTitle, Row} from "react-bootstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import React from "react";
-import UserAvatar from "./UserAvatar";
+import UserAvatar from "../../components/UserAvatar";
 
-const WorkSpaceSettingModal = ({workspace, clicked, handleClose}) => {
+const WorkSpaceSettingModal = ({workspace, clicked, handleClose, role}) => {
     return (
         <Modal
             size={"lg"}
@@ -26,7 +26,7 @@ const WorkSpaceSettingModal = ({workspace, clicked, handleClose}) => {
                                 <Form.Control
                                     type="text"
                                     defaultValue={workspace.name}
-                                    disabled={workspace.role !== "admin"}
+                                    disabled={role !== "ADMIN"}
                                 />
                             </Col>
                         </Row>
@@ -39,11 +39,13 @@ const WorkSpaceSettingModal = ({workspace, clicked, handleClose}) => {
                             <Col sm={8}>
                                 <Form.Control
                                     type="email"
-                                    disabled={workspace.role !== "admin"}
+                                    disabled={role !== "ADMIN"}
                                 />
                             </Col>
                             <Col sm={4}>
-                                <Button disabled={workspace.role !== "admin"}> add Member</Button>
+                                <Button
+                                    disabled={role !== "ADMIN"}
+                                > add Member</Button>
                             </Col>
                         </Row>
                     </Form.Group>
@@ -67,7 +69,7 @@ const WorkSpaceSettingModal = ({workspace, clicked, handleClose}) => {
                 <Button
                     variant="primary"
                     onClick={handleClose}
-                    disabled={workspace.role !== "admin"}
+                    disabled={workspace.role !== "ADMIN"}
                 >
                     Save Changes
                 </Button>

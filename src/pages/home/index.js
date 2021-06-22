@@ -30,14 +30,14 @@ const Home = () => {
             <div>
                 {
                     workspaces.names.map((name, index) => {
-                        return <Card style={workspaces.style}>
+                        return <Card style={workspaces.style} key={index}>
                             <Card.Header>
                                 <h3>{name}</h3>
                             </Card.Header>
                             <Card.Body style={{height: 500, overflowY: "scroll"}}>
                                 <Row>
                                     {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => {
-                                        return <WorkSpaceCard title="test" key={value}/>;
+                                        return <WorkSpaceCard title="test" key={value} id={value}/>;
                                     })}
                                 </Row>
                             </Card.Body>

@@ -4,9 +4,9 @@ import {IconButton} from "@material-ui/core";
 import {Form, Modal, ModalBody, ModalFooter, ModalTitle} from "react-bootstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import {Button} from "react-bootstrap";
-import WorkSpaceSettingModal from "../../components/WorkSpaceSettingModal";
+import WorkSpaceSettingModal from "./WorkSpaceSettingModal";
 
-const SettingWorkspace = ({workspace}) => {
+const SettingWorkspace = ({workspace, role}) => {
     const [clicked, setClicked] = useState(false);
     const handleClose = () => setClicked(false);
     return (
@@ -17,6 +17,7 @@ const SettingWorkspace = ({workspace}) => {
                 <SettingsIcon/>
             </IconButton>
             <WorkSpaceSettingModal
+                role={role}
                 workspace={workspace}
                 clicked={clicked}
                 handleClose={handleClose}

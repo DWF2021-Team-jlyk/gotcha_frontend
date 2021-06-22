@@ -1,10 +1,10 @@
-import { Button, Card, Row } from "react-bootstrap";
+import { Card, Row } from "react-bootstrap";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const WorkSpaceCard = ({ title, id }) => {
   return (
-    <a href={`workspace/${id}`} style={{width:"18rem", margin:"10px"}}>
+    <Link to={`workspace/${id}`} style={{width:"18rem", margin:"10px"}}>
       <Card style={{ width: "18rem", }}>
         <Card.Img variant="top" width={200} height={150} />
         <Card.Body>
@@ -13,7 +13,7 @@ const WorkSpaceCard = ({ title, id }) => {
           </Row>
         </Card.Body>
       </Card>
-    </a>
+    </Link>
   );
 };
 
