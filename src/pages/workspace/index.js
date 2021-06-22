@@ -3,6 +3,8 @@ import {Nav} from "react-bootstrap";
 import "../../layout/css/Layout.css"
 import WorkList from "./WorkList";
 import Card from "react-bootstrap/Card";
+import MyCalendar from "../calendar";
+import MyTable from "../board";
 
 
 const Workspace = () => {
@@ -31,8 +33,8 @@ const Workspace = () => {
             </Card.Header>
             <Card.Body>
                 {value === 1 && <WorkList/>}
-                {value === 2 && "Calendar"}
-                {value === 3 && "Board"}
+                {value === 2 && <MyCalendar/>}
+                {value === 3 && <MyTable/>}
             </Card.Body>
         </Card>
     )

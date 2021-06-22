@@ -5,6 +5,7 @@ import Header from "./layout/Header";
 import Workspace from "./pages/workspace";
 import {Route, Switch} from "react-router-dom"
 import AppInitData from "./DumiData/AppInitData";
+import Content from "./pages/board_content";
 
 const style = {
     display: "flex"
@@ -42,6 +43,7 @@ const App = () => {
                     <div>
                         <Route exact path="/" component={Home}/>
                         <Route exact path="/workspace" component={Workspace}/>
+                        <Route exact path="/board_content" component={Content}/>
                     </div>
                 </div>
             </div>
