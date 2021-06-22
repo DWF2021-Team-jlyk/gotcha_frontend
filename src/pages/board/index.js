@@ -1,7 +1,21 @@
 import React, {useEffect} from 'react';
-import { DataGrid } from '@material-ui/data-grid';
+import { DataGrid, GridFooter } from '@material-ui/data-grid';
 import Button from '@material-ui/core/Button'
+import { makeStyles } from '@material-ui/core';
+import Content from '../board_content';
 
+//DataGrid footer에 글쓰기 버튼 넣기
+
+const MyButton = () => {
+  return(
+    
+      <Button variant="outlined" color="primary" style={{float:"right"}}
+      href="/board_content">
+        글쓰기
+      </Button>
+    
+  );
+}
 
 
 const columns = [
@@ -25,10 +39,12 @@ const rows = [
 const MyTable=()=>{
   return (
     <div style={{ height: 400, width: '100%' }}>
-        {<DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />}
-        <Button variant="outlined" color="primary" size="small" href="#outlined-buttons">
-            글쓰기
-        </Button>
+        {<DataGrid 
+        rows={rows} columns={columns} pageSize={5} checkboxSelection 
+        components={{Footer:MyButton}}
+        />
+          }
+        
     </div>
     
   );
