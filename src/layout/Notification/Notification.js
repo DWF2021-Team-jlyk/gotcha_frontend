@@ -31,6 +31,7 @@ export default function Notification(props) {
 
                     {notis.map((noti, index) => {
                         return <Alert
+                            key={index}
                             variant={returnTypeColor(noti.type)}>
                             <Alert.Link href="#">
                                 <h4>{noti.workspaceName}</h4>

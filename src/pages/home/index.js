@@ -30,7 +30,7 @@ const Home = () => {
             <div>
                 {
                     workspaces.names.map((name, index) => {
-                        return <Card style={workspaces.style}>
+                        return <Card style={workspaces.style} key={index}>
                             <Card.Header>
                                 <h3>{name}</h3>
                             </Card.Header>

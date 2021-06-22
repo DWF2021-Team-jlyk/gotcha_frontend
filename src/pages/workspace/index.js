@@ -5,6 +5,8 @@ import WorkspaceNav from "./WorkspaceNav";
 import {Paper, Tab, Tabs} from "@material-ui/core";
 import TabPanel from "./TabPanel";
 import Board from "./Board";
+import MyCalendar from "../calendar";
+import MyTable from "../board";
 
 
 const Workspace = () => {
@@ -29,8 +31,8 @@ const Workspace = () => {
                 <TabPanel value={value} index={0}>
                     <Board/>
                 </TabPanel>
-                <TabPanel value={value} index={1}>Calender</TabPanel>
-                <TabPanel value={value} index={2}>Notification</TabPanel>
+                <TabPanel value={value} index={1}><MyCalendar/></TabPanel>
+                <TabPanel value={value} index={2}><MyTable/></TabPanel>
             </Paper>
         </div>
     )
