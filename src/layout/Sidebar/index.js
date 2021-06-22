@@ -3,6 +3,8 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
 import {makeStyles} from "@material-ui/core/styles";
 import MainList from "./MainList";
+import listContent from "../../DumiData/HomeData";
+import HomeData from "../../DumiData/HomeData";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,27 +29,9 @@ const useStyles = makeStyles((theme) => ({
 
 const Sidebar = () => {
     const classes = useStyles();
+    const [subListData, setsubListData] = useStyles(HomeData);
 
-    const listContent = [
-        {
-            title: "즐겨찾기",
-            workspaceList: [
-                {name: "workspace1", role: "admin"}, {name: "workspace2", role: "member"}
-            ]
-        },
-        {
-            title: "Admin WorkSpace",
-            workspaceList: [
-                {name: "workspace1", role: "admin"}, {name: "workspace2", role: "admin"}
-            ]
-        },
-        {
-            title: "WorkSpace",
-            workspaceList: [
-                {name: "workspace1", role: "member"}, {name: "workspace2", role: "member"}
-            ]
-        },
-    ]
+
     return (
         <List
             component="nav"
