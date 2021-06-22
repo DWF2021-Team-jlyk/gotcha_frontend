@@ -3,12 +3,25 @@ import Sidebar from "./layout/Sidebar/index";
 import Home from "./pages/home";
 import Header from "./layout/Header";
 import Workspace from "./pages/workspace";
-import {Route, Switch} from "react-router-dom"
+import Login from "./pages/user/Login";
+import Join from "./pages/user/Join";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Code from "./pages/user/Code";
 import AppInitData from "./DumiData/AppInitData";
 
 const style = {
-    display: "flex"
+    display: "flex",
 }
+
+const LoginStyle = {
+    display: "flex",
+    position: "absolute",
+    top: "23%",
+    left: "50%",
+    transform: "translateX(-50%)",
+}
+
+
 const side = {
     background: '#7986cb'
 }
@@ -17,6 +30,7 @@ const horizontal = {
     width: 1920,
     overflowX: "scroll"
 }
+
 const App = () => {
     const [adminWorkSpace, setAdminWorkSpace] = useState(
         AppInitData.admin
@@ -29,25 +43,42 @@ const App = () => {
     )
     return (
         <>
-            <Header/>
-            <div style={style}>
-                <div style={side}>
-                    <Sidebar
-                        admin={adminWorkSpace}
-                        fav={favWorkSpace}
-                        member={memberWorkSpace}
-                    />
-                </div>
-                <div>
-                    <div>
-                        <Route exact path="/" component={Home}/>
-                        <Route exact path="/workspace" component={Workspace}/>
+            <Switch>
+                <Route exact path="/Login" component={Login}>
+                    <div style={LoginStyle}>
+                        <Login/>
                     </div>
-                </div>
-            </div>
-            <footer>
-                this is footer
-            </footer>
+                </Route>
+
+                <Route exact path="/">
+                    <Header/>
+                    <div style={style}>
+                        <div style={side}>
+                            <Sidebar
+                                admin={adminWorkSpace}
+                                fav={favWorkSpace}
+                                member={memberWorkSpace}
+                            />
+                        </div>
+                        <div>
+                            <div>
+                                <Route exact path="/" component={Home}/>
+                                <Route exact path="/workspace" component={Workspace}/>
+
+                                <Route path="/Join" component={Join}>
+                                    <Join/>
+                                </Route>
+                                <Route path="/Code" component={Code}>
+                                    <Code/>
+                                </Route>
+                            </div>
+                        </div>
+                    </div>
+                    <footer>
+                        this is footer
+                    </footer>
+                </Route>
+            </Switch>
         </>
     )
 }

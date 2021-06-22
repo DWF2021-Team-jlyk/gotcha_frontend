@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import InputBase from "@material-ui/core/InputBase";
 import {fade, makeStyles} from "@material-ui/core/styles";
@@ -16,7 +15,9 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import {Add} from "@material-ui/icons";
-import {Link} from "react-router-dom";
+import {BrowserRouter as Router, Link, Route} from "react-router-dom";
+import Login from "../../pages/user/Login";
+import {CssBaseline} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -138,46 +139,22 @@ export default function Header(props) {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+                <Link
+                    to="/login"
+                    style={{
+                        color: "inherit",
+                        textDecoration: "none",
+                        underline: "none"
+                    }}
+                >
+                    Profile
+                </Link>
+            </MenuItem>
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
         </Menu>
     );
 
-    const mobileMenuId = "primary-search-account-menu-mobile";
-    const renderMobileMenu = (
-        <Menu
-            anchorEl={mobileMoreAnchorEl}
-            anchorOrigin={{vertical: "top", horizontal: "right"}}
-            id={mobileMenuId}
-            keepMounted
-            transformOrigin={{vertical: "top", horizontal: "right"}}
-            open={isMobileMenuOpen}
-            onClose={handleMobileMenuClose}
-        >
-            <MenuItem>
-                <IconButton aria-label="show 11 new notifications" color="inherit">
-                    <Badge badgeContent={11} color="secondary">
-                        <NotificationsIcon/>
-                    </Badge>
-                </IconButton>
-                <p>Notifications</p>
-            </MenuItem>
-            <MenuItem onClick={handleProfileMenuOpen}>
-                <IconButton
-                    aria-label="account of current user"
-                    aria-controls="primary-search-account-menu"
-                    aria-haspopup="true"
-                    color="inherit"
-                >
-                    <AccountCircle/>
-                </IconButton>
-                <p>Profile</p>
-            </MenuItem>
-            <MenuItem>
-                &ensp;  &ensp;  &ensp; Logout
-            </MenuItem>
-        </Menu>
-    );
     return (
         <>
             <CssBaseline/>
@@ -191,9 +168,9 @@ export default function Header(props) {
                         >
                             <Link
                                 style={{
-                                    color:"inherit",
-                                    textDecoration:"none",
-                                    underline:"none"
+                                    color: "inherit",
+                                    textDecoration: "none",
+                                    underline: "none"
                                 }}
                                 to="/"
                             >
@@ -216,15 +193,10 @@ export default function Header(props) {
                         <div className={classes.grow}/>
 
                         <div className={classes.sectionDesktop}>
-                            <IconButton
-                                color="inherit"
-                            >
+                            <IconButton color="inherit">
                                 <Add/>
                             </IconButton>
-                            <IconButton
-                                aria-label="show 17 new notifications"
-                                color="inherit"
-                            >
+                            <IconButton aria-label="show 17 new notifications" color="inherit">
                                 <Badge badgeContent={17} color="secondary">
                                     <NotificationsIcon/>
                                 </Badge>
@@ -245,23 +217,10 @@ export default function Header(props) {
                         <Typography className={classes.title} variant="h6" noWrap>
                             &ensp; Logout
                         </Typography>
-
-                        <div className={classes.sectionMobile}>
-                            <IconButton
-                                aria-label="show more"
-                                aria-controls={mobileMenuId}
-                                aria-haspopup="true"
-                                onClick={handleMobileMenuOpen}
-                                color="inherit"
-                            >
-                                <MoreIcon/>
-                            </IconButton>
-                        </div>
                     </Toolbar>
                 </AppBar>
             </ElevationScroll>
             <Toolbar/>
-            {renderMobileMenu}
             {renderMenu}
         </>
     );
