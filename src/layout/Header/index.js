@@ -151,7 +151,18 @@ export default function Header(props) {
                     Profile
                 </Link>
             </MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+                <Link
+                    to="/mypage"
+                    style={{
+                        color: "inherit",
+                        textDecoration: "none",
+                        underline: "none"
+                    }}
+                >
+                    My account
+                </Link>
+            </MenuItem>
         </Menu>
     );
 

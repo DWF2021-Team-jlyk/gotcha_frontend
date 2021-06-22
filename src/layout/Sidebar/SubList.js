@@ -5,7 +5,6 @@ import React from "react";
 import {Link} from "react-router-dom";
 
 
-
 const SubList = ({classes, workspaces, open, category}) => {
     return (
         <Collapse className={classes.sub} in={open} timeout="auto" unmountOnExit>
@@ -17,13 +16,13 @@ const SubList = ({classes, workspaces, open, category}) => {
                                 <Button>
                                     <Link
                                         style={{
-                                            color:"inherit",
-                                            textDecoration:"none",
-                                            underline:"none"
+                                            color: "inherit",
+                                            textDecoration: "none",
+                                            underline: "none"
                                         }}
                                         to="/workspace"
                                     >
-                                    <ListItemText primary={workspace.name}/>
+                                        <ListItemText primary={workspace.name}/>
                                     </Link>
                                 </Button>
                                 {category !== "FAVORITE" &&

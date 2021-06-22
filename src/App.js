@@ -5,9 +5,10 @@ import Header from "./layout/Header";
 import Workspace from "./pages/workspace";
 import Login from "./pages/user/Login";
 import Join from "./pages/user/Join";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import Code from "./pages/user/Code";
 import AppInitData from "./DumiData/AppInitData";
+import Mypage from "./pages/mypage/mypage"
 
 const style = {
     display: "flex",
@@ -25,7 +26,6 @@ const LoginStyle = {
 const side = {
     background: '#7986cb'
 }
-
 const horizontal = {
     width: 1920,
     overflowX: "scroll"
@@ -64,13 +64,9 @@ const App = () => {
                             <div>
                                 <Route exact path="/" component={Home}/>
                                 <Route exact path="/workspace" component={Workspace}/>
-
-                                <Route path="/Join" component={Join}>
-                                    <Join/>
-                                </Route>
-                                <Route path="/Code" component={Code}>
-                                    <Code/>
-                                </Route>
+                                <Route path="/Join" component={Join}/>
+                                <Route path="/Code" component={Code}/>
+                                <Route path="/mypage" component={Mypage}/>
                             </div>
                         </div>
                     </div>
