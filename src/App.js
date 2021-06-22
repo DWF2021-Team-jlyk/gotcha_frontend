@@ -6,6 +6,7 @@ import Workspace from "./pages/workspace";
 import Login from "./pages/user/Login";
 import Join from "./pages/user/Join";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Code from "./pages/user/Code";
 
 const style = {
     display:"flex",
@@ -50,6 +51,9 @@ const App = ()=>{
               <Route path="/Join" component={Join} >
                 <Join />
               </Route>  
+              <Route path="/Code" component={Code} >
+                <Code/>
+              </Route>
             </Switch>
           </div>
         </div>

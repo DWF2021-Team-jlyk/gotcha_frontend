@@ -13,9 +13,10 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import '../../layout/css/Login.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
+import { useForm } from "react-hook-form";
 
-// import Link from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -52,11 +53,55 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Join() {
+  const history = useHistory();
   const classes = useStyles();
-  const [email, setEmail] = useState('');
-  const onChange = useCallback(e=>{
-    setEmail(e.target.value);
-  }, []);
+  
+  const [inputs, setInputs] = useState({
+    email:'',
+    username:'',
+    password:'',
+  });
+
+  // 중복 검사
+  const [overlap,setOverlap] = useState(false);
+
+  const { email, username, password } = inputs;
+
+  // joinSubmit
+  const JoinCheck = useCallback((e) => {
+
+    e.preventDefault();
+
+    const url = '/main/joinForm'
+    const data = { 
+      "user_id": email,
+      "user_name": username,
+      "user_pwd": password
+     };
+    const options = {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      data: JSON.stringify(data),
+      url,
+    };
+
+    axios(options).then((res) => {
+      console.log(res)
+      console.log(res.data);
+      //window.sessionStorage.setItem("joinCode",res.data);
+      history.push('/Code');
+    },[]);
+
+    // if(overlap === true){
+    //   axios(options).then(history.push('/'));
+    // }else {
+    //   alert("이미 가입한 Email입니다.")
+    // }
+    
+  },[inputs]);
+  
+  // const {handleSubmit, register} = useForm();
+  // const onSubmit = (data, e) => console.log(data, e);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -69,8 +114,8 @@ function Join() {
         <Typography component="h1" variant="h5">
           회원가입
         </Typography>
-        <form className={classes.form} onSubmit={JoinCheck} method='get'>
-          <Grid container spacing={2}>
+        <form className={classes.form} onSubmit={JoinCheck} method="post">
+          <Grid container spacing={3}>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -78,6 +123,7 @@ function Join() {
                 fullWidth
                 id="email"
                 label="Email Address"
+                // ref={register({ required: true })}
                 name="email"
                 value={email}
                 autoComplete="email"
@@ -89,11 +135,28 @@ function Join() {
                 variant="outlined"
                 required
                 fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                // ref={register({ required: true })}
+                value={username}
+                autoComplete="username"
+                onChange={onChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
                 name="password"
+                value={password}
+                // ref={register({ required: true })}
                 label="Password"
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={onChange}
               />
             </Grid>
           </Grid>
@@ -120,10 +183,17 @@ function Join() {
       </Box>
     </Container>
   );
+
+  function onChange(e) {
+    const {value, name} = e.target;
+
+    setInputs({
+      ...inputs,
+      [name]: value
+    })
+  }
 }
 
-function JoinCheck(props) {
-  console.log(props);
-}
+
 
 export default Join;
