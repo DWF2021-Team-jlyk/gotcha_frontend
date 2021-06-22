@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,6 +7,7 @@ import Chip from "@material-ui/core/Chip";
 import Badge from "react-bootstrap/Badge";
 import "../../layout/css/mypage.css";
 import { grey } from "@material-ui/core/colors";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   tableStyle: {
@@ -159,6 +160,15 @@ const Mypage = () => {
     </div>
   );
 
+  const [name, setName] = useState('');
+  const getName = async () => {
+      const result = await axios.get("/name") //url요청
+      await setName(result.data)
+  }
+  useEffect(()=>{
+      getName()
+  },[]);
+
   return (
     <div className={classes.mypagePosition}>
       <h1 className="title">MyPage</h1>
@@ -186,7 +196,7 @@ const Mypage = () => {
               />{" "}
             </td>
             <td style={{ fontSize: 18 }}>
-              boyoung
+              {name}
               <Button
                 variant="contained"
                 color="primary"
