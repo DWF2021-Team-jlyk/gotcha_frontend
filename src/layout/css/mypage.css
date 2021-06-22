@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'Volkhov-Bold';
+    src: url('../fonts/Volkhov-Bold.ttf');
+    font-style: normal;
+    font-weight: bold;
+}
+
+.title {
+    font-family: 'Volkhov-Bold';
+    font-size: 50px;
+    color: #3F51B5;
+    text-align: center;
+}
+
+.shadow {
+    margin-top: 30px;
+    padding: 40px 60px;
+    box-shadow: 20px 20px 20px grey;
+}
+
+.modaltitle {
+    font-family: 'Volkhov-Bold';
+    font-size: 30px;
+    text-align: center;
+    color: #3F51B5;
+    margin-bottom: 20px;
+
+}
