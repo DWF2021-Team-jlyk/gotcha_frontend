@@ -7,6 +7,8 @@ import TabPanel from "./TabPanel";
 import Board from "./Board";
 import MyCalendar from "../calendar";
 import MyTable from "../board";
+import { Route } from "react-router-dom";
+import Content from "../board_content";
 
 
 const Workspace = () => {
@@ -34,6 +36,7 @@ const Workspace = () => {
                 <TabPanel value={value} index={1}><MyCalendar/></TabPanel>
                 <TabPanel value={value} index={2}><MyTable/></TabPanel>
             </Paper>
+            <Route path="/board_content" component={Content}/>
         </div>
     )
 }
