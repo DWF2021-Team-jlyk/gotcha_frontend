@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
 import {makeStyles} from "@material-ui/core/styles";
 import MainList from "./MainList";
-import listContent from "../../DumiData/HomeData";
-import HomeData from "../../DumiData/HomeData";
+import listContent from "../../DumiData/AppInitData";
+import AppInitData from "../../DumiData/AppInitData";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,9 +27,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Sidebar = () => {
+const Sidebar = ({admin, fav, member}) => {
     const classes = useStyles();
-    const [subListData, setsubListData] = useStyles(HomeData);
+    const [subListData, setsubListData] = useState(AppInitData);
 
 
     return (
@@ -47,11 +47,11 @@ const Sidebar = () => {
             }
             className={classes.root}
         >
-            {
-                listContent.map((value, index) => {
-                    return <MainList key={index} classes={classes} listContent={value}/>
-                })
-            }
+            {/*{*/}
+            {/*    listContent.map((value, index) => {*/}
+            {/*        return <MainList key={index} classes={classes} listContent={value}/>*/}
+            {/*    })*/}
+            {/*}*/}
         </List>
     );
 };

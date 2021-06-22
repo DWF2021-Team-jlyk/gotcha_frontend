@@ -7,8 +7,9 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import SettingWorkspace from "./SettingWorkspace";
+import SubList from "./SubList";
 
-const MainList = ({classes, listContent}) => {
+const MainList = ({role, classes, workspaces}) => {
     const [open, setOpen] = useState(true);
     const handleClick = () => {
         setOpen(!open);
@@ -18,30 +19,29 @@ const MainList = ({classes, listContent}) => {
             <ListItem button onClick={handleClick}>
                 <ListItemIcon>
                     {
-                        listContent.title==="즐겨찾기" ?
+                        role==="admin" ?
                         <StarBorder /> : <InboxIcon />
                     }
                 </ListItemIcon>
-                <ListItemText primary={listContent.title}/>
+                <ListItemText primary={workspaces.title}/>
                 {open ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
-
             <Collapse className={classes.sub} in={open} timeout="auto" unmountOnExit>
-                {
-                    listContent.workspaceList.map((workspace, index) =>{
-                        return(
-                            <List key={index} component="div" disablePadding>
-                                <ListItem className={classes.nested}>
-                                    <Button>
-                                        <ListItemText primary={workspace.name} />
-                                    </Button>
-                                    <SettingWorkspace workspace={workspace}/>
-                                </ListItem>
-                            </List>
-                        )
-                    })
-                }
-            </Collapse>
+            {
+                workspaces.map((workspace, index) =>{
+                    return(
+                        <List key={workspace.id} component="div" disablePadding>
+                            <ListItem className={classes.nested}>
+                                <Button>
+                                    <ListItemText primary={workspace.name} />
+                                </Button>
+                                <SettingWorkspace workspace={workspace}/>
+                            </ListItem>
+                        </List>
+                    )
+                })
+            }
+        </Collapse>
         </>
     )
 }

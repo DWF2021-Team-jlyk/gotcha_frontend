@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import Sidebar from "./layout/Sidebar/index";
 import Home from "./pages/home";
 import Header from "./layout/Header";
 import Workspace from "./pages/workspace";
 import Board from "./pages/workspace/Board";
+import AppInitData from "./DumiData/AppInitData";
 
 const style = {
     display: "flex"
@@ -19,6 +20,11 @@ const horizontal = {
   overflowX:"scroll"
 }
 const App = () => {
+    const [workspaceData, setWorkspaceData] = useState(
+        AppInitData.admin,
+        AppInitData.member,
+        AppInitData.fav,
+    );
     return (
         <>
             <Header/>
