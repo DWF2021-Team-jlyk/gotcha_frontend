@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Button from "@material-ui/core/Button";
-import MyList from "../../components/BoardMyList";
+import MyList from "../../components/WorkList/WorkListCardList";
 
 const listStyle = {
     width: "100%",
@@ -40,7 +40,7 @@ const WorkList = () => {
             <div style={listStyle}>
                 {lists.map((list, index) => {
                     return <div key={index}>
-                        <MyList list={list} key={index}/>
+                        <MyList list={list} key={index} id={index} setList={setLists}/>
                     </div>
                 })}
                 <div style={{margin: 10}}>

@@ -16,7 +16,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import {Add} from "@material-ui/icons";
 import {BrowserRouter as Router, Link, Route} from "react-router-dom";
-import Login from "../../pages/user/Login";
+import Login from "../../pages/login";
 import {CssBaseline} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({

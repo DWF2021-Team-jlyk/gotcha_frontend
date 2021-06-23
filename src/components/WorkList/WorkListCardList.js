@@ -6,6 +6,7 @@ import { AiFillCopy } from "react-icons/ai";
 import { AiFillDelete } from "react-icons/ai";
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import WorkListCard from "./WorkListCard";
 
 
 const CardHeaderStyle = {
@@ -31,7 +32,9 @@ const IconMargin = {
 const ListStyle = {
     float:"left",
     width: "300px",
-    marginRight: 10
+    marginRight: 10,
+    height:"inherit",
+    overflowY:"scroll",
 }
 
 
@@ -68,9 +71,7 @@ const MyList = ({ list }) => {
         <Card.Body>
           {list.cards.map((card, index) => {
             return (
-              <Card style={CardBodyStyle} key={index}>
-                {card}
-              </Card>
+                <WorkListCard key={index} body={card}/>
             );
           })}
         </Card.Body>
@@ -81,7 +82,6 @@ const MyList = ({ list }) => {
           </Button>
         </Card.Footer>
       </Card>
-
   );
 };
 

@@ -3,6 +3,10 @@ import {Nav} from "react-bootstrap";
 import "../../layout/css/Layout.css"
 import WorkList from "./WorkList";
 import Card from "react-bootstrap/Card";
+import loadable from "@loadable/component";
+
+const Calendar = loadable(() => import('../calendar'));
+const Board = loadable(()=>import("../board"));
 
 
 const Workspace = () => {
@@ -12,8 +16,8 @@ const Workspace = () => {
         <Card
             style={{
                 margin:20,
-                width:1440,
-                height:760
+                width:1600,
+                height:900
             }}
         >
             <Card.Header>
@@ -31,8 +35,8 @@ const Workspace = () => {
             </Card.Header>
             <Card.Body>
                 {value === 1 && <WorkList/>}
-                {value === 2 && "Calendar"}
-                {value === 3 && "Board"}
+                {value === 2 && <Calendar/>}
+                {value === 3 && <Board/>}
             </Card.Body>
         </Card>
     )

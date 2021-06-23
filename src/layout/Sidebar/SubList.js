@@ -4,7 +4,6 @@ import SettingWorkspace from "./SettingWorkspace";
 import React from "react";
 import {Link} from "react-router-dom";
 
-
 const SubList = ({classes, workspaces, open, category}) => {
     return (
         <Collapse className={classes.sub} in={open} timeout="auto" unmountOnExit>
@@ -22,7 +21,7 @@ const SubList = ({classes, workspaces, open, category}) => {
                                         }}
                                         to="/workspace"
                                     >
-                                        <ListItemText primary={workspace.name}/>
+                                        <ListItemText primary={workspace.ws_name}/>
                                     </Link>
                                 </Button>
                                 {category !== "FAVORITE" &&

@@ -1,5 +1,6 @@
 import React from "react";
 import {Avatar} from "@material-ui/core";
+import {Col, Row} from "react-bootstrap";
 
 
 const UserAvatar = (props) => {
@@ -15,15 +16,29 @@ const UserAvatar = (props) => {
     }
 
     return (
-        <>
-            <Avatar
-                onClick={event => {
-
-                }}
-                style={{margin: "10px 10px 0px 5px"}}>
-                {avatarIcon(props.user_id)}
-            </Avatar>
-        </>
+        <Col>
+            <Row>
+                <Col>
+                    <Avatar
+                        onClick={event => {
+                        }}
+                        style={{margin: "10px 10px 0px 5px"}}>
+                        {avatarIcon(props.user_id)}
+                    </Avatar>
+                </Col>
+                <Col>
+                    <span>
+                        {props.user_id}
+                    </span>
+                    <Row>
+                        <Col>
+                            To admin
+                        </Col>
+                        <Col>추방하기</Col>
+                    </Row>
+                </Col>
+            </Row>
+        </Col>
     )
 }
 

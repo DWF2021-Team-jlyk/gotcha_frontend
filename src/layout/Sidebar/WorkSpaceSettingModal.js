@@ -13,7 +13,7 @@ const WorkSpaceSettingModal = ({workspace, clicked, handleClose, role}) => {
         >
             <ModalHeader closeButton>
                 <ModalTitle>
-                    {workspace.name} 환경 설정
+                    {workspace.ws_name} 환경 설정
                 </ModalTitle>
             </ModalHeader>
             <ModalBody>
@@ -25,7 +25,7 @@ const WorkSpaceSettingModal = ({workspace, clicked, handleClose, role}) => {
                             <Col sm={8}>
                                 <Form.Control
                                     type="text"
-                                    defaultValue={workspace.name}
+                                    defaultValue={workspace.ws_name}
                                     disabled={role !== "ADMIN"}
                                 />
                             </Col>
@@ -52,7 +52,18 @@ const WorkSpaceSettingModal = ({workspace, clicked, handleClose, role}) => {
                 </Form>
                 <Row>
                     {
-                        ["Test1@naver.com", "Test2@naver.com", "Test3@naver.com"]
+                        [
+                            "Test1@naver.com",
+                            "Test2@naver.com",
+                            "Test3@naver.com",
+                            "Test4@naver.com",
+                            "Test5@naver.com",
+                            "Test6@naver.com",
+                            "Test7@naver.com",
+                            "Test8@naver.com",
+                            "Test9@naver.com",
+                            "Test10@naver.com",
+                        ]
                             .map(((value, index) => {
                                 return <UserAvatar user_id={value} key={index}/>
                             }))
