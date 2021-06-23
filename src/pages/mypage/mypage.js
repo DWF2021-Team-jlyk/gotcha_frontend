@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Chip from "@material-ui/core/Chip";
 import Badge from "react-bootstrap/Badge";
-import "../../layout/css/mypage.css";
+import "./mypage.css";
 import { grey } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({

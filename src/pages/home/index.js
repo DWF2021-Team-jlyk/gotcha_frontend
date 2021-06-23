@@ -2,7 +2,8 @@ import React from "react";
 import "../../layout/css/Layout.css";
 import WorkSpaceCard from "../../components/WorkSpaceCard";
 import {Card, Row} from "react-bootstrap";
-import Notification from "../../layout/Notification/Notification";
+import Notification from "./Notification";
+import "./Cards.css"
 
 const Home = () => {
     const style = {
@@ -34,7 +35,7 @@ const Home = () => {
                             <Card.Header>
                                 <h3>{name}</h3>
                             </Card.Header>
-                            <Card.Body style={{height: 500, overflowY: "scroll"}}>
+                            <Card.Body className="workspaces">
                                 <Row>
                                     {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => {
                                         return <WorkSpaceCard title="test" key={value} id={value}/>;

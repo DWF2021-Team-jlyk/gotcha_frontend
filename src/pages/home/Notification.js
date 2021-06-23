@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Alert, Card} from "react-bootstrap";
+import "./Cards.css"
 
 export default function Notification(props) {
 
@@ -18,6 +19,8 @@ export default function Notification(props) {
             {title: "Card Noti Test", workspaceName: "test2", desc: "test Noti", type: "card", endDate: "2021/06/30"},
             {title: " Noti Test", workspaceName: "test3", desc: "test Noti", type: "noti", endDate: "2021/06/30"},
             {title: "Invite Noti Test", workspaceName: "test4", desc: "test Noti", type: "invite", endDate: "2021/06/30"},
+            {title: "Invite Noti Test", workspaceName: "test4", desc: "test Noti", type: "invite", endDate: "2021/06/30"},
+            {title: "Invite Noti Test", workspaceName: "test4", desc: "test Noti", type: "invite", endDate: "2021/06/30"},
         ]
     )
     return (
@@ -26,7 +29,8 @@ export default function Notification(props) {
                 <Card.Header>
                     <h3>Notification</h3>
                 </Card.Header>
-                <Card.Body style={{height: 800, overflowY: "scroll"}}>
+                {/*<Card.Body style={{height: 800, overflowY: "scroll"}}>*/}
+                    <Card.Body className="notification">
 
                     {notis.map((noti, index) => {
                         return <Alert

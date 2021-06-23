@@ -3,10 +3,12 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
 import {makeStyles} from "@material-ui/core/styles";
 import MainList from "./MainList";
+import "./sidebar.css"
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: 250,
+        height: "1500px",
+        overflowY:"scroll",
         backgroundColor: theme.palette.primary.light,
         color: theme.palette.background.paper,
     },
@@ -45,7 +47,7 @@ const Sidebar = ({admin, fav, member}) => {
                     WorkSpace List
                 </ListSubheader>
             }
-            className={classes.root}
+            className="root"
         >
             <MainList category="FAVORITE" classes={classes} workspaces={fav}/>
             <MainList category="ADMIN" classes={classes} workspaces={admin}/>

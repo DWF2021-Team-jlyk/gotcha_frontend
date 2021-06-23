@@ -1,14 +1,18 @@
 import React, {useState} from "react";
-import Sidebar from "./layout/Sidebar/index";
+import Sidebar from "./layout/Sidebar";
 import Home from "./pages/home";
-import Header from "./layout/Header";
-import Workspace from "./pages/workspace";
-import Login from "./pages/user/Login";
-import Join from "./pages/user/Join";
+import Header from "./layout/Header/header";
+// import Header from "./layout/Header";
+import Login from "./pages/login";
 import {Route, Switch} from "react-router-dom";
-import Code from "./pages/user/Code";
 import AppInitData from "./DumiData/AppInitData";
-import Mypage from "./pages/mypage/mypage"
+import loadable from "@loadable/component";
+import {Row} from "react-bootstrap";
+
+const Workspace = loadable(()=>import("./pages/workspace"));
+const Join = loadable(()=>import("./pages/signUp"));
+const Code = loadable(()=>import("./pages/signUp/Code"));
+const Mypage = loadable(()=>import("./pages/mypage/mypage"));
 
 const style = {
     display: "flex",
@@ -43,38 +47,56 @@ const App = () => {
     )
     return (
         <>
-            <Switch>
-                <Route exact path="/Login" component={Login}>
-                    <div style={LoginStyle}>
-                        <Login/>
-                    </div>
-                </Route>
+            {/*<Switch>*/}
+            <Route exact path="/Login" component={Login}>
+                <div style={LoginStyle}>
+                    <Login/>
+                </div>
+            </Route>
 
-                <Route exact path="/">
-                    <Header/>
-                    <div style={style}>
-                        <div style={side}>
-                            <Sidebar
-                                admin={adminWorkSpace}
-                                fav={favWorkSpace}
-                                member={memberWorkSpace}
-                            />
-                        </div>
-                        <div>
-                            <div>
-                                <Route exact path="/" component={Home}/>
-                                <Route exact path="/workspace" component={Workspace}/>
-                                <Route path="/Join" component={Join}/>
-                                <Route path="/Code" component={Code}/>
-                                <Route path="/mypage" component={Mypage}/>
-                            </div>
-                        </div>
+            {/*<Route exact path="/">*/}
+            <Header/>
+            {/*<div style={{*/}
+            {/*    display:"flex",*/}
+            {/*    height:"100%"*/}
+            {/*}}>*/}
+            {/*    <Sidebar/>*/}
+            {/*    <Home/>*/}
+            {/*    /!*<Workspace/>*!/*/}
+            {/*</div>*/}
+            <div style={style}>
+                <div style={side}>
+                    <Sidebar
+                        admin={adminWorkSpace}
+                        fav={favWorkSpace}
+                        member={memberWorkSpace}
+                    />
+                </div>
+                <div>
+                    <div>
+                        <Route exact path="/">
+                            <Home/>
+                        </Route>
+                        <Route exact path="/workspace">
+                            <Workspace/>
+                        </Route>
+                        <Route exact path="/Join">
+                            <Join/>
+                        </Route>
+                        <Route exact path="/Code">
+                            <Code/>
+                        </Route>
+                        <Route exact path="/Mypage">
+                            <Mypage/>
+                        </Route>
                     </div>
-                    <footer>
-                        this is footer
-                    </footer>
-                </Route>
-            </Switch>
+                </div>
+            </div>
+            <footer>
+                this is footer
+            </footer>
+            {/*</Route>*/}
+            {/*</Switch>*/}
         </>
     )
 }
