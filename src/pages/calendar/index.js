@@ -18,7 +18,7 @@ const MyCalendar = () => (
       events={events}
       step={60}
       views={allViews}
-      defaultDate={new Date(2021, 6, 22)}
+      defaultDate={new Date()}
     />
   </div>
 );

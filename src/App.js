@@ -8,10 +8,11 @@ import {Route, Switch} from "react-router-dom";
 import AppInitData from "./DumiData/AppInitData";
 import loadable from "@loadable/component";
 
-const Workspace = loadable(()=>import("./pages/workspace"));
-const Join = loadable(()=>import("./pages/signUp"));
-const Code = loadable(()=>import("./pages/signUp/Code"));
-const Mypage = loadable(()=>import("./pages/mypage/mypage"));
+const Workspace = loadable(() => import("./pages/workspace"));
+const Join = loadable(() => import("./pages/signUp"));
+const Code = loadable(() => import("./pages/signUp/Code"));
+const Mypage = loadable(() => import("./pages/mypage/mypage"));
+
 
 const style = {
     display: "flex",
