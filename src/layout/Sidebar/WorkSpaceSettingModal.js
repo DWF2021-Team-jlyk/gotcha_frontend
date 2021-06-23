@@ -13,7 +13,7 @@ const WorkSpaceSettingModal = ({workspace, clicked, handleClose, role}) => {
         >
             <ModalHeader closeButton>
                 <ModalTitle>
-                    {workspace.name} 환경 설정
+                    {workspace.ws_name} 환경 설정
                 </ModalTitle>
             </ModalHeader>
             <ModalBody>
@@ -25,7 +25,7 @@ const WorkSpaceSettingModal = ({workspace, clicked, handleClose, role}) => {
                             <Col sm={8}>
                                 <Form.Control
                                     type="text"
-                                    defaultValue={workspace.name}
+                                    defaultValue={workspace.ws_name}
                                     disabled={role !== "ADMIN"}
                                 />
                             </Col>
@@ -57,6 +57,11 @@ const WorkSpaceSettingModal = ({workspace, clicked, handleClose, role}) => {
                                 return <UserAvatar user_id={value} key={index}/>
                             }))
                     }
+                    <div>
+                        <span>
+
+                        </span>
+                    </div>
                 </Row>
             </ModalBody>
             <ModalFooter>

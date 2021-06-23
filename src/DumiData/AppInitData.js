@@ -1,25 +1,42 @@
-const AppInitData = {
-    admin : [
-        {name: "workspace1", id:"0"},
-        {name: "workspace2", id:"1"},
-        {name: "workspace3", id:"2"},
-        {name: "workspace4", id:"3"},
-        {name: "workspace5", id:"4"},
-        {name: "workspace6", id:"5"},
-    ],
-    fav : [
-        {name: "workspace1", id:"0"},
-        {name: "workspace2", id:"1"},
-        {name: "workspace7", id:"6"},
-        {name: "workspace8", id:"7"},
-    ],
-    member : [
-        {name: "workspace7", id:"6"},
-        {name: "workspace8", id:"7"},
-        {name: "workspace9", id:"8"},
-        {name: "workspace10", id:"9"},
-        {name: "workspace11", id:"10"},
-        {name: "workspace12", id:"11"},
+export default{
+    
+    workspaces: [
+        {
+        ws_name:"workspace1",
+        ws_id: 0,
+        role_id:1,
+        is_fav:0
+    },
+        {
+        ws_name:"workspace1",
+        ws_id: 0,
+        role_id:2,
+        is_fav:0
+    },
+    {
+        ws_name:"workspace2",
+        ws_id: 1,
+        role_id:1,
+        is_fav:0
+    },
+    {
+        ws_name:"workspace2",
+        ws_id: 1,
+        role_id:2,
+        is_fav:1
+    },
+    {
+        ws_name:"workspace3",
+        ws_id: 2,
+        role_id:1,
+        is_fav:0
+    },
+    {
+        ws_name:"workspace3",
+        ws_id: 2,
+        role_id:2,
+        is_fav:1
+    },
     ],
     notifications : [
         {
@@ -56,5 +73,3 @@ const AppInitData = {
         },
     ]
 }
-
-export default AppInitData

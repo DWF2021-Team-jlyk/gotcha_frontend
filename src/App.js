@@ -7,13 +7,13 @@ import Login from "./pages/login";
 import {Route, Switch} from "react-router-dom";
 import AppInitData from "./DumiData/AppInitData";
 import loadable from "@loadable/component";
-import {Row} from "react-bootstrap";
 
 const Workspace = loadable(()=>import("./pages/workspace"));
 const Join = loadable(()=>import("./pages/signUp"));
 const Code = loadable(()=>import("./pages/signUp/Code"));
 const Mypage = loadable(()=>import("./pages/mypage/mypage"));
 const Pwdfind =loadable(()=>import("./pages/pwdfind/Pwdfind"));
+
 const style = {
     display: "flex",
 }
@@ -36,13 +36,19 @@ const horizontal = {
 
 const App = () => {
     const [adminWorkSpace, setAdminWorkSpace] = useState(
-        AppInitData.admin
+        AppInitData.workspaces.filter((workspace)=>{
+            return workspace.role_id === 1;
+        })
     );
     const [memberWorkSpace, setMemberWorkSpace] = useState(
-        AppInitData.member
+        AppInitData.workspaces.filter((workspace)=>{
+            return workspace.role_id === 2;
+        })
     );
     const [favWorkSpace, setFavWorkSpace] = useState(
-        AppInitData.fav
+        AppInitData.workspaces.filter((workspace)=>{
+            return workspace.is_fav === 1;
+        })
     )
     return (
         <>
