@@ -1,6 +1,5 @@
 import Card from "react-bootstrap/Card";
 import React, { useState } from "react";
-import Col from "react-bootstrap/Col";
 import Button from "@material-ui/core/Button";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { AiFillCopy } from "react-icons/ai";
@@ -29,8 +28,10 @@ const IconMargin = {
   marginRight: 10
 }
 
-const listSize = {
- float:"left"
+const ListStyle = {
+    float:"left",
+    width: "300px",
+    marginRight: 10
 }
 
 
@@ -47,10 +48,9 @@ const MyList = ({ list }) => {
 
   return (
 
-      <Card style={listSize}>
+      <Card style={ListStyle}>
         <Card.Header style={CardHeaderStyle}>
-          {" "}
-          {list.title}{" "}
+          {" "}{list.title}{" "}
           <AiOutlinePlusCircle style={PlusIcon} onClick={handleClick} />
         </Card.Header>
         <Menu

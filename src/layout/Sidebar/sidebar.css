@@ -1,0 +1,10 @@
+.root{
+    width:250px;
+    height:1000px;
+    background-color:#7986CB;
+    color:#ffffff;
+    overflow-y: scroll;
+}
+.root::-webkit-scrollbar{
+    display: none;
+}
