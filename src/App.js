@@ -7,7 +7,6 @@ import Login from "./pages/login";
 import {Route, Switch} from "react-router-dom";
 import AppInitData from "./DumiData/AppInitData";
 import loadable from "@loadable/component";
-import {Row} from "react-bootstrap";
 
 const Workspace = loadable(()=>import("./pages/workspace"));
 const Join = loadable(()=>import("./pages/signUp"));

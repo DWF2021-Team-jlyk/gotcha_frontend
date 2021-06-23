@@ -5,6 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import {Icon} from "@material-ui/core";
 import {IoIosNotificationsOutline, IoMdAdd, IoPersonCircleOutline} from "react-icons/all";
+import NotiDropDown from "./NotiDropDown";
 
 const style = {}
 
@@ -42,18 +43,14 @@ const Header = () => {
                 <Button variant="primary">ToGo</Button>
             </Form>
             <div style={{
-                marginRight: 20
+                marginRight: 20,
+                display:"flex"
             }}>
                 <IoMdAdd
                     color="white"
                     size="30"
-                    onClic
                 />
-                <IoIosNotificationsOutline
-                    color="white"
-                    size="30"
-                    onClick
-                />
+                <NotiDropDown/>
                 <Link to="/mypage">
                     <IoPersonCircleOutline
                         color="#FFFFFF"

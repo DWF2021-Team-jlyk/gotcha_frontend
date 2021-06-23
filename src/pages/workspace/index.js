@@ -16,8 +16,8 @@ const Workspace = () => {
         <Card
             style={{
                 margin:20,
-                width:1440,
-                height:760
+                width:1600,
+                height:900
             }}
         >
             <Card.Header>
