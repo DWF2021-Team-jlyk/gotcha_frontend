@@ -4,7 +4,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import SubList from "./SubList";
-import {AiOutlineStar, GrUserManager, ImOffice} from "react-icons/all";
+import {AiOutlineStar} from "react-icons/all";
+import { FaUserCog, FaUsers } from "react-icons/fa";
 
 const MainList = ({category, classes, workspaces}) => {
     const [open, setOpen] = useState(false);
@@ -13,8 +14,8 @@ const MainList = ({category, classes, workspaces}) => {
     }
     const categorySwitch = (category) => {
         switch(category){
-            case "ADMIN" : return (<GrUserManager size="30"/>);
-            case "MEMBER" : return (<ImOffice size="30"/>);
+            case "ADMIN" : return (<FaUserCog size="30"/>);
+            case "MEMBER" : return (<FaUsers size="30"/>);
             default: return (<AiOutlineStar size="30"/>);
 
         }
@@ -28,6 +29,7 @@ const MainList = ({category, classes, workspaces}) => {
                 <ListItemText primary={category}/>
                 {open ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
+            
             <SubList
                 open={open}
                 workspaces={workspaces}

@@ -2,9 +2,9 @@ import React, {useState} from "react";
 import {Alert, Card} from "react-bootstrap";
 import "./Cards.css"
 
-export default function Notification(props) {
+export default function Notification({notis}) {
 
-    const returnTypeColor = (type) =>{
+    const returnTypeColor = (type) => {
         switch (type) {
             case "card": return "primary";
             case "board" : return "danger";
@@ -13,31 +13,20 @@ export default function Notification(props) {
         }
     }
 
-    const [notis, setNotis] = useState(
-        [
-            {title: "Board Noti Test", workspaceName: "test1", desc: "test Noti", type: "board", endDate: "2021/06/30"},
-            {title: "Card Noti Test", workspaceName: "test2", desc: "test Noti", type: "card", endDate: "2021/06/30"},
-            {title: " Noti Test", workspaceName: "test3", desc: "test Noti", type: "noti", endDate: "2021/06/30"},
-            {title: "Invite Noti Test", workspaceName: "test4", desc: "test Noti", type: "invite", endDate: "2021/06/30"},
-            {title: "Invite Noti Test", workspaceName: "test4", desc: "test Noti", type: "invite", endDate: "2021/06/30"},
-            {title: "Invite Noti Test", workspaceName: "test4", desc: "test Noti", type: "invite", endDate: "2021/06/30"},
-        ]
-    )
     return (
         <div>
             <Card>
-                <Card.Header>
+                <Card.Header style={{textAlign:"center"}}>
                     <h3>Notification</h3>
                 </Card.Header>
                 {/*<Card.Body style={{height: 800, overflowY: "scroll"}}>*/}
                     <Card.Body className="notification">
-
                     {notis.map((noti, index) => {
                         return <Alert
                             key={index}
                             variant={returnTypeColor(noti.type)}>
-                            <Alert.Link href="#">
-                                <h4>{noti.workspaceName}</h4>
+                            <Alert.Link href="#" style={{textDecoration: 'none'}}>
+                                <h4 style={{marginBottom:20}}>{noti.workspaceName}</h4>
                             </Alert.Link>
                             <Card>
                                 <Card.Header>{noti.title}</Card.Header>

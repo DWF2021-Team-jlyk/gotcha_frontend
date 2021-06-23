@@ -6,6 +6,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { withStyles } from "@material-ui/core/styles";
 import Badge from '@material-ui/core/Badge';
 import ListItemText from "@material-ui/core/ListItemText";
+import "../css/font.css";
 
 import {
   IoIosNotificationsOutline,
@@ -71,7 +72,7 @@ const Header = () => {
           marginLeft: 20,
         }}
       >
-        GotCha
+        <div className="logofont">GotCha</div>
       </Navbar.Brand>
       <Form className="d-flex">
         <FormControl
