@@ -4,7 +4,7 @@ import {IconButton} from "@material-ui/core";
 import loadable from "@loadable/component";
 
 const WorkSpaceSettingModal = loadable(
-    ()=>import("./WorkSpaceSettingModal")
+    () => import("./WorkSpaceSettingModal")
 );
 
 const SettingWorkspace = ({workspace, role}) => {
@@ -12,11 +12,9 @@ const SettingWorkspace = ({workspace, role}) => {
     const handleClose = () => setClicked(false);
     return (
         <>
-            <IconButton onClick={() => {
-                setClicked(true);
-            }}>
-                <SettingsIcon/>
-            </IconButton>
+            <SettingsIcon
+                onClick={() => setClicked(true)}
+            />
             <WorkSpaceSettingModal
                 role={role}
                 workspace={workspace}

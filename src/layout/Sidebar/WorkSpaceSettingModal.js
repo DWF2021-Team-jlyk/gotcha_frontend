@@ -52,16 +52,22 @@ const WorkSpaceSettingModal = ({workspace, clicked, handleClose, role}) => {
                 </Form>
                 <Row>
                     {
-                        ["Test1@naver.com", "Test2@naver.com", "Test3@naver.com"]
+                        [
+                            "Test1@naver.com",
+                            "Test2@naver.com",
+                            "Test3@naver.com",
+                            "Test4@naver.com",
+                            "Test5@naver.com",
+                            "Test6@naver.com",
+                            "Test7@naver.com",
+                            "Test8@naver.com",
+                            "Test9@naver.com",
+                            "Test10@naver.com",
+                        ]
                             .map(((value, index) => {
                                 return <UserAvatar user_id={value} key={index}/>
                             }))
                     }
-                    <div>
-                        <span>
-
-                        </span>
-                    </div>
                 </Row>
             </ModalBody>
             <ModalFooter>

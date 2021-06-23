@@ -71,7 +71,7 @@ const MyList = ({ list }) => {
         <Card.Body>
           {list.cards.map((card, index) => {
             return (
-                <WorkListCard body={card}/>
+                <WorkListCard key={index} body={card}/>
             );
           })}
         </Card.Body>
