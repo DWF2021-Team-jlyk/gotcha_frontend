@@ -25,7 +25,7 @@ function Copyright() {
       {/* <Link color="inherit" href="https://material-ui.com/">
         Your Website
       </Link>{' '} */}
-      GotCha 
+      &nbsp;GotCha 
       &nbsp;{new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -50,61 +50,59 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  style: {
+    position: "absolute",
+    top: "23%",
+    left: "50%",
+    transform: "translateX(-50%)",
+  },
 }));
 
 function Join() {
   const history = useHistory();
   const classes = useStyles();
   
-  const [inputs, setInputs] = useState({
-    email:'',
-    username:'',
-    password:'',
-  });
-
-  // 중복 검사
-  const [overlap,setOverlap] = useState(false);
-
-  const { email, username, password } = inputs;
-
-  // joinSubmit
-  const JoinCheck = useCallback((e) => {
-
+  // 입력한 값을 검사 할 수 있는 Hook
+  const { register, formState: { errors }, handleSubmit } = useForm();
+  
+  // submit
+  const onSubmit = (data,e) => {
     e.preventDefault();
-
-    const url = '/main/joinForm'
-    const data = { 
-      "user_id": email,
-      "user_name": username,
-      "user_pwd": password
+    const url = '/main/joinCheck'
+    const datas = { 
+      "user_id": data.email,
+      "user_name": data.username,
+      "user_pwd": data.password
      };
     const options = {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      data: JSON.stringify(data),
+      data: JSON.stringify(datas),
       url,
     };
 
     axios(options).then((res) => {
-      console.log(res)
-      console.log(res.data);
-      //window.sessionStorage.setItem("joinCode",res.data);
-      history.push('/Code');
+      if(res.data === false) {
+        alert("이미 가입한 아이디입니다.");
+      }else{
+        history.push({
+          pathname: '/Code',
+          state: { user_id: data.email }
+          });
+      }
     },[]);
+  }
 
-    // if(overlap === true){
-    //   axios(options).then(history.push('/'));
-    // }else {
-    //   alert("이미 가입한 Email입니다.")
-    // }
-    
-  },[inputs]);
+  // const [inputs, setInputs] = useState({
+  //   email:'',
+  //   username:'',
+  //   password:'',
+  // });
+
+ //const { email, username, password } = inputs;
   
-  // const {handleSubmit, register} = useForm();
-  // const onSubmit = (data, e) => console.log(data, e);
-
   return (
-    <Container component="main" maxWidth="xs">
+    <Container className={classes.style} component="main" maxWidth="xs">
       <div className="title">GotCha</div>  
       <CssBaseline />
       <div className={classes.paper}>
@@ -114,7 +112,7 @@ function Join() {
         <Typography component="h1" variant="h5">
           회원가입
         </Typography>
-        <form className={classes.form} onSubmit={JoinCheck} method="post">
+        <form className={classes.form} onSubmit={handleSubmit(onSubmit)} method="post" noValidate>
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <TextField
@@ -123,12 +121,18 @@ function Join() {
                 fullWidth
                 id="email"
                 label="Email Address"
-                // ref={register({ required: true })}
                 name="email"
-                value={email}
                 autoComplete="email"
-                onChange={onChange}
+                {
+                  ...register("email", 
+                    {
+                      required: true, 
+                      pattern:/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
+                    })
+                } 
               />
+                {errors.email?.type === 'required' && "email is required" 
+                  || errors.email?.type === 'pattern' && "사용할 수 없는 이메일입니다."}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -138,11 +142,10 @@ function Join() {
                 id="username"
                 label="Username"
                 name="username"
-                // ref={register({ required: true })}
-                value={username}
                 autoComplete="username"
-                onChange={onChange}
+                {...register("username", {required: true })} 
               />
+              {errors.username && "username is required"}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -150,14 +153,19 @@ function Join() {
                 required
                 fullWidth
                 name="password"
-                value={password}
-                // ref={register({ required: true })}
-                label="Password"
+                label="특수문자,대문자,소문자를 포함한 8자리 이상"
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                onChange={onChange}
+                {...register("password",
+                 { 
+                   required: true, 
+                   pattern:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/
+                 })
+                } 
               />
+                {errors.password?.type === 'required' && "password is required" 
+                 || errors.password?.type === 'pattern' && "형식에 맞지 않습니다."}
             </Grid>
           </Grid>
           <Button
@@ -184,14 +192,14 @@ function Join() {
     </Container>
   );
 
-  function onChange(e) {
-    const {value, name} = e.target;
+  // function onChange(e) {
+  //   const {value, name} = e.target;
 
-    setInputs({
-      ...inputs,
-      [name]: value
-    })
-  }
+  //   setInputs({
+  //     ...inputs,
+  //     [name]: value
+  //   })
+  // }
 }
 
 

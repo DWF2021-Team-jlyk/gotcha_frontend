@@ -8,13 +8,13 @@ import Join from "./pages/user/Join";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Code from "./pages/user/Code";
 
-const style = {
-    display:"flex",
-    position: "absolute",
-    top: "23%",
-    left: "50%",
-    transform: "translateX(-50%)",
-}
+// const style = {
+//     display:"flex",
+//     position: "absolute",
+//     top: "23%",
+//     left: "50%",
+//     transform: "translateX(-50%)",
+// }
 
 const headerWidth = {
     width: 1680
@@ -30,13 +30,12 @@ const title = {
 
 
 const App = ()=>{
-   
-
+  
     return (
       <>
       {/* <Header/> */}
 
-      <div style={style}>
+      <div>
         {/* <div style={side}>
           <Sidebar />
         </div> */}
@@ -53,6 +52,9 @@ const App = ()=>{
               </Route>  
               <Route path="/Code" component={Code} >
                 <Code/>
+              </Route>
+              <Route path="/home">
+                <Home />
               </Route>
             </Switch>
           </div>

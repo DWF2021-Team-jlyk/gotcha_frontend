@@ -5,7 +5,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-// import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -14,8 +13,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { createGlobalStyle } from 'styled-components';
 import { CenterFocusStrong } from '@material-ui/icons';
-import { BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch, useHistory} from 'react-router-dom';
 import '../../layout/css/Login.css';
+import {useForm} from "react-hook-form";
 
 function Copyright() {
     return (
@@ -24,7 +24,7 @@ function Copyright() {
         {/* <Link color="inherit" href="https://material-ui.com/">
         GotCha
         </Link>{' '} */}
-        GotCha 
+        &nbsp;GotCha 
         &nbsp;{new Date().getFullYear()}
         {'.'}
       </Typography>
@@ -49,14 +49,38 @@ function Copyright() {
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
+    style: {
+      position: "absolute",
+      top: "23%",
+      left: "50%",
+      transform: "translateX(-50%)",
+    },
   }));
 
   export default function Login() {
+
+    const style = {
+      color: "red"
+    }
+
     const classes = useStyles();
-  
+    const history = useHistory();
+
+    const { register, formState: { errors }, handleSubmit } = useForm();
+    const onSubmit = data => {
+      console.log(data.lastName);
+      history.push("/home") 
+    }
+
+    const onSubmit1 = (e) => {
+      e.preventDefault();
+      alert("click");
+      history.push("/home")
+    }
+
     return (
     
-      <Container component="main" maxWidth="xs">
+      <Container className={classes.style} component="main" maxWidth="xs">
         <div className="title">GotCha</div>        
         <CssBaseline />
         <div className={classes.paper}>
@@ -66,7 +90,7 @@ function Copyright() {
           <Typography component="h1" variant="h5">
             로그인
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={handleSubmit(onSubmit)} noValidate>
             <TextField
               variant="outlined"
               margin="normal"
@@ -77,7 +101,10 @@ function Copyright() {
               name="email"
               autoComplete="email"
               autoFocus
+              type="text"
+              {...register("email", { required: true })} 
             />
+              {errors.email && "email is required"}
             <TextField
               variant="outlined"
               margin="normal"
@@ -88,11 +115,10 @@ function Copyright() {
               type="password"
               id="password"
               autoComplete="current-password"
+              {...register("password", { required: true })} 
             />
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
+              {errors.password && "password is required"}
+            {/* <input type="text" {...register("firstName", { required: true, maxLength: 20 })}/> */}
             <Button
               type="submit"
               fullWidth
