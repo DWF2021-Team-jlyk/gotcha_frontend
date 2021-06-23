@@ -21,7 +21,7 @@ const SubList = ({classes, workspaces, open, category}) => {
                                         }}
                                         to="/workspace"
                                     >
-                                        <ListItemText primary={workspace.name}/>
+                                        <ListItemText primary={workspace.ws_name}/>
                                     </Link>
                                 </Button>
                                 {category !== "FAVORITE" &&
