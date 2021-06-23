@@ -4,7 +4,6 @@ import SettingWorkspace from "./SettingWorkspace";
 import React from "react";
 import {Link} from "react-router-dom";
 
-
 const SubList = ({classes, workspaces, open, category}) => {
     return (
         <Collapse className={classes.sub} in={open} timeout="auto" unmountOnExit>
