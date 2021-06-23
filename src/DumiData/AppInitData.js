@@ -84,7 +84,7 @@ export default{
             workspaceName: "workspace2",
             desc: "test Noti",
             type: "todo",
-            endDate: "2021/1/30",
+            endDate: "2021/06/30",
             ws_id:1
         },
         {

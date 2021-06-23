@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import MyList from "../../components/WorkList/WorkListCardList";
+import axios from 'axios';
 
 const listStyle = {
     width: "100%",
@@ -13,18 +14,32 @@ const listStyle = {
 
 const WorkList = () => {
     const [lists, setLists] = useState([
-        {
-            title: "listname1",
-            cards: ["card1", "card2", "card3", "card4", "card5", "card6", "card7"],
-        },
-        {title: "listname2", cards: ["card1", "card2", "card3", "card4"]},
-        {title: "listname3", cards: ["card1", "card2", "card3"]},
-        {title: "listname4", cards: ["card1", "card2", "card3"]},
+
     ]);
+    const url = '/workspace2'
+    const datas = {
+        "list_id": 1
+    };
+    const options = {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        data: JSON.stringify(datas),
+        url,
+    };
+
+    axios(options)
+        .then((res) => {
+            console.log(res)
+        }, [])
+        .catch(error => {
+            console.log(error)
+        });
+
+
 
     return (
         <>
-            <Button
+            {/* <Button
                 variant="contained"
                 color="primary"
                 onClick={(e) => {
@@ -46,7 +61,11 @@ const WorkList = () => {
                 <div style={{margin: 10}}>
 
                 </div>
-            </div>
+            </div> */}
+            <h1>{lists.list_id}</h1>
+            <h1>{lists.user_id}</h1>
+            <h1>{lists.list_name}</h1>
+            <h1>{lists.is_fav}</h1>
         </>
     );
 };

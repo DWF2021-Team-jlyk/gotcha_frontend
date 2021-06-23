@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import { DataGrid, GridFooter } from '@material-ui/data-grid';
 import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core';
-import Content from '../board_content';
+//import Content from '../board_content';
 
 //DataGrid footer에 글쓰기 버튼 넣기
 
