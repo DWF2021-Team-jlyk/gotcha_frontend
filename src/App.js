@@ -7,6 +7,7 @@ import Login from "./pages/login";
 import {Route, Switch} from "react-router-dom";
 import AppInitData from "./DumiData/AppInitData";
 import loadable from "@loadable/component";
+import "./layout/css/font.css"
 
 const Workspace = loadable(()=>import("./pages/workspace"));
 const Join = loadable(()=>import("./pages/signUp"));
@@ -49,9 +50,13 @@ const App = () => {
         AppInitData.workspaces.filter((workspace)=>{
             return workspace.is_fav === 1;
         })
-    )
+    );
+
+    const [Noti, setNoti] = useState(AppInitData.notifications);
+
+
     return (
-        <>
+        <div className="font">
             {/*<Switch>*/}
             <Route exact path="/Login" component={Login}>
                 <div style={LoginStyle}>
@@ -80,7 +85,8 @@ const App = () => {
                 <div>
                     <div>
                         <Route exact path="/">
-                            <Home/>
+                            <Home admin={adminWorkSpace}  member={memberWorkSpace} noti={Noti} />
+
                         </Route>
                         <Route exact path="/workspace">
                             <Workspace/>
@@ -105,7 +111,7 @@ const App = () => {
             </footer>
             {/*</Route>*/}
             {/*</Switch>*/}
-        </>
+        </div>
     )
 }
 

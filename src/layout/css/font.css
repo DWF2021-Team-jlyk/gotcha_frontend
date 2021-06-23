@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'Mukta', sans-serif;
+    src: url('../fonts/Volkhov-Bold.ttf');
+    font-style: normal;
+    font-weight: bold;
+}
+
+.font {
+    font-family: 'Mukta';
+  
+}
+
+@font-face {
+    font-family: 'Volkhov-Bold';
+    src: url('../fonts/Volkhov-Bold.ttf');
+    font-style: normal;
+    font-weight: bold;
+}
+
+.logofont {
+    font-family: 'Volkhov-Bold';
+
+}

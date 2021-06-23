@@ -6,12 +6,6 @@ import MainList from "./MainList";
 import "./sidebar.css"
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        height: "1500px",
-        overflowY:"scroll",
-        backgroundColor: theme.palette.primary.light,
-        color: theme.palette.background.paper,
-    },
     nested: {
         paddingLeft: theme.spacing(4),
     },
