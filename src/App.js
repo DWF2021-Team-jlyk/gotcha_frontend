@@ -2,10 +2,13 @@ import React, {useState} from "react";
 import Sidebar from "./layout/Sidebar/index";
 import Home from "./pages/home";
 import Header from "./layout/Header";
-import Workspace from "./pages/workspace";
+// import Workspace from "./pages/workspace";
 import {Route, Switch} from "react-router-dom"
 import AppInitData from "./DumiData/AppInitData";
 import Content from "./pages/board_content";
+import loadable from "@loadable/component"
+
+const Workspace = loadable(()=>import("./pages/workspace/index"));
 
 const style = {
     display: "flex"
@@ -20,13 +23,19 @@ const horizontal = {
 }
 const App = () => {
     const [adminWorkSpace, setAdminWorkSpace] = useState(
-        AppInitData.admin
+        AppInitData.workspaces.filter((workspace)=>{
+            return workspace.role_id === 1;
+        })
     );
     const [memberWorkSpace, setMemberWorkSpace] = useState(
-        AppInitData.member
+        AppInitData.workspaces.filter((workspace)=>{
+            return workspace.role_id === 2;
+        })
     );
     const [favWorkSpace, setFavWorkSpace] = useState(
-        AppInitData.fav
+        AppInitData.workspaces.filter((workspace)=>{
+            return workspace.is_fav === 1;
+        })
     )
     return (
         <>

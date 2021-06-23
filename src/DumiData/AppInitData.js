@@ -41,7 +41,7 @@ export default{
     notifications : [
         {
             title: "WorkList Noti Test",
-            workspaceName: "test1",
+            workspaceName: "workspace2",
             desc: "test Noti",
             type: "board",
             endDate: "2021/06/30",
@@ -49,7 +49,7 @@ export default{
         },
         {
             title: "Card Noti Test",
-            workspaceName: "test2",
+            workspaceName: "workspace1",
             desc: "test Noti",
             type: "card",
             endDate: "2021/06/30",
@@ -57,15 +57,15 @@ export default{
         },
         {
             title: "Noti Noti Test",
-            workspaceName: "test3",
+            workspaceName: "workspace2",
             desc: "test Noti",
-            type: "noti",
+            type: "todo",
             endDate: "2021/06/30",
             ws_id:1
         },
         {
             title: "Invite Noti Test",
-            workspaceName: "test4",
+            workspaceName: "workspace3",
             desc: "test Noti",
             type: "invite",
             endDate: "2021/06/30",
@@ -73,5 +73,3 @@ export default{
         },
     ]
 }
-
-export default AppInitData

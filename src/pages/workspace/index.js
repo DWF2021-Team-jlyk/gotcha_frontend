@@ -21,7 +21,7 @@ const Workspace = () => {
             <Card.Header>
                 <Nav variant="tabs" defaultActiveKey="#WorkList">
                     <Nav.Item>
-                        <Nav.Link href="#WorkList" onSelect={e => setValue(1)}>WorkList</Nav.Link>
+                        <Nav.Link href="#WorkList" onSelect={e => {setValue(1)}}>WorkList</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link href="#Calendar" onSelect={e => setValue(2)}>Calendar</Nav.Link>
