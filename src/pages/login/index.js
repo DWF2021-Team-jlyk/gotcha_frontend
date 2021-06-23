@@ -32,6 +32,7 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
+    
     paper: {
         marginTop: theme.spacing(8),
         display: 'flex',
@@ -108,7 +109,7 @@ export default function Login() {
                     <Switch>
                         <Grid container>
                             <Grid item xs>
-                                <Link href="#" variant="body2">
+                                <Link to="/Pwdfind" variant="body2">
                                     Forgot password?
                                 </Link>
                             </Grid>

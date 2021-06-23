@@ -7,8 +7,8 @@ import Chip from "@material-ui/core/Chip";
 import Badge from "react-bootstrap/Badge";
 import "./mypage.css";
 import { grey } from "@material-ui/core/colors";
-import axios from "axios";
 
+import axios from "axios";
 const useStyles = makeStyles((theme) => ({
   tableStyle: {
     borderCollapse: "separate",
@@ -46,6 +46,7 @@ const Mypage = () => {
 
   const [useropen, setuserOpen] = React.useState(false);
   const [passwordopen, setpasswordOpen] = React.useState(false);
+  const [leaveopen, setleaveOpen] = React.useState(false);
 
   const userhandleOpen = () => {
     setuserOpen(true);
@@ -61,6 +62,14 @@ const Mypage = () => {
 
   const passwordhandleClose = () => {
     setpasswordOpen(false);
+  };
+
+  const leavehandleOpen = () => {
+    setleaveOpen(true);
+  };
+
+  const leavehandleClose = () => {
+    setleaveOpen(false);
   };
 
   //유저네임 변경 모달 바디
@@ -152,7 +161,7 @@ const Mypage = () => {
           </td>
           <td>
             <Button variant="contained" color="primary" disabled>
-                변경하기
+              변경하기
             </Button>
           </td>
         </tr>
@@ -160,14 +169,34 @@ const Mypage = () => {
     </div>
   );
 
-  const [name, setName] = useState('');
-  const getName = async () => {
-      const result = await axios.get("/name") //url요청
-      await setName(result.data)
-  }
-  useEffect(()=>{
-      getName()
-  },[]);
+  const leaveBody = (
+    <div className={classes.paper}>
+      <div className="modaltitle" id="simple-modal-title">
+        회원탈퇴
+      </div>
+
+      <table id="simple-modal-description" className={classes.tableStyle}>
+        <tr>
+          <td>비밀번호를 입력해주세요</td>
+          <td>
+            <TextField
+              required
+              id="outlined-required"
+              type="password"
+              placeholder="비밀번호 입력"
+              variant="outlined"
+              size="small"
+            />
+          </td>
+          <td>
+            <Button variant="contained" color="primary" disabled>
+              탈퇴하기
+            </Button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  );
 
   return (
     <div className={classes.mypagePosition}>
@@ -196,7 +225,7 @@ const Mypage = () => {
               />{" "}
             </td>
             <td style={{ fontSize: 18 }}>
-              {name}
+              boyoung
               <Button
                 variant="contained"
                 color="primary"
@@ -255,7 +284,7 @@ const Mypage = () => {
                 label="&emsp;&nbsp;leave&emsp;&nbsp;"
                 variant="outlined"
                 color="primary"
-                style={{ fontSize: 18}}
+                style={{ fontSize: 18 }}
               />{" "}
             </td>
 
@@ -263,10 +292,20 @@ const Mypage = () => {
               <Button
                 variant="contained"
                 color="primary"
+                onClick={leavehandleOpen}
               >
                 &emsp;&emsp;회원탈퇴&emsp;&emsp;
               </Button>
-            
+
+              <Modal
+                open={leaveopen}
+                className={classes.modal}
+                onClose={leavehandleClose}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+              >
+                {leaveBody}
+              </Modal>
             </td>
           </tr>
         </table>

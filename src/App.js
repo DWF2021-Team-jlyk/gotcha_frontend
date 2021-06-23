@@ -13,7 +13,7 @@ const Workspace = loadable(()=>import("./pages/workspace"));
 const Join = loadable(()=>import("./pages/signUp"));
 const Code = loadable(()=>import("./pages/signUp/Code"));
 const Mypage = loadable(()=>import("./pages/mypage/mypage"));
-
+const Pwdfind =loadable(()=>import("./pages/pwdfind/Pwdfind"));
 const style = {
     display: "flex",
 }
@@ -25,7 +25,6 @@ const LoginStyle = {
     left: "50%",
     transform: "translateX(-50%)",
 }
-
 
 const side = {
     background: '#7986cb'
@@ -88,6 +87,9 @@ const App = () => {
                         </Route>
                         <Route exact path="/Mypage">
                             <Mypage/>
+                        </Route>
+                        <Route exact path="/Pwdfind">
+                            <Pwdfind/>
                         </Route>
                     </div>
                 </div>
