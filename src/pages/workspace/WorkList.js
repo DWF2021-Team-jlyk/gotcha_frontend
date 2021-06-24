@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import MyList from "../../components/WorkList/WorkListCardList";
 import axios from 'axios';
@@ -13,10 +13,9 @@ const listStyle = {
 };
 
 const WorkList = () => {
-    const [lists, setLists] = useState([
-
-    ]);
-    const url = '/workspace2'
+    const [lists, setLists] = useState([]);
+    const [receiver, setReceiver] = useState(false);
+    const url = '/workspace/list'
     const datas = {
         "list_id": 1
     };
@@ -27,15 +26,44 @@ const WorkList = () => {
         url,
     };
 
-    axios(options)
+    useEffect(()=>{
+        axios(options)
         .then((res) => {
             console.log(res)
-        }, [])
+            setLists([...lists, ...res.data])
+            console.log(lists);
+        })
         .catch(error => {
             console.log(error)
         });
+        console.log(lists);
+    },[]);
+    
+    const [cards, setCards] = useState([]);
+    //const [receiver, setReceiver] = useState(false);
+    const url = '/workspace/card'
+    const datas = {
+        "list_id": 1
+    };
+    const options = {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        data: JSON.stringify(datas),
+        url,
+    };
 
-
+    useEffect(()=>{
+        axios(options)
+        .then((res) => {
+            console.log(res)
+            setLists([...cards, ...res.data])
+            console.log(lists);
+        })
+        .catch(error => {
+            console.log(error)
+        });
+        console.log(cards);
+    },[]);
 
     return (
         <>
@@ -62,10 +90,23 @@ const WorkList = () => {
 
                 </div>
             </div> */}
-            <h1>{lists.list_id}</h1>
-            <h1>{lists.user_id}</h1>
-            <h1>{lists.list_name}</h1>
-            <h1>{lists.is_fav}</h1>
+
+            {/* test용 receiver 
+            <button 
+                onClick={()=>setReceiver(!receiver)}
+            >receiver</button> */}
+            {
+                lists.map((list)=>{
+                    return <>
+                        <h1>{list.list_id}</h1>
+                        <h1>{list.user_id}</h1>
+                        <h1>{list.list_name}</h1>
+                        <h1>{list.is_fav}</h1>
+                        <h1>{cards.card_id}</h1>
+                        
+                    </>
+                })
+            }
         </>
     );
 };

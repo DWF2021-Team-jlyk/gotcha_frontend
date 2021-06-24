@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Sidebar from "./layout/Sidebar";
 import Home from "./pages/home";
 import Header from "./layout/Header/header";
@@ -8,7 +8,7 @@ import {Route, Switch} from "react-router-dom";
 import AppInitData from "./DumiData/AppInitData";
 import loadable from "@loadable/component";
 import "./layout/css/font.css"
-
+import { useDispatch, useSelector } from "react-redux";
 const Workspace = loadable(()=>import("./pages/workspace"));
 const Join = loadable(()=>import("./pages/signUp"));
 const Code = loadable(()=>import("./pages/signUp/Code"));
@@ -36,6 +36,14 @@ const horizontal = {
 }
 
 const App = () => {
+    // const dispatch = useDispatch();
+    // const state = useSelector((state)=>{return state.count});
+    // useEffect(()=>{
+    //     handleAddCount();
+    //  },[])
+    //  const handleAddCount=()=>{
+    //      dispatch({type:"ADD_COUNT",payload:state+1}) 
+    //  }
     const [adminWorkSpace, setAdminWorkSpace] = useState(
         AppInitData.workspaces.filter((workspace)=>{
             return workspace.role_id === 1;
