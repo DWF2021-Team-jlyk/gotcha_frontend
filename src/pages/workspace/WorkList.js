@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
-import MyList from "../../components/WorkList/WorkListCardList";
+import MyList from "./components/worklist/WorkListCardList";
 import axios from 'axios';
 
 const listStyle = {

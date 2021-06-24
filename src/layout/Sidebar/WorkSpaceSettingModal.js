@@ -1,7 +1,7 @@
 import {Button, Col, Form, Modal, ModalBody, ModalFooter, ModalTitle, Row} from "react-bootstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import React from "react";
-import UserAvatar from "../../components/UserAvatar";
+import UserAvatar from "./UserAvatar";
 
 const WorkSpaceSettingModal = ({workspace, clicked, handleClose, role}) => {
     return (

@@ -1,6 +1,6 @@
 import React from "react";
 import "../../layout/css/Layout.css";
-import WorkSpaceCard from "../../components/WorkSpaceCard";
+import WorkSpaceCard from "./components/WorkSpaceCard";
 import { Card, Row } from "react-bootstrap";
 import Notification from "./Notification";
 import "./Cards.css";
