@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import MyList from "../../components/WorkList/WorkListCardList";
 import axios from 'axios';
+import Array from ''
 
 const listStyle = {
     width: "100%",
@@ -14,7 +15,7 @@ const listStyle = {
 
 const WorkList = () => {
     const [lists, setLists] = useState([]);
-    const [receiver, setReceiver] = useState(false);
+    //const [receiver, setReceiver] = useState(false);
     const url = '/workspace/list'
     const datas = {
         "list_id": 1
@@ -36,34 +37,9 @@ const WorkList = () => {
         .catch(error => {
             console.log(error)
         });
-        console.log(lists);
     },[]);
     
-    const [cards, setCards] = useState([]);
-    //const [receiver, setReceiver] = useState(false);
-    const url = '/workspace/card'
-    const datas = {
-        "list_id": 1
-    };
-    const options = {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        data: JSON.stringify(datas),
-        url,
-    };
-
-    useEffect(()=>{
-        axios(options)
-        .then((res) => {
-            console.log(res)
-            setLists([...cards, ...res.data])
-            console.log(lists);
-        })
-        .catch(error => {
-            console.log(error)
-        });
-        console.log(cards);
-    },[]);
+    
 
     return (
         <>
@@ -102,7 +78,6 @@ const WorkList = () => {
                         <h1>{list.user_id}</h1>
                         <h1>{list.list_name}</h1>
                         <h1>{list.is_fav}</h1>
-                        <h1>{cards.card_id}</h1>
                         
                     </>
                 })
@@ -111,4 +86,37 @@ const WorkList = () => {
     );
 };
 
-export default WorkList;
+const WorkCard = ()=>{
+    const [cards, setCards] = useState([]);
+    const url = "/workspace/card";
+    const datas = {"card_id" : 1};
+    const options = {
+        method: "POST",
+        header: "content-type:application/json",
+        data: JSON.stringify(datas),
+        url,
+    }
+
+    useEffect (()=>{
+        axios(options)
+        .then((res)=>{
+            console.log(res)
+            setCards([...cards, ...res.data])
+            console.log(cards)
+        })
+        .catch(error =>{
+            console.log(error)
+        })
+    },[]);
+    
+    return(
+        <>
+        <h1>{cards.card_id}</h1>
+        <h1>{cards.card_name}</h1>
+        <h1>{cards.list_id}</h1>
+        <h1>{cards.ws_id}</h1>
+        </>
+    );
+};
+
+export default WorkCard;

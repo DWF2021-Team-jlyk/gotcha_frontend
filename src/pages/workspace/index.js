@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Nav} from "react-bootstrap";
 import "../../layout/css/Layout.css"
 import WorkList from "./WorkList";
+import WorkCard from "./WorkList";
 import Card from "react-bootstrap/Card";
 import loadable from "@loadable/component";
 
@@ -34,7 +35,7 @@ const Workspace = () => {
                 </Nav>
             </Card.Header>
             <Card.Body>
-                {value === 1 && <WorkList/>}
+                {value === 1 && <WorkCard/>}
                 {value === 2 && <Calendar/>}
                 {value === 3 && <Board/>}
             </Card.Body>
