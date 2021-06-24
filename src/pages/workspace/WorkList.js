@@ -39,7 +39,7 @@ const WorkList = () => {
 
     return (
         <>
-            {/* <Button
+            <Button
                 variant="contained"
                 color="primary"
                 onClick={(e) => {
@@ -61,11 +61,11 @@ const WorkList = () => {
                 <div style={{margin: 10}}>
 
                 </div>
-            </div> */}
-            <h1>{lists.list_id}</h1>
+            </div>
+            {/* <h1>{lists.list_id}</h1>
             <h1>{lists.user_id}</h1>
             <h1>{lists.list_name}</h1>
-            <h1>{lists.is_fav}</h1>
+            <h1>{lists.is_fav}</h1> */}
         </>
     );
 };

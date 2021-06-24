@@ -50,7 +50,11 @@ const WorkSpaceSettingModal = ({workspace, clicked, handleClose, role}) => {
                         </Row>
                     </Form.Group>
                 </Form>
-                <Row>
+
+                
+                <Row style={{marginTop:20}}>
+                    <div>Member Management</div>
+                  
                     {
                         [
                             "Test1@naver.com",
