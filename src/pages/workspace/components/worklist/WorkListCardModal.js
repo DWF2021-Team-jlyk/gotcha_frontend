@@ -1,11 +1,7 @@
 import React from "react";
 import {Button, Col, Modal, ModalBody, ModalFooter, Row} from "react-bootstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
-import styled from "styled-components";
-
-const modal = styled.div`
-  display: flex;
-`;
+import {FunctionalAddOn, ActionAddOn} from "./ModalAddOn";
 
 const WorkListCardModal = (props) => {
     return (
@@ -35,48 +31,12 @@ const WorkListCardModal = (props) => {
                     <Col sm={3}>
                         <div>
                             ADD TO CARD
-                            {
-                                ["Member", "Checklist", "Date", "File"]
-                                    .map((value, index) => {
-                                        return (
-                                            <div key={index}>
-                                                <Button
-                                                    variant="secondary"
-                                                    style={{
-                                                        width: "150px",
-                                                        textAlign: "left",
-                                                        marginTop: "5px"
-                                                    }}
-                                                >
-                                                    {value}
-                                                </Button>
-                                            </div>
-                                        )
-                                    })
-                            }
+                            <FunctionalAddOn/>
                         </div>
                         <br/>
                         <div>
                             ACTIONS
-                            {
-                                ["Move", "Copy"]
-                                    .map((value, index) => {
-                                        return (
-                                            <div key={index}>
-                                                <Button
-                                                    variant="secondary"
-                                                    style={{
-                                                        width: "150px",
-                                                        textAlign: "left",
-                                                        marginTop: "5px"
-                                                    }}
-                                                >
-                                                    {value}
-                                                </Button>
-                                            </div>
-                                        )
-                                    })
-                            }
+                            <ActionAddOn/>
                         </div>
                     </Col>
                 </Row>

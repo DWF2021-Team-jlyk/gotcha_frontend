@@ -1,7 +1,7 @@
-import React, {useState, useRef} from "react";
+import React from "react";
 import {Button, Form, FormControl, Navbar} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import {IoIosNotificationsOutline, IoMdAdd, IoPersonCircleOutline,} from "react-icons/all";
+import {IoPersonCircleOutline,} from "react-icons/all";
 import NotiButton from "./NotiButton";
 import WorkSpaceAddButton from "./WorkSpaceAddButton";
 

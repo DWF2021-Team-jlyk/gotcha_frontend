@@ -4,8 +4,8 @@ import Home from "./pages/home";
 import Header from "./layout/Header/header";
 // import Header from "./layout/Header";
 import Login from "./pages/user/Login";
-import {Route, Switch} from "react-router-dom";
-import AppInitData from "./DumiData/AppInitData";
+import {Route} from "react-router-dom";
+import AppInitData from "./DummyData/AppInitData";
 import loadable from "@loadable/component";
 import "./layout/css/font.css"
 
@@ -86,9 +86,8 @@ const App = () => {
                     <div>
                         <Route exact path="/">
                             <Home admin={adminWorkSpace}  member={memberWorkSpace} noti={Noti} />
-
                         </Route>
-                        <Route exact path="/workspace">
+                        <Route exact path="/workspace/:id">
                             <Workspace/>
                         </Route>
                         <Route exact path="/Join">

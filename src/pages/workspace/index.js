@@ -4,13 +4,27 @@ import "../../layout/css/Layout.css"
 import WorkList from "./WorkList";
 import Card from "react-bootstrap/Card";
 import loadable from "@loadable/component";
+import {useParams} from "react-router-dom";
+import axios from "axios";
+import WorkSpaceData from "../../DummyData/WorkSpaceData";
 
 const Calendar = loadable(() => import('../calendar'));
 const Board = loadable(()=>import("../board"));
 
 
 const Workspace = () => {
+    const {ws_id} = useParams();
     const [value, setValue] = useState(1);
+
+    const [lists, setLists] = useState(
+        WorkSpaceData.lists
+    )
+    const [cards, setCards] = useState(
+        WorkSpaceData.cards
+    )
+    // const getList = async () => {
+    //     return await axios.post();
+    // }
 
     return (
         <Card
@@ -34,9 +48,18 @@ const Workspace = () => {
                 </Nav>
             </Card.Header>
             <Card.Body>
-                {value === 1 && <WorkList/>}
-                {value === 2 && <Calendar/>}
-                {value === 3 && <Board/>}
+                {
+                    value === 1
+                    &&
+                    <WorkList
+                        lists={lists}
+                        cards={cards}
+                        setLists={setLists}
+                        setCards={setCards}
+                    />
+                }
+                {/*{value === 2 && <Calendar/>}*/}
+                {/*{value === 3 && <Board/>}*/}
             </Card.Body>
         </Card>
     )
