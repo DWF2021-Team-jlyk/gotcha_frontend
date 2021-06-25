@@ -6,13 +6,12 @@ import Notification from "./Notification";
 import "./Cards.css";
 import axios from "axios";
 
-const Home = ({ admin, member, noti }) => {
+const Home = () => {
   const style = {
     display: "flex",
   };
 
   const workspaces = {
-    //names: ["ADMIN", "MEMBER"],
     style: {
       width: 1050,
       marginTop: 50,
