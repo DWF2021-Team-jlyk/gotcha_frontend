@@ -19,7 +19,7 @@ const SubList = ({classes, workspaces, open, category}) => {
                                             textDecoration: "none",
                                             underline: "none"
                                         }}
-                                        to="/workspace"
+                                        to={`/workspace/${workspace.ws_id}`}
                                     >
                                         <ListItemText primary={workspace.ws_name}/>
                                     </Link>

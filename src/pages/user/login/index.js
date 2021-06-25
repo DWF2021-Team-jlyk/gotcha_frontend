@@ -15,7 +15,7 @@ import Container from '@material-ui/core/Container';
 import {createGlobalStyle} from 'styled-components';
 import {CenterFocusStrong} from '@material-ui/icons';
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
-import '../../layout/css/Login.css';
+import '../../../layout/css/Login.css';
 
 function Copyright() {
     return (
@@ -110,7 +110,7 @@ export default function Login() {
                         <Grid container>
                             <Grid item xs>
                                 <Link to="/Pwdfind" variant="body2">
-                                    Forgot password?
+                                     Forgot password?
                                 </Link>
                             </Grid>
                             <Grid item>

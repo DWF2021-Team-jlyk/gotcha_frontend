@@ -23,9 +23,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Sidebar = ({admin, fav, member}) => {
     const classes = useStyles();
-    const [subListData, setsubListData] = useState({
-        admin, fav, member
-    });
 
 
     return (

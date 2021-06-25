@@ -1,7 +1,7 @@
 import {Button, Col, Form, Modal, ModalBody, ModalFooter, ModalTitle, Row} from "react-bootstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import React from "react";
-import UserAvatar from "../../components/UserAvatar";
+import UserAvatar from "./UserAvatar";
 
 const WorkSpaceSettingModal = ({workspace, clicked, handleClose, role}) => {
     return (
@@ -50,7 +50,11 @@ const WorkSpaceSettingModal = ({workspace, clicked, handleClose, role}) => {
                         </Row>
                     </Form.Group>
                 </Form>
-                <Row>
+
+                
+                <Row style={{marginTop:20}}>
+                    <div>Member Management</div>
+                  
                     {
                         [
                             "Test1@naver.com",
