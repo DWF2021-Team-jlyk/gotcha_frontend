@@ -22,7 +22,7 @@ export default function Notification({ notification }) {
 
   return (
     <div>
-      <Tabs defaultActiveKey="home" transition={false} id="noanim-tab-example">
+      <Tabs defaultActiveKey="allNoti" transition={false} id="noanim-tab-example">
         <Tab eventKey="allNoti" title="전체 알림">
           <Card>
             <Card.Header style={{ textAlign: "center" }}>

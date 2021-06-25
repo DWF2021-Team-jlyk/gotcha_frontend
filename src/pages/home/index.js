@@ -32,7 +32,7 @@ const Home = () => {
   const [notilist, setNotilist] = useState([]);
 
   const getList = async () => {
-    const wsResult = await axios.post("/wsList", {
+    const wsResult = await axios.post("/home/wsList", {
       user_id: "user01@naver.com",
     });
 
@@ -50,7 +50,7 @@ const Home = () => {
   };
 
   const getnotiList = async () => {
-    const notiResult = await axios.post("/notiList", {
+    const notiResult = await axios.post("/home/notiList", {
       user_id: "user01@naver.com",
     });
     setNotilist(notiResult.data)
@@ -68,8 +68,9 @@ const Home = () => {
     <div style={style}>   
       <div>
         {[
-          { title: "Admin", workspaces: adminWorkspace },
-          { title: "Member", workspaces: memberWorkspace },
+          // data 객체들
+          { title: "Admin", workspaces: adminWorkspace, setWs: setAdminWorkspace},
+          { title: "Member", workspaces: memberWorkspace, setWs: setMemberWorkspace},
         ].map((data, index) => {
           return (
             <>
@@ -80,6 +81,7 @@ const Home = () => {
 
                 <Card.Body className="workspaces">
                   <Row>
+                    {/* data객체들 중에서 workspaces만 받아와서 workspacecard에 넘겨준다*/}
                     {data.workspaces.map((workspace, index) => {
                       return (
                         <WorkSpaceCard workspaces={workspace} key={index} />
