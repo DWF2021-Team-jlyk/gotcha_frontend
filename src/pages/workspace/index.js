@@ -17,7 +17,9 @@ const Workspace = () => {
     const [value, setValue] = useState(1);
 
     const [lists, setLists] = useState(
-        WorkSpaceData.lists
+        WorkSpaceData.lists.filter(list=>{
+            list.list_id
+        })
     )
     const [cards, setCards] = useState(
         WorkSpaceData.cards
