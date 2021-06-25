@@ -36,6 +36,7 @@ const horizontal = {
 }
 
 const App = () => {
+    // main말고 사이드바에서 잠시 쓰는 더미데이터
     const [adminWorkSpace, setAdminWorkSpace] = useState(
         AppInitData.workspaces.filter((workspace)=>{
             return workspace.role_id === 1;
@@ -51,9 +52,6 @@ const App = () => {
             return workspace.is_fav === 1;
         })
     );
-
-    const [Noti, setNoti] = useState(AppInitData.notifications);
-
 
     return (
         <div className="font">
@@ -85,7 +83,7 @@ const App = () => {
                 <div>
                     <div>
                         <Route exact path="/">
-                            <Home admin={adminWorkSpace}  member={memberWorkSpace} noti={Noti} />
+                            <Home />
                         </Route>
                         <Route exact path="/workspace/:id">
                             <Workspace/>

@@ -1,69 +1,111 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../layout/css/Layout.css";
+<<<<<<< HEAD
 import WorkSpaceCard from "./components/WorkSpaceCard";
 import {Card, Row} from "react-bootstrap";
+=======
+import WorkSpaceCard from "../../components/WorkSpaceCard";
+import { Card, Row } from "react-bootstrap";
+>>>>>>> boyoung
 import Notification from "./Notification";
-import "./Cards.css"
+import "./Cards.css";
+import axios from "axios";
 
-const Home = ({admin, member}) => {
-    const style = {
-        display: "flex",
-    };
+const Home = ({ admin, member, noti }) => {
+  const style = {
+    display: "flex",
+  };
 
-    const workspaces = {
-        names: ["ADMIN", "MEMBER"],
-        style: {
-            width: 1050,
-            marginTop: 50,
-            marginRight: 50,
-            marginLeft: 50,
-        }
-    }
+  const workspaces = {
+    //names: ["ADMIN", "MEMBER"],
+    style: {
+      width: 1050,
+      marginTop: 50,
+      marginRight: 50,
+      marginLeft: 50,
+      textAlign: "center",
+    },
+  };
 
-    const Noti = {
-        width: 500,
-        marginTop: 50,
-    };
+  const Noti = {
+    width: 500,
+    marginTop: 50,
+  };
 
-  
-    function Cardrole () {
-        if(workspaces.role_id == 1){
-           return  <WorkSpaceCard workspaces={admin}></WorkSpaceCard>
-        }else{
-            return <WorkSpaceCard workspaces={member}></WorkSpaceCard>
-        }
-    }
-    return (
-        <div style={style}>
-            {/*admin , member 워크 스페이스를 띄우기 위한 div*/}
-            <div>
-                
-                {
-                    workspaces.names.map((name, index) => {
-                        return <Card style={workspaces.style} key={index}>
-                            <Card.Header>
-                                <h3>{name}</h3> 
-                                {/* admin member 공간 분리 */}
-                            </Card.Header>
 
-                            <Card.Body className="workspaces">
-                                <Row>
-                                   {Cardrole}
-                                    {/* {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => {
-                                        return <WorkSpaceCard title="test" key={value} id={value}/>;
-                                    })} */}
-                                  
-                                </Row>
-                            </Card.Body>
-                        </Card>
-                    })
-                }
-            </div>
+  const [adminWorkspace, setAdminWorkspace] = useState([]);
+  const [memberWorkspace, setMemberWorkspace] = useState([]);
+  const [Notification, setNotification] = useState([]);
 
-            <div style={Noti}>
-                <Notification/>
-            </div>
-        </div>
+  const getList = async () => {
+    const wsResult = await axios.post("/wsList", {
+      user_id: "user01@naver.com",
+    });
+
+    setAdminWorkspace(
+      wsResult.data.filter((workspace) => {
+        return workspace.ROLE_ID === 1;
+      })
     );
+
+    setMemberWorkspace(
+      wsResult.data.filter((workspace) => {
+        return workspace.ROLE_ID === 2;
+      })
+    );
+  };
+
+  const getNotiList = async () => {
+
+    const notiResult = await axios.post("/notiList", {
+      user_id: "user01@naver.com",
+    });
+
+    setNotification(notiResult)
+
+  };
+
+  useEffect(() => {
+    getList();
+    getNotiList();
+  }, []);
+
+
+  console.log(Notification)
+
+  return (
+    <div style={style}>   
+      <div>
+        {[
+          { title: "Admin", workspaces: adminWorkspace },
+          { title: "Member", workspaces: memberWorkspace },
+        ].map((data, index) => {
+          return (
+            <>
+              <Card style={workspaces.style}>
+                <Card.Header>
+                  <h3 style={{ textAlign: "center" }}>{data.title}</h3>
+                </Card.Header>
+
+                <Card.Body className="workspaces">
+                  <Row>
+                    {data.workspaces.map((workspace, index) => {
+                      return (
+                        <WorkSpaceCard workspaces={workspace} key={index} />
+                      );
+                    })}
+                  </Row>
+                </Card.Body>
+              </Card>
+            </>
+          );
+        })}
+      </div>
+
+      <div style={Noti}>
+        <Notification notis={noti} />
+      </div>
+    </div>
+  );
 };
 export default Home;

@@ -68,10 +68,10 @@ const WorkList = (props) => {
 
                 </div>
             </div>
-            {/*<h1>{lists.list_id}</h1>*/}
-            {/*<h1>{lists.user_id}</h1>*/}
-            {/*<h1>{lists.list_name}</h1>*/}
-            {/*<h1>{lists.is_fav}</h1>*/}
+            {/* <h1>{lists.list_id}</h1>
+            <h1>{lists.user_id}</h1>
+            <h1>{lists.list_name}</h1>
+            <h1>{lists.is_fav}</h1> */}
         </>
     );
 };

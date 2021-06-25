@@ -1,23 +1,34 @@
 import { Card, Row } from "react-bootstrap";
 import React from "react";
 import { Link } from "react-router-dom";
+import noImg from "../image/gotcha.png";
+import {AiOutlineStar} from "react-icons/ai";
 
 const LinkStyle = {
-  width:"18rem", 
+  width:"300px",
   margin:"10px", 
   textDecoration: 'none', 
   color: "#212529",
   textAlign: "center",
   fontSize:"1rem"
 }
+
+
 const WorkSpaceCard = ({ workspaces}) => {
+
+
   return (
-    <Link to={`workspace/${workspaces.ws_id}`} style={LinkStyle}>
-      <Card style={{ width: "18rem"}}>
-        <Card.Img variant="top" width={200} height={150} />
-        <Card.Body>
+    <Link to={`workspace/${workspaces.WS_ID}`} style={LinkStyle}>
+      <Card>
+        <div style={{ textAlign: "center"}}>
+        <Card.Img variant="top" style={{width:150}}src={noImg}/>
+        </div>
+        <Card.Body style={{backgroundColor:"#f7f7f7"}}>
           <Row>
-            <Card.Text >{workspaces.ws_name}</Card.Text>
+            <Card.Text>
+              <span style={{position:"relative", left:10}}>{workspaces.WS_NAME}</span>
+              <AiOutlineStar style={{position:"relative", left:100, fontSize:25, color:"FFC947"}}/>
+            </Card.Text>
           </Row>
         </Card.Body>
       </Card>
