@@ -82,6 +82,7 @@ function Join() {
     };
 
     axios(options).then((res) => {
+      console.log(res)
       if(res.data === false) {
         alert("이미 가입한 아이디입니다.");
       }else{

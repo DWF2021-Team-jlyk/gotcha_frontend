@@ -67,16 +67,31 @@ function Copyright() {
     const history = useHistory();
 
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const onSubmit = data => {
-      console.log(data.lastName);
-      history.push("/home") 
-    }
-
-    const onSubmit1 = (e) => {
+    const onSubmit1 = (data,e) => {
       e.preventDefault();
-      alert("click");
-      history.push("/home")
-    }
+      alert('dd');
+      console.log(data.lastName);
+      // const url = '/login'
+      // const datas = { 
+      //   "user_id": data.email,
+      //   "user_name": data.username,
+      //   "user_pwd": data.password
+      // };
+      // const options = {
+      //   method: 'POST',
+      //   headers: { 'content-type': 'application/json' },
+      //   data: JSON.stringify(datas),
+      //   url,
+      // };
+      // axios.post(options)
+      // history.push("/home") 
+    };
+
+    // const onSubmit1 = (e) => {
+      
+    //   alert("click");
+    //   history.push("/home")
+    // }
 
     return (
     
@@ -90,7 +105,7 @@ function Copyright() {
           <Typography component="h1" variant="h5">
             로그인
           </Typography>
-          <form className={classes.form} onSubmit={handleSubmit(onSubmit)} noValidate>
+          <form className={classes.form} onSubmit={handleSubmit(onSubmit1)} method='post' noValidate>
             <TextField
               variant="outlined"
               margin="normal"
@@ -126,7 +141,7 @@ function Copyright() {
               color="primary"
               className={classes.submit}
             >
-              Login
+              Login11
             </Button>
             <Switch>
             <Grid container>
