@@ -29,7 +29,8 @@ const Home = () => {
 
   const [adminWorkspace, setAdminWorkspace] = useState([]);
   const [memberWorkspace, setMemberWorkspace] = useState([]);
-  const [notilist, setNotilist] = useState([]);
+  const [notiList, setNotiList] = useState([]);
+  const [unreadNotiList, setUnreadNotiList] = useState([]);
 
   const getList = async () => {
     const wsResult = await axios.post("/home/wsList", {
@@ -53,7 +54,15 @@ const Home = () => {
     const notiResult = await axios.post("/home/notiList", {
       user_id: "user01@naver.com",
     });
-    setNotilist(notiResult.data)
+
+    setUnreadNotiList( //읽지않은 list
+      notiResult.data.filter((noti) => {
+        return noti.NOTI_CHECKED === "0" //0이 읽지않음
+      })
+    )
+
+    setNotiList(notiResult.data) //전체 list
+
 
   };
 
@@ -61,8 +70,6 @@ const Home = () => {
     getList();
     getnotiList();
   }, []);
-
-  console.log(notilist)
 
   return (
     <div style={style}>   
@@ -96,7 +103,7 @@ const Home = () => {
       </div>
 
       <div style={Noti}>
-        <Notification notification={notilist} />
+        <Notification allNoti={notiList} unreadNoti={unreadNotiList} />
       </div>
     </div>
   );

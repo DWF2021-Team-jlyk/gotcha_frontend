@@ -37,9 +37,6 @@ const changeFav = async(ws_id, is_fav) => {
     ws_id: ws_id,
     is_fav: is_fav
   });
-
-  console.log(ws_id)
-
 }
 
 const WorkSpaceCard = ({ workspaces}) => {
