@@ -1,20 +1,23 @@
-import React, { useState } from "react";
-import { Alert, Card } from "react-bootstrap";
-import "./Cards.css";
-import Tab from 'react-bootstrap/Tab'
-import Tabs from 'react-bootstrap/Tabs'
+import React, { useState } from 'react';
+import { Alert, Card } from 'react-bootstrap';
+import './Cards.css';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+import { useSelector } from 'react-redux';
+import NotiCard from './components/NotiCard';
 
-export default function Notification({ notification }) {
+export default function Notification() {
+  const notification = useSelector(state => state.notification);
   const returnTypeColor = (type) => {
     switch (type) {
-      case "c":
-        return "primary"; //card
-      case "b":
-        return "danger"; //board
-      case "i":
-        return "success"; //invite
+      case 'card':
+        return 'primary'; //card
+      case 'board':
+        return 'danger'; //board
+      case 'invite':
+        return 'success'; //invite
       default:
-        return "secondary"; //todo
+        return 'secondary'; //todo
     }
   };
 
@@ -22,32 +25,53 @@ export default function Notification({ notification }) {
 
   return (
     <div>
-      <Tabs defaultActiveKey="home" transition={false} id="noanim-tab-example">
-        <Tab eventKey="allNoti" title="전체 알림">
+      <Tabs defaultActiveKey='allNoti' transition={false} id='noanim-tab-example'>
+        <Tab eventKey='allNoti' title='전체 알림'>
           <Card>
-            <Card.Header style={{ textAlign: "center" }}>
+            <Card.Header style={{ textAlign: 'center' }}>
               <h3>Notification</h3>
             </Card.Header>
-            <Card.Body className="notification">
-              {notification.map((noti, index) => {
-                return (
-                  <Alert key={index} variant={returnTypeColor(noti.noti_type)}>
-                    <Alert.Link href="#" style={{ textDecoration: "none" }}>
-                      <h4 style={{ marginBottom: 20 }}>{noti.ws_name}</h4>
-                    </Alert.Link>
-                    <Card>
-                      <Card.Header>노티 타이틀?</Card.Header>
-                      <Card.Body>{noti.noti_desc}</Card.Body>
-                      <Card.Footer>{noti.NOTI_TIME}</Card.Footer>
-                    </Card>
-                  </Alert>
-                );
-              })}
+            <Card.Body className='notification'>
+              {notification
+                .map(noti => {
+                  return (
+                    <NotiCard key={noti.noti_id} noti={noti}/>
+                  );
+                })}
             </Card.Body>
           </Card>
         </Tab>
-        <Tab eventKey="NoReadNoti" title="읽지 않은 알림">
-          dsadasdasd
+        <Tab eventKey='NoReadNoti' title='읽지 않은 알림'>
+          <Card>
+            <Card.Header style={{ textAlign: 'center' }}>
+              <h3>Notification</h3>
+            </Card.Header>
+            <Card.Body className='notification'>
+              {notification
+                .filter(noti=>!noti.noti_read)
+                .map(noti => {
+                  return (
+                    <NotiCard key={noti.noti_id} noti={noti}/>
+                  );
+                })}
+            </Card.Body>
+          </Card>
+        </Tab>
+        <Tab eventKey='ReadNoti' title="읽은 알림">
+          <Card>
+            <Card.Header style={{ textAlign: 'center' }}>
+              <h3>Notification</h3>
+            </Card.Header>
+            <Card.Body className='notification'>
+              {notification
+                .filter(noti=>noti.noti_read)
+                .map(noti => {
+                  return (
+                    <NotiCard key={noti.noti_id} noti={noti}/>
+                  );
+                })}
+            </Card.Body>
+          </Card>
         </Tab>
       </Tabs>
     </div>

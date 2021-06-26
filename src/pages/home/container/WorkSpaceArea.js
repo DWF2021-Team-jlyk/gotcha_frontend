@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import WorkSpaceCard from '../components/WorkSpaceCard';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { changeWorkspaceFav } from '../../../modules/workspace';
 
 const workspaceStyle = {
@@ -14,11 +14,12 @@ const workspaceStyle = {
   },
 };
 
-const WorkSpaceArea = ({
-                         areaType,
-                         workspaces,
-                         changeWorkspaceFav,
-                       }) => {
+const WorkSpaceArea = ({ areaType}) => {
+  const workspaces = useSelector(state=> state.workspaces)
+  const dispatch = useDispatch();
+  const onToggle = useCallback(
+    ws_id=>dispatch(changeWorkspaceFav(ws_id)),
+    [dispatch])
   const getAreaTitle = (areaType) => {
     return areaType === 1 ? 'Admin' : 'Member';
   };
@@ -30,20 +31,15 @@ const WorkSpaceArea = ({
 
       <Card.Body className='workspaces'>
         <Row>
-          {console.log(workspaces)}
           {
             workspaces
               .filter(workspace => workspace.role_id === areaType)
               .map(workspace =>
                 <WorkSpaceCard
-                  workspaces={workspace}
-                  ws_id={workspace.ws_id}
-                  ws_name={workspace.ws_name}
-                  is_fav={workspace.is_fav}
-                  onToggle={changeWorkspaceFav}
+                  workspace={workspace}
                   key={workspace.ws_id}
-                />,
-              )
+                  onToggle={e=>onToggle(workspace.ws_id)}
+                />)
           }
         </Row>
       </Card.Body>
@@ -52,11 +48,4 @@ const WorkSpaceArea = ({
 };
 
 
-export default connect(
-  state => ({
-    workspaces: state.workspaces,
-  }),
-  {
-    changeWorkspaceFav,
-  },
-)(WorkSpaceArea);
+export default WorkSpaceArea;

@@ -14,7 +14,7 @@ const LinkStyle = {
 };
 
 
-const WorkSpaceCard = ({ workspace, ws_id, ws_name, is_fav, onToggle }) => {
+const WorkSpaceCard = ({workspace, onToggle}) => {
   return (
     <Card>
       <div style={{ textAlign: 'center' }}>
@@ -23,26 +23,26 @@ const WorkSpaceCard = ({ workspace, ws_id, ws_name, is_fav, onToggle }) => {
       <Card.Body style={{ backgroundColor: '#f7f7f7' }}>
         <Row>
           <Card.Text>
-            <Link to={`workspace/${ws_id}`} style={LinkStyle}>
-              <span style={{ position: 'relative', left: 10 }}>{ws_name}</span>
+            <Link to={`workspace/${workspace.ws_id}`} style={LinkStyle}>
+              <span style={{ position: 'relative', left: 10 }}>{workspace.ws_name}</span>
             </Link>
-            {is_fav &&
+            {workspace.is_fav &&
             <AiFillStar
               style={{
                 position: 'relative',
                 left: 100, fontSize: 25,
                 color: 'FFC947',
               }}
-              onClick={e=>onToggle(ws_id)}
+              onClick={onToggle}
             />}
-            {!is_fav &&
+            {!workspace.is_fav &&
             <AiOutlineStar
               style={{
                 position: 'relative',
                 left: 100, fontSize: 25,
                 color: 'FFC947',
               }}
-              onClick={e => onToggle(ws_id)}
+              onClick={onToggle}
             />}
           </Card.Text>
         </Row>

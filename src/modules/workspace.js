@@ -20,12 +20,7 @@ function workspaces(state = initialState, action) {
     case ADD_WORKSPACE:
       return [
         ...state,
-        {
-          ws_id: action.workspace.ws_id,
-          ws_name: action.workspace.ws_name,
-          role_id: action.workspace.role_id,
-          is_fav: action.workspace.is_fav,
-        },
+        { ...action.workspace },
       ];
 
     case CHANGE_WORKSPACE_FAV:
@@ -37,8 +32,8 @@ function workspaces(state = initialState, action) {
     case DELETE_WORKSPACE:
       return state.filter(workspace => workspace.ws_id !== action.ws_id);
 
-    default:
-      return state;
+    default: return state;
+
   }
 }
 

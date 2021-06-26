@@ -36,23 +36,6 @@ const horizontal = {
 };
 
 const App = () => {
-  // main말고 사이드바에서 잠시 쓰는 더미데이터
-  const [adminWorkSpace, setAdminWorkSpace] = useState(
-    AppInitData.workspaces.filter((workspace) => {
-      return workspace.role_id === 1;
-    }),
-  );
-  const [memberWorkSpace, setMemberWorkSpace] = useState(
-    AppInitData.workspaces.filter((workspace) => {
-      return workspace.role_id === 2;
-    }),
-  );
-  const [favWorkSpace, setFavWorkSpace] = useState(
-    AppInitData.workspaces.filter((workspace) => {
-      return workspace.is_fav === 1;
-    }),
-  );
-
   return (
     <div className='font'>
       {/*<Switch>*/}
@@ -74,11 +57,7 @@ const App = () => {
       {/*</div>*/}
       <div style={style}>
         <div style={side}>
-          <Sidebar
-            admin={adminWorkSpace}
-            fav={favWorkSpace}
-            member={memberWorkSpace}
-          />
+          <Sidebar/>
         </div>
         <div>
           <div>

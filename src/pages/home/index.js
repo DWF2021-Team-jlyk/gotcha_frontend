@@ -21,7 +21,6 @@ const Home = () => {
 
   // const [adminWorkspace, setAdminWorkspace] = useState([]);
   // const [memberWorkspace, setMemberWorkspace] = useState([]);
-  const [notilist, setNotilist] = useState(AppInitData.notifications);
   //
   // const getList = async () => {
   //   const wsResult = await axios.post("/wsList", {
@@ -64,7 +63,7 @@ const Home = () => {
       </div>
 
       <div style={Noti}>
-        <Notification notification={notilist} />
+        <Notification/>
       </div>
     </div>
   );
