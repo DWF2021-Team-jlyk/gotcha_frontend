@@ -1,8 +1,8 @@
-import {combineReducers} from "redux";
-import workspaceReducer from "./workspace";
+import { combineReducers } from 'redux';
+import workspaces from './workspace';
 
 const rootReducer = combineReducers({
-    workspaceReducer,
+  workspaces,
 });
 
 export default rootReducer;
