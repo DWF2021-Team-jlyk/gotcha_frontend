@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar } from "@material-ui/core";
 import { Button, Col, Row } from "react-bootstrap";
-import "../layout/css/workspaceSettingModal.css"
+import "../../layout/css/workspaceSettingModal.css"
 
 const UserAvatar = (props) => {
   const avatarIcon = (id) => {

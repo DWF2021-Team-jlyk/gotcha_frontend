@@ -31,8 +31,8 @@ const Home = () => {
   const [memberWorkspace, setMemberWorkspace] = useState([]);
   const [notilist, setNotilist] = useState([]);
 
-  const getList = async () => {
-    const wsResult = await axios.post("/wsList", {
+  const getWorkspace = async () => {
+    const wsResult = await axios.post("/main/wsList", {
       user_id: "user01@naver.com",
     });
 
@@ -50,7 +50,7 @@ const Home = () => {
   };
 
   const getnotiList = async () => {
-    const notiResult = await axios.post("/notiList", {
+    const notiResult = await axios.post("/main/notiList", {
       user_id: "user01@naver.com",
     });
     setNotilist(notiResult.data)
@@ -58,7 +58,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getList();
+    getWorkspace();
     getnotiList();
   }, []);
 

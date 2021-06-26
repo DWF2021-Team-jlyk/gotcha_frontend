@@ -34,7 +34,8 @@ const ListStyle = {
 
 const WorkListCardList = (props) => {
     const {lists, list,listId, cards, setLists, setCards} = props;
-
+    //console.log("WorkListCardList",cards)
+    console.log("WorkListCardList listId",listId)
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -71,14 +72,19 @@ const WorkListCardList = (props) => {
 
             <Card.Body>
                 {cards
-                    .filter(card=>{return card.list_id===listId})
+                    .filter((card,index)=>{
+                        console.log("WorkListCardList Before",card)
+                        return card.LIST_ID===listId
+                    })
                     .map(card=>{
+                        console.log("WorkListCardList After",card)
                         return <WorkListCard
                             cards={cards}
                             card={card}
                             setCard={setCards}
                         />
                     })
+                    
                 }
             </Card.Body>
 

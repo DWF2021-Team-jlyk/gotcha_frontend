@@ -15,7 +15,25 @@ const listStyle = {
 
 const WorkList = (props) => {
     const {lists, cards, setLists, setCards} = props;
-    console.log("WorkListCard",cards)
+    // const [lists, setLists] = useState(WorkSpaceData.lists);
+    // const url = '/workspace2'
+    // const datas = {
+    //     "list_id": 1
+    // };
+    // const options = {
+    //     method: 'POST',
+    //     headers: { 'content-type': 'application/json' },
+    //     data: JSON.stringify(datas),
+    //     url,
+    // };
+    //
+    // axios(options)
+    //     .then((res) => {
+    //         console.log(res)
+    //     }, [])
+    //     .catch(error => {
+    //         console.log(error)
+    //     });
     return (
         <>
             <Button
@@ -50,8 +68,12 @@ const WorkList = (props) => {
 
                 </div>
             </div>
+            {/* <h1>{lists.list_id}</h1>
+            <h1>{lists.user_id}</h1>
+            <h1>{lists.list_name}</h1>
+            <h1>{lists.is_fav}</h1> */}
         </>
     );
-        };
+};
 
 export default WorkList;

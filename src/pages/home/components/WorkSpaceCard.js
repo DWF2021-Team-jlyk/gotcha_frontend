@@ -1,7 +1,7 @@
 import { Card, Row } from "react-bootstrap";
 import React from "react";
 import { Link } from "react-router-dom";
-import noImg from "../image/gotcha.png";
+import noImg from "../../../image/gotcha.png";
 import {AiOutlineStar} from "react-icons/ai";
 
 const LinkStyle = {
