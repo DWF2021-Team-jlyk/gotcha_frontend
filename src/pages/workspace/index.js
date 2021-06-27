@@ -26,61 +26,23 @@ const Workspace = () => {
     const getList = async () => {
         const listResult = await axios.post("/main/wsList/list", {
             ws_id: id,
-        });console.log("listResult",listResult);
+        });
         setLists(listResult.data);
     };
-
-    const listmap  = lists.map((list)=>{
-        <lists key={list.list_id} list={list}/>
-        
-     });
 
     const getCard = async () => {
         //console.log("lists to use in card:",lists);
         const cardResult = await axios.post("/main/wsList/list/card", {
             ws_id:id,
         }); 
-        console.log("cardResult(after get axios data)", cardResult);
         setCards(
             cardResult.data
-            // .map((data)=>{
-            //     data
-            // })
-                // .filter((card) => {
-                //     return card.LIST_ID   === lists.list_id
-                // })
-       );
-        //console.log("cards.LIST_ID",cards.LIST_ID);
-        //console.log("lists.LIST_ID",lists[0].list_id); 
-    };
-
-    const cardmap = cards.map((card,i)=>{
-        console.log("i",i)
-        return card
-    });
-
-    // useEffect(()=>{
-    //     axios.post("/main/wsList/list/card",{
-    //         list_id: lists.list_id,
-    //     }).then((res)=>{
-
-    //         res.data.map((list,index)=>{
-    //           return key={index}  
-    //         })
-    //     });
-    // })
+       );}
 
     useEffect(() => {
         getList();
         getCard();
     }, [id]);
-
-    
-    console.log("list_id",lists.list_id);
-     console.log("listmap(after useEffect)", listmap);
-     console.log("cardmap(after useEffect)", cardmap);
-    console.log("lists(after useEffect)", lists);
-    console.log("cards(after useEffect)", cards);
 
     return (
         <>

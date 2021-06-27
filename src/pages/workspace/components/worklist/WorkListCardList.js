@@ -73,11 +73,9 @@ const WorkListCardList = (props) => {
             <Card.Body>
                 {cards
                     .filter((card,index)=>{
-                        console.log("WorkListCardList Before",card)
                         return card.LIST_ID===listId
                     })
                     .map(card=>{
-                        console.log("WorkListCardList After",card)
                         return <WorkListCard
                             cards={cards}
                             card={card}

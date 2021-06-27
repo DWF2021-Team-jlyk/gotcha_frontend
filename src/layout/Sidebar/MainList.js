@@ -7,7 +7,7 @@ import SubList from "./SubList";
 import {AiOutlineStar} from "react-icons/all";
 import { FaUserCog, FaUsers } from "react-icons/fa";
 
-const MainList = ({category, classes, workspaces}) => {
+const MainList = ({category, workspaces}) => {
     const [open, setOpen] = useState(false);
     const handleClick = () => {
         setOpen(!open);
@@ -33,7 +33,6 @@ const MainList = ({category, classes, workspaces}) => {
             <SubList
                 open={open}
                 workspaces={workspaces}
-                classes={classes}
                 category={category}
             />
         </>
