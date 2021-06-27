@@ -43,6 +43,7 @@ export default function Notification() {
                 })}
             </Card.Body>
           </Card>
+
         </Tab>
         <Tab eventKey='ReadNoti' title="읽은 알림">
           <Card>
