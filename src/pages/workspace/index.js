@@ -7,21 +7,17 @@ import loadable from '@loadable/component';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import WorkSpaceData from '../../DummyData/WorkSpaceData';
+import { useSelector } from 'react-redux';
+import workspace from '../../modules/workspace';
 
 const Calendar = loadable(() => import('../calendar'));
 const Board = loadable(() => import('../board'));
 
 
 const Workspace = () => {
-  const { id } = useParams();
+  const { ws_id } = useParams();
   const [value, setValue] = useState(1);
-
-  const [lists, setLists] = useState(
-    WorkSpaceData.lists,
-  );
-  const [cards, setCards] = useState(
-    WorkSpaceData.cards,
-  );
+  const {lists} = useSelector(state=>workspace)
   // const getList = async () => {
   //     return await axios.post();
   // }
@@ -54,10 +50,11 @@ const Workspace = () => {
           value === 1
           &&
           <WorkList
+            ws_id={ws_id}
             lists={lists}
-            cards={cards}
-            setLists={setLists}
-            setCards={setCards}
+            // cards={cards}
+            // setLists={setLists}
+            // setCards={setCards}
           />
         }
         {/*{value === 2 && <Calendar/>}*/}

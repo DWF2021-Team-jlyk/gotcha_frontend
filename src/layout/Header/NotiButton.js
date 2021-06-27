@@ -7,6 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { changeNotiRead } from '../../modules/notification';
+import { ListItem } from '@material-ui/core';
 
 const StyledMenu = withStyles({
   paper: {
@@ -80,11 +81,22 @@ const NotiButton = () => {
           notification
             .filter(noti => !noti.noti_read)
             .map(noti => {
-              return <StyledMenuItem>
-                  <ListItemText
-                    primary={`notiSpace: ${noti.workspaceName} notiType: ${noti.type}`}
-                    onClick={e=>onClick(noti)}
-                  />
+              return <StyledMenuItem key={noti.noti_id}>
+                <ListItem
+                  onClick={e=>{
+                    onClick(noti);
+                    handleClose();
+                  }}
+                >
+                  {`notiSpace: ${noti.workspaceName} notiType: ${noti.type}`}
+                </ListItem>
+                  {/*<ListItemText*/}
+                  {/*  primary={`notiSpace: ${noti.workspaceName} notiType: ${noti.type}`}*/}
+                  {/*  onClick={e=>{*/}
+                  {/*    onClick(noti);*/}
+                  {/*    handleClose();*/}
+                  {/*  }}*/}
+                  {/*/>*/}
               </StyledMenuItem>;
             })
         }

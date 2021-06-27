@@ -8,19 +8,6 @@ import NotiCard from './components/NotiCard';
 
 export default function Notification() {
   const notification = useSelector(state => state.notification);
-  const returnTypeColor = (type) => {
-    switch (type) {
-      case 'card':
-        return 'primary'; //card
-      case 'board':
-        return 'danger'; //board
-      case 'invite':
-        return 'success'; //invite
-      default:
-        return 'secondary'; //todo
-    }
-  };
-
   console.log(notification);
 
   return (
