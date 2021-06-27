@@ -46,7 +46,7 @@ function workspace(state = initialState, action) {
           ...state.loading,
           POST_LIST: false,
         },
-        list: action.list,
+        list: action.payload,
       };
     case POST_LIST_FAILURE:
       return {
