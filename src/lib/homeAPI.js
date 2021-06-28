@@ -1,11 +1,13 @@
-import axios from 'axios';
+import apiAxios from './apiAxios';
 
-export const postList = ws_id =>
-  axios({
-    url: '/main/wsList/list',
-    method: 'post',
-    headers: {'content-type' : 'application/json'},
-    data: {
-      ws_id:ws_id,
-    }
-  });
+export const postGetWorkspaces =
+  user_id => apiAxios('/home/wsList', {user_id:user_id});
+
+export const postGetNoti =
+  user_id => apiAxios('/home/notiList', { user_id: user_id });
+
+export const postDeleteNoti =
+  noti_id => apiAxios('/home/deleteNoti', {noti_id:noti_id});
+
+export const postUpdateNoti =
+  noti => apiAxios('/home/updateNoti', {noti});
