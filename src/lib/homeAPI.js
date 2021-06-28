@@ -1,7 +1,13 @@
-// import axios from 'axios';
-//
-// export const getWorkspaces = userId =>
-//   axios.get(`http://localhost:8080/workspaces/${userId}`);
-//
-// export const getNoti = userId =>
-//   axios.get(`http://localhost:8080/notification/${userId}`);
+import apiAxios from './apiAxios';
+
+export const postGetWorkspaces =
+  user_id => apiAxios('/home/wsList', {user_id:user_id});
+
+export const postGetNoti =
+  user_id => apiAxios('/home/notiList', { user_id: user_id });
+
+export const postDeleteNoti =
+  noti_id => apiAxios('/home/deleteNoti', {noti_id:noti_id});
+
+export const postUpdateNoti =
+  noti => apiAxios('/home/updateNoti', {noti});

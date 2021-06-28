@@ -12,59 +12,49 @@ const cardStyle = {
   fontSize: '1rem',
 };
 
-const cardWorkName = {
-  position: 'relative', 
-  left:20, 
-  top:5,
-  textDecoration: 'none',
-  color: '#212529'
+const starStyle= {
+  position:"relative",
+  left:100,
+  fontSize:25,
+  color:"FFC947"
 }
 
 
+
 const WorkSpaceCard = ({workspace, onToggle}) => {
-  const isFav = is_fav => is_fav? true : false
+  const isFav = is_fav => is_fav? true : false;
   return (
-    <Card style={cardStyle}>
+    <Card style={LinkStyle}>
       <div style={{ textAlign: 'center' }}>
         <Card.Img variant='top' style={{ width: 150 }} src={noImg} />
       </div>
 
       <Card.Body style={{ backgroundColor: '#f7f7f7' }}>
         <Row>
-          <Card.Text style={{display:"flex"}}>
-            <div style={{width:210, height:40}}>
-              <Link to={`workspace/${workspace.ws_id}`} style={cardWorkName}>
-                <span>{workspace.ws_name}</span>
-              </Link>
-            </div>
-
-            <div>
-              {isFav(workspace.is_fav) &&
-              //즐찾일때
-              <AiFillStar
-                style={{
-                  position: 'relative',
-                  left: 30,
-                  top:5,
-                  fontSize: 28,
-                  color: 'FFC947',
-                }}
-                onClick={onToggle}
-              />}
-
-              {!isFav(workspace.is_fav) &&
-              <AiOutlineStar
-                style={{
-                  position: 'relative',
-                  left: 30, 
-                  top:5,
-                  fontSize: 28,
-                  color: 'FFC947',
-                }}
-                onClick={onToggle}
-              />}
-            </div>
-            
+          <Card.Text>
+            <Link to={`workspace/${workspace.ws_id}`} >
+              <span style={{ position: 'relative', left: 10 }}>
+                {workspace.ws_name}
+              </span>
+            </Link>
+            {isFav(workspace.is_fav) &&
+            <AiFillStar
+              style={{
+                position: 'relative',
+                left: 10, fontSize: 25,
+                color: 'FFC947',
+              }}
+              onClick={onToggle}
+            />}
+            {!isFav(workspace.is_fav) &&
+            <AiOutlineStar
+              style={{
+                position: 'relative',
+                left: 10, fontSize: 25,
+                color: 'FFC947',
+              }}
+              onClick={onToggle}
+            />}
           </Card.Text>
         </Row>
       </Card.Body>

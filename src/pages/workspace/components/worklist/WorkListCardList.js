@@ -34,7 +34,8 @@ const ListStyle = {
 
 const WorkListCardList = (props) => {
     const {lists, list,listId, cards, setLists, setCards} = props;
-
+    //console.log("WorkListCardList",cards)
+    console.log("WorkListCardList listId",listId)
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -79,6 +80,7 @@ const WorkListCardList = (props) => {
                             setCard={setCards}
                         />
                     })
+                    
                 }
             </Card.Body>
 
