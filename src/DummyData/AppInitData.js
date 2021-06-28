@@ -2,13 +2,13 @@ export default {
 
   workspaces: [
     {
-      ws_name: 'workspaceAdmin1',
+      ws_name: '한글알림오십자가오면어떻게될까한글은왜이바이트일까',
       ws_id: 0,
       role_id: 1,
       is_fav: 0,
     },
     {
-      ws_name: 'workspaceMember1',
+      ws_name: 'aaaaaaaaaaaaaaa',
       ws_id: 1,
       role_id: 2,
       is_fav: 0,

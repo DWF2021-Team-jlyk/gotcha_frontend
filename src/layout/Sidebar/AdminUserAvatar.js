@@ -3,7 +3,7 @@ import { Avatar } from '@material-ui/core';
 import { Button, Col, Row } from 'react-bootstrap';
 import '../css/workspaceSettingModal.css';
 
-const UserAvatar = (props) => {
+const AdminUserAvatar = (props) => {
   const avatarIcon = (id) => {
     let returnStr = id.charAt(0);
     for (let i = 1; i < id.length; i++) {
@@ -15,7 +15,6 @@ const UserAvatar = (props) => {
   };
 
   return (
-
     <Col md={4} style={{ marginTop: 10 }}>
       <div className='avatorBorder'>
         <div style={{ float: 'left' }}>
@@ -34,7 +33,7 @@ const UserAvatar = (props) => {
           </div>
 
           <div style={{ display: 'flex', marginTop: 5 }}>
-            <div><Button variant='danger' style={{ fontSize: '.8rem' }}> Member 추방하기</Button></div>
+            <div><Button variant='primary' style={{ fontSize: '.8rem' }}> To Admin</Button></div>
           </div>
         </div>
       </div>
@@ -44,4 +43,4 @@ const UserAvatar = (props) => {
   );
 };
 
-export default UserAvatar;
+export default AdminUserAvatar;

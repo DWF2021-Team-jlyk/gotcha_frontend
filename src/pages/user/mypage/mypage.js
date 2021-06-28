@@ -102,7 +102,7 @@ const Mypage = () => {
             />
           </td>
           <td>
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" disabled>
               변경하기
             </Button>
           </td>
