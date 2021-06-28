@@ -68,7 +68,7 @@ function Join() {
   // submit
   const onSubmit = (data,e) => {
     e.preventDefault();
-    const url = '/main/joinCheck'
+    const url = '/user/joinCheck'
     const datas = { 
       "user_id": data.email,
       "user_name": data.username,

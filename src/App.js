@@ -3,7 +3,7 @@ import Sidebar from "./layout/Sidebar";
 import Home from "./pages/home";
 import Header from "./layout/Header/header";
 // import Header from "./layout/Header";
-import Login from "./pages/login";
+import Login from "./pages/user/Login";
 import {Route, Switch} from "react-router-dom";
 import AppInitData from "./DumiData/AppInitData";
 import loadable from "@loadable/component";
@@ -19,13 +19,13 @@ const style = {
     display: "flex",
 }
 
-const LoginStyle = {
-    display: "flex",
-    position: "absolute",
-    top: "23%",
-    left: "50%",
-    transform: "translateX(-50%)",
-}
+// const LoginStyle = {
+//     display: "flex",
+//     position: "absolute",
+//     top: "23%",
+//     left: "50%",
+//     transform: "translateX(-50%)",
+// }
 
 const side = {
     background: '#7986cb'
@@ -59,7 +59,7 @@ const App = () => {
         <div className="font">
             {/*<Switch>*/}
             <Route exact path="/Login" component={Login}>
-                <div style={LoginStyle}>
+                <div>
                     <Login/>
                 </div>
             </Route>

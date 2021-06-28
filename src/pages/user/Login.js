@@ -11,11 +11,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { createGlobalStyle } from 'styled-components';
-import { CenterFocusStrong } from '@material-ui/icons';
 import { BrowserRouter as Router, Route, Link, Switch, useHistory} from 'react-router-dom';
-import '../../layout/css/Login.css';
+import axios from "axios";
 import {useForm} from "react-hook-form";
+import '../../layout/css/Login.css';
 
 function Copyright() {
     return (
@@ -67,23 +66,35 @@ function Copyright() {
     const history = useHistory();
 
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const onSubmit1 = (data,e) => {
+    const onSubmit = (data,e) => {
       e.preventDefault();
-      alert('dd');
-      console.log(data.lastName);
-      // const url = '/login'
-      // const datas = { 
-      //   "user_id": data.email,
-      //   "user_name": data.username,
-      //   "user_pwd": data.password
-      // };
+      
+      const url = '/login'
+      
+      const datas = { 
+        "user_id": data.email,
+        "user_pwd": data.password
+      };
+      const headers = {
+        'content-type': 'application/json'
+      }
       // const options = {
       //   method: 'POST',
       //   headers: { 'content-type': 'application/json' },
       //   data: JSON.stringify(datas),
       //   url,
       // };
-      // axios.post(options)
+      axios.post('/login',datas,headers).then(res => {
+        console.log('res',res);
+        alert("로그인 성공")
+        // console.log(Object.keys(res.headers))
+        console.log(res.headers.authorization)
+        sessionStorage.setItem("authorization",res.headers.authorization)
+        history.push('/')
+      }).catch(error => {
+        alert("아이디나 비밀번호가 일치하지 않습니다.")
+        console.log('err', error)
+      });
       // history.push("/home") 
     };
 
@@ -105,7 +116,7 @@ function Copyright() {
           <Typography component="h1" variant="h5">
             로그인
           </Typography>
-          <form className={classes.form} onSubmit={handleSubmit(onSubmit1)} method='post' noValidate>
+          <form className={classes.form} onSubmit={handleSubmit(onSubmit)} noValidate>
             <TextField
               variant="outlined"
               margin="normal"
@@ -141,7 +152,7 @@ function Copyright() {
               color="primary"
               className={classes.submit}
             >
-              Login11
+              Login
             </Button>
             <Switch>
             <Grid container>

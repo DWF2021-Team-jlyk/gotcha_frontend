@@ -66,7 +66,7 @@ function Copyright() {
     const onSubmit = (data,e) =>{
       e.preventDefault();
       
-      const url = '/main/code'
+      const url = '/user/code'
         const datas = { 
             "code":data.code,
             "user_id":location.state.user_id,
