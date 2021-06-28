@@ -64,7 +64,7 @@ const App = () => {
             <Route exact path='/'>
               <Home />
             </Route>
-            <Route exact path='/workspace/:id'>
+            <Route exact path='/workspace/:ws_id'>
               <Workspace />
             </Route>
             <Route exact path='/Join'>

@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import WorkSpaceCard from '../components/WorkSpaceCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeWorkspaceFav } from '../../../modules/workspace';
+import { changeWorkspaceFav } from '../../../modules/workspaces';
 
 const workspaceStyle = {
   style: {
