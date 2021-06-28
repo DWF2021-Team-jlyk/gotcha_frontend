@@ -4,26 +4,23 @@ import List from "@material-ui/core/List";
 import {makeStyles} from "@material-ui/core/styles";
 import MainList from "./MainList";
 import "./sidebar.css"
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
-    nested: {
-        paddingLeft: theme.spacing(4),
-    },
-
     navName: {
         paddingTop: 20,
         paddingBottom: 15,
         color: theme.palette.background.paper,
         fontSize: "1.75rem",
     },
-    sub: {
-        paddingBottom: 20,
-    },
 }));
 
-const Sidebar = ({admin, fav, member}) => {
+const Sidebar = () => {
     const classes = useStyles();
-
+    const workspaces = useSelector(state=>state.workspaces);
+    const fav = workspaces.filter(workspace=>workspace.is_fav);
+    const admin = workspaces.filter(workspace=>workspace.role_id===1);
+    const member = workspaces.filter(workspace=>workspace.role_id===2);
 
     return (
         <List
@@ -40,9 +37,9 @@ const Sidebar = ({admin, fav, member}) => {
             }
             className="root"
         >
-            <MainList category="FAVORITE" classes={classes} workspaces={fav}/>
-            <MainList category="ADMIN" classes={classes} workspaces={admin}/>
-            <MainList category="MEMBER" classes={classes} workspaces={member}/>
+            <MainList category="FAVORITE" workspaces={fav}/>
+            <MainList category="ADMIN" workspaces={admin}/>
+            <MainList category="MEMBER" workspaces={member}/>
         </List>
     );
 };

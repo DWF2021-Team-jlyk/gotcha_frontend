@@ -2,18 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter } from "react-router-dom";
-import { applyMiddleware, createStore } from 'redux';
-//import rootReducer from './reducer';
-//import logger from "redux-logger";
+import { BrowserRouter } from 'react-router-dom';
+import rootReducer from './modules';
 import { Provider } from 'react-redux';
-//const store= createStore(rootReducer,applyMiddleware(logger))
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { applyMiddleware, createStore } from 'redux';
+import ReduxThunk from 'redux-thunk';
+import { createLogger } from 'redux-logger/src';
+
+// const store = createStore(rootReducer, composeWithDevTools());
+const logger = createLogger();
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(logger, ReduxThunk)))
+
+
 ReactDOM.render(
-
-  // <Provider store={store}></Provider>
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  document.getElementById('root')
+  <Provider store={store}>
+    <React.StrictMode>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </React.StrictMode>
+  </Provider>,
+  document.getElementById('root'),
 );
-

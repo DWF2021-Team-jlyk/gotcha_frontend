@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {IoPersonCircleOutline,} from "react-icons/all";
 import NotiButton from "./NotiButton";
 import WorkSpaceAddButton from "./WorkSpaceAddButton";
+import headerImg from "../../image/header.png";
 
 const Header = () => {
 
@@ -23,6 +24,7 @@ const Header = () => {
                     marginLeft: 20,
                 }}
             >
+                <img src={headerImg} width="50"/>
                 GotCha
             </Navbar.Brand>
             <Form className="d-flex">

@@ -71,7 +71,7 @@ const WorkListCardList = (props) => {
 
             <Card.Body>
                 {cards
-                    .filter(card=>{return card.list_id===listId})
+                    .filter(card=>{return card.LIST_ID===listId})
                     .map(card=>{
                         return <WorkListCard
                             cards={cards}
