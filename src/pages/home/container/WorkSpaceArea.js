@@ -3,6 +3,7 @@ import { Card, Col, Row } from 'react-bootstrap';
 import WorkSpaceCard from '../components/WorkSpaceCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeWorkspaceFav } from '../../../modules/workspaces';
+import { FaUserCog, FaUsers } from "react-icons/fa";
 
 const workspaceStyle = {
   style: {
@@ -20,9 +21,14 @@ const WorkSpaceArea = ({ areaType}) => {
   const onToggle = useCallback(
     ws_id=>dispatch(changeWorkspaceFav(ws_id)),
     [dispatch])
+
   const getAreaTitle = (areaType) => {
-    return areaType === 1 ? 'Admin' : 'Member';
+    return areaType === 1 ? 
+    <div><FaUserCog size="25" style={{marginRight:20}}/>Admin Workspace</div>:
+    <div><FaUsers size="25" style={{marginRight:20}}/>Member Workspace</div>;
   };
+  <FaUserCog/>
+
   return (
     <Card style={workspaceStyle.style}>
       <Card.Header>
@@ -30,15 +36,17 @@ const WorkSpaceArea = ({ areaType}) => {
       </Card.Header>
 
       <Card.Body className='workspaces'>
-        <Row>
+        <Row md={3}>
           {
             workspaces
               .filter(workspace => workspace.role_id === areaType)
               .map(workspace =>
+
                 <WorkSpaceCard
                   workspace={workspace}
                   key={workspace.ws_id}
                   onToggle={e=>onToggle(workspace.ws_id)}
+         
                 />)
           }
         </Row>
