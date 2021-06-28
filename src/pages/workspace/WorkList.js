@@ -16,8 +16,34 @@ const listStyle = {
     whiteSpace: "nowrap"
 };
 
-const WorkList = (props) => {
-const {lists, cards} = props
+const WorkList = () => {
+    const [lists, setLists] = useState([
+
+    ]);
+    
+    const url = '/workspace2'
+    const datas = {
+        "ws_id": 1,
+        "list_id": 1,
+        "token": sessionStorage.getItem('authorization'),
+    };
+    const options = {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        data: JSON.stringify(datas),
+        url,
+    };
+
+    axios(options)
+        .then((res) => {
+            console.log(res)
+        }, [])
+        .catch(error => {
+            console.log(error)
+        });
+
+
+
     return (
         <>
             <Button

@@ -3,11 +3,19 @@ import Sidebar from './layout/Sidebar';
 import Home from './pages/home';
 import Header from './layout/Header/header';
 // import Header from "./layout/Header";
+<<<<<<< HEAD
 import Login from './pages/user/Login';
 import { Route } from 'react-router-dom';
 import AppInitData from './DummyData/AppInitData';
 import loadable from '@loadable/component';
 import './layout/css/font.css';
+=======
+import Login from "./pages/user/Login";
+import {Route, Switch} from "react-router-dom";
+import AppInitData from "./DumiData/AppInitData";
+import loadable from "@loadable/component";
+import "./layout/css/font.css"
+>>>>>>> seungup
 
 const Workspace = loadable(() => import('./pages/workspace'));
 const Join = loadable(() => import('./pages/user/signUp'));
@@ -16,8 +24,21 @@ const Mypage = loadable(() => import('./pages/user/mypage/mypage'));
 const Pwdfind = loadable(() => import('./pages/user/pwdfind/Pwdfind'));
 
 const style = {
+<<<<<<< HEAD
   display: 'flex',
 };
+=======
+    display: "flex",
+}
+
+// const LoginStyle = {
+//     display: "flex",
+//     position: "absolute",
+//     top: "23%",
+//     left: "50%",
+//     transform: "translateX(-50%)",
+// }
+>>>>>>> seungup
 
 const side = {
   background: '#7986cb',

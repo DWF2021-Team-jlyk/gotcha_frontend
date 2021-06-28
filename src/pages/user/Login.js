@@ -9,9 +9,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Link, Switch, useHistory} from 'react-router-dom';
-import '../../layout/css/Login.css';
+import { BrowserRouter as Router, Route, Link, Switch, useHistory} from 'react-router-dom';
+import axios from "axios";
 import {useForm} from "react-hook-form";
+import '../../layout/css/Login.css';
 
 function Copyright() {
     return (
@@ -58,16 +59,43 @@ function Copyright() {
     const history = useHistory();
 
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const onSubmit = data => {
-      console.log(data.lastName);
-      history.push("/home") 
-    }
-
-    const onSubmit1 = (e) => {
+    const onSubmit = (data,e) => {
       e.preventDefault();
-      alert("click");
-      history.push("/home")
-    }
+      
+      const url = '/login'
+      
+      const datas = { 
+        "user_id": data.email,
+        "user_pwd": data.password
+      };
+      const headers = {
+        'content-type': 'application/json'
+      }
+      // const options = {
+      //   method: 'POST',
+      //   headers: { 'content-type': 'application/json' },
+      //   data: JSON.stringify(datas),
+      //   url,
+      // };
+      axios.post('/login',datas,headers).then(res => {
+        console.log('res',res);
+        alert("로그인 성공")
+        // console.log(Object.keys(res.headers))
+        console.log(res.headers.authorization)
+        sessionStorage.setItem("authorization",res.headers.authorization)
+        history.push('/')
+      }).catch(error => {
+        alert("아이디나 비밀번호가 일치하지 않습니다.")
+        console.log('err', error)
+      });
+      // history.push("/home") 
+    };
+
+    // const onSubmit1 = (e) => {
+      
+    //   alert("click");
+    //   history.push("/home")
+    // }
 
     return (
     

@@ -1,0 +1,9 @@
+diff a/package.json b/package.json	(rejected hunks)
+@@ -63,6 +63,5 @@
+   },
+   "devDependencies": {
+     "prop-types": "^15.7.2"
+-  },
+-  "proxy": "http://localhost:8080"
++  }
+ }
