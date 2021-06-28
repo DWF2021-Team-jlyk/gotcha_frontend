@@ -1,13 +1,5 @@
 import axios from 'axios';
 
-const options = (data, url) => {
-  return {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    data: JSON.stringify(data),
-    url:url,
-  };
-};
 export const postList = ws_id =>
   axios({
     url: '/main/wsList/list',

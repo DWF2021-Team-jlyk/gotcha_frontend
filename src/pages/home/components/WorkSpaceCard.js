@@ -15,6 +15,7 @@ const LinkStyle = {
 
 
 const WorkSpaceCard = ({workspace, onToggle}) => {
+  const isFav = is_fav => is_fav? true : false
   return (
     <Card>
       <div style={{ textAlign: 'center' }}>
@@ -26,7 +27,7 @@ const WorkSpaceCard = ({workspace, onToggle}) => {
             <Link to={`workspace/${workspace.ws_id}`} style={LinkStyle}>
               <span style={{ position: 'relative', left: 10 }}>{workspace.ws_name}</span>
             </Link>
-            {workspace.is_fav &&
+            {isFav(workspace.is_fav) &&
             <AiFillStar
               style={{
                 position: 'relative',
@@ -35,7 +36,7 @@ const WorkSpaceCard = ({workspace, onToggle}) => {
               }}
               onClick={onToggle}
             />}
-            {!workspace.is_fav &&
+            {!isFav(workspace.is_fav) &&
             <AiOutlineStar
               style={{
                 position: 'relative',
