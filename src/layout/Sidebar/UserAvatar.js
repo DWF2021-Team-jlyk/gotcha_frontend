@@ -3,6 +3,7 @@ import { Avatar } from '@material-ui/core';
 import { Button, Col, Row } from 'react-bootstrap';
 import '../css/workspaceSettingModal.css';
 
+
 const UserAvatar = (props) => {
   const avatarIcon = (id) => {
     let returnStr = id.charAt(0);

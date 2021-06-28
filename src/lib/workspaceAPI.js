@@ -10,6 +10,13 @@ export const postList = ws_id =>
     }
   });
 
-export const getWorkspaceDetail = workspaceId =>
-  axios.get(`/main/wsList/list/card`);
+export const postCard = ws_id =>
+  axios({
+      url:'/main/wsList/list/card',
+      method: 'post',
+      headers: {'content-type' : 'application/json'},
+      data: {
+      ws_id:ws_id,
+    }
+  });
 

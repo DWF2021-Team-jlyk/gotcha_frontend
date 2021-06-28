@@ -26,10 +26,12 @@ const initialState = {
   loading: {
     POST_LIST: false,
   },
-  list: null,
+  lists: [],
 };
 
-function workspace(state = initialState, action) {
+
+
+function workspaceList(state = initialState, action) {
   switch (action.type) {
     case POST_LIST:
       return {
@@ -46,7 +48,7 @@ function workspace(state = initialState, action) {
           ...state.loading,
           POST_LIST: false,
         },
-        list: action.payload,
+        lists: action.payload,
       };
     case POST_LIST_FAILURE:
       return {
@@ -56,7 +58,9 @@ function workspace(state = initialState, action) {
           POST_LIST: false,
         },
       };
+      default:
+        return state;
   }
 }
 
-export default workspace;
+export default workspaceList;
