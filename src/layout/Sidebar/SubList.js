@@ -35,7 +35,6 @@ const SubList = ({ workspaces, open, category }) => {
 
   return (
     <Collapse className={classes.sub} in={open} timeout="auto" unmountOnExit>
-      {/* workspace.ws_id로 axios 이용해서 값받아오기 */}
       {workspaces.map((workspace) => {
         return (
           <List key={workspace.ws_id} component="div" disablePadding>

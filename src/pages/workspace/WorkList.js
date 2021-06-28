@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
-import WorkListCardList from "./components/worklist/WorkListCardList";
+import MyList from "../../components/WorkList/WorkListCardList";
 import axios from 'axios';
-import WorkSpaceData from "../../DummyData/WorkSpaceData";
-import { useDispatch } from 'react-redux';
-import { postList } from '../../modules/workspace';
 
 const listStyle = {
     width: "100%",
@@ -15,62 +12,110 @@ const listStyle = {
     whiteSpace: "nowrap"
 };
 
-const WorkList = (props) => {
-    const {lists, ws_id} = props;
-    const dispatch = useDispatch();
-    // useEffect(()=>{dispatch(postList(ws_id))});
-    console.log(dispatch(postList(ws_id)));
+const WorkList = () => {
+    const [lists, setLists] = useState([]);
+    //const [receiver, setReceiver] = useState(false);
+    const url = '/workspace/list'
+    const datas = {
+        "list_id": 1
+    };
+    const options = {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        data: JSON.stringify(datas),
+        url,
+    };
 
-    // const [lists, setLists] = useState(WorkSpaceData.lists);
-    // const url = '/workspace2'
-    // const datas = {
-    //     "list_id": 1
-    // };
-    // const options = {
-    //     method: 'POST',
-    //     headers: { 'content-type': 'application/json' },
-    //     data: JSON.stringify(datas),
-    //     url,
-    // };
-    //
-    // axios(options)
-    //     .then((res) => {
-    //         console.log(res)
-    //     }, [])
-    //     .catch(error => {
-    //         console.log(error)
-    //     });
+    useEffect(()=>{
+        axios(options)
+        .then((res) => {
+            console.log(res)
+            setLists([...lists, ...res.data])
+            console.log(lists);
+        })
+        .catch(error => {
+            console.log(error)
+        });
+    },[]);
+    
+    
+
     return (
         <>
-            <Button
+            {/* <Button
                 variant="contained"
                 color="primary"
+                onClick={(e) => {
+                    setLists([
+                        ...lists,
+                        {title: "listTest", cards: ["test1", "test2", "test3"]},
+                    ]);
+                }}
             >
                 + Add Another List
             </Button>
 
-            {/*<div style={listStyle}>*/}
-            {/*    {lists.map((list, index) => {*/}
-            {/*        return <div key={index}>*/}
-            {/*            <WorkListCardList*/}
-            {/*                lists={lists}*/}
-            {/*                list={list}*/}
-            {/*                listId={list.list_id}*/}
-            {/*                // cards={cards}*/}
-            {/*                // setList={setLists}*/}
-            {/*            />*/}
-            {/*        </div>*/}
-            {/*    })}*/}
-            {/*    <div style={{margin: 10}}>*/}
+            <div style={listStyle}>
+                {lists.map((list, index) => {
+                    return <div key={index}>
+                        <MyList list={list} key={index} id={index} setList={setLists}/>
+                    </div>
+                })}
+                <div style={{margin: 10}}>
 
-            {/*    </div>*/}
-            {/*</div>*/}
-            {/*/!* <h1>{lists.list_id}</h1>*/}
-            {/*<h1>{lists.user_id}</h1>*/}
-            {/*<h1>{lists.list_name}</h1>*/}
-            {/*<h1>{lists.is_fav}</h1> *!/*/}
+                </div>
+            </div> */}
+
+            {/* test용 receiver 
+            <button 
+                onClick={()=>setReceiver(!receiver)}
+            >receiver</button> */}
+            {
+                lists.map((list)=>{
+                    return <>
+                        <h1>{list.list_id}</h1>
+                        <h1>{list.user_id}</h1>
+                        <h1>{list.list_name}</h1>
+                        <h1>{list.is_fav}</h1>
+                        
+                    </>
+                })
+            }
         </>
     );
 };
 
-export default WorkList;
+const WorkCard = ()=>{
+    const [cards, setCards] = useState([]);
+    const url = "/workspace/card";
+    const datas = {"card_id" : 1};
+    const options = {
+        method: "POST",
+        header: "content-type:application/json",
+        data: JSON.stringify(datas),
+        url,
+    }
+
+    useEffect (()=>{
+        axios(options)
+        .then((res)=>{
+            console.log(res)
+            setCards([...cards, ...res.data])
+            console.log(cards)
+        })
+        .catch(error =>{
+            console.log(error)
+        })
+    },[]);
+    
+    return(
+        <>
+        <h1>{cards.card_id}</h1>
+        <h1>{cards.card_name}</h1>
+        <h1>{cards.list_id}</h1>
+        <h1>{cards.ws_id}</h1>
+        </>
+    );
+};
+
+export default WorkCard;

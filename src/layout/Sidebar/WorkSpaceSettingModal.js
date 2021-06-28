@@ -16,6 +16,7 @@ import AdminUserAvatar from './AdminUserAvatar';
 import LeaveModal from './LeaveModal';
 
 const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
+
   const [userList, setUserLists] = useState([]);
 
   const [leaveModal, setLeaveModal] = useState(false);
@@ -43,7 +44,6 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
       });
   }, []);
 
- console.log(userList)
   return (
     <Modal
       size={'lg'}
@@ -73,11 +73,16 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
               </Col>
 
               <Col>
-                <Button>변경하기</Button>
+            
+                <div>
+                  {role === 'ADMIN' ?  <Button>변경하기</Button> : null}
+                </div>
               </Col>
             </Row>
           </Form.Group>
           <br />
+
+          {role === 'ADMIN' ? 
           <Form.Group>
             <Form.Label>WorkSpace Members</Form.Label>
 
@@ -86,15 +91,17 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
                 <Form.Control type="email" disabled={role !== 'ADMIN'} />
               </Col>
               <Col sm={4}>
-                <Button disabled={role !== 'ADMIN'}> add Member</Button>
+                <Button> add Member</Button>
               </Col>
             </Row>
           </Form.Group>
+          :null}
+
         </Form>
 
         <Row style={{ marginTop: 20 }}>
           {userList.map((value, index) => {
-            return <UserAvatar user_id={value} key={index} />;
+            return <UserAvatar user_id={value} key={index}  role={role}/>;
           })}
         </Row>
       </ModalBody>
@@ -103,9 +110,13 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
           Leave Workspace
         </Button>
 
-        <LeaveModal leaveModal={leaveModal} leaveModalClose={leaveModalClose} userList={userList}/>
+        <LeaveModal 
+          leaveModal={leaveModal} 
+          leaveModalClose={leaveModalClose} 
+          userList={userList} 
+          role={role}
+        />
 
-        
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>

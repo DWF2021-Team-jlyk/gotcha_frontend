@@ -6,9 +6,12 @@ const WorkSpaceSettingModal = loadable(
     () => import("./WorkSpaceSettingModal")
 );
 
+
 const SettingWorkspace = ({workspace, role}) => {
     const [clicked, setClicked] = useState(false);
     const handleClose = () => setClicked(false);
+
+   
     return (
         <>
             <SettingsIcon

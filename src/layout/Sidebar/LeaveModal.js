@@ -12,9 +12,11 @@ import ModalHeader from 'react-bootstrap/ModalHeader';
 import React, { useEffect, useState } from 'react';
 import AdminUserAvatar from './AdminUserAvatar';
 
-const LeaveModal = ({ leaveModal, leaveModalClose, userList }) => {
-  return (
-    <Modal
+function RoleModal({role, leaveModal, leaveModalClose, userList}){
+
+  if(role === 'ADMIN'){
+    return(
+      <Modal
       show={leaveModal}
       onHide={leaveModalClose}
       style={{ marginTop: '120px' }}
@@ -41,6 +43,43 @@ const LeaveModal = ({ leaveModal, leaveModalClose, userList }) => {
         </Button>
       </Modal.Footer>
     </Modal>
+    )
+  }else{
+    return(
+      <Modal
+      show={leaveModal}
+      onHide={leaveModalClose}
+      style={{ marginTop: '120px' }}
+    >
+      <Modal.Header style={{backgroundColor:"#F7F7F7"}}>
+        <Modal.Title>Leave Workspace</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        정말 workspace를 떠나시겠습니까?
+      </Modal.Body>
+      <Modal.Footer>
+
+        <Button variant="danger" onClick={leaveModalClose} disabled>
+          leave Workspace
+        </Button>
+        <Button variant="secondary" onClick={leaveModalClose}>
+          Close
+        </Button>
+      </Modal.Footer>
+    </Modal>
+    )
+  }
+}
+
+const LeaveModal = ({ leaveModal, leaveModalClose, userList, role}) => {
+
+  return (
+   <RoleModal 
+      role={role} 
+      leaveModal= {leaveModal} 
+      leaveModalClose={leaveModalClose} 
+      userList={userList}
+   />
   );
 };
 

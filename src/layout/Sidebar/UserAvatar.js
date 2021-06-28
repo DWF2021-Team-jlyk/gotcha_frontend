@@ -14,6 +14,7 @@ const UserAvatar = (props) => {
     return returnStr;
   };
 
+
   return (
 
     <Col md={4} style={{ marginTop: 10 }}>
@@ -32,10 +33,14 @@ const UserAvatar = (props) => {
           <div>
             {props.user_id}
           </div>
+          
+          {props.role == 'ADMIN' 
+          ? <div style={{ display: 'flex', marginTop: 5 }}>
+              <div><Button variant='danger' style={{ fontSize: '.8rem' }}> Member 추방하기</Button></div>
+            </div>
+          : null}
 
-          <div style={{ display: 'flex', marginTop: 5 }}>
-            <div><Button variant='danger' style={{ fontSize: '.8rem' }}> Member 추방하기</Button></div>
-          </div>
+
         </div>
       </div>
     </Col>
