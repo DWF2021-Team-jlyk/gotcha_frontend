@@ -13,25 +13,35 @@ const LinkStyle = {
   fontSize: '1rem',
 };
 
+const starStyle= {
+  position:"relative",
+  left:100,
+  fontSize:25,
+  color:"FFC947"
+}
+
+
 
 const WorkSpaceCard = ({workspace, onToggle}) => {
-  const isFav = is_fav => is_fav? true : false
+  const isFav = is_fav => is_fav? true : false;
   return (
-    <Card>
+    <Card style={LinkStyle}>
       <div style={{ textAlign: 'center' }}>
         <Card.Img variant='top' style={{ width: 150 }} src={noImg} />
       </div>
       <Card.Body style={{ backgroundColor: '#f7f7f7' }}>
         <Row>
           <Card.Text>
-            <Link to={`workspace/${workspace.ws_id}`} style={LinkStyle}>
-              <span style={{ position: 'relative', left: 10 }}>{workspace.ws_name}</span>
+            <Link to={`workspace/${workspace.ws_id}`} >
+              <span style={{ position: 'relative', left: 10 }}>
+                {workspace.ws_name}
+              </span>
             </Link>
             {isFav(workspace.is_fav) &&
             <AiFillStar
               style={{
                 position: 'relative',
-                left: 100, fontSize: 25,
+                left: 10, fontSize: 25,
                 color: 'FFC947',
               }}
               onClick={onToggle}
@@ -40,7 +50,7 @@ const WorkSpaceCard = ({workspace, onToggle}) => {
             <AiOutlineStar
               style={{
                 position: 'relative',
-                left: 100, fontSize: 25,
+                left: 10, fontSize: 25,
                 color: 'FFC947',
               }}
               onClick={onToggle}
