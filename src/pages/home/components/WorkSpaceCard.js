@@ -24,7 +24,7 @@ const starStyle= {
 const WorkSpaceCard = ({workspace, onToggle}) => {
   const isFav = is_fav => is_fav? true : false;
   return (
-    <Card style={LinkStyle}>
+    <Card style={cardStyle}>
       <div style={{ textAlign: 'center' }}>
         <Card.Img variant='top' style={{ width: 150 }} src={noImg} />
       </div>

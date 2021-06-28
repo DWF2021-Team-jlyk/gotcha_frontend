@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Button from "@material-ui/core/Button";
 import WorkListCardList from "./components/worklist/WorkListCardList";
 import axios from 'axios';
-import Array from ''
+// import Array from ''
 import WorkSpaceData from "../../DummyData/WorkSpaceData";
 import { useDispatch } from 'react-redux';
 import { postList } from '../../modules/workspaceList';
@@ -48,4 +48,4 @@ const {lists, cards} = props
     );
         };
 
-export default WorkCard;
+export default WorkList;
