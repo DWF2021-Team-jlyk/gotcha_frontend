@@ -16,9 +16,12 @@ const WorkList = () => {
     const [lists, setLists] = useState([
 
     ]);
+    
     const url = '/workspace2'
     const datas = {
-        "list_id": 1
+        "ws_id": 1,
+        "list_id": 1,
+        "token": sessionStorage.getItem('authorization'),
     };
     const options = {
         method: 'POST',
