@@ -8,6 +8,7 @@ export const postList = ws_id => async dispatch => {
   dispatch({ type: POST_LIST });
   try {
     const response = await workspaceAPI.postList(ws_id);
+    console.log("response",response);
     dispatch({
       type: POST_LIST_SUCCESS,
       payload: response.data,
