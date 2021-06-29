@@ -12,6 +12,7 @@ export default function createRequest(type, request) {
         payload:response.data
       });
     } catch (e){
+      //실패하면
       dispatch({
         type:FAILURE,
         payload:e,
