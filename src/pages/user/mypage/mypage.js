@@ -6,7 +6,6 @@ import Modal from "@material-ui/core/Modal";
 import Chip from "@material-ui/core/Chip";
 import "./mypage.css";
 
-import axios from "axios";
 const useStyles = makeStyles((theme) => ({
   tableStyle: {
     borderCollapse: "separate",

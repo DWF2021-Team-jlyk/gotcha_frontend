@@ -1,4 +1,4 @@
-export default{
+const WorkSpaceModalData = {
     workspace_modal:[
         {
             ws_id:0,
@@ -74,3 +74,5 @@ export default{
         },
     ]
 }
+
+export default WorkSpaceModalData;

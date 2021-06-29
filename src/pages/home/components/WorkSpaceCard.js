@@ -12,15 +12,6 @@ const cardStyle = {
   fontSize: '1rem',
 };
 
-const starStyle= {
-  position:"relative",
-  left:100,
-  fontSize:25,
-  color:"FFC947"
-}
-
-
-
 const WorkSpaceCard = ({workspace, onToggle}) => {
   const isFav = is_fav => is_fav? true : false;
   return (

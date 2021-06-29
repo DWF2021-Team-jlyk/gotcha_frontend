@@ -2,7 +2,10 @@ import React from 'react';
 import '../../layout/css/Layout.css';
 import Notification from './Notification';
 import './Cards.css';
-import WorkSpaceArea from './container/WorkSpaceArea';
+import loadable from '@loadable/component';
+
+const WorkSpaceArea =
+  loadable(()=>import('./container/WorkSpaceArea'));
 
 const Home = () => {
   const style = {

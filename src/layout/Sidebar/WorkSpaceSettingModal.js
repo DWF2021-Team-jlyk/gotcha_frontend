@@ -12,7 +12,6 @@ import ModalHeader from 'react-bootstrap/ModalHeader';
 import React, { useEffect, useState } from 'react';
 import UserAvatar from './UserAvatar';
 import axios from 'axios';
-import AdminUserAvatar from './AdminUserAvatar';
 import LeaveModal from './LeaveModal';
 
 const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
@@ -43,6 +42,8 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
         console.log(error);
       });
   }, []);
+
+  console.log(userList);
 
   return (
     <Modal

@@ -1,19 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import Button from '@material-ui/core/Button';
+import React, { useState } from 'react';
 import axios from 'axios';
-import WorkSpaceData from '../../DummyData/WorkSpaceData';
-import { useDispatch } from 'react-redux';
-import { postList } from '../../modules/workspaceList';
-import WorkListCardList from './components/worklist/WorkListCardList';
-
-const listStyle = {
-  width: '100%',
-  height: '100%',
-  display: 'flex',
-  overflowX: 'auto',
-  margin: '10px',
-  whiteSpace: 'nowrap',
-};
 
 const WorkList = () => {
   const [lists, setLists] = useState([]);

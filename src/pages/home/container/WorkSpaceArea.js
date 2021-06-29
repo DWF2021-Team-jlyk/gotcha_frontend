@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import React, { useCallback, useEffect } from 'react';
+import { Card, Row } from 'react-bootstrap';
 import WorkSpaceCard from '../components/WorkSpaceCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeWorkspaceFav } from '../../../modules/workspaces';
+import { changeWorkspaceFav, postWorkspaces } from '../../../modules/workspaces';
 import { FaUserCog, FaUsers } from "react-icons/fa";
 
 const workspaceStyle = {
@@ -16,8 +16,11 @@ const workspaceStyle = {
 };
 
 const WorkSpaceArea = ({ areaType}) => {
-  const workspaces = useSelector(state=> state.workspaces)
+  const workspaces = useSelector(state=> state.workspaces.workspaces);
   const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(postWorkspaces("user01@naver.com"))
+  }, [])
   const onToggle = useCallback(
     ws_id=>dispatch(changeWorkspaceFav(ws_id)),
     [dispatch])

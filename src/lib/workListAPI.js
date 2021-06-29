@@ -1,4 +1,3 @@
-import axios from 'axios';
 import apiAxios from './apiAxios';
 
 export const postList = ws_id =>

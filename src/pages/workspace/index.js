@@ -68,8 +68,8 @@ const Workspace = () => {
             // setCards={setCards}
           />
         )}
-        {/*{value === 2 && <Calendar/>}*/}
-        {/*{value === 3 && <Board/>}*/}
+        {value === 2 && <Calendar/>}
+        {value === 3 && <Board/>}
       </Card.Body>
     </Card>
   );

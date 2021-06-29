@@ -9,7 +9,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { BrowserRouter as Router, Route, Link, Switch, useHistory} from 'react-router-dom';
+import { Link, Switch, useHistory} from 'react-router-dom';
 import axios from "axios";
 import {useForm} from "react-hook-form";
 import '../../layout/css/Login.css';
@@ -62,7 +62,7 @@ function Copyright() {
     const onSubmit = (data,e) => {
       e.preventDefault();
       
-      const url = '/login'
+      // const url = '/login'
       
       const datas = { 
         "user_id": data.email,

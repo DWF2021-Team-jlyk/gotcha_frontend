@@ -24,7 +24,7 @@ const Header = () => {
                     marginLeft: 20,
                 }}
             >
-                <img src={headerImg} width="50"/>
+                <img src={headerImg} alt={"gotcha"} width="50"/>
                 GotCha
             </Navbar.Brand>
             <Form className="d-flex">

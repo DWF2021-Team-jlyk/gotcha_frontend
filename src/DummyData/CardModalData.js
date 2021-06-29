@@ -1,6 +1,4 @@
-import { NavigateBeforeRounded } from '@material-ui/icons';
-
-export default {
+const CardModalData = {
   m_cards: [
     {
       card_id: 0,
@@ -212,3 +210,5 @@ export default {
   ],
 
 };
+
+export default CardModalData;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar } from '@material-ui/core';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button, Col} from 'react-bootstrap';
 import '../css/workspaceSettingModal.css';
 
 const AdminUserAvatar = (props) => {

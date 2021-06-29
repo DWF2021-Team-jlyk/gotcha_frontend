@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar } from '@material-ui/core';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button, Col } from 'react-bootstrap';
 import '../css/workspaceSettingModal.css';
 
 
@@ -34,12 +34,12 @@ const UserAvatar = (props) => {
           <div>
             {props.user_id}
           </div>
-          
-          {props.role == 'ADMIN' 
-          ? <div style={{ display: 'flex', marginTop: 5 }}>
+
+          {props.role === 'ADMIN'
+            ? <div style={{ display: 'flex', marginTop: 5 }}>
               <div><Button variant='danger' style={{ fontSize: '.8rem' }}> Member 추방하기</Button></div>
             </div>
-          : null}
+            : null}
 
 
         </div>
