@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { AiOutlineArrowRight} from 'react-icons/ai';
 
 export const FunctionalAddOn = () => {
   return (
@@ -8,11 +9,11 @@ export const FunctionalAddOn = () => {
         return (
           <div key={index}>
             <Button
-              variant='secondary'
               style={{
                 width: '150px',
                 textAlign: 'left',
                 marginTop: '5px',
+                backgroundColor:"#3f51b5"
               }}
             >
               {value}
@@ -21,6 +22,7 @@ export const FunctionalAddOn = () => {
         );
       })}
     </>
+
   );
 };
 
@@ -31,11 +33,11 @@ export const ActionAddOn = () => {
         return (
           <div key={index}>
             <Button
-              variant='secondary'
               style={{
                 width: '150px',
                 textAlign: 'left',
                 marginTop: '5px',
+                backgroundColor:"#3f51b5"
               }}
             >
               {value}

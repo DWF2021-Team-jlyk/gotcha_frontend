@@ -52,7 +52,7 @@ const NotiButton = () => {
     changeRead(noti.noti_id);
   }
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const notification = useSelector(state => state.notification);
+  const notification = useSelector(state => state.notification.noti);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

@@ -19,14 +19,6 @@ const style = {
   display: 'flex',
 };
 
-const LoginStyle = {
-  display: 'flex',
-  position: 'absolute',
-  top: '23%',
-  left: '50%',
-  transform: 'translateX(-50%)',
-};
-
 const side = {
   background: '#7986cb',
 };
@@ -40,7 +32,7 @@ const App = () => {
     <div className='font'>
       {/*<Switch>*/}
       <Route exact path='/Login' component={Login}>
-        <div style={LoginStyle}>
+        <div>
           <Login />
         </div>
       </Route>

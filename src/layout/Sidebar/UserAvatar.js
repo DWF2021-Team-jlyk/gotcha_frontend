@@ -19,6 +19,7 @@ const UserAvatar = (props) => {
 
     <Col md={4} style={{ marginTop: 10 }}>
       <div className='avatorBorder'>
+    
         <div style={{ float: 'left' }}>
           <Avatar
             onClick={(event) => {
@@ -34,14 +35,13 @@ const UserAvatar = (props) => {
             {props.user_id}
           </div>
           
-          {props.role == 'ADMIN' 
-          ? <div style={{ display: 'flex', marginTop: 5 }}>
+       
+          <div style={{ display: 'flex', marginTop: 5 }}>
               <div><Button variant='danger' style={{ fontSize: '.8rem' }}> Member 추방하기</Button></div>
             </div>
-          : null}
-
-
+         
         </div>
+
       </div>
     </Col>
 

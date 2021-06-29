@@ -56,3 +56,5 @@ const home = handleAction(
 
   }
 )
+
+export default home;

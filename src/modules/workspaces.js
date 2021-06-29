@@ -1,4 +1,5 @@
 import AppInitData from '../DummyData/AppInitData';
+import {postGetWorkspaces} from '../lib/homeAPI'
 
 const ADD_WORKSPACE = 'workspace/ADD_WORKSPACE';
 const DELETE_WORKSPACE = 'workspace/DELETE_WORKSPACE';
@@ -11,7 +12,8 @@ export const deleteWorkspace = ws_id => ({ type: DELETE_WORKSPACE, ws_id });
 export const changeWorkspaceFav = ws_id => ({ type: CHANGE_WORKSPACE_FAV, ws_id });
 
 const initialState = [
-  ...AppInitData.workspaces,
+ ...AppInitData.workspaces,
+  //postGetWorkspaces
 ];
 
 function workspaces(state = initialState, action) {
