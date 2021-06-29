@@ -35,6 +35,19 @@ const WorkSpaceAddModal = (props) => {
                             </Col>
                         </Row>
                     </Form.Group>
+                    <br/>
+                    <Form.Group>
+                        <Form.Label>WorkSpace Thumbnail 사진</Form.Label>
+                        <Row>
+                            <Col sm={8}>
+                                <Form.Control type="email"/>
+                            </Col>
+                            <Col sm={4}>
+                                <Button>사진 추가하기</Button>
+                            </Col>
+                        </Row>
+                    </Form.Group>
+
                 </Form>
             </ModalBody>
             <ModalFooter>
