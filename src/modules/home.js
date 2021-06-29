@@ -19,6 +19,7 @@ const POST_WORKSPACES_FAILURE = 'home/POST_WORKSPACES_FAILURE';
 
 export const getWorkspaces = userId => async dispatch =>{
   dispatch({type:GET_WORKSPACES});
+  
   try{
     const response = await homeAPI.getWorkspaces(userId);
     dispatch({

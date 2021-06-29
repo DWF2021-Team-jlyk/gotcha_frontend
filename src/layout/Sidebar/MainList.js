@@ -9,9 +9,11 @@ import { FaUserCog, FaUsers } from "react-icons/fa";
 
 const MainList = ({category, workspaces}) => {
     const [open, setOpen] = useState(false);
+
     const handleClick = () => {
         setOpen(!open);
     }
+    
     const categorySwitch = (category) => {
         switch(category){
             case "ADMIN" : return (<FaUserCog size="30"/>);

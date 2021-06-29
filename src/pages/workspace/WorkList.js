@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
-import WorkListCardList from "./components/worklist/WorkListCardList";
+import MyList from "../../components/WorkList/WorkListCardList";
 import axios from 'axios';
-// import Array from ''
 import WorkSpaceData from "../../DummyData/WorkSpaceData";
 import { useDispatch } from 'react-redux';
 import { postList } from '../../modules/workspaceList';
@@ -46,9 +45,15 @@ const WorkList = () => {
 
     return (
         <>
-            <Button
+            {/* <Button
                 variant="contained"
                 color="primary"
+                onClick={(e) => {
+                    setLists([
+                        ...lists,
+                        {title: "listTest", cards: ["test1", "test2", "test3"]},
+                    ]);
+                }}
             >
                 + Add Another List
             </Button>
