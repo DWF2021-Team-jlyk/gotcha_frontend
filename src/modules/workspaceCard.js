@@ -23,7 +23,7 @@ const POST_CARD_FAILURE = 'workspace/POST_CARD_FAILURE'
 //   }
 // }
 
-export const postCard = createRequest(POST_CARD, workspaceAPI.postList);
+export const postCard = createRequest(POST_CARD, workspaceAPI.postCard);
 
 const initialState = {
   loading: {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import apiAxios from './apiAxios';
 
-export const postList = ws_id =>
+export const postList = (ws_id) =>
   apiAxios('/main/wsList/list', { ws_id: ws_id });
 // axios({
 //   url: '/main/wsList/list',
@@ -12,7 +12,15 @@ export const postList = ws_id =>
 //   }
 // });
 
-export const postCard = ws_id =>
+export const addList = ({list_name, ws_id})=>
+apiAxios('main/wsList/list/insert',{
+  list_name: list_name,
+  ws_id: ws_id
+});
+
+
+
+export const postCard = (ws_id) =>
   apiAxios('/main/wsList/list/card', { ws_id: ws_id });
 // axios({
 //     url:'/main/wsList/list/card',
@@ -22,4 +30,3 @@ export const postCard = ws_id =>
 //     ws_id:ws_id,
 //   }
 // });
-

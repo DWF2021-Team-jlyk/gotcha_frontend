@@ -19,6 +19,7 @@ const Workspace = () => {
   const [value, setValue] = useState(1);
   const lists = useSelector((state) => state.workspaceList.lists);
   const cards = useSelector((state) => state.workspaceCard.cards);
+  
   const dispatch = useDispatch();
 
   useEffect(() => {

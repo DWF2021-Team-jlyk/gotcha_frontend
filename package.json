@@ -31,6 +31,7 @@
     "react-icons": "^4.2.0",
     "react-minimal-side-navigation": "^1.8.0",
     "react-redux": "^7.2.4",
+    "react-request": "^3.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "redux": "^4.1.0",
@@ -69,5 +70,5 @@
     "prettier": "^2.3.1",
     "prop-types": "^15.7.2"
   },
-  "proxy" : "http://localhost:8080"
+  "proxy": "http://localhost:8080"
 }

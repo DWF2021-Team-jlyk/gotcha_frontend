@@ -8,6 +8,7 @@ import { Route } from 'react-router-dom';
 import AppInitData from './DummyData/AppInitData';
 import loadable from '@loadable/component';
 import './layout/css/font.css';
+
 const Workspace = loadable(() => import('./pages/workspace'));
 const Join = loadable(() => import('./pages/user/signUp'));
 const Code = loadable(() => import('./pages/user/signUp/Code'));
@@ -18,6 +19,13 @@ const style = {
   display: 'flex',
 };
 
+const LoginStyle = {
+  display: 'flex',
+  position: 'absolute',
+  top: '23%',
+  left: '50%',
+  transform: 'translateX(-50%)',
+};
 
 const side = {
   background: '#7986cb',
@@ -32,7 +40,7 @@ const App = () => {
     <div className='font'>
       {/*<Switch>*/}
       <Route exact path='/Login' component={Login}>
-        <div>
+        <div style={LoginStyle}>
           <Login />
         </div>
       </Route>

@@ -77,7 +77,7 @@ const WorkListCardList = (props) => {
                         return <WorkListCard
                             cards={cards}
                             card={card}
-                            setCard={setCards}
+                            //setCard={setCards}
                         />
                     })
                     

@@ -15,8 +15,7 @@ export const addNoti = noti => ({ type: ADD_NOTI, noti });
 export const deleteNoti = noti_id => ({ type: DELETE_NOTI, noti_id });
 export const changeNotiRead = noti_id => ({ type: CHANGE_NOTI_READ, noti_id });
 
-export const postNoti =
-  user_id => createRequest(POST_NOTI, api.postGetNoti);
+export const postNoti = createRequest(POST_NOTI, api.postGetNoti);
 //
 // const initialState = [
 //

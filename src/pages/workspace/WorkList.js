@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import WorkSpaceData from '../../DummyData/WorkSpaceData';
-import { useDispatch } from 'react-redux';
-import { postList } from '../../modules/workspaceList';
+import { useDispatch, useSelector } from 'react-redux';
+//import { addList, postList } from '../../modules/workspaceList';
 import WorkListCardList from './components/worklist/WorkListCardList';
+import addList from '../../modules/addList';
+//import addlist from '../../modules/addList';
 
 const listStyle = {
   width: '100%',
@@ -15,62 +17,48 @@ const listStyle = {
   whiteSpace: 'nowrap',
 };
 
-const WorkList = () => {
-  const [lists, setLists] = useState([]);
+const WorkList = (props) => {
+  const {cards, lists, ws_id} = props;
+  const [listName,setListName ] = useState("");
+  const dispatch = useDispatch();
+  // const {list_name, ws_id} = useSelector(({addlist})=>({
+  //   list_name:addlist.list_name,
+  //   ws_id:addlist.ws_id,
+  // }))
 
-  const url = '/workspace2';
-  const datas = {
-    'ws_id': 1,
-    'list_id': 1,
-    'token': sessionStorage.getItem('authorization'),
-  };
-  const options = {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    data: JSON.stringify(datas),
-    url,
-  };
-
-  axios(options)
-    .then((res) => {
-      console.log(res);
-    }, [])
-    .catch(error => {
-      console.log(error);
-    });
-
+  useEffect(()=>
+  console.log(listName) ,[listName]);
 
   return (
     <>
-      {/*<Button*/}
-      {/*  variant='contained'*/}
-      {/*  color='primary'*/}
-      {/*  onClick={(e) => {*/}
-      {/*    setLists([*/}
-      {/*      ...lists,*/}
-      {/*      { title: 'listTest', cards: ['test1', 'test2', 'test3'] },*/}
-      {/*    ]);*/}
-      {/*  }}*/}
-      {/*>*/}
-      {/*  + Add Another List*/}
-      {/*</Button>*/}
+      <input onChange={e=>setListName(e.target.value)}/>
+      <Button
+       variant='contained'
+       color='primary'
+       onClick={(e) => {
+        dispatch(addList({listName, ws_id}));
+       }}
+       
+      >
+       + Add Another List
+      </Button>
 
-      {/*<div style={listStyle}>*/}
-      {/*  {lists.map((list, index) => {*/}
-      {/*    return <div key={index}>*/}
-      {/*      <WorkListCardList*/}
-      {/*        lists={lists}*/}
-      {/*        list={list}*/}
-      {/*        listId={list.list_id}*/}
-      {/*        cards={cards}*/}
-      {/*        // setList={setLists}*/}
-      {/*      />*/}
-      {/*    </div>;*/}
-      {/*  })}*/}
-      {/*  <div style={{ margin: 10 }}>*/}
+      <div style={listStyle}>
+       {lists.map((list, index) => {
+         return <div key={index}>
+           <WorkListCardList
+             lists={lists}
+             list={list}
+             listId={list.list_id}
+             cards={cards}
+             // setList={setLists}
+           />
+         </div>;
+       })}
+       <div style={{ margin: 10 }}>
 
-      {/*  </div>*/}
-      {/*</div>*/}
+       </div>
+      </div>
 
     </>
   );

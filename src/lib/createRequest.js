@@ -6,6 +6,7 @@ export default function createRequest(type, request) {
     // 요청을 보내고
     try {
       const response = await request(param);
+      console.log("param", param)
       //성공하면
       dispatch({
         type:SUCCESS,

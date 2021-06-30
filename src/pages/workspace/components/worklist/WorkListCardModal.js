@@ -24,7 +24,7 @@ const WorkListCardModal = (props) => {
           <Col sm={9}>
             <h5>Description</h5>
             <div contentEditable>
-
+              {props.cardDesc}
             </div>
             <h5>Activity</h5>
           </Col>
