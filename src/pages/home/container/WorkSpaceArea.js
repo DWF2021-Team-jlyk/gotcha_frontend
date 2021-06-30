@@ -44,7 +44,6 @@ const WorkSpaceArea = ({ areaType}) => {
             workspaces
               .filter(workspace => workspace.role_id === areaType)
               .map(workspace =>
-
                 <WorkSpaceCard
                   workspace={workspace}
                   key={workspace.ws_id}
