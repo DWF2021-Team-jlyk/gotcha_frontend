@@ -51,8 +51,8 @@ function addlist(state = initialState, action) {
           ...state.loading,
           ADD_LIST: false,
         },
-        list_name: action.payload,
-        ws_id: action.payload,
+        list_name: action.payload.list_name,
+        ws_id: action.payload.ws_id,
       };
     case ADD_LIST_FAILURE:
       return {
