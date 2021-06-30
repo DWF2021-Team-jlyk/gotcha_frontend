@@ -3,7 +3,7 @@ import workspaces from './workspaces';
 import notification from './notification';
 import workspaceList from './workspaceList';
 import workspaceCard from './workspaceCard';
-import addlist from './addList';
+import addlist from './addlist';
 
 const rootReducer = combineReducers({
   workspaces,

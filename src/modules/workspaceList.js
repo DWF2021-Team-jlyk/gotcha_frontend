@@ -68,17 +68,17 @@ function workspaceList(state = initialState, action) {
           POST_LIST: false,
         },
       };
-    case ADD_LIST:
-      return{
-        ...state,
-        lists:state.lists.concat(action.payload)
-      //ws_id:action.payload,
-      //lists:[...state.lists,action.payload]
-      //list_name:action.payload
-      }
+  //   case ADD_LIST:
+  //     return{
+  //       ...state,
+  //       lists:state.lists.concat(action.payload)
+  //     //ws_id:action.payload,
+  //     //lists:[...state.lists,action.payload]
+  //     //list_name:action.payload
+  //     }
       default:
         return state;
-  }
+   }
 }
 
 export default workspaceList;

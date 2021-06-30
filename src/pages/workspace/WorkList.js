@@ -5,8 +5,8 @@ import WorkSpaceData from '../../DummyData/WorkSpaceData';
 import { useDispatch, useSelector } from 'react-redux';
 //import { addList, postList } from '../../modules/workspaceList';
 import WorkListCardList from './components/worklist/WorkListCardList';
-import addList from '../../modules/addList';
-//import addlist from '../../modules/addList';
+import addList from '../../modules/addlist';
+import addlist from '../../modules/addlist';
 
 const listStyle = {
   width: '100%',

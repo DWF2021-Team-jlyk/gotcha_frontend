@@ -13,10 +13,11 @@ export const postList = (ws_id) =>
 // });
 
 export const addList = ({list_name, ws_id})=>
-apiAxios('main/wsList/list/insert',{
-  list_name: list_name,
-  ws_id: ws_id
-});
+axios.post('main/wsList/list/insert'
+// ,{
+//   list_name: list_name,
+//   ws_id: ws_id}
+);
 
 
 
