@@ -5,9 +5,10 @@ import { AiFillEdit } from 'react-icons/all';
 const WorkListCardModal = loadable(() => import('./WorkListCardModal'));
 
 const WorkListCard = (props) => {
-  const { cards, card, setCard } = props;
+  const { card } = props;
   const [openModal, setOpenModal] = useState(false);
   const [editable, setEditable] = useState(false);
+  const [editbutton, setEditButton] = useState(false);
   const handleModal = () => {
     setOpenModal(false);
   };
@@ -15,8 +16,10 @@ const WorkListCard = (props) => {
     if (editable === false)
       setOpenModal(true);
   };
-  const onEditable = () => setEditable(true);
+  const handleEditable = () => setEditable(true);
   const handleDisEditable = () => setEditable(false);
+  const showEditButton = () => setEditButton(true);
+  const noShowEditButton = () => setEditButton(false);
   return (
     <>
       <div
@@ -24,27 +27,39 @@ const WorkListCard = (props) => {
           height: '50px',
           marginTop: '15px',
           boxShadow: '0 0 2px 2px #666',
-          width: '220px',
+          width: '250px',
           display: 'flex',
+          verticalAlign: 'middle',
         }}
+        onMouseOver={showEditButton}
+        onMouseOut={noShowEditButton}
       >
-
         <div
           onClick={onClick}
           onBlur={handleDisEditable}
-          contentEditable={editable}
           style={{
             height: 'inherit',
-            width: '200px',
+            width: '220px',
             verticalAlign: 'middle',
           }}
         >
-          {card.CARD_NAME}
+          <input
+            defaultValue={card.CARD_NAME}
+            disabled={!editable}
+            style={{
+              height: 'inherit',
+              width: 'inherit',
+              verticalAlign: 'middle',
+            }}
+          />
         </div>
-        <div>
+
+        <div
+          onClick={handleEditable}
+          style={{ width: 30, height: 50 }}
+        >
           <AiFillEdit
-            onClick={onEditable}
-            opacity='0.5'
+            opacity={!editbutton ? 0 : '0.5'}
             size='20'
           />
         </div>
@@ -53,15 +68,14 @@ const WorkListCard = (props) => {
         openModal
         &&
         <WorkListCardModal
-          cardName={card.CARD_NAME}
-          cardDesc={card.card_desc}
+          cardName={card?.CARD_NAME}
+          cardDesc={card?.card_desc}
           show={openModal}
           handle={handleModal}
         />
       }
     </>
-  )
-    ;
+  );
 };
 
 export default WorkListCard;

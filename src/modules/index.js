@@ -3,7 +3,7 @@ import workspaces from './workspaces';
 import notification from './notification';
 import workspaceList from './workspaceList';
 import workspaceCard from './workspaceCard';
-import addlist from './addlist';
+import addList from './addList';
 import { FaAllergies } from 'react-icons/fa';
 
 const rootReducer = combineReducers({
@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   notification,
   workspaceList,
   workspaceCard,
-  addlist,
+  addList,
 });
 
 export default rootReducer;

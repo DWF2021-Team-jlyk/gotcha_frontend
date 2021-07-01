@@ -5,11 +5,11 @@ import WorkSpaceData from '../../DummyData/WorkSpaceData';
 import { useDispatch, useSelector } from 'react-redux';
 //import { addList, postList } from '../../modules/workspaceList';
 import WorkListCardList from './components/worklist/WorkListCardList';
-import {addList} from '../../modules/addlist';
+import {addList} from '../../modules/addList';
 
 const listStyle = {
     width: "97%",
-    height: "inherit",
+    height: 800,
     display: "flex",
     overflowX: "auto",
     margin: "10px",
