@@ -5,7 +5,7 @@ import WorkSpaceData from '../../DummyData/WorkSpaceData';
 import { useDispatch, useSelector } from 'react-redux';
 //import { addList, postList } from '../../modules/workspaceList';
 import WorkListCardList from './components/worklist/WorkListCardList';
-import addList from '../../modules/addlist';
+import {addList} from '../../modules/addlist';
 
 const listStyle = {
   width: '100%',
@@ -20,30 +20,17 @@ const WorkList = (props) => {
   const { cards, lists, ws_id } = props;
   const [listName, setListName] = useState('');
   const dispatch = useDispatch();
-  // const {list_name, ws_id} = useSelector(({addlist})=>({
-  //   list_name:addlist.list_name,
-  //   ws_id:addlist.ws_id,
-  // }))
-
-  useEffect(() => console.log(listName), [listName]);
-  const response = async (listName, ws_id) => await axios({
-    url: 'http://192.168.20.18:8080/test/post',
-    method: 'post',
-    headers: { 'content-type': 'application/json' },
-    data: {
-      list_name: listName,
-      ws_id: ws_id,
-    },
-  });
 
   return (
     <>
-      <input onChange={(e) => setListName(e.target.value)} />
+      <input value={listName} onChange={(e) =>setListName(e.target.value)} />
       <Button
         variant="contained"
         color="primary"
         onClick={(e) => {
-          dispatch(addList({listName, ws_id}))
+          // console.log(e);
+          // console.log(listName);
+          dispatch(addList(listName, ws_id));
         }}
       >
         + Add Another List

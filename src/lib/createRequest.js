@@ -1,7 +1,7 @@
 export default function createRequest(type, request) {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
-  return param => async dispatch => {
+  return (param) => async dispatch => {
     dispatch({type});
     // 요청을 보내고
     try {

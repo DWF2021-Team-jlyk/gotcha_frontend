@@ -9,23 +9,7 @@ const ADD_LIST = 'workspacelist/ADD_LIST';
 
 
 
-// export const postList = ws_id => async dispatch => {
-//   dispatch({ type: POST_LIST });
-//   try {
-//     const response = await api.postList(ws_id);
-//     dispatch({
-//       type: POST_LIST_SUCCESS,
-//       payload: response.data,
-//     });
-//   } catch (e) {
-//     dispatch({
-//       type: POST_LIST_FAILURE,
-//       payload: e,
-//       error: true,
-//     });
-//     throw e;
-//   }
-// };
+
 
 export const postList = createRequest(POST_LIST, api.postList)
 
@@ -68,14 +52,7 @@ function workspaceList(state = initialState, action) {
           POST_LIST: false,
         },
       };
-  //   case ADD_LIST:
-  //     return{
-  //       ...state,
-  //       lists:state.lists.concat(action.payload)
-  //     //ws_id:action.payload,
-  //     //lists:[...state.lists,action.payload]
-  //     //list_name:action.payload
-  //     }
+ 
       default:
         return state;
    }

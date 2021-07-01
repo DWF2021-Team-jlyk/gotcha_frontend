@@ -4,6 +4,7 @@ import notification from './notification';
 import workspaceList from './workspaceList';
 import workspaceCard from './workspaceCard';
 import addlist from './addlist';
+import { FaAllergies } from 'react-icons/fa';
 
 const rootReducer = combineReducers({
   workspaces,

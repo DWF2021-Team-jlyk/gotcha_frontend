@@ -4,22 +4,21 @@ import { bindActionCreators } from 'redux';
 import produce from 'immer';
 import createRequest from '../lib/createRequest';
 
-const ADD_LIST_LOADING = 'addlist/ADD_LIST_LOADING';
+// const ADD_LIST_LOADING = 'addlist/ADD_LIST_LOADING';
 const ADD_LIST_SUCCESS = 'addlist/ADD_LIST_SUCCESS';
 const ADD_LIST_FAILURE = 'addlist/ADD_LIST_FAILURE';
 
-const addListLoading = createAction(ADD_LIST_LOADING);
-const addListSuccess = createAction(ADD_LIST_SUCCESS);
-const addListFailure = createAction(ADD_LIST_FAILURE);
+const ADD_LIST = 'addlist/ADD_LIST';
 
+//export const addList = createRequest(ADD_LIST,api.addList);
 export const addList =
-  ({ list_name, ws_id }) =>
+  ( list_name, ws_id ) =>
   async (dispatch) => {
     console.log('addList list_name', list_name);
     console.log('addList ws_id', ws_id);
-    dispatch(ADD_LIST_LOADING);
+    dispatch({type:ADD_LIST,});
     try {
-      const response = await api.addList({ list_name, ws_id });
+      const response = await api.addList( list_name, ws_id );
 
       dispatch({
         type: ADD_LIST_SUCCESS,
@@ -44,9 +43,9 @@ const initialState = {
   },
 };
 
-export default function (state = initialState, action) {
+export default function addlist(state = initialState, action) {
   switch (action.type) {
-    case ADD_LIST_LOADING:
+    case ADD_LIST:
       return {
         ...state,
         loading:true,
@@ -70,35 +69,3 @@ export default function (state = initialState, action) {
       return state;
   }
 }
-
-// export default handleActions({
-//   [ADD_LIST_LOADING] : (state,action) =>{
-//     console.log(action);
-//     return {
-//       ...state,
-//       loading:true,
-//       error:false
-//     };
-//   },
-//   [ADD_LIST_SUCCESS]: (state, action) =>{
-//     console.log(action);
-//     const {list_name,ws_id} = action.payload.data;
-//     return{
-//       ...state,
-//       loading:false,
-//       error:false,
-//       data:{
-//         list_name,
-//         ws_id
-//       }
-//     };
-//   },
-//   [ADD_LIST_FAILURE]:(state,action)=>{
-//     return{
-//       ...state,
-//       loading:false,
-//       error:true
-
-//     }
-//   }
-// }, initialState);
