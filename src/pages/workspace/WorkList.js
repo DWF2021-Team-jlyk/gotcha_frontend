@@ -18,6 +18,7 @@ const listStyle = {
 
 const WorkList = (props) => {
 const {lists, cards} = props
+console.log(cards)
 const [modalTest,setModalTest] = useState(false);
     return (
         <>
@@ -27,15 +28,7 @@ const [modalTest,setModalTest] = useState(false);
             >
                 + Add Another List
             </Button>
-
-            <Button
-                variant="contained"
-                color="primary"
-                onClick={e=>{setModalTest(!modalTest)}}
-            >
-                modalTest
-            </Button>
-            {modalTest&&<WorkListCardModal show={modalTest}/>}
+            
             <div style={listStyle}>
                {lists.map((list, index) => {
                    return <div key={index}>

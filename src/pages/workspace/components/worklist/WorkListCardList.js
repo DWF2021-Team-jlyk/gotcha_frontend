@@ -1,5 +1,5 @@
 import Card from "react-bootstrap/Card";
-import React from "react";
+import React , {useState}from "react";
 import Button from "@material-ui/core/Button";
 import {AiOutlineDelete, AiOutlinePlusCircle} from "react-icons/ai";
 import {AiFillCopy} from "react-icons/ai";
@@ -7,6 +7,7 @@ import {AiFillDelete} from "react-icons/ai";
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import WorkListCard from "./WorkListCard";
+import WorkListCardModal from './WorkListCardModal';
 
 
 const CardHeaderStyle = {
@@ -36,6 +37,7 @@ const WorkListCardList = (props) => {
     const {lists, list,listId, cards, setLists, setCards} = props;
     //console.log("WorkListCardList",cards)
     console.log("WorkListCardList listId",listId)
+    const [modalTest,setModalTest] = useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -52,6 +54,7 @@ const WorkListCardList = (props) => {
                 {" "}{list.list_name}{" "}
                 <AiOutlinePlusCircle style={PlusIcon} onClick={handleClick}/>
             </Card.Header>
+            
             <Menu
                 id="simple-menu"
                 anchorEl={anchorEl}
@@ -78,10 +81,12 @@ const WorkListCardList = (props) => {
                             cards={cards}
                             card={card}
                             setCard={setCards}
+                            onClick={e=>{setModalTest(!modalTest)}}
                         />
                     })
                     
                 }
+                {modalTest&&<WorkListCardModal show={modalTest}/>}
             </Card.Body>
 
             <Card.Footer>

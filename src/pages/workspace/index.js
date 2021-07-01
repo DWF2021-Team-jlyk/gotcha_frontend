@@ -19,8 +19,9 @@ const Workspace = () => {
   const [value, setValue] = useState(1);
   const lists = useSelector((state) => state.workspaceList.lists);
   const cards = useSelector((state) => state.workspaceCard.cards);
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch(postList(ws_id));
     dispatch(postCard(ws_id));

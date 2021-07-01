@@ -5,18 +5,24 @@ import { AiFillEdit } from 'react-icons/all';
 const WorkListCardModal = loadable(() => import('./WorkListCardModal'));
 
 const WorkListCard = (props) => {
+
   const { cards, card, setCard } = props;
   const [openModal, setOpenModal] = useState(false);
   const [editable, setEditable] = useState(false);
   const handleModal = () => {
     setOpenModal(false);
   };
+
+ 
+
   const onClick = () => {
-    if (editable === false)
+    if (editable === false){
       setOpenModal(true);
+    }
   };
   const onEditable = () => setEditable(true);
   const handleDisEditable = () => setEditable(false);
+
   return (
     <>
       <div
@@ -39,8 +45,9 @@ const WorkListCard = (props) => {
             verticalAlign: 'middle',
           }}
         >
-          {card.card_name}
+          {card.CARD_NAME}
         </div>
+        
         <div>
           <AiFillEdit
             onClick={onEditable}
@@ -53,9 +60,11 @@ const WorkListCard = (props) => {
         openModal
         &&
         <WorkListCardModal
-          cardName={card.card_name}
+
+          card={card}
           show={openModal}
           handle={handleModal}
+    
         />
       }
     </>
