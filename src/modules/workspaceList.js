@@ -7,13 +7,11 @@ const POST_LIST_FAILURE = 'workspace/POST_LIST_FAILURE';
 
 const ADD_LIST = 'workspacelist/ADD_LIST';
 
-
-
-
+const LIST_DELETE = "workspace/LIST_DELETE";
 
 export const postList = createRequest(POST_LIST, api.postList)
-
-export const addList = createRequest(ADD_LIST,api.addList);
+export const listDelete = list_id => ({type:LIST_DELETE, list_id});
+//export const addList = createRequest(ADD_LIST,api.addList);
 
 
 const initialState = {
@@ -52,6 +50,11 @@ function workspaceList(state = initialState, action) {
           POST_LIST: false,
         },
       };
+      case LIST_DELETE :
+        return {
+          ...state,
+          lists: state.lists.filter(list=>list.list_id !== action.list_id)
+        }
  
       default:
         return state;

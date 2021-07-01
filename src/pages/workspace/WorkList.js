@@ -45,6 +45,7 @@ const WorkList = (props) => {
                 list={list}
                 listId={list.list_id}
                 cards={cards}
+                ws_id={ws_id}
                 // setList={setLists}
               />
             </div>

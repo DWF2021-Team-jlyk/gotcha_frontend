@@ -8,6 +8,22 @@ export const postList = (ws_id) =>
 export const addList = ( list_name, ws_id ) =>
 apiAxios('/main/wsList/list/insert', { list_name:list_name,ws_id:ws_id});
 
+export const updateList = (list_name, ws_id, list_id)=>{
+  apiAxios('/main/wsList/list/update',
+  {
+    list_name:list_name,
+    ws_id : ws_id,
+    list_id: list_id,
+  })
+}
+
+export const deleteList = (list_id) =>{
+  apiAxios('/main/wsList/list/delete',
+  {
+    list_id: list_id,
+  })
+}
+
   // {
   //   return axios({
   //     url:'main/wsList/list/insert',
