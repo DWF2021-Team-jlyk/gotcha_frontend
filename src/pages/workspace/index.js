@@ -63,7 +63,7 @@ const Workspace = () => {
               margin: 5,
             }}
           >
-            <Calendar lists={lists} />
+            <Calendar />
           </Tab>
           <Tab
             title='Board'
