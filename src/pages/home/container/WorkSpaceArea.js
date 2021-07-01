@@ -25,6 +25,7 @@ const WorkSpaceArea = ({ areaType }) => {
     ws_id => dispatch(changeWorkspaceFav(ws_id)),
     [dispatch]);
 
+    console.log(workspaces);
   const getAreaTitle = (areaType) => {
     return areaType === 1 ?
       <div><FaUserCog size='25' style={{ marginRight: 20 }} />Admin Workspace</div> :

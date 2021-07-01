@@ -12,9 +12,13 @@ const WorkListCard = (props) => {
   const handleModal = () => {
     setOpenModal(false);
   };
+
+ 
+
   const onClick = () => {
-    if (editable === false)
+    if (editable === false){
       setOpenModal(true);
+    }
   };
   const handleEditable = () => setEditable(true);
   const handleDisEditable = () => setEditable(false);
@@ -72,6 +76,7 @@ const WorkListCard = (props) => {
           cardDesc={card?.card_desc}
           show={openModal}
           handle={handleModal}
+    
         />
       }
     </>

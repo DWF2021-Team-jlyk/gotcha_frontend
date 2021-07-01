@@ -17,10 +17,9 @@ const Workspace = () => {
   const { ws_id } = useParams();
   const lists = useSelector((state) => state.workspaceList.lists);
   const cards = useSelector((state) => state.workspaceCard.cards);
-  
-  const dispatch = useDispatch();
-  const tab = useRef(null);
 
+  const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch(postList(ws_id));
     dispatch(postCard(ws_id));

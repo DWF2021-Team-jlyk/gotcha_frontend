@@ -7,10 +7,6 @@ const POST_LIST_FAILURE = 'workspace/POST_LIST_FAILURE';
 
 const ADD_LIST = 'workspacelist/ADD_LIST';
 
-
-
-
-
 export const postList = createRequest(POST_LIST, api.postList)
 
 export const addList = createRequest(ADD_LIST,api.addList);
