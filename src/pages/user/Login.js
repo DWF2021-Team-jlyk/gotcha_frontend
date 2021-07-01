@@ -79,11 +79,13 @@ function Copyright() {
       // };
       axios.post('/login',datas,headers).then(res => {
         console.log('res',res);
-        alert("로그인 성공")
         // console.log(Object.keys(res.headers))
         console.log(res.headers.authorization)
-        sessionStorage.setItem("authorization",res.headers.authorization)
-        history.push('/')
+        sessionStorage.setItem("accessToken",res.headers.authorization)
+        history.push({
+          pathname: '/',
+          state: {user_id: data.email}
+        })
       }).catch(error => {
         alert("아이디나 비밀번호가 일치하지 않습니다.")
         console.log('err', error)
@@ -121,9 +123,16 @@ function Copyright() {
               autoComplete="email"
               autoFocus
               type="text"
-              {...register("email", { required: true })} 
-            />
-              {errors.email && "email is required"}
+              {
+                ...register("email",
+                    {
+                        required: true,
+                        pattern: /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
+                    })
+            }
+        />
+        {errors.email?.type === 'required' && "email is required"
+        || errors.email?.type === 'pattern' && "사용할 수 없는 이메일입니다."}
             <TextField
               variant="outlined"
               margin="normal"
@@ -137,7 +146,6 @@ function Copyright() {
               {...register("password", { required: true })} 
             />
               {errors.password && "password is required"}
-            {/* <input type="text" {...register("firstName", { required: true, maxLength: 20 })}/> */}
             <Button
               type="submit"
               fullWidth
@@ -150,7 +158,7 @@ function Copyright() {
             <Switch>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link to="/Pwdfind" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>

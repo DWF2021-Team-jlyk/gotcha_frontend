@@ -80,7 +80,7 @@ export default function Code() {
     axios(options).then((res) => {
       if (res.data === true) {
         alert('회원가입 완료');
-        history.push('/');
+        history.push('/Login');
       } else {
         alert('코드가 일치하지 않습니다.');
       }

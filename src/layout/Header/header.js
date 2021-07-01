@@ -63,12 +63,19 @@ const Header = () => {
                         color: "#ffffff",
                         textDecoration: "none",
                     }}
+                    onClick={onClick}
                 >
                     LOGOUT
                 </Link>
             </div>
         </Navbar>
     );
+    function onClick() {
+        const accessToken = sessionStorage.getItem("accessToken")
+        if(accessToken !== null || accessToken !== '') {
+            sessionStorage.removeItem("accessToken")
+        }
+    }
 };
 
 export default Header;

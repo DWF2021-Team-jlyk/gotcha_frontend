@@ -3,6 +3,9 @@ import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory} from 'react-router-dom';
+import axios from "axios";
+import {useForm} from "react-hook-form";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,7 +38,19 @@ const useStyles = makeStyles((theme) => ({
 
 const Pwdfind = () => {
   const classes = useStyles();
+  const history = useHistory();
+  
+  const { register, formState: { errors }, handleSubmit } = useForm();
 
+  const onSubmit = (data,e) => {
+    e.preventDefault();
+    axios.post('/user/pwdFind',{
+      "user_id": data.email,
+    }).then(res => {
+      alert("이메일을 확인해 주시기 바랍니다.")
+      console.log(res)
+    });
+  }
   return (
     <Container component="main" maxWidth="xs" className={classes.style}>
   
@@ -43,7 +58,7 @@ const Pwdfind = () => {
   
           이메일을 입력하세요, 새로운 비밀번호를 발송합니다.
       
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit(onSubmit)} method="post" noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -54,7 +69,17 @@ const Pwdfind = () => {
             name="email"
             autoComplete="email"
             autoFocus
-          />
+            type="text"
+            {
+              ...register("email",
+                  {
+                      required: true,
+                      pattern: /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
+                  })
+          }
+        />
+          {errors.email?.type === 'required' && "email is required"
+          || errors.email?.type === 'pattern' && "사용할 수 없는 이메일입니다."}
         
           {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
