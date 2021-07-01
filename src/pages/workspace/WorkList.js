@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Button from "@material-ui/core/Button";
-import WorkListCardList from "./components/worklist/WorkListCardList";
-import WorkListCardModal from './components/worklist/WorkListCardModal';
+import Button from '@material-ui/core/Button';
+import axios from 'axios';
+import WorkSpaceData from '../../DummyData/WorkSpaceData';
+import { useDispatch, useSelector } from 'react-redux';
+//import { addList, postList } from '../../modules/workspaceList';
+import WorkListCardList from './components/worklist/WorkListCardList';
+import {addList} from '../../modules/addlist';
 
 const listStyle = {
     width: "97%",
@@ -13,41 +17,42 @@ const listStyle = {
 };
 
 const WorkList = (props) => {
-const {lists, cards} = props
-const [modalTest,setModalTest] = useState(false);
-    return (
-        <>
-            <Button
-                variant="contained"
-                color="primary"
-            >
-                + Add Another List
-            </Button>
+  const { cards, lists, ws_id } = props;
+  const [listName, setListName] = useState('');
+  const dispatch = useDispatch();
 
-            <Button
-                variant="contained"
-                color="primary"
-                onClick={e=>{setModalTest(!modalTest)}}
-            >
-                modalTest
-            </Button>
-            {modalTest&&<WorkListCardModal show={modalTest}/>}
-            <div style={listStyle}>
-               {lists.map((list, index) => {
-                   return <div key={index} style={{height:750}}>
-                       <WorkListCardList
-                           lists={lists}
-                           list={list}
-                           listId={list.list_id}
-                           cards={cards}
-                           // setList={setLists}
-                       />
-                   </div>
-               })}
+  return (
+    <>
+      <input value={listName} onChange={(e) =>setListName(e.target.value)} />
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={(e) => {
+          // console.log(e);
+          // console.log(listName);
+          dispatch(addList(listName, ws_id));
+        }}
+      >
+        + Add Another List
+      </Button>
+
+      <div style={listStyle}>
+        {lists.map((list, index) => {
+          return (
+            <div key={index}>
+              <WorkListCardList
+                lists={lists}
+                list={list}
+                listId={list.list_id}
+                cards={cards}
+                // setList={setLists}
+              />
             </div>
-            
-        </>
-    );
-        };
-
+          );
+        })}
+        <div style={{ margin: 10 }}></div>
+      </div>
+    </>
+  );
+};
 export default WorkList;

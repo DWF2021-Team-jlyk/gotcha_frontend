@@ -39,7 +39,7 @@ const WorkListCard = (props) => {
             verticalAlign: 'middle',
           }}
         >
-          {card.card_name}
+          {card.CARD_NAME}
         </div>
         <div>
           <AiFillEdit
@@ -53,7 +53,8 @@ const WorkListCard = (props) => {
         openModal
         &&
         <WorkListCardModal
-          cardName={card.card_name}
+          cardName={card.CARD_NAME}
+          cardDesc={card.card_desc}
           show={openModal}
           handle={handleModal}
         />
