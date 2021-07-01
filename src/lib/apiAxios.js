@@ -5,6 +5,8 @@ export default function apiAxios(url, data){
     url:url,
     method:'post',
     headers: {'content-type' : 'application/json'},
-    data:JSON.stringify(data)
+    data:{
+      ...data
+    }
   })
 }

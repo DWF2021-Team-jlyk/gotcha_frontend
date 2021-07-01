@@ -12,16 +12,14 @@ import { createLogger } from 'redux-logger/src';
 
 // const store = createStore(rootReducer, composeWithDevTools());
 const logger = createLogger();
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(logger, ReduxThunk)))
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(logger, ReduxThunk)));
 
 
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root'),
 );

@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Button from "@material-ui/core/Button";
 import WorkListCardList from "./components/worklist/WorkListCardList";
-import axios from 'axios';
-import WorkSpaceData from "../../DummyData/WorkSpaceData";
-import { useDispatch } from 'react-redux';
-import { postList } from '../../modules/workspaceList';
 import WorkListCardModal from './components/worklist/WorkListCardModal';
 
 const listStyle = {
-    width: "100%",
-    height: "100%",
+    width: "97%",
+    height: "inherit",
     display: "flex",
     overflowX: "auto",
     margin: "10px",
@@ -38,7 +34,7 @@ const [modalTest,setModalTest] = useState(false);
             {modalTest&&<WorkListCardModal show={modalTest}/>}
             <div style={listStyle}>
                {lists.map((list, index) => {
-                   return <div key={index}>
+                   return <div key={index} style={{height:750}}>
                        <WorkListCardList
                            lists={lists}
                            list={list}
@@ -48,9 +44,6 @@ const [modalTest,setModalTest] = useState(false);
                        />
                    </div>
                })}
-               <div style={{margin: 10}}>
-
-               </div>
             </div>
             
         </>
