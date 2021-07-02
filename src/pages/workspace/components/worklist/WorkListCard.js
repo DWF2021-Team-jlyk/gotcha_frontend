@@ -50,7 +50,7 @@ const WorkListCard = (props) => {
           }}
         >
           <input
-            defaultValue={card.CARD_NAME}
+            defaultValue={card.card_name}
             disabled={!editable}
             ref={cardInputEL}
             style={{
@@ -75,7 +75,7 @@ const WorkListCard = (props) => {
         openModal
         &&
         <WorkListCardModal
-          cardName={card?.CARD_NAME}
+          cardName={card?.card_name}
           cardId={card?.card_id}
           cardDesc={card?.card_desc}
           show={openModal}

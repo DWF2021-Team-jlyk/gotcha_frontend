@@ -10,12 +10,13 @@ export default function createRequest(type, request) {
     try {
       const response = await request(param);
       //성공하면
+      if(response !== undefined){
       dispatch({
-        type: SUCCESS,
-        payload: response.data,
-      });
-      // dispatch(finishLoading(type));
-    } catch (e) {
+        type:SUCCESS,
+        payload:response.data
+      })
+    }else{dispatch({type:SUCCESS})}
+    } catch (e){
       //실패하면
       dispatch({
         type: FAILURE,
@@ -25,5 +26,4 @@ export default function createRequest(type, request) {
       // dispatch(startLoading(type));
       throw e;
     }
-  };
-}
+}};
