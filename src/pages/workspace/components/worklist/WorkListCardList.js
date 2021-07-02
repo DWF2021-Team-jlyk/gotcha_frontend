@@ -1,6 +1,5 @@
 import Card from 'react-bootstrap/Card';
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router';
 import Button from '@material-ui/core/Button';
 import { AiOutlineDelete, AiOutlinePlusCircle } from 'react-icons/ai';
 import { AiFillCopy } from 'react-icons/ai';
@@ -50,8 +49,6 @@ const WorkListCardList = (props) => {
   };
 
   console.log("WorkListCardList ws_id",ws_id)
-
-  const history = useHistory();
 
   const onRemove = async () => {
     try {
