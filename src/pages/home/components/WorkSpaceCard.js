@@ -1,8 +1,10 @@
 import { Card, Row } from 'react-bootstrap';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import noImg from '../../../image/gotcha.png';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { changeWorkspaceFav } from '../../../modules/workspaces';
+import { useDispatch } from 'react-redux';
 
 const cardStyle = {
   width: '300px',
@@ -13,16 +15,32 @@ const cardStyle = {
 };
 
 const cardWorkName = {
-  position: 'relative', 
-  left:20, 
-  top:5,
+  position: 'relative',
+  left: 20,
+  top: 5,
   textDecoration: 'none',
-  color: '#212529'
-}
+  color: '#212529',
+};
 
+const starStyle = {
+  position: 'relative',
+  left: 30,
+  top: 5,
+  fontSize: 28,
+  color: 'FFC947',
+};
 
-const WorkSpaceCard = ({workspace, onToggle}) => {
-  const isFav = is_fav => is_fav? true : false
+const WorkSpaceCard = ({ workspace }) => {
+  const isFav = is_fav => is_fav ? true : false;
+  const dispatch = useDispatch();
+  const [ws, setWs] = useState({...workspace});
+  const onToggle = useCallback(
+    ws_id => dispatch(changeWorkspaceFav(ws_id)),
+    [dispatch],
+  );
+  useEffect(()=>{
+    setWs({...workspace});
+  }, [workspace]);
   return (
     <Card style={cardStyle}>
       <div style={{ textAlign: 'center' }}>
@@ -31,40 +49,16 @@ const WorkSpaceCard = ({workspace, onToggle}) => {
 
       <Card.Body style={{ backgroundColor: '#f7f7f7' }}>
         <Row>
-          <Card.Text style={{display:"flex"}}>
-            <div style={{width:210, height:40}}>
-              <Link to={`workspace/${workspace.ws_id}`} style={cardWorkName}>
-                <span>{workspace.ws_name}</span>
+          <Card.Text style={{ display: 'flex' }}>
+            <div style={{ width: 210, height: 40 }}>
+              <Link to={`workspace/${ws.ws_id}`} style={cardWorkName}>
+                <span>{ws.ws_name}</span>
               </Link>
             </div>
-
             <div>
-              {isFav(workspace.is_fav) &&
-              //즐찾일때
-              <AiFillStar
-                style={{
-                  position: 'relative',
-                  left: 30,
-                  top:5,
-                  fontSize: 28,
-                  color: 'FFC947',
-                }}
-                onClick={onToggle}
-              />}
-
-              {!isFav(workspace.is_fav) &&
-              <AiOutlineStar
-                style={{
-                  position: 'relative',
-                  left: 30, 
-                  top:5,
-                  fontSize: 28,
-                  color: 'FFC947',
-                }}
-                onClick={onToggle}
-              />}
+              {isFav(ws.is_fav) && <AiFillStar style={starStyle} onClick={e=>onToggle(ws.ws_id)} />}
+              {!isFav(ws.is_fav) && <AiOutlineStar style={starStyle} onClick={e=>onToggle(ws.ws_id)} />}
             </div>
-            
           </Card.Text>
         </Row>
       </Card.Body>

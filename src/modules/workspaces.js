@@ -1,5 +1,7 @@
 import createRequest from '../lib/createRequest';
 import * as api from '../lib/workspaceAPI'
+import {createAction, handleActions} from 'redux-actions';
+import produce from 'immer';
 
 const ADD_WORKSPACE = 'workspace/ADD_WORKSPACE';
 const DELETE_WORKSPACE = 'workspace/DELETE_WORKSPACE';
@@ -10,10 +12,12 @@ const POST_WORKSPACES = 'workspace/POST_WORKSPACES';
 const POST_WORKSPACES_SUCCESS = 'workspace/POST_WORKSPACES_SUCCESS';
 const POST_WORKSPACES_FAILURE = 'workspace/POST_WORKSPACES_FAILURE';
 
-export const addWorkspace = workspace => ({ type: ADD_WORKSPACE, workspace });
+export const addWorkspace = createAction(ADD_WORKSPACE, workspace=>workspace);
+// export const addWorkspace = workspace => ({ type: ADD_WORKSPACE, workspace });
 export const deleteWorkspace = ws_id => ({ type: DELETE_WORKSPACE, ws_id });
 // export const changeWorkspaceName = () => ({type:CHANGE_WORKSPACE_NAME, ws_id});
-export const changeWorkspaceFav = ws_id => ({ type: CHANGE_WORKSPACE_FAV, ws_id });
+export const changeWorkspaceFav = createAction(CHANGE_WORKSPACE_FAV, ws_id=>ws_id);
+// export const changeWorkspaceFav = ws_id => ({ type: CHANGE_WORKSPACE_FAV, ws_id });
 
 export const postWorkspaces = createRequest(POST_WORKSPACES, api.postGetWorkspaces);
 
@@ -23,6 +27,19 @@ const initialState = {
   },
   workspaces: [],
 };
+
+// const workspaces = handleActions(
+//   {
+//     [ADD_WORKSPACE]:(state, {payload:workspace}) =>
+//       produce(state, draft=>{
+//         draft.workspaces.push(workspace);
+//       }),
+//     [CHANGE_WORKSPACE_FAV]:(state, {payload:workspace})=>{
+//       produce(state, draft=>{
+//       })
+//     }
+//   }
+// )
 
 function workspaces(state = initialState, action) {
   switch (action.type) {
@@ -37,9 +54,8 @@ function workspaces(state = initialState, action) {
       return {
         ...state,
         workspaces: state.workspaces.map(workspace =>
-          workspace.ws_id === action.ws_id ?
-            { ...workspace, is_fav: !workspace.is_fav } :
-            workspace,
+          workspace.ws_id === action.payload ?
+            {...workspace, is_fav:!workspace.is_fav} : workspace,
         ),
       };
 

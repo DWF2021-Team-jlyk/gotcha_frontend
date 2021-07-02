@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from 'react';
 import {Button, Col, Form, Modal, ModalBody, ModalFooter, ModalTitle, Row} from "react-bootstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import axios from 'axios';
@@ -7,7 +7,8 @@ import apiAxios from '../../lib/apiAxios';
 const WorkSpaceMembers = async (data) => apiAxios("/home/wsUserList", data);
 
 const WorkSpaceModal = (props) => {
-  const {workspace, } = props;
+  const {workspace} = props;
+  const fileEl = useRef<HTMLImageElement>(null);
   return (
     <Modal
       size={"lg"}
@@ -34,6 +35,18 @@ const WorkSpaceModal = (props) => {
           </Form.Group>
           <br/>
           <Form.Group>
+            <Form.Label>WorkSpace Thumbnail 사진</Form.Label>
+            <Row>
+              <Col sm={8}>
+                <input type="image"/>
+              </Col>
+              {/*<Col sm={4}>*/}
+              {/*  <Button>사진 추가하기</Button>*/}
+              {/*</Col>*/}
+            </Row>
+          </Form.Group>
+          <br/>
+          <Form.Group>
             <Form.Label>WorkSpace 멤버</Form.Label>
             <Row>
               <Col sm={8}>
@@ -44,18 +57,7 @@ const WorkSpaceModal = (props) => {
               </Col>
             </Row>
           </Form.Group>
-          <br/>
-          <Form.Group>
-            <Form.Label>WorkSpace Thumbnail 사진</Form.Label>
-            <Row>
-              <Col sm={8}>
-                <Form.Control type="file"/>
-              </Col>
-              <Col sm={4}>
-                <Button>사진 추가하기</Button>
-              </Col>
-            </Row>
-          </Form.Group>
+
 
         </Form>
       </ModalBody>

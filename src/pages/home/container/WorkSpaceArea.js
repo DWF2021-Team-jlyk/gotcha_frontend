@@ -2,8 +2,9 @@ import React, { useCallback, useEffect } from 'react';
 import { Card, Row } from 'react-bootstrap';
 import WorkSpaceCard from '../components/WorkSpaceCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeWorkspaceFav, postWorkspaces } from '../../../modules/workspaces';
+import { postWorkspaces, updateWorkspace } from '../../../modules/workspaces';
 import { FaUserCog, FaUsers } from 'react-icons/fa';
+import loading from '../../../modules/loading';
 
 const workspaceStyle = {
   style: {
@@ -20,18 +21,14 @@ const WorkSpaceArea = ({ areaType }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(postWorkspaces('user01@naver.com'));
+    // dispatch(loading['workspace/POST_WORKSPACES']);
   }, []);
-  const onToggle = useCallback(
-    ws_id => dispatch(changeWorkspaceFav(ws_id)),
-    [dispatch]);
 
-    console.log(workspaces);
   const getAreaTitle = (areaType) => {
     return areaType === 1 ?
       <div><FaUserCog size='25' style={{ marginRight: 20 }} />Admin Workspace</div> :
       <div><FaUsers size='25' style={{ marginRight: 20 }} />Member Workspace</div>;
   };
-  <FaUserCog />;
 
   return (
     <Card style={workspaceStyle.style}>
@@ -48,7 +45,6 @@ const WorkSpaceArea = ({ areaType }) => {
                 <WorkSpaceCard
                   workspace={workspace}
                   key={workspace.ws_id}
-                  onToggle={e => onToggle(workspace.ws_id)}
                 />,
               )
           }

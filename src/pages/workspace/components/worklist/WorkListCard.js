@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import loadable from '@loadable/component';
 import { AiFillEdit } from 'react-icons/all';
 
@@ -12,13 +12,17 @@ const WorkListCard = (props) => {
   const handleModal = () => {
     setOpenModal(false);
   };
+  const cardInputEL = useRef(null);
 
   const onClick = () => {
     if (editable === false) {
       setOpenModal(true);
     }
   };
-  const handleEditable = () => setEditable(true);
+  const handleEditable = async (e) => {
+    await setEditable(true)
+    cardInputEL.current.focus();
+  };
   const handleDisEditable = () => setEditable(false);
   const showEditButton = () => setEditButton(true);
   const noShowEditButton = () => setEditButton(false);
@@ -46,8 +50,9 @@ const WorkListCard = (props) => {
           }}
         >
           <input
-            defaultValue={card.CARD_NAME}
+            defaultValue={card.card_name}
             disabled={!editable}
+            ref={cardInputEL}
             style={{
               height: 'inherit',
               width: 'inherit',
