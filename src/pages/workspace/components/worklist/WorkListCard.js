@@ -13,10 +13,9 @@ const WorkListCard = (props) => {
     setOpenModal(false);
   };
 
- 
 
   const onClick = () => {
-    if (editable === false){
+    if (editable === false) {
       setOpenModal(true);
     }
   };
@@ -73,14 +72,15 @@ const WorkListCard = (props) => {
         &&
         <WorkListCardModal
           cardName={card?.CARD_NAME}
+          cardId={card?.card_id}
           cardDesc={card?.card_desc}
           show={openModal}
           handle={handleModal}
-    
+
         />
       }
     </>
   );
-};
+}
 
 export default WorkListCard;

@@ -40,7 +40,7 @@ const WorkListCardModal = (props) => {
   const onClickShowLog = () => {
     setShowLog(!showLog);
   };
- 
+
 
   useEffect(() => {
     getDetail();
@@ -48,7 +48,7 @@ const WorkListCardModal = (props) => {
 
   const getDetail = async () => {
     const result = await axios.post('/card/cardDetail', {
-      card_id: props.card.CARD_ID,
+      card_id: props.cardId,
     });
     console.log(result.data);
     setCardDTO(result.data.cardDTO);
@@ -106,7 +106,8 @@ const WorkListCardModal = (props) => {
                 {cardMember.map((value, key) => {
                   return (
                     <Avatar
-                      onClick={(event) => {}}
+                      onClick={(event) => {
+                      }}
                       style={{ margin: '10px 10px 0px 5px' }}
                     >
                       {avatarIcon(value.user_id)}
@@ -129,7 +130,7 @@ const WorkListCardModal = (props) => {
                 }}
               >
                 <Form.Control
-                  as="textarea"
+                  as='textarea'
                   value={cardDTO.card_name}
                   style={{ height: '100px', resize: 'none' }}
                   disabled
@@ -139,10 +140,10 @@ const WorkListCardModal = (props) => {
               // Description값 수정하기
               <div>
                 <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlTextarea1"
+                  className='mb-3'
+                  controlId='exampleForm.ControlTextarea1'
                 >
-                  <Form.Control as="textarea" style={{ height: '180px' }}>
+                  <Form.Control as='textarea' style={{ height: '180px' }}>
                     {cardDTO.card_name}
                   </Form.Control>
                   <div style={{ marginTop: 5, float: 'right' }}>
@@ -183,9 +184,9 @@ const WorkListCardModal = (props) => {
                     <div style={{ display: 'flex' }}>
                       <div style={{ padding: 5 }}>
                         <Form.Check
-                          type="checkbox"
-                          id="autoSizingCheck"
-                          className="mb-2"
+                          type='checkbox'
+                          id='autoSizingCheck'
+                          className='mb-2'
                         />
                       </div>
                       <div style={{ padding: 5 }}>{value.todo_name}</div>
@@ -214,10 +215,10 @@ const WorkListCardModal = (props) => {
                     End date
                   </Modal.Body>
                   <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant='secondary' onClick={handleClose}>
                       Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant='primary' onClick={handleClose}>
                       Save
                     </Button>
                   </Modal.Footer>
@@ -232,95 +233,103 @@ const WorkListCardModal = (props) => {
               </h5>
 
               <Button
-                style={{ backgroundColor: '#7986CB',  border: '1px solid #7986CB', marginLeft: 377}}
+                style={{ backgroundColor: '#7986CB', border: '1px solid #7986CB', marginLeft: 377 }}
                 onClick={onClickShowLog}
               >
-                {showLog===true? <span>Show Log</span>: <span>Hide Log</span>}
-        
+                {showLog === true ? <span>Show Log</span> : <span>Hide Log</span>}
+
               </Button>
             </div>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className='mb-3' controlId='exampleForm.ControlInput1'>
               <div style={{ display: 'flex' }}>
                 <Avatar
-                  onClick={(event) => {}}
+                  onClick={(event) => {
+                  }}
                   style={{ margin: '10px 10px 0px 5px' }}
                 >
                   {avatarIcon('user01@naver.com')}
                 </Avatar>
 
-                <Form.Control type="text" placeholder="Write a comment..." />
+                <Form.Control type='text' placeholder='Write a comment...' />
               </div>
             </Form.Group>
 
             <div style={{ height: 200 }}>
 
               {showLog === true
-              ? 
-              <>
-              {cardAct.map((value, key) => {
-                return <>
-                <div style={{ display: 'flex', marginBottom:7 }}>
-                  <div>
-                    <Avatar
-                      onClick={(event) => {}}
-                      style={{ margin: '10px 10px 0px 5px' }}
-                    >
-                      {avatarIcon(value.user_id)}
-                    </Avatar>
-                  </div>
+                ?
+                <>
+                  {cardAct.map((value, key) => {
+                    return <>
+                      <div style={{ display: 'flex', marginBottom: 7 }}>
+                        <div>
+                          <Avatar
+                            onClick={(event) => {
+                            }}
+                            style={{ margin: '10px 10px 0px 5px' }}
+                          >
+                            {avatarIcon(value.user_id)}
+                          </Avatar>
+                        </div>
 
-                  <div>
-                    <div style={{ marginTop: 7, fontSize: '.9rem' }}>
-                      <b>{value.user_id}</b>{' '}
-                      <span style={{ fontSize: '0.8rem' }}>{value.created_date}</span>
-                    </div>
-                    <div style={{marginTop: 10, marginBottom:10}}>
-                      <span style={{border: '1px solid #ced4da', fontSize: '.95rem',padding: 5, borderRadius: 4}}>{value.act_desc}</span>
-                    </div>
-                    <div style={{ marginTop: 3, fontSize: '.8rem' }}>
-                      Edit Delete
-                    </div>
-                  </div>
-                </div>
+                        <div>
+                          <div style={{ marginTop: 7, fontSize: '.9rem' }}>
+                            <b>{value.user_id}</b>{' '}
+                            <span style={{ fontSize: '0.8rem' }}>{value.created_date}</span>
+                          </div>
+                          <div style={{ marginTop: 10, marginBottom: 10 }}>
+                            <span style={{
+                              border: '1px solid #ced4da',
+                              fontSize: '.95rem',
+                              padding: 5,
+                              borderRadius: 4,
+                            }}>{value.act_desc}</span>
+                          </div>
+                          <div style={{ marginTop: 3, fontSize: '.8rem' }}>
+                            Edit Delete
+                          </div>
+                        </div>
+                      </div>
+                    </>;
+                  })}
                 </>
-              })}
-              </>
-              
-              : 
-              <>
-               {cardAct.map((value, key) => {
-                return <>
-                <div style={{ display: 'flex', marginBottom:7 }}>
-                  <div>
-                    <Avatar
-                      onClick={(event) => {}}
-                      style={{ margin: '10px 10px 0px 5px' }}
-                    >
-                      {avatarIcon(value.user_id)}
-                    </Avatar>
-                  </div>
+                :
+                <>
+                  {cardAct.map((value, key) => {
+                    return <>
+                      <div style={{ display: 'flex', marginBottom: 7 }}>
+                        <div>
+                          <Avatar
+                            onClick={(event) => {
+                            }}
+                            style={{ margin: '10px 10px 0px 5px' }}
+                          >
+                            {avatarIcon(value.user_id)}
+                          </Avatar>
+                        </div>
 
-                  <div>
-                    <div style={{ marginTop: 7, fontSize: '.9rem' }}>
-                      <b>{value.user_id}</b>{' '}
-                      <span style={{ fontSize: '0.8rem' }}>{value.created_date}</span>
-                    </div>
-                    <div style={{marginTop: 10, marginBottom:10}}>
-                      <span style={{border: '1px solid #ced4da', fontSize: '.95rem',padding: 5, borderRadius: 4}}>{value.act_desc}</span>
-                    </div>
-                    <div style={{ marginTop: 3, fontSize: '.8rem' }}>
-                      Edit Delete
-                    </div>
-                  </div>
-                </div>
+                        <div>
+                          <div style={{ marginTop: 7, fontSize: '.9rem' }}>
+                            <b>{value.user_id}</b>{' '}
+                            <span style={{ fontSize: '0.8rem' }}>{value.created_date}</span>
+                          </div>
+                          <div style={{ marginTop: 10, marginBottom: 10 }}>
+                            <span style={{
+                              border: '1px solid #ced4da',
+                              fontSize: '.95rem',
+                              padding: 5,
+                              borderRadius: 4,
+                            }}>{value.act_desc}</span>
+                          </div>
+                          <div style={{ marginTop: 3, fontSize: '.8rem' }}>
+                            Edit Delete
+                          </div>
+                        </div>
+                      </div>
+                    </>;
+                  })}
                 </>
-              })}
-              </>
-              
               }
-           
-
-
             </div>
           </Col>
 
@@ -338,9 +347,9 @@ const WorkListCardModal = (props) => {
         </Row>
       </ModalBody>
       <ModalFooter>
-        <Button variant="primary">Save</Button>
-        <Button variant="danger">Delete</Button>
-        <Button variant="secondary">Cancel</Button>
+        <Button variant='primary'>Save</Button>
+        <Button variant='danger'>Delete</Button>
+        <Button variant='secondary'>Cancel</Button>
       </ModalFooter>
     </Modal>
   );
