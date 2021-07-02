@@ -18,7 +18,6 @@ const listStyle = {
 
 const WorkList = (props) => {
 const {lists, cards} = props
-console.log(cards)
 const [modalTest,setModalTest] = useState(false);
     return (
         <>

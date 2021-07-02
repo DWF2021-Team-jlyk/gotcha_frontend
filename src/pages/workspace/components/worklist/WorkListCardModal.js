@@ -40,7 +40,6 @@ const WorkListCardModal = (props) => {
   const onClickShowLog = () => {
     setShowLog(!showLog);
   };
- 
 
   useEffect(() => {
     getDetail();
@@ -50,12 +49,22 @@ const WorkListCardModal = (props) => {
     const result = await axios.post('/card/cardDetail', {
       card_id: props.card.CARD_ID,
     });
+
     console.log(result.data);
     setCardDTO(result.data.cardDTO);
     setCardAct(result.data.cardActs);
     setCardFile(result.data.cardFiles);
     setCardmember(result.data.cardMembers);
     setCardTodo(result.data.cardTodos);
+  };
+
+  
+  const changeTodoIsDone = async (todo_id, isdone) => {
+    const result = await axios.post('/card/todoIsDoneChange', {
+      todo_id: todo_id,
+      todo_isdone: isdone,
+    });
+  
   };
 
   console.log(cardTodo);
@@ -172,23 +181,46 @@ const WorkListCardModal = (props) => {
             <div>
               <div style={{ marginTop: 30, marginBottom: 20 }}>
                 <h5>
-                  <BsCheckBox /> TodoList
+                  <BsCheckBox/> TodoList
                 </h5>
               </div>
 
               {/* 입력된 todolist들 */}
               <div>
                 {cardTodo.map((value, key) => {
+                   console.log(value.todo_isdone )
                   return (
                     <div style={{ display: 'flex' }}>
                       <div style={{ padding: 5 }}>
-                        <Form.Check
-                          type="checkbox"
-                          id="autoSizingCheck"
-                          className="mb-2"
-                        />
+                      {value.todo_isdone === 1?
+                     
+                        //1이면 check됨 
+                        <div style={{display:"flex"}}>
+                          <Form.Check
+                            type="checkbox"
+                            id="autoSizingCheck" 
+                            className="mb-2"
+                            checked="checked"
+                            onClick={()=>changeTodoIsDone(value.todo_id,0)}
+                          
+                          />
+                          <div style={{marginLeft:5}}><del>{value.todo_name}</del></div>
+                        </div>
+                        :
+                        <div style={{display:"flex"}}>
+                          <Form.Check
+                            type="checkbox"
+                            id="autoSizingCheck" 
+                            className="mb-2"
+                          
+                            onClick={()=>changeTodoIsDone(value.todo_id,1)}
+                      
+                          />
+                           <div style={{marginLeft:5}}>{value.todo_name}</div>
+                        </div>
+                      }
                       </div>
-                      <div style={{ padding: 5 }}>{value.todo_name}</div>
+             
                       <Button onClick={handleShow} style={listButton}>
                         기간 설정
                       </Button>
@@ -232,11 +264,18 @@ const WorkListCardModal = (props) => {
               </h5>
 
               <Button
-                style={{ backgroundColor: '#7986CB',  border: '1px solid #7986CB', marginLeft: 377}}
+                style={{
+                  backgroundColor: '#7986CB',
+                  border: '1px solid #7986CB',
+                  marginLeft: 377,
+                }}
                 onClick={onClickShowLog}
               >
-                {showLog===true? <span>Show Log</span>: <span>Hide Log</span>}
-        
+                {showLog === true ? (
+                  <span>Hide Log</span>
+                ) : (
+                  <span>Show Log</span>
+                )}
               </Button>
             </div>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -247,80 +286,103 @@ const WorkListCardModal = (props) => {
                 >
                   {avatarIcon('user01@naver.com')}
                 </Avatar>
-
-                <Form.Control type="text" placeholder="Write a comment..." />
+                <div style={{ display: 'flex', marginTop:10}}>
+                  <Form.Control type="text" placeholder="Write a comment..." style={{width:445, marginRight:10, height:40}}/>
+                  <Button style={{ backgroundColor: '#7986CB', border: '1px solid #7986CB', height:40}}>입력</Button>
+                </div>
               </div>
             </Form.Group>
 
             <div style={{ height: 200 }}>
+              {showLog === true ? (
+                <>
+                  {cardAct.map((value, key) => {
+                    return (
+                      <>
+                        <div style={{ display: 'flex', marginBottom: 7 }}>
+                          <div>
+                            <Avatar
+                              onClick={(event) => {}}
+                              style={{ margin: '10px 10px 0px 5px' }}
+                            >
+                              {avatarIcon(value.user_id)}
+                            </Avatar>
+                          </div>
 
-              {showLog === true
-              ? 
-              <>
-              {cardAct.map((value, key) => {
-                return <>
-                <div style={{ display: 'flex', marginBottom:7 }}>
-                  <div>
-                    <Avatar
-                      onClick={(event) => {}}
-                      style={{ margin: '10px 10px 0px 5px' }}
-                    >
-                      {avatarIcon(value.user_id)}
-                    </Avatar>
-                  </div>
-
-                  <div>
-                    <div style={{ marginTop: 7, fontSize: '.9rem' }}>
-                      <b>{value.user_id}</b>{' '}
-                      <span style={{ fontSize: '0.8rem' }}>{value.created_date}</span>
-                    </div>
-                    <div style={{marginTop: 10, marginBottom:10}}>
-                      <span style={{border: '1px solid #ced4da', fontSize: '.95rem',padding: 5, borderRadius: 4}}>{value.act_desc}</span>
-                    </div>
-                    <div style={{ marginTop: 3, fontSize: '.8rem' }}>
-                      Edit Delete
-                    </div>
-                  </div>
-                </div>
+                          <div>
+                            <div style={{ marginTop: 7, fontSize: '.9rem' }}>
+                              <b>{value.user_id}</b>{' '}
+                              <span style={{ fontSize: '0.8rem' }}>
+                                {value.created_date}
+                              </span>
+                            </div>
+                            <div style={{ marginTop: 10, marginBottom: 10 }}>
+                              <span
+                                style={{
+                                  border: '1px solid #ced4da',
+                                  fontSize: '.95rem',
+                                  padding: 5,
+                                  borderRadius: 4,
+                                }}
+                              >
+                                {value.act_desc}
+                              </span>
+                            </div>
+                            <div style={{ marginTop: 3, fontSize: '.8rem' }}>
+                              Edit Delete
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    );
+                  })}
                 </>
-              })}
-              </>
-              
-              : 
-              <>
-               {cardAct.map((value, key) => {
-                return <>
-                <div style={{ display: 'flex', marginBottom:7 }}>
-                  <div>
-                    <Avatar
-                      onClick={(event) => {}}
-                      style={{ margin: '10px 10px 0px 5px' }}
-                    >
-                      {avatarIcon(value.user_id)}
-                    </Avatar>
-                  </div>
+              ) : (
+                <>
+                  {cardAct.map((value, key) => {
+                    if (value.islog == 0) {
+                      return (
+                        <>
+                          <div style={{ display: 'flex', marginBottom: 7 }}>
+                            <div>
+                              <Avatar
+                                onClick={(event) => {}}
+                                style={{ margin: '10px 10px 0px 5px' }}
+                              >
+                                {avatarIcon(value.user_id)}
+                              </Avatar>
+                            </div>
 
-                  <div>
-                    <div style={{ marginTop: 7, fontSize: '.9rem' }}>
-                      <b>{value.user_id}</b>{' '}
-                      <span style={{ fontSize: '0.8rem' }}>{value.created_date}</span>
-                    </div>
-                    <div style={{marginTop: 10, marginBottom:10}}>
-                      <span style={{border: '1px solid #ced4da', fontSize: '.95rem',padding: 5, borderRadius: 4}}>{value.act_desc}</span>
-                    </div>
-                    <div style={{ marginTop: 3, fontSize: '.8rem' }}>
-                      Edit Delete
-                    </div>
-                  </div>
-                </div>
+                            <div>
+                              <div style={{ marginTop: 7, fontSize: '.9rem' }}>
+                                <b>{value.user_id}</b>{' '}
+                                <span style={{ fontSize: '0.8rem' }}>
+                                  {value.created_date}
+                                </span>
+                              </div>
+                              <div style={{ marginTop: 10, marginBottom: 10 }}>
+                                <span
+                                  style={{
+                                    border: '1px solid #ced4da',
+                                    fontSize: '.95rem',
+                                    padding: 5,
+                                    borderRadius: 4,
+                                  }}
+                                >
+                                  {value.act_desc}
+                                </span>
+                              </div>
+                              <div style={{ marginTop: 3, fontSize: '.8rem' }}>
+                                Edit Delete
+                              </div>
+                            </div>
+                          </div>
+                        </>
+                      );
+                    }
+                  })}
                 </>
-              })}
-              </>
-              
-              }
-           
-
-
+              )}
             </div>
           </Col>
 
