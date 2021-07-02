@@ -31,7 +31,7 @@ const WorkSpaceArea = ({ areaType}) => {
     <div><FaUsers size="25" style={{marginRight:20}}/>Member Workspace</div>;
   };
   <FaUserCog/>
-
+  console.log('workspaces :',workspaces);
   return (
     <Card style={workspaceStyle.style}>
       <Card.Header>
@@ -49,7 +49,7 @@ const WorkSpaceArea = ({ areaType}) => {
                   workspace={workspace}
                   key={workspace.ws_id}
                   onToggle={e=>onToggle(workspace.ws_id)}
-         
+
                 />)
           }
         </Row>
