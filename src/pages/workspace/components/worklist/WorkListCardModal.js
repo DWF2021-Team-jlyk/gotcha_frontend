@@ -47,7 +47,7 @@ const WorkListCardModal = (props) => {
 
   const getDetail = async () => {
     const result = await axios.post('/card/cardDetail', {
-      card_id: props.card.CARD_ID,
+      card_id: props.cardId,
     });
 
     console.log(result.data);
@@ -115,7 +115,8 @@ const WorkListCardModal = (props) => {
                 {cardMember.map((value, key) => {
                   return (
                     <Avatar
-                      onClick={(event) => {}}
+                      onClick={(event) => {
+                      }}
                       style={{ margin: '10px 10px 0px 5px' }}
                     >
                       {avatarIcon(value.user_id)}
@@ -138,7 +139,7 @@ const WorkListCardModal = (props) => {
                 }}
               >
                 <Form.Control
-                  as="textarea"
+                  as='textarea'
                   value={cardDTO.card_name}
                   style={{ height: '100px', resize: 'none' }}
                   disabled
@@ -148,10 +149,10 @@ const WorkListCardModal = (props) => {
               // Description값 수정하기
               <div>
                 <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlTextarea1"
+                  className='mb-3'
+                  controlId='exampleForm.ControlTextarea1'
                 >
-                  <Form.Control as="textarea" style={{ height: '180px' }}>
+                  <Form.Control as='textarea' style={{ height: '180px' }}>
                     {cardDTO.card_name}
                   </Form.Control>
                   <div style={{ marginTop: 5, float: 'right' }}>
@@ -246,10 +247,10 @@ const WorkListCardModal = (props) => {
                     End date
                   </Modal.Body>
                   <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant='secondary' onClick={handleClose}>
                       Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant='primary' onClick={handleClose}>
                       Save
                     </Button>
                   </Modal.Footer>
@@ -278,10 +279,11 @@ const WorkListCardModal = (props) => {
                 )}
               </Button>
             </div>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className='mb-3' controlId='exampleForm.ControlInput1'>
               <div style={{ display: 'flex' }}>
                 <Avatar
-                  onClick={(event) => {}}
+                  onClick={(event) => {
+                  }}
                   style={{ margin: '10px 10px 0px 5px' }}
                 >
                   {avatarIcon('user01@naver.com')}
@@ -400,9 +402,9 @@ const WorkListCardModal = (props) => {
         </Row>
       </ModalBody>
       <ModalFooter>
-        <Button variant="primary">Save</Button>
-        <Button variant="danger">Delete</Button>
-        <Button variant="secondary">Cancel</Button>
+        <Button variant='primary'>Save</Button>
+        <Button variant='danger'>Delete</Button>
+        <Button variant='secondary'>Cancel</Button>
       </ModalFooter>
     </Modal>
   );

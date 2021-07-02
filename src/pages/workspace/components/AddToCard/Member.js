@@ -14,7 +14,7 @@ const buttonStyle = {
 }
 
 
-export default function AddMember() {
+export default function AddMember(props) {
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
