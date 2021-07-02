@@ -10,12 +10,12 @@ import {addList} from '../../lib/workListAPI';
 
 
 const listStyle = {
-  width: '100%',
-  height: '100%',
-  display: 'flex',
-  overflowX: 'auto',
-  margin: '10px',
-  whiteSpace: 'nowrap',
+    width: "97%",
+    height: 800,
+    display: "flex",
+    overflowX: "auto",
+    margin: "10px",
+    whiteSpace: "nowrap"
 };
 
 const WorkList = (props) => {

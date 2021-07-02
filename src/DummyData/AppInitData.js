@@ -1,4 +1,4 @@
-export default {
+const AppInitData = {
 
   workspaces: [
     {
@@ -145,3 +145,5 @@ export default {
     },
   ],
 };
+
+export default AppInitData;

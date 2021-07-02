@@ -65,7 +65,7 @@ function Join() {
     // submit
     const onSubmit = (data, e) => {
         e.preventDefault();
-        const url = '/main/joinCheck'
+        const url = '/user/joinCheck'
         const datas = {
             "user_id": data.email,
             "user_name": data.username,
@@ -179,7 +179,7 @@ function Join() {
                     </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
-                            <Link to="/" variant="body2">
+                            <Link to="/Login" variant="body2">
                                 Already have an account? Sign in
                             </Link>
                         </Grid>

@@ -12,12 +12,13 @@ import ModalHeader from 'react-bootstrap/ModalHeader';
 import React, { useEffect, useState } from 'react';
 import UserAvatar from './UserAvatar';
 import axios from 'axios';
-import AdminUserAvatar from './AdminUserAvatar';
 import LeaveModal from './LeaveModal';
 
 const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
 
   const [userList, setUserLists] = useState([]);
+
+  console.log(userList);
 
   const [leaveModal, setLeaveModal] = useState(false);
 
@@ -44,6 +45,8 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
       });
   }, []);
 
+  console.log(userList);
+
   return (
     <Modal
       size={'lg'}
@@ -53,7 +56,7 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
     >
       <ModalHeader style={{backgroundColor:"#F7F7F7"}}>
         <ModalTitle>
-          <span style={{ fontSize: '1.2rem' }}> {workspace.ws_name}</span>{' '}
+          <span style={{ fontSize: '1.2rem' }}> {workspace.WS_NAME}</span>{' '}
           환경설정
         </ModalTitle>
       </ModalHeader>
@@ -67,7 +70,7 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
               <Col sm={8}>
                 <Form.Control
                   type="text"
-                  defaultValue={workspace.ws_name}
+                  defaultValue={workspace.WS_NAME}
                   disabled={role !== 'ADMIN'}
                 />
               </Col>
@@ -101,10 +104,12 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
 
         <Row style={{ marginTop: 20 }}>
           {userList.map((value, index) => {
-            return <UserAvatar user_id={value} key={index}  role={role}/>;
+            return <UserAvatar user_id={value} key={index} role={role}/>;
           })}
         </Row>
+
       </ModalBody>
+
       <ModalFooter>
         <Button variant="danger" onClick={leaveModalShow}>
           Leave Workspace

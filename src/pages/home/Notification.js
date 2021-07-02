@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Alert, Card } from 'react-bootstrap';
+import React, { useEffect} from 'react';
+import { Card } from 'react-bootstrap';
 import './Cards.css';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';

@@ -1,5 +1,4 @@
-import * as api from '../lib/homeAPI';
-import AppInitData from '../DummyData/AppInitData';
+import * as api from '../lib/notiAPI';
 import createRequest from '../lib/createRequest';
 
 const ADD_NOTI = 'notification/ADD_NOTI';

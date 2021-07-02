@@ -1,5 +1,6 @@
 import Card from 'react-bootstrap/Card';
-import React, { useEffect } from 'react';
+import '../../css/WorkListCardList.css';
+import React, { useCallback, useRef, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import { AiOutlineDelete, AiOutlinePlusCircle } from 'react-icons/ai';
 import { AiFillCopy } from 'react-icons/ai';
@@ -34,11 +35,18 @@ const ListStyle = {
 };
 
 const WorkListCardList = (props) => {
-  const { ws_id, lists, list, listId, cards, setLists, setCards } = props;
-  console.log("WorkListCardList",cards)
-  console.log('WorkListCardList listId', listId);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const { ws_id,lists, list, listId, cards, setLists, setCards } = props;
+  const cardInputEl = useRef(null);
+  const [cardTitle, setCardTitle] = useState('');
+  const [showCardInput, setShowCardInput] = useState(false);
+  
   const dispatch = useDispatch();
+  
+  const onChange = useCallback(e => {
+    setCardTitle(e.target.value);
+  }, []);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -48,9 +56,7 @@ const WorkListCardList = (props) => {
     setAnchorEl(null);
   };
 
-  console.log("WorkListCardList ws_id",ws_id)
-
-  const onRemove = async () => {
+const onRemove = async () => {
     try {
       await deleteList(listId);
       dispatch(listDelete(listId));
@@ -60,27 +66,24 @@ const WorkListCardList = (props) => {
   };
 
   return (
-    <Card style={ListStyle}>
-      <Card.Header style={CardHeaderStyle}>
+    <Card className='ListStyle'>
+      <Card.Header className='CardHeaderStyle'>
         {' '}
         {list.list_name}{' '}
         <AiOutlinePlusCircle style={PlusIcon} onClick={handleClick} />
       </Card.Header>
       <Menu
-        id="simple-menu"
+        id='simple-menu'
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem
-        //   onClick={(e) => {
-        //     onRemove
-        //   }}
+        <MenuItem 
         onClick={(e)=>{
-            onRemove();
-            handleClose();
-        }}
+          onRemove();
+          handleClose();
+      }}
         >
           <AiFillDelete style={IconMargin} />
           List Delete
@@ -102,17 +105,39 @@ const WorkListCardList = (props) => {
           })
           .map((card) => {
             return (
-              <WorkListCard
-                cards={cards}
-                card={card}
-                //setCard={setCards}
-              />
+              <WorkListCard cards={cards} card={card} setCard={setCards} />
             );
           })}
+        {showCardInput &&
+        <div>
+
+          <input
+            value={cardTitle}
+            onChange={onChange}
+            ref={cardInputEl}
+            onBlur={e => {
+              e.target.value = '';
+              setShowCardInput(false);
+            }}
+            onfocusout={e => {
+              e.target.value = '';
+            }}
+          />
+          <Button>save</Button>
+        </div>
+        }
       </Card.Body>
 
       <Card.Footer>
-        <Button variant="contained" color="primary" onClick={(e) => {}}>
+        <Button
+          variant='contained'
+          color='primary'
+          onClick={async (e) => {
+            await setShowCardInput(true);
+            cardInputEl.current.focus();
+            // console.log(cardInputEl.current);
+          }}
+        >
           + Add Another Card
         </Button>
       </Card.Footer>

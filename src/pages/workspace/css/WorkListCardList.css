@@ -1,0 +1,18 @@
+.ListStyle{
+    float:left;
+    width:300px;
+    margin-right:10px;
+    overflow-y:scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+}
+
+.ListStyle::-webkit-scrollbar{
+    display: none;
+}
+
+.CardHeaderStyle{
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+}

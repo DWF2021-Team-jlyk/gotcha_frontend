@@ -16,6 +16,7 @@ export default function createRequest(type, request) {
       })
     }else{dispatch({type:SUCCESS})}
     } catch (e){
+      //실패하면
       dispatch({
         type:FAILURE,
         payload:e,

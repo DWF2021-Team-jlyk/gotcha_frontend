@@ -1,5 +1,5 @@
 import {handleAction} from 'redux-actions';
-import * as homeAPI from '../lib/homeAPI';
+import * as homeAPI from '../lib/workspaceAPI';
 
 const GET_NOTI = 'home/GET_NOTI';
 const GET_NOTI_SUCCESS = 'home/GET_NOTI_SUCCESS';

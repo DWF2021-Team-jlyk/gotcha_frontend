@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Sidebar from './layout/Sidebar';
 import Home from './pages/home';
-import Header from './layout/Header/header';
-// import Header from "./layout/Header";
+import Header from './layout/Header';
 import Login from './pages/user/Login';
 import { Route } from 'react-router-dom';
-import AppInitData from './DummyData/AppInitData';
 import loadable from '@loadable/component';
 import './layout/css/font.css';
 
@@ -30,17 +28,17 @@ const LoginStyle = {
 const side = {
   background: '#7986cb',
 };
-const horizontal = {
-  width: 1920,
-  overflowX: 'scroll',
-};
+// const horizontal = {
+//   width: 1920,
+//   overflowX: 'scroll',
+// };
 
 const App = () => {
   return (
     <div className='font'>
       {/*<Switch>*/}
-      <Route exact path='/Login' component={Login}>
-        <div style={LoginStyle}>
+      <Route exact path='/Login'>
+        <div>
           <Login />
         </div>
       </Route>

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React  from 'react';
 import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
 import {makeStyles} from "@material-ui/core/styles";
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Sidebar = () => {
     const classes = useStyles();
-    const workspaces = useSelector(state=>state.workspaces);
+    const workspaces = useSelector(state=>state.workspaces.workspaces);
     const fav = workspaces.filter(workspace=>workspace.is_fav);
     const admin = workspaces.filter(workspace=>workspace.role_id===1);
     const member = workspaces.filter(workspace=>workspace.role_id===2);

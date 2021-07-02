@@ -1,4 +1,4 @@
-export default {
+const WorkSpaceData = {
 
   ws_lists: [
     {
@@ -109,3 +109,4 @@ export default {
   ],
 
 };
+export default WorkSpaceData;
