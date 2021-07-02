@@ -25,7 +25,7 @@ const WorkList = (props) => {
   
   const dispatch = useDispatch();
 
-  const onAdd = async() => {
+  const onListAdd = async() => {
     try{
       const response = await addList(listName, ws_id);
       dispatch(listAdd(response.data));
@@ -42,7 +42,7 @@ const WorkList = (props) => {
         variant="contained"
         color="primary"
         onClick={(e) => {
-          onAdd(listName, ws_id);
+          onListAdd();
           listEL.current.value="";
         }}
       >
@@ -57,7 +57,6 @@ const WorkList = (props) => {
                 lists={lists}
                 list={list}
                 listId={list.list_id}
-                cards={cards}
                 ws_id={ws_id}
                 // setList={setLists}
               />

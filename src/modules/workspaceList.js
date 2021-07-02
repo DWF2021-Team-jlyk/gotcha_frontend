@@ -1,13 +1,13 @@
 import * as api from '../lib/workListAPI';
 import createRequest from '../lib/createRequest';
 
-const POST_LIST = 'workspace/POST_LIST';
-const POST_LIST_SUCCESS = 'workspace/POST_LIST_SUCCESS';
-const POST_LIST_FAILURE = 'workspace/POST_LIST_FAILURE';
+const POST_LIST = 'workspaceList/POST_LIST';
+const POST_LIST_SUCCESS = 'workspaceList/POST_LIST_SUCCESS';
+const POST_LIST_FAILURE = 'workspaceList/POST_LIST_FAILURE';
 
-const LIST_ADD = 'workspacelist/LIST_ADD';
-const LIST_UPDATE = 'workspacelist/LIST_UPDATE';
-const LIST_DELETE = "workspace/LIST_DELETE";
+const LIST_ADD = 'workspaceList/LIST_ADD';
+const LIST_UPDATE = 'workspaceList/LIST_UPDATE';
+const LIST_DELETE = "workspaceList/LIST_DELETE";
 
 export const postList = createRequest(POST_LIST, api.postList)
 export const listAdd = list =>({type:LIST_ADD, list});
