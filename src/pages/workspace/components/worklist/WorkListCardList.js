@@ -31,7 +31,7 @@ const WorkListCardList = (props) => {
   const [cardStartDate, setCardStartDate] = useState('');
   const [cardEndDate, setCardEndDate] = useState('');
   const [showCardInput, setShowCardInput] = useState(false);
-  const cards = useSelector(state=>state.workspaceCard.cards);
+  const cards = useSelector(state => state.workspaceCard.cards);
   const dispatch = useDispatch();
 
   const onChange = useCallback((e) => {
@@ -49,29 +49,28 @@ const WorkListCardList = (props) => {
   };
 
   const onListRemove = () => {
-      dispatch(listDelete({list_id:listId}));
+    dispatch(listDelete({ list_id: listId }));
   };
 
-  const onCardAdd = async() =>{
-    try{
-      const response = await addCard(cardTitle, cardDesc, listId, ws_id, cardStartDate, cardEndDate);
-      console.log(cardDesc);
-      dispatch(cardAdd(response.data));
-    }catch(e){
-      console.log(e);
-    }
+  const onCardAdd = () => {
+    dispatch(cardAdd({
+      list_id: listId,
+      ws_id: ws_id,
+      card_name: cardTitle,
+      card_desc: cardDesc,
+      card_start_date: cardStartDate,
+      card_end_date: cardEndDate,
+    }));
   };
-
-  console.log(cards);
   return (
-    <Card className="ListStyle">
-      <Card.Header className="CardHeaderStyle">
+    <Card className='ListStyle'>
+      <Card.Header className='CardHeaderStyle'>
         {' '}
         {list.list_name}{' '}
         <AiOutlinePlusCircle style={PlusIcon} onClick={handleClick} />
       </Card.Header>
       <Menu
-        id="simple-menu"
+        id='simple-menu'
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
@@ -96,7 +95,7 @@ const WorkListCardList = (props) => {
         </MenuItem>
       </Menu>
 
-      <Card.Body>
+      <Card.Body className='ListBodyStyle'>
         {cards
           .filter((card) => {
             return card.list_id === listId;
@@ -122,8 +121,15 @@ const WorkListCardList = (props) => {
             />
             <Button
               onClick={(e) => {
-                onCardAdd();
-                cardInputEl.current.value = "";
+                if (cardInputEl.current.value !== '') {
+                  onCardAdd();
+                  cardInputEl.current.value = '';
+                  setCardTitle('');
+                  setCardDesc('');
+                  setCardStartDate('');
+                  setCardEndDate('');
+                }
+                setShowCardInput(!showCardInput);
               }}
             >
               save
@@ -134,12 +140,11 @@ const WorkListCardList = (props) => {
 
       <Card.Footer>
         <Button
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
           onClick={async (e) => {
             await setShowCardInput(true);
             cardInputEl.current.focus();
-            // console.log(cardInputEl.current);
           }}
         >
           + Add Another Card

@@ -11,6 +11,16 @@
     display: none;
 }
 
+.ListBodyStyle{
+    height:675px;
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+}
+.ListBodyStyle::-webkit-scrollbar{
+    display: none;
+}
+
 .CardHeaderStyle{
     padding: 1rem;
     font-size: 1rem;
