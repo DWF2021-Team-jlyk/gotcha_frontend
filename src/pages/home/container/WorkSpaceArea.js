@@ -1,10 +1,8 @@
 import React, { useCallback, useEffect } from 'react';
 import { Card, Row } from 'react-bootstrap';
 import WorkSpaceCard from '../components/WorkSpaceCard';
-import { useDispatch, useSelector } from 'react-redux';
-import { postWorkspaces, updateWorkspace } from '../../../modules/workspaces';
+import { useSelector } from 'react-redux';
 import { FaUserCog, FaUsers } from 'react-icons/fa';
-import loading from '../../../modules/loading';
 
 const workspaceStyle = {
   style: {
@@ -17,12 +15,7 @@ const workspaceStyle = {
 };
 
 const WorkSpaceArea = ({ areaType }) => {
-  const workspaces = useSelector(state => state.workspaces.workspaces);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(postWorkspaces('user01@naver.com'));
-    // dispatch(loading['workspace/POST_WORKSPACES']);
-  }, []);
+  const workspaces = useSelector(state => state.workspace.workspaces);
 
   const getAreaTitle = (areaType) => {
     return areaType === 1 ?
