@@ -1,6 +1,7 @@
 import createRequest from '../lib/createRequest';
 import { postMember } from '../lib/cardDetailAPI';
 import { createAction, handleActions } from 'redux-actions';
+import produce from 'immer';
 
 const POST_CARD_MEMBER = 'cardDetail/POST_CARD_MEMBER';
 const POST_CARD_MEMBER_SUCCESS = 'cardDetail/POST_CARD_MEMBER_SUCCESS';
@@ -18,28 +19,19 @@ const initialState = {
 
 const cardMember = handleActions(
   {
-    [POST_CARD_MEMBER]: (state, action) => ({
-      ...state,
-      loading: {
-        ...state.loading,
-        POST_CARD_MEMBER: true,
-      },
-    }),
-    [POST_CARD_MEMBER_SUCCESS]: (state, action) => ({
-      ...state,
-      loading:{
-        ...state.loading,
-        POST_CARD_MEMBER: false,
-      },
-      member: action.payload,
-    }),
-    [POST_CARD_MEMBER_FAILURE]: (state, action) => ({
-      ...state,
-      loading:{
-        ...state.loading,
-        POST_CARD_MEMBER: false,
-      },
-    }),
+    [POST_CARD_MEMBER]: (state, action) =>
+      produce(state, draft=>{
+        draft.loading.POST_CARD_MEMBER = true;
+      }),
+    [POST_CARD_MEMBER_SUCCESS]: (state, action) =>
+      produce(state, draft=>{
+        draft.loading.POST_CARD_MEMBER = false;
+        draft.todos = action.payload;
+      }),
+    [POST_CARD_MEMBER_FAILURE]: (state, action) =>
+      produce(state, draft=>{
+        draft.loading.POST_CARD_MEMBER = false;
+      }),
   },
   initialState,
 );

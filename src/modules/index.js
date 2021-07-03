@@ -1,18 +1,25 @@
 import { combineReducers } from 'redux';
-import workspaces from './workspaces';
+import workspace from './workspace';
 import notification from './notification';
 import workspaceList from './workspaceList';
 import workspaceCard from './workspaceCard';
 import addList from './addList';
 import loading from './loading';
+import cardTodo from './cardTodo';
+import cardAct from './cardAct';
+import cardFile from './cardFile';
+import cardMember from './cardMember';
 
 const rootReducer = combineReducers({
-  workspaces,
+  workspace,
   notification,
   workspaceList,
   workspaceCard,
   addList,
-  loading,
+  cardTodo,
+  cardAct,
+  cardFile,
+  cardMember,
 });
 
 export default rootReducer;
