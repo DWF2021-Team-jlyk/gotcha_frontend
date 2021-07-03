@@ -14,6 +14,7 @@ export const cardAdd = card =>({type:CARD_ADD, card});
 export const cardUpdate = card =>({type:CARD_UPDATE, card});
 export const cardDelete = card_id =>({type:CARD_DELETE, card_id});
 
+
 const initialState = {
   loading: {
     POST_CARD: false,

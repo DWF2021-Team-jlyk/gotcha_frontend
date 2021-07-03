@@ -67,6 +67,8 @@ const WorkListCardList = (props) => {
     }
   };
 
+  console.log(JSON.stringify(cards));
+
   return (
     <Card className="ListStyle">
       <Card.Header className="CardHeaderStyle">
@@ -103,7 +105,7 @@ const WorkListCardList = (props) => {
       <Card.Body>
         {cards
           .filter((card) => {
-            return card.LIST_ID === listId;
+            return card.list_id === listId;
           })
           .map((card) => {
             return (
