@@ -1,20 +1,28 @@
 import * as api from '../lib/workListAPI';
 import createRequest from '../lib/createRequest';
+import { handleActions } from 'redux-actions';
+import produce from 'immer';
 
 const POST_LIST = 'workspaceList/POST_LIST';
 const POST_LIST_SUCCESS = 'workspaceList/POST_LIST_SUCCESS';
 const POST_LIST_FAILURE = 'workspaceList/POST_LIST_FAILURE';
 
 const LIST_ADD = 'workspaceList/LIST_ADD';
-const LIST_UPDATE = 'workspaceList/LIST_UPDATE';
-const LIST_DELETE = "workspaceList/LIST_DELETE";
+const LIST_ADD_SUCCESS = 'workspaceList/LIST_ADD_SUCCESS';
+const LIST_ADD_FAILURE = 'workspaceList/LIST_ADD_FAILURE';
 
-export const postList = createRequest(POST_LIST, api.postList)
-export const listAdd = list =>({type:LIST_ADD, list});
+const LIST_UPDATE = 'workspaceList/LIST_UPDATE'
+const LIST_UPDATE_SUCCESS = 'workspaceList/LIST_UPDATE_SUCCESS';
+const LIST_UPDATE_FAILURE = 'workspaceList/LIST_UPDATE_FAILURE';
 
-export const listUpdate = list => ({type:LIST_UPDATE,list});
-export const listDelete = list_id => ({type:LIST_DELETE, list_id});
-//export const addList = createRequest(ADD_LIST,api.addList);
+const LIST_DELETE = 'workspaceList/LIST_DELETE';
+const LIST_DELETE_SUCCESS = 'workspaceList/LIST_DELETE_SUCCESS';
+const LIST_DELETE_FAILURE = 'workspaceList/LIST_DELETE_FAILURE';
+
+export const postList = createRequest(POST_LIST, api.postList);
+export const listAdd = createRequest(LIST_ADD, api.addList);
+export const listUpdate = createRequest(LIST_UPDATE, api.updateList);
+export const listDelete = createRequest(LIST_DELETE, api.deleteList);
 
 
 const initialState = {
@@ -24,58 +32,68 @@ const initialState = {
   lists: [],
 };
 
-
-
-function workspaceList(state = initialState, action) {
-  switch (action.type) {
-    case POST_LIST:
-      return {
-        ...state,
-        loading: {
-          ...state.loading,
-          POST_LIST: true,
-        },
-      };
-    case POST_LIST_SUCCESS:
-      return {
-        ...state,
-        loading: {
-          ...state.loading,
-          POST_LIST: false,
-        },
-        lists: action.payload,
-      };
-    case POST_LIST_FAILURE:
-      return {
-        ...state,
-        loading: {
-          ...state.loading,
-          POST_LIST: false,
-        },
-      };
-      case LIST_ADD:
-        return {
-          ...state,
-          lists:state.lists.concat(action.list)
-        }
-      case LIST_UPDATE:
-        return{
-          ...state,
-          lists:state.lists.map(
-            list => list.list_id === action.list.list_id ?
-            {...action.list} : list
-          )
-
-        }
-      case LIST_DELETE :
-        return {
-          ...state,
-          lists: state.lists.filter(list=>list.list_id !== action.list_id)
-        }
- 
-      default:
-        return state;
-   }
-}
+const workspaceList = handleActions(
+  {
+    [POST_LIST]: (state, action) =>
+      produce(state, draft => {
+        draft.loading.POST_LIST = true;
+      }),
+    [POST_LIST_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        draft.loading.POST_LIST = false;
+        draft.lists = action.payload;
+      }),
+    [POST_LIST_FAILURE]: (state, action) =>
+      produce(state, draft => {
+        draft.loading.POST_LIST = false;
+      }),
+    [LIST_ADD]: (state, action) =>
+      produce(state, draft => {
+        draft.loading.POST_LIST = true;
+      }),
+    [LIST_ADD_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        draft.loading.POST_LIST = false;
+        draft.lists.push(action.payload);
+      }),
+    [LIST_ADD_FAILURE]: (state, action) =>
+      produce(state, draft => {
+        draft.loading.POST_LIST = false;
+      }),
+    [LIST_UPDATE]: (state, action) =>
+      produce(state, draft => {
+        draft.loading.POST_LIST = true;
+      }),
+    [LIST_UPDATE_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        draft.loading.POST_LIST = false;
+        const list = draft.lists
+          .find(list=> list.list_id === action.payload.list_id);
+        list.list_id = action.payload.list_id;
+        list.list_name = action.payload.list_name;
+        list.ws_id = action.payload.ws_id;
+      }),
+    [LIST_UPDATE_FAILURE]: (state, action) =>
+      produce(state, draft => {
+        draft.loading.POST_LIST = false;
+      }),
+    [LIST_DELETE]: (state, action) =>
+      produce(state, draft => {
+        draft.loading.POST_LIST = true;
+      }),
+    [LIST_DELETE_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        draft.loading.POST_LIST = false;
+        const index = draft.lists
+          .findIndex(list=>list.list_id === action.payload.list_id);
+        draft.lists.splice(index,1);
+      }),
+    [LIST_DELETE_FAILURE]: (state, action) =>
+      produce(state, draft => {
+        draft.loading.POST_LIST = false;
+      }),
+  },
+  initialState,
+);
 
 export default workspaceList;

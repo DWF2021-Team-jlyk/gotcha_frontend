@@ -1,49 +1,48 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import WorkSpaceData from '../../DummyData/WorkSpaceData';
 import { useDispatch, useSelector } from 'react-redux';
 import { listAdd } from '../../modules/workspaceList';
 import WorkListCardList from './components/worklist/WorkListCardList';
-import {addList} from '../../lib/workListAPI';
+import { addList } from '../../lib/workListAPI';
 //import {addList} from '../../modules/addlist';
 
 
 const listStyle = {
-    width: "97%",
-    height: 800,
-    display: "flex",
-    overflowX: "auto",
-    margin: "10px",
-    whiteSpace: "nowrap"
+  width: '97%',
+  height: 800,
+  display: 'flex',
+  overflowX: 'auto',
+  margin: '10px',
+  whiteSpace: 'nowrap',
 };
 
 const WorkList = (props) => {
   const { cards, lists, ws_id } = props;
   const [listName, setListName] = useState('');
   const listEL = useRef(null);
-  
+
   const dispatch = useDispatch();
 
-  const onListAdd = async() => {
-    try{
-      const response = await addList(listName, ws_id);
-      dispatch(listAdd(response.data));
-    }catch(e){
-      console.log(e);
-    }
-  };
+  const onListAdd = () => {
+    dispatch(listAdd({list_name:listName, ws_id:ws_id}));
+  }
 
 
   return (
     <>
-      <input onChange={(e) =>setListName(e.target.value)} ref={listEL} />
+      <input
+        onChange={(e) =>
+          setListName(e.target.value)
+        }
+        ref={listEL} />
       <Button
-        variant="contained"
-        color="primary"
+        variant='contained'
+        color='primary'
         onClick={(e) => {
           onListAdd();
-          listEL.current.value="";
+          listEL.current.value = '';
         }}
       >
         + Add Another List

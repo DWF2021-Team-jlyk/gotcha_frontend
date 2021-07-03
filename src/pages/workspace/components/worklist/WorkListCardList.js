@@ -48,13 +48,8 @@ const WorkListCardList = (props) => {
     setAnchorEl(null);
   };
 
-  const onListRemove = async () => {
-    try {
-      await deleteList(listId);
-      dispatch(listDelete(listId));
-    } catch (e) {
-      console.log(e);
-    }
+  const onListRemove = () => {
+      dispatch(listDelete({list_id:listId}));
   };
 
   const onCardAdd = async() =>{
@@ -67,8 +62,7 @@ const WorkListCardList = (props) => {
     }
   };
 
-  console.log(JSON.stringify(cards));
-
+  console.log(cards);
   return (
     <Card className="ListStyle">
       <Card.Header className="CardHeaderStyle">
