@@ -7,43 +7,32 @@ import {
   ModalFooter,
   Row,
 } from 'react-bootstrap';
-import ModalHeader from 'react-bootstrap/ModalHeader';
+
 import { FunctionalAddOn, ActionAddOn } from './ModalAddOn';
-import { TiDocument } from 'react-icons/ti';
-import axios from 'axios';
+
 import CardMember from '../CardModal/CardMember';
 import CardAct from '../CardModal/CardAct';
 import CardDesc from '../CardModal/CardDesc';
 import CardTodo from '../CardModal/CardTodo';
 import CardModalHeader from '../CardModal/CardModalHeader';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
+import { postCardMember } from '../../../../modules/cardMember';
 
 const WorkListCardModal = (props) => {
-  
-  
-  const [cardDTO, setCardDTO] = useState({});
-  const [cardAct, setCardAct] = useState([]);
-  const [cardFile, setCardFile] = useState({});
-  const [cardMember, setCardmember] = useState([]);
-  const [cardTodo, setCardTodo] = useState([]);
+  const {cardId} = props;
+  console.log({cardId})
+  const cardMembers = useSelector((state) => state.cardMember.members);
 
 
+  const dispatch = useDispatch();
+  
   useEffect(() => {
-    getDetail();
-  }, []);
+    dispatch(postCardMember(cardId));
 
-  const getDetail = async () => {
-    const result = await axios.post('/card/cardDetail', {
-      card_id: props.cardId
-    });
-    console.log(result.data);
+  }, [cardId]);
 
-    setCardDTO(result.data.cardDTO);
-    setCardAct(result.data.cardActs);
-    setCardFile(result.data.cardFiles);
-    setCardmember(result.data.cardMembers);
-    setCardTodo(result.data.cardTodos);
-  };
 
   return (
     <Modal
@@ -53,15 +42,15 @@ const WorkListCardModal = (props) => {
       style={{ marginTop: '100px' }}
     >
      
-      <CardModalHeader cardDTO={cardDTO}></CardModalHeader>
+      <CardModalHeader></CardModalHeader>
 
       <ModalBody>
         <Row>
           <Col sm={9}>
-            <CardMember cardMember = {cardMember}></CardMember>
-            <CardDesc cardDTO = {cardDTO}></CardDesc>
-            <CardTodo cardTodo={cardTodo}></CardTodo>
-            <CardAct cardAct = {cardAct}></CardAct>  
+            <CardMember cardMember = {cardMembers}></CardMember>
+            {/* <CardDesc ></CardDesc>
+            <CardTodo></CardTodo>
+            <CardAct ></CardAct>   */}
           </Col>
 
           <Col sm={3}>
@@ -77,7 +66,7 @@ const WorkListCardModal = (props) => {
           </Col>
         </Row>
       </ModalBody>
-
+           
       <ModalFooter>
         <Button variant='primary'>Save</Button>
         <Button variant='danger'>Delete</Button>
@@ -85,6 +74,8 @@ const WorkListCardModal = (props) => {
       </ModalFooter>
     </Modal>
   );
+
+  
 };
 
 export default WorkListCardModal;

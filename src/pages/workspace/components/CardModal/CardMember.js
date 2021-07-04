@@ -14,13 +14,14 @@ const avatarIcon = (id) => {
 
 
 const CardMember = ({cardMember}) => {
-  return (
+ return (
     <div>
       <h5>
         {' '}
         <AiOutlineUser /> Members{' '}
       </h5>
       <div style={{ display: 'flex' }}>
+
         {cardMember?.map((value, key) => {
           return (
             <Avatar
@@ -28,6 +29,7 @@ const CardMember = ({cardMember}) => {
               }}
               style={{ margin: '10px 10px 0px 5px' }}
             >
+        
               {avatarIcon(value.user_id)}
             </Avatar>
           );

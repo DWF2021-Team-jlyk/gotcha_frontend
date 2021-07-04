@@ -24,6 +24,7 @@ const IconMargin = {
 };
 
 const WorkListCardList = (props) => {
+  console.log(props)
   const { ws_id, list, listId } = props;
   const cardInputEl = useRef(null);
   const [cardTitle, setCardTitle] = useState('');
@@ -32,6 +33,7 @@ const WorkListCardList = (props) => {
   const [cardEndDate, setCardEndDate] = useState('');
   const [showCardInput, setShowCardInput] = useState(false);
   const cards = useSelector(state=>state.workspaceCard.cards);
+  console.log("cards:",cards)
   const dispatch = useDispatch();
 
   const onChange = useCallback((e) => {
@@ -103,7 +105,7 @@ const WorkListCardList = (props) => {
       <Card.Body>
         {cards
           .filter((card) => {
-            return card.LIST_ID === listId;
+            return card.list_id === listId;
           })
           .map((card) => {
             return (

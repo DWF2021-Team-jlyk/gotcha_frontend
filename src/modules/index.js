@@ -3,6 +3,7 @@ import workspaces from './workspaces';
 import notification from './notification';
 import workspaceList from './workspaceList';
 import workspaceCard from './workspaceCard';
+import cardMember from './cardMember'
 import addList from './addList';
 import loading from './loading';
 
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   workspaceCard,
   addList,
   loading,
+  cardMember
 });
 
 export default rootReducer;
