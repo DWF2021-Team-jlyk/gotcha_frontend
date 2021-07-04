@@ -18,6 +18,8 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
 
   const [userList, setUserLists] = useState([]);
 
+  console.log(userList);
+
   const [leaveModal, setLeaveModal] = useState(false);
 
   const leaveModalClose = () => setLeaveModal(false);
@@ -54,7 +56,7 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
     >
       <ModalHeader style={{backgroundColor:"#F7F7F7"}}>
         <ModalTitle>
-          <span style={{ fontSize: '1.2rem' }}> {workspace.ws_name}</span>{' '}
+          <span style={{ fontSize: '1.2rem' }}> {workspace.WS_NAME}</span>{' '}
           환경설정
         </ModalTitle>
       </ModalHeader>
@@ -68,7 +70,7 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
               <Col sm={8}>
                 <Form.Control
                   type="text"
-                  defaultValue={workspace.ws_name}
+                  defaultValue={workspace.WS_NAME}
                   disabled={role !== 'ADMIN'}
                 />
               </Col>
@@ -102,10 +104,12 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
 
         <Row style={{ marginTop: 20 }}>
           {userList.map((value, index) => {
-            return <UserAvatar user_id={value} key={index}  role={role}/>;
+            return <UserAvatar user_id={value} key={index} role={role}/>;
           })}
         </Row>
+
       </ModalBody>
+
       <ModalFooter>
         <Button variant="danger" onClick={leaveModalShow}>
           Leave Workspace

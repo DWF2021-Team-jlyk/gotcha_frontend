@@ -30,6 +30,7 @@ const initialState = {
 
 function notification(state = initialState, action) {
   switch (action.type) {
+
     case ADD_NOTI :
       return {
         ...state,
@@ -38,11 +39,13 @@ function notification(state = initialState, action) {
           action.noti,
         ]
       };
+
     case DELETE_NOTI:
       return {
         ...state,
         noti: state.noti.filter(noti=>noti.noti_id !== action.noti_id)
       };
+
     case CHANGE_NOTI_READ:
       return {
         ...state,
@@ -50,6 +53,7 @@ function notification(state = initialState, action) {
         noti=>noti.noti_id === action.noti_id ?
           {...noti, noti_read : !noti.noti_read} : noti
       )};
+
     case POST_NOTI:
       return {
         ...state,
@@ -58,6 +62,7 @@ function notification(state = initialState, action) {
           POST_NOTI: true,
         },
       }
+
     case POST_NOTI_SUCCESS:
       return {
         ...state,
@@ -67,6 +72,7 @@ function notification(state = initialState, action) {
         },
         noti:action.payload,
       }
+
     case POST_NOTI_FAILURE:
       return {
         ...state,

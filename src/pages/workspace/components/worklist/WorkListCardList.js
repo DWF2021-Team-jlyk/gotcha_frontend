@@ -1,97 +1,155 @@
-import Card from "react-bootstrap/Card";
-import React from "react";
-import Button from "@material-ui/core/Button";
-import {AiOutlineDelete, AiOutlinePlusCircle} from "react-icons/ai";
-import {AiFillCopy} from "react-icons/ai";
-import {AiFillDelete} from "react-icons/ai";
+import Card from 'react-bootstrap/Card';
+import '../../css/WorkListCardList.css';
+import React, { useCallback, useRef, useState } from 'react';
+import Button from '@material-ui/core/Button';
+import { AiOutlineDelete, AiOutlinePlusCircle } from 'react-icons/ai';
+import { AiFillCopy } from 'react-icons/ai';
+import { AiFillDelete } from 'react-icons/ai';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import WorkListCard from "./WorkListCard";
-
-
-const CardHeaderStyle = {
-    padding: "1rem",
-    fontSize: "1rem",
-    fontWeight: "bold",
-};
+import WorkListCard from './WorkListCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { listDelete } from '../../../../modules/workspaceList';
+import { cardAdd } from '../../../../modules/workspaceCard';
 
 const PlusIcon = {
-    fontSize: "1.5rem",
-    float: "right",
+  fontSize: '1.5rem',
+  float: 'right',
 };
 
 const IconMargin = {
-    marginRight: 10
-}
-
-const ListStyle = {
-    float: "left",
-    width: "300px",
-    marginRight: 10,
-    overflowY: "scroll",
-}
-
+  marginRight: 10,
+};
 
 const WorkListCardList = (props) => {
-    const {lists, list,listId, cards, setLists, setCards} = props;
-    //console.log("WorkListCardList",cards)
-    console.log("WorkListCardList listId",listId)
-    const [anchorEl, setAnchorEl] = React.useState(null);
+  const { ws_id, list, listId } = props;
+  const cardInputEl = useRef(null);
+  const [cardTitle, setCardTitle] = useState('');
+  const [cardDesc, setCardDesc] = useState('');
+  const [cardStartDate, setCardStartDate] = useState('');
+  const [cardEndDate, setCardEndDate] = useState('');
+  const [showCardInput, setShowCardInput] = useState(false);
+  const cards = useSelector(state => state.workspaceCard.cards);
+  const dispatch = useDispatch();
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+  const onChange = useCallback((e) => {
+    setCardTitle(e.target.value);
+  }, []);
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+  const [anchorEl, setAnchorEl] = useState(null);
 
-    return (
-        <Card style={ListStyle}>
-            <Card.Header style={CardHeaderStyle}>
-                {" "}{list.list_name}{" "}
-                <AiOutlinePlusCircle style={PlusIcon} onClick={handleClick}/>
-            </Card.Header>
-            <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-            >
-                <MenuItem onClick={handleClose}>
-                    <AiFillDelete style={IconMargin}/>List Delete
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
-                    <AiFillCopy style={IconMargin}/>List Copy
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
-                    <AiOutlineDelete style={IconMargin}/>Delete All Cards
-                </MenuItem>
-            </Menu>
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-            <Card.Body>
-                {cards
-                    .filter(card=>{return card.LIST_ID===listId})
-                    .map(card=>{
-                        return <WorkListCard
-                            cards={cards}
-                            card={card}
-                            setCard={setCards}
-                        />
-                    })
-                    
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const onListRemove = () => {
+    dispatch(listDelete({ list_id: listId }));
+  };
+
+  const onCardAdd = () => {
+    dispatch(cardAdd({
+      list_id: listId,
+      ws_id: ws_id,
+      card_name: cardTitle,
+      card_desc: cardDesc,
+      card_start_date: cardStartDate,
+      card_end_date: cardEndDate,
+    }));
+  };
+  return (
+    <Card className='ListStyle'>
+      <Card.Header className='CardHeaderStyle'>
+        {' '}
+        {list.list_name}{' '}
+        <AiOutlinePlusCircle style={PlusIcon} onClick={handleClick} />
+      </Card.Header>
+      <Menu
+        id='simple-menu'
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem
+          onClick={(e) => {
+            onListRemove();
+            handleClose();
+          }}
+        >
+          <AiFillDelete style={IconMargin} />
+          List Delete
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <AiFillCopy style={IconMargin} />
+          List Copy
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <AiOutlineDelete style={IconMargin} />
+          Delete All Cards
+        </MenuItem>
+      </Menu>
+
+      <Card.Body className='ListBodyStyle'>
+        {cards
+          .filter((card) => {
+            return card.list_id === listId;
+          })
+          .map((card) => {
+            return (
+              <WorkListCard key={card.card_id} card={card} />
+            );
+          })}
+        {showCardInput && (
+          <div>
+            <input
+              //value={cardTitle}
+              onChange={(e) => setCardTitle(e.target.value)}
+              ref={cardInputEl}
+              // onBlur={(e) => {
+              //   e.target.value = '';
+              //   setShowCardInput(false);
+              // }}
+              // onfocusout={(e) => {
+              //   e.target.value = '';
+              // }}
+            />
+            <Button
+              onClick={(e) => {
+                if (cardInputEl.current.value !== '') {
+                  onCardAdd();
+                  cardInputEl.current.value = '';
+                  setCardTitle('');
+                  setCardDesc('');
+                  setCardStartDate('');
+                  setCardEndDate('');
                 }
-            </Card.Body>
+                setShowCardInput(!showCardInput);
+              }}
+            >
+              save
+            </Button>
+          </div>
+        )}
+      </Card.Body>
 
-            <Card.Footer>
-                <Button variant="contained" color="primary" onClick={(e) => {
-                }}>
-                    + Add Another Card
-                </Button>
-            </Card.Footer>
-        </Card>
-    );
+      <Card.Footer>
+        <Button
+          variant='contained'
+          color='primary'
+          onClick={async (e) => {
+            await setShowCardInput(true);
+            cardInputEl.current.focus();
+          }}
+        >
+          + Add Another Card
+        </Button>
+      </Card.Footer>
+    </Card>
+  );
 };
 
 export default WorkListCardList;

@@ -1,11 +1,11 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { IoIosNotificationsOutline } from 'react-icons/all';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { changeNotiRead } from '../../modules/notification';
+import { changeNotiRead, postNoti } from '../../modules/notification';
 import { ListItem } from '@material-ui/core';
 
 const StyledMenu = withStyles({
@@ -61,6 +61,10 @@ const NotiButton = () => {
     setAnchorEl(null);
   };
 
+  useEffect(()=>{
+    dispatch(postNoti("user01@naver.com"));
+  }, []);
+
   return (
     <>
       <IoIosNotificationsOutline
@@ -89,13 +93,6 @@ const NotiButton = () => {
                 >
                   {`notiSpace: ${noti.workspaceName} notiType: ${noti.type}`}
                 </ListItem>
-                  {/*<ListItemText*/}
-                  {/*  primary={`notiSpace: ${noti.workspaceName} notiType: ${noti.type}`}*/}
-                  {/*  onClick={e=>{*/}
-                  {/*    onClick(noti);*/}
-                  {/*    handleClose();*/}
-                  {/*  }}*/}
-                  {/*/>*/}
               </StyledMenuItem>;
             })
         }
