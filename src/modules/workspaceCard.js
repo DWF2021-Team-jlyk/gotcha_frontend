@@ -25,67 +25,30 @@ export const cardUpdate = createRequest(CARD_UPDATE, api.updateCard);
 export const cardDelete = createRequest(CARD_DELETE, api.deleteCard);
 
 const initialState = {
-  loading: {
-    POST_CARD: false,
-  },
   cards: [],
 };
 
 const workspaceCard = handleActions(
   {
-    [POST_CARD]: (state, action) =>
-      produce(state, draft => {
-        draft.loading.POST_CARD = true;
-      }),
     [POST_CARD_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.loading.POST_CARD = false;
         draft.cards = action.payload;
-      }),
-    [POST_CARD_FAILURE]: (state, action) =>
-      produce(state, draft => {
-        draft.loading.POST_CARD = false;
-      }),//이까진 성공
-    [CARD_ADD]: (state, action) =>
-      produce(state, draft => {
-        draft.loading.POST_CARD = true;
       }),
     [CARD_ADD_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.loading.POST_CARD = false;
         draft.cards.push(action.payload);
       }),
-    [CARD_ADD_FAILURE]: (state, action) =>
-      produce(state, draft => {
-        draft.loading.POST_CARD = false;
-      }),
-    [CARD_UPDATE]: (state, action) =>
-      produce(state, draft => {
-        draft.loading.POST_CARD = true;
-      }),
+
     [CARD_UPDATE_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.loading.POST_CARD = false;
         draft.cards.find(card=> card.card_id === action.payload.card_id);
       }),
-    [CARD_UPDATE_FAILURE]: (state, action) =>
-      produce(state, draft => {
-        draft.loading.POST_CARD = false;
-      }),
-    [CARD_DELETE]: (state, action) =>
-      produce(state, draft => {
-        draft.loading.POST_CARD = true;
-      }),
+
     [CARD_DELETE_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.loading.POST_CARD = false;
         const index = draft.cards
           .findIndex(card=>card.card_id === action.payload.card_id);
         draft.cards.splice(index,1);
-      }),
-    [CARD_DELETE_FAILURE]: (state, action) =>
-      produce(state, draft => {
-        draft.loading.POST_CARD = false;
       }),
   },
   initialState,

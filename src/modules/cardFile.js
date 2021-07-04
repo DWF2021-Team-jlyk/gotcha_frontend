@@ -10,26 +10,15 @@ const POST_CARD_FILE_FAILURE = 'cardDetail/POST_CARD_FILE_FAILURE';
 export const postCardFile = createRequest(POST_CARD_FILE, postFile);
 
 const initialState = {
-  loading : {
-    POST_CARD_FILE:false,
-  },
-  todos : [],
+  files : [],
 }
 
 const cardFile = handleActions(
   {
-    [POST_CARD_FILE]: (state, action) =>
-      produce(state, draft=>{
-        draft.loading.POST_CARD_FILE = true;
-      }),
     [POST_CARD_FILE_SUCCESS]: (state, action) =>
       produce(state, draft=>{
         draft.loading.POST_CARD_FILE = false;
         draft.todos = action.payload;
-      }),
-    [POST_CARD_FILE_FAILURE]: (state, action) =>
-      produce(state, draft=>{
-        draft.loading.POST_CARD_FILE = false;
       }),
   },
   initialState,

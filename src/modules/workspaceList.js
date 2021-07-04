@@ -11,7 +11,7 @@ const LIST_ADD = 'workspaceList/LIST_ADD';
 const LIST_ADD_SUCCESS = 'workspaceList/LIST_ADD_SUCCESS';
 const LIST_ADD_FAILURE = 'workspaceList/LIST_ADD_FAILURE';
 
-const LIST_UPDATE = 'workspaceList/LIST_UPDATE'
+const LIST_UPDATE = 'workspaceList/LIST_UPDATE';
 const LIST_UPDATE_SUCCESS = 'workspaceList/LIST_UPDATE_SUCCESS';
 const LIST_UPDATE_FAILURE = 'workspaceList/LIST_UPDATE_FAILURE';
 
@@ -26,71 +26,46 @@ export const listDelete = createRequest(LIST_DELETE, api.deleteList);
 
 
 const initialState = {
-  loading: {
-    POST_LIST: false,
-  },
   lists: [],
 };
 
 const workspaceList = handleActions(
   {
-    [POST_LIST]: (state, action) =>
-      produce(state, draft => {
-        draft.loading.POST_LIST = true;
-      }),
     [POST_LIST_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.loading.POST_LIST = false;
+        action.payload.sort((list1, list2)=>{
+          if(list1.position > list2.position)
+            return 1;
+          else
+            return -1;
+        })
         draft.lists = action.payload;
-      }),
-    [POST_LIST_FAILURE]: (state, action) =>
-      produce(state, draft => {
-        draft.loading.POST_LIST = false;
-      }),
-    [LIST_ADD]: (state, action) =>
-      produce(state, draft => {
-        draft.loading.POST_LIST = true;
       }),
     [LIST_ADD_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.loading.POST_LIST = false;
         draft.lists.push(action.payload);
-      }),
-    [LIST_ADD_FAILURE]: (state, action) =>
-      produce(state, draft => {
-        draft.loading.POST_LIST = false;
-      }),
-    [LIST_UPDATE]: (state, action) =>
-      produce(state, draft => {
-        draft.loading.POST_LIST = true;
       }),
     [LIST_UPDATE_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.loading.POST_LIST = false;
         const list = draft.lists
-          .find(list=> list.list_id === action.payload.list_id);
+          .find(list => list.list_id === action.payload.list_id);
         list.list_id = action.payload.list_id;
+        list.position = action.payload.position;
         list.list_name = action.payload.list_name;
         list.ws_id = action.payload.ws_id;
-      }),
-    [LIST_UPDATE_FAILURE]: (state, action) =>
-      produce(state, draft => {
-        draft.loading.POST_LIST = false;
-      }),
-    [LIST_DELETE]: (state, action) =>
-      produce(state, draft => {
-        draft.loading.POST_LIST = true;
+
+        draft.sort((list1, list2)=>{
+          if(list1.position > list2.position)
+            return 1;
+          else
+            return -1;
+        })
       }),
     [LIST_DELETE_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.loading.POST_LIST = false;
         const index = draft.lists
-          .findIndex(list=>list.list_id === action.payload.list_id);
-        draft.lists.splice(index,1);
-      }),
-    [LIST_DELETE_FAILURE]: (state, action) =>
-      produce(state, draft => {
-        draft.loading.POST_LIST = false;
+          .findIndex(list => list.list_id === action.payload.list_id);
+        draft.lists.splice(index, 1);
       }),
   },
   initialState,

@@ -5,7 +5,7 @@ export default function createRequest(type, request) {
   const FAILURE = `${type}_FAILURE`;
   return (params) => async dispatch => {
     dispatch({ type });
-    // dispatch(startLoading(type));
+    dispatch(startLoading(type));
     // 요청을 보내고
     try {
       const response = await request(params);
@@ -15,6 +15,7 @@ export default function createRequest(type, request) {
           type: SUCCESS,
           payload: response.data,
         });
+        dispatch(finishLoading(type));
       } else {
         throw 'response undefined error';
       }
@@ -25,7 +26,7 @@ export default function createRequest(type, request) {
         payload: e,
         error: true,
       });
-      // dispatch(startLoading(type));
+      dispatch(startLoading(type));
       throw e;
     }
   };

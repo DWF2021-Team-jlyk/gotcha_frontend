@@ -9,9 +9,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import WorkListCard from './WorkListCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteList } from '../../../../lib/workListAPI';
 import { listDelete } from '../../../../modules/workspaceList';
-import { addCard } from '../../../../lib/workListAPI';
 import { cardAdd } from '../../../../modules/workspaceCard';
 
 const PlusIcon = {
@@ -38,7 +36,7 @@ const WorkListCardList = (props) => {
     setCardTitle(e.target.value);
   }, []);
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -102,7 +100,7 @@ const WorkListCardList = (props) => {
           })
           .map((card) => {
             return (
-              <WorkListCard card={card} />
+              <WorkListCard key={card.card_id} card={card} />
             );
           })}
         {showCardInput && (

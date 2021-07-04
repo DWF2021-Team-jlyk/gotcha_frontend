@@ -10,26 +10,15 @@ const POST_CARD_TODO_FAILURE = 'cardDetail/POST_CARD_TODO_FAILURE';
 export const postCardTodo = createRequest(POST_CARD_TODO, postTodo);
 
 const initialState = {
-  loading : {
-    POST_CARD_TODO:false,
-  },
   todos : [],
 }
 
 const cardTodo = handleActions(
   {
-    [POST_CARD_TODO]: (state, action) =>
-      produce(state, draft=>{
-        draft.loading.POST_CARD_TODO = true;
-      }),
     [POST_CARD_TODO_SUCCESS]: (state, action) =>
       produce(state, draft=>{
         draft.loading.POST_CARD_TODO = false;
         draft.todos = action.payload;
-      }),
-    [POST_CARD_TODO_FAILURE]: (state, action) =>
-      produce(state, draft=>{
-        draft.loading.POST_CARD_TODO = false;
       }),
   },
   initialState,

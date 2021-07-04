@@ -10,26 +10,15 @@ const POST_CARD_ACT_FAILURE = 'cardDetail/POST_CARD_ACT_FAILURE';
 export const postCardAct = createRequest(POST_CARD_ACT, postAct);
 
 const initialState = {
-  loading :{
-    POST_CARD_ACT:false,
-  },
   acts : [],
 }
 
 const cardAct = handleActions(
   {
-    [POST_CARD_ACT]: (state, action) =>
-      produce(state, draft=>{
-        draft.loading.POST_CARD_ACT = true;
-      }),
     [POST_CARD_ACT_SUCCESS]: (state, action) =>
       produce(state, draft=>{
         draft.loading.POST_CARD_ACT = false;
         draft.todos = action.payload;
-      }),
-    [POST_CARD_ACT_FAILURE]: (state, action) =>
-      produce(state, draft=>{
-        draft.loading.POST_CARD_ACT = false;
       }),
   },
   initialState,

@@ -22,9 +22,6 @@ export const changeWorkspaceFav =
 export const postWorkspaces = createRequest(POST_WORKSPACES, api.postGetWorkspaces);
 
 const initialState = {
-  loading: {
-    POST_WORKSPACES: false,
-  },
   workspaces: [],
 };
 
@@ -46,21 +43,9 @@ const workspace = handleActions(
         const index = draft.workspaces.findIndex(ws => ws.ws_id === ws_id);
         draft.workspaces.splice(index, 1);
       }),
-
-    [POST_WORKSPACES]: (state, action) =>
-      produce(state, draft => {
-        draft.loading.POST_WORKSPACES = true;
-      }),
-
     [POST_WORKSPACES_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.loading.POST_WORKSPACES = false;
         draft.workspaces = action.payload;
-      }),
-
-    [POST_WORKSPACES_FAILURE]: (state, action) =>
-      produce(state, draft => {
-        draft.loading.POST_WORKSPACES = false;
       }),
   },
   initialState,

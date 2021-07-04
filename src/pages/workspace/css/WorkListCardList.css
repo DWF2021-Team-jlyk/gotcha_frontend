@@ -12,7 +12,7 @@
 }
 
 .ListBodyStyle{
-    height:675px;
+    max-height:675px;
     overflow-y: scroll;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;

@@ -11,26 +11,15 @@ export const postCardMember = createRequest(POST_CARD_MEMBER, postMember);
 
 
 const initialState = {
-  loading: {
-    POST_CARD_MEMBER: false,
-  },
   members: [],
 };
 
 const cardMember = handleActions(
   {
-    [POST_CARD_MEMBER]: (state, action) =>
-      produce(state, draft=>{
-        draft.loading.POST_CARD_MEMBER = true;
-      }),
     [POST_CARD_MEMBER_SUCCESS]: (state, action) =>
       produce(state, draft=>{
         draft.loading.POST_CARD_MEMBER = false;
         draft.todos = action.payload;
-      }),
-    [POST_CARD_MEMBER_FAILURE]: (state, action) =>
-      produce(state, draft=>{
-        draft.loading.POST_CARD_MEMBER = false;
       }),
   },
   initialState,

@@ -22,12 +22,18 @@ const WorkList = (props) => {
   const { cards, lists, ws_id } = props;
   const [listName, setListName] = useState('');
   const listEL = useRef(null);
+  const [nextPosition, setNextPosition] = useState(0);
 
   const dispatch = useDispatch();
 
   const onListAdd = () => {
-    dispatch(listAdd({list_name:listName, ws_id:ws_id}));
+    dispatch(listAdd({list_name:listName, ws_id:ws_id, position:nextPosition}));
   }
+
+  useEffect(()=>{
+    setNextPosition(Math.max(lists.map(list=>list.position))+1);
+    console.log(nextPosition);
+  },[lists]);
 
 
   return (
@@ -36,7 +42,8 @@ const WorkList = (props) => {
         onChange={(e) =>
           setListName(e.target.value)
         }
-        ref={listEL} />
+        ref={listEL}
+      />
       <Button
         variant='contained'
         color='primary'
@@ -49,10 +56,12 @@ const WorkList = (props) => {
       </Button>
 
       <div style={listStyle}>
-        {lists.map((list, index) => {
+        {lists
+          .map((list, index) => {
           return (
             <div key={index}>
               <WorkListCardList
+                key={index}
                 lists={lists}
                 list={list}
                 listId={list.list_id}
