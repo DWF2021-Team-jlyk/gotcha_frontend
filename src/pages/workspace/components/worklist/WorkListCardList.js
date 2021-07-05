@@ -1,6 +1,6 @@
 import Card from 'react-bootstrap/Card';
 import '../../css/WorkListCardList.css';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import { AiOutlineDelete, AiOutlinePlusCircle } from 'react-icons/ai';
 import { AiFillCopy } from 'react-icons/ai';
@@ -11,6 +11,7 @@ import WorkListCard from './WorkListCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { listDelete } from '../../../../modules/workspaceList';
 import { cardAdd } from '../../../../modules/workspaceCard';
+import { AiFillEdit } from 'react-icons/all';
 
 const PlusIcon = {
   fontSize: '1.5rem',
@@ -24,11 +25,14 @@ const IconMargin = {
 const WorkListCardList = (props) => {
   const { ws_id, list, listId } = props;
   const cardInputEl = useRef(null);
+  const listEditEl = useRef(null);
   const [cardTitle, setCardTitle] = useState('');
   const [cardDesc, setCardDesc] = useState('');
   const [cardStartDate, setCardStartDate] = useState('');
   const [cardEndDate, setCardEndDate] = useState('');
+  const [position, setPosition] = useState(0);
   const [showCardInput, setShowCardInput] = useState(false);
+  const [editList, setEditList] = useState(false);
   const cards = useSelector(state => state.workspaceCard.cards);
   const dispatch = useDispatch();
 
@@ -58,14 +62,36 @@ const WorkListCardList = (props) => {
       card_desc: cardDesc,
       card_start_date: cardStartDate,
       card_end_date: cardEndDate,
+      position: position,
     }));
   };
+
+  useEffect(() => {
+    setPosition(
+      cards.filter(
+        card=>card.list_id === listId
+      ).length
+    )
+  }, [cards]);
+
+  console.log(position);
   return (
     <Card className='ListStyle'>
-      <Card.Header className='CardHeaderStyle'>
-        {' '}
-        {list.list_name}{' '}
+      <Card.Header
+        className='CardHeaderStyle'
+        contentEditable={editList}
+      >
+        {' '}{list.list_name}{' '}
         <AiOutlinePlusCircle style={PlusIcon} onClick={handleClick} />
+        <AiFillEdit
+          style={{
+            float: 'right',
+            fontSize: '1.5rem',
+          }}
+          onClick={() => {
+            setEditList(true);
+          }}
+        />
       </Card.Header>
       <Menu
         id='simple-menu'

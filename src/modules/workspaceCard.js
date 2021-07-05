@@ -33,6 +33,11 @@ const workspaceCard = handleActions(
     [POST_CARD_SUCCESS]: (state, action) =>
       produce(state, draft => {
         draft.cards = action.payload;
+        draft.cards.sort((card1, card2)=>{
+          if(card1.card_id > card2.card_id)
+            return 1;
+          else return -1;
+        })
       }),
     [CARD_ADD_SUCCESS]: (state, action) =>
       produce(state, draft => {
@@ -41,7 +46,8 @@ const workspaceCard = handleActions(
 
     [CARD_UPDATE_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.cards.find(card=> card.card_id === action.payload.card_id);
+        const index = draft.cards.findIndex(card=>card.card_id === action.payload.card_id);
+        draft.cards.splice(index, 1, action.payload);
       }),
 
     [CARD_DELETE_SUCCESS]: (state, action) =>

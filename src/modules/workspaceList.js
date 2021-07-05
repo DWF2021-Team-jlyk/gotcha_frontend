@@ -44,15 +44,19 @@ const workspaceList = handleActions(
     [LIST_ADD_SUCCESS]: (state, action) =>
       produce(state, draft => {
         draft.lists.push(action.payload);
+        draft.lists.sort((list1, list2)=>{
+          if(list1.position > list2.position)
+            return 1;
+          else
+            return -1;
+        });
       }),
     [LIST_UPDATE_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        const list = draft.lists
-          .find(list => list.list_id === action.payload.list_id);
-        list.list_id = action.payload.list_id;
-        list.position = action.payload.position;
-        list.list_name = action.payload.list_name;
-        list.ws_id = action.payload.ws_id;
+        const index = draft.lists
+          .findIndex(list => list.list_id === action.payload.list_id);
+
+        draft.lists.splice(index, 1, action.payload);
 
         draft.sort((list1, list2)=>{
           if(list1.position > list2.position)
