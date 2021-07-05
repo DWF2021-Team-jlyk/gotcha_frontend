@@ -35,7 +35,7 @@ const workspaceCard = handleActions(
       produce(state, draft => {
         draft.cards = action.payload;
         draft.cards.sort((card1, card2)=>{
-          if(card1.card_id > card2.card_id)
+          if(card1.position > card2.position)
             return 1;
           else return -1;
         })

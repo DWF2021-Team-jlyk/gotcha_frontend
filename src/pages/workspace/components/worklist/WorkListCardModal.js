@@ -16,15 +16,12 @@ import CardDesc from '../CardModal/CardDesc';
 import CardTodo from '../CardModal/CardTodo';
 import CardModalHeader from '../CardModal/CardModalHeader';
 import { useSelector, useDispatch } from 'react-redux';
-import { useDispatch } from 'react-redux';
 import { postCardMember } from '../../../../modules/cardMember';
 
 const WorkListCardModal = (props) => {
   const {cardId} = props;
   console.log({cardId})
   const cardMembers = useSelector((state) => state.cardMember.members);
-
-  }, [card_id]);
 
   const dispatch = useDispatch();
   

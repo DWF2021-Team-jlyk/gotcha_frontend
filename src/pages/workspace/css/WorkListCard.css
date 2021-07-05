@@ -1,0 +1,29 @@
+.cardInfoDiv {
+    height: 50px;
+    margin-top: 15px;
+    box-shadow: 0 0 2px 2px #666;
+    width: 250px;
+    display: flex;
+    vertical-align: middle;
+}
+
+.cardInputDiv {
+    height: inherit;
+    width: 220px;
+    vertical-align: middle;
+}
+
+.cardInput {
+    height: inherit;
+    width: inherit;
+    vertical-align: middle;
+}
+
+.cardButton {
+    width: 30px;
+    height: 50px;
+}
+
+.cardModifyButton {
+    margin-top: 5px;
+}

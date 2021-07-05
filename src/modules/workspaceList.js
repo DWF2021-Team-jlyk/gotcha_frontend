@@ -58,7 +58,7 @@ const workspaceList = handleActions(
 
         draft.lists.splice(index, 1, action.payload);
 
-        draft.sort((list1, list2)=>{
+        draft.lists.sort((list1, list2)=>{
           if(list1.position > list2.position)
             return 1;
           else

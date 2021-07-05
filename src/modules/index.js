@@ -9,7 +9,6 @@ import loading from './loading';
 import cardTodo from './cardTodo';
 import cardAct from './cardAct';
 import cardFile from './cardFile';
-import cardMember from './cardMember';
 
 const rootReducer = combineReducers({
   workspace,
