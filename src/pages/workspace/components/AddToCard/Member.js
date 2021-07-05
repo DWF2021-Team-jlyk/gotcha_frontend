@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-
+import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import Form from 'react-bootstrap/Form';
 import Popover from 'react-bootstrap/Popover'
@@ -13,6 +13,18 @@ const buttonStyle = {
   marginBottom:8
 }
 
+const memberButton ={
+  marginBottom:10, 
+  marginTop: 10, 
+  fontSize:".7rem"
+}
+
+const getDetail = async (card_id,user_id) => {
+  const result = await axios.post('/card/cardMemberInsert', {
+    card_id: card_id,
+    user_id: user_id
+  });
+}
 
 export default function AddMember(props) {
   const [show, setShow] = useState(false);
@@ -57,15 +69,18 @@ export default function AddMember(props) {
               <div style={{ marginTop: 15 }}>
                 <b>Board Member List</b>
 
+                {/* 워크스페이스의 멤버들을 가져온다 */}
                 <div>
-                  <Button style={{ marginBottom:10, marginTop: 10, fontSize:".7rem"}} variant="contained">
+                  <Button style={memberButton} variant="contained">
                     김김김김김 (kim123@naver.com)
                     {/* 초대됐으면 색변경 or disabled */}
                   </Button>
                 </div>
 
+                {/* 워크스페이스 멤버 리스트 가져오기,
+                    버튼에서 워크스페이스 멤버(user_id)& 카드 id 넘기기,  */}
                 <div>
-                  <Button style={{ marginBottom:10, fontSize:".7rem"}} variant="contained">
+                  <Button onClick={getDetail()} style={{ marginBottom:10, fontSize:".7rem"}} variant="contained">
                     김김이 (kim123@naver.com)
                   </Button> 
                 </div>

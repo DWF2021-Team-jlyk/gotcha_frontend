@@ -75,10 +75,9 @@ const WorkListCard = (props) => {
         openModal
         &&
         <WorkListCardModal
-          cardName={card?.card_name}
-          cardId={card?.card_id}
-          cardDesc={card?.card_desc}
+          cardId={card.card_id}
           show={openModal}
+          
           handle={handleModal}
 
         />

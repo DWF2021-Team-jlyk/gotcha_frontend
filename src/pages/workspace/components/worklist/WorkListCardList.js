@@ -23,6 +23,7 @@ const IconMargin = {
 };
 
 const WorkListCardList = (props) => {
+  console.log(props)
   const { ws_id, list, listId } = props;
   const cardInputEl = useRef(null);
   const listEditEl = useRef(null);
