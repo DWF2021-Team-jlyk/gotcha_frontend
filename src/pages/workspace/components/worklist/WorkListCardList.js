@@ -109,7 +109,7 @@ const WorkListCardList = (props) => {
           })
           .map((card) => {
             return (
-              <WorkListCard card={card} />
+              <WorkListCard ws_id={ws_id} card={card} />
             );
           })}
         {showCardInput && (

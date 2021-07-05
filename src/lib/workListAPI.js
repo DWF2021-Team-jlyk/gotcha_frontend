@@ -2,12 +2,14 @@ import axios from 'axios';
 import { dateFnsLocalizer } from 'react-big-calendar';
 import apiAxios from './apiAxios';
 
+
 // List CRUD axios
 export const postList = (ws_id) =>
   apiAxios('/main/wsList/list', { ws_id: ws_id });
 
 export const addList = (list_name, ws_id) =>
-  apiAxios('/main/wsList/list/insert', { list_name: list_name, ws_id: ws_id });
+  apiAxios('/main/wsList/list/insert', 
+  { list_name: list_name, ws_id: ws_id });
 
 export const updateList = (list_name, ws_id, list_id) => {
   apiAxios('/main/wsList/list/update', {

@@ -21,13 +21,12 @@ import { useDispatch } from 'react-redux';
 import { postCardMember } from '../../../../modules/cardMember';
 
 const WorkListCardModal = (props) => {
-  const {cardId} = props;
-  console.log({cardId})
+  const {ws_id, cardId} = props;
+  // const cardId = useSelector(state => state.cardId);
   const cardMembers = useSelector((state) => state.cardMember.members);
 
-
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(postCardMember(cardId));
 
@@ -56,7 +55,7 @@ const WorkListCardModal = (props) => {
           <Col sm={3}>
             <div>
               <h5>ADD TO CARD</h5>
-              <FunctionalAddOn />
+              <FunctionalAddOn cardId = {cardId} ws_id={ws_id} />
             </div>
             <br />
             <div>

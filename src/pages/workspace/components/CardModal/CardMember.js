@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 import Avatar from '@material-ui/core/Avatar';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import {postWorkspaceMember} from '../../../../modules/workspaceMember'
+
 
 const avatarIcon = (id) => {
   let returnStr = id.charAt(0);
@@ -14,6 +18,7 @@ const avatarIcon = (id) => {
 
 
 const CardMember = ({cardMember}) => {
+  const cardMem = useSelector(state=>state.cardMember.members);
  return (
     <div>
       <h5>
@@ -22,7 +27,7 @@ const CardMember = ({cardMember}) => {
       </h5>
       <div style={{ display: 'flex' }}>
 
-        {cardMember?.map((value, key) => {
+        {cardMem?.map((value, key) => {
           return (
             <Avatar
               onClick={(event) => {

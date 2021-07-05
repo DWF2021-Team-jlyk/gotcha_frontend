@@ -1,14 +1,17 @@
 import React, { useRef, useState } from 'react';
 import loadable from '@loadable/component';
 import { AiFillEdit } from 'react-icons/all';
+import { useDispatch } from 'react-redux';
+import { getCardId } from '../../../../modules/cardId';
 
 const WorkListCardModal = loadable(() => import('./WorkListCardModal'));
 
 const WorkListCard = (props) => {
-  const { card } = props;
+  const { ws_id , card } = props;
   const [openModal, setOpenModal] = useState(false);
   const [editable, setEditable] = useState(false);
   const [editbutton, setEditButton] = useState(false);
+  const dispatch = useDispatch();
   const handleModal = () => {
     setOpenModal(false);
   };
@@ -16,6 +19,9 @@ const WorkListCard = (props) => {
 
   const onClick = () => {
     if (editable === false) {
+      // console.log(card.cardId);
+      console.log(card.card_id);
+      dispatch(getCardId(card.card_id));
       setOpenModal(true);
     }
   };
@@ -77,6 +83,7 @@ const WorkListCard = (props) => {
         <WorkListCardModal
           cardId={card.card_id}
           show={openModal}
+          ws_id={ws_id}
           
           handle={handleModal}
 

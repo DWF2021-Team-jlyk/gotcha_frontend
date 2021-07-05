@@ -10,6 +10,7 @@ const LIST_UPDATE = 'workspaceList/LIST_UPDATE';
 const LIST_DELETE = "workspaceList/LIST_DELETE";
 
 export const postList = createRequest(POST_LIST, api.postList)
+
 export const listAdd = list =>({type:LIST_ADD, list});
 
 export const listUpdate = list => ({type:LIST_UPDATE,list});
