@@ -15,9 +15,7 @@ import CardAct from '../CardModal/CardAct';
 import CardDesc from '../CardModal/CardDesc';
 import CardTodo from '../CardModal/CardTodo';
 import CardModalHeader from '../CardModal/CardModalHeader';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
 import { postCardMember } from '../../../../modules/cardMember';
 
 const WorkListCardModal = (props) => {
@@ -47,9 +45,9 @@ const WorkListCardModal = (props) => {
         <Row>
           <Col sm={9}>
             <CardMember cardMember = {cardMembers}></CardMember>
-            {/* <CardDesc ></CardDesc>
-            <CardTodo></CardTodo>
-            <CardAct ></CardAct>   */}
+            <CardDesc></CardDesc>
+            <CardTodo ></CardTodo>
+            <CardAct></CardAct>  
           </Col>
 
           <Col sm={3}>

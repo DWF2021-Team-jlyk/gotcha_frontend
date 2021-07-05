@@ -1,10 +1,11 @@
-import React  from 'react';
+import React, { useEffect } from 'react';
 import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
 import {makeStyles} from "@material-ui/core/styles";
 import MainList from "./MainList";
 import "./sidebar.css"
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { postWorkspaces } from '../../modules/workspace';
 
 const useStyles = makeStyles((theme) => ({
     navName: {
@@ -17,10 +18,15 @@ const useStyles = makeStyles((theme) => ({
 
 const Sidebar = () => {
     const classes = useStyles();
-    const workspaces = useSelector(state=>state.workspaces.workspaces);
+    const workspaces = useSelector(state=>state.workspace.workspaces);
+    const dispatch = useDispatch();
     const fav = workspaces.filter(workspace=>workspace.is_fav);
     const admin = workspaces.filter(workspace=>workspace.role_id===1);
     const member = workspaces.filter(workspace=>workspace.role_id===2);
+
+    useEffect(()=>{
+        dispatch(postWorkspaces("user01@naver.com"));
+    },[]);
 
     return (
         <List

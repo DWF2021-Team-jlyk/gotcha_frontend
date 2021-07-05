@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect} from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import '../../layout/css/Layout.css';
 import loadable from '@loadable/component';
@@ -21,8 +21,8 @@ const Workspace = () => {
   const dispatch = useDispatch();
   
   useEffect(() => {
-    dispatch(postList(ws_id));
-    dispatch(postCard(ws_id));
+    dispatch(postList({ws_id:ws_id}));
+    dispatch(postCard({ws_id:ws_id}));
   }, [ws_id]);
 
   return (

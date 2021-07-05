@@ -1,4 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
+import produce from 'immer';
 
 const START_LOADING = 'loading/START_LOADING';
 const FINISH_LOADING = 'loading/FINISH_LOADING';
@@ -17,16 +18,16 @@ const initialState = {};
 
 const loading = handleActions(
   {
-    [START_LOADING]: (state, action) => ({
-      ...state,
-      [action.payload]: true,
-    }),
-    [FINISH_LOADING]: (state, action) => ({
-      ...state,
-      [action.payload]: false,
-    })
+    [START_LOADING]: (state, action) =>
+      produce(state, draft => {
+        draft[action.payload] = true;
+      }),
+    [FINISH_LOADING]: (state, action) =>
+      produce(state, draft =>{
+        draft[action.payload] = false;
+      }),
   },
-  initialState,
-);
+  initialState
+)
 
 export default loading;

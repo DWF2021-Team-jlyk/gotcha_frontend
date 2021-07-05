@@ -3,17 +3,11 @@ import { Card } from 'react-bootstrap';
 import './Cards.css';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import NotiCard from './components/NotiCard';
-import { postNoti } from '../../modules/notification';
 
 export default function Notification() {
   const notification = useSelector(state => state.notification.noti);
-  const dispatch = useDispatch();
-  useEffect(()=>{
-    dispatch(postNoti("user01@naver.com"))
-  }, [])
-  console.log(notification)
 
   return (
     <div>

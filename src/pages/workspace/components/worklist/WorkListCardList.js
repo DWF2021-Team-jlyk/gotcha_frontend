@@ -1,6 +1,6 @@
 import Card from 'react-bootstrap/Card';
 import '../../css/WorkListCardList.css';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import { AiOutlineDelete, AiOutlinePlusCircle } from 'react-icons/ai';
 import { AiFillCopy } from 'react-icons/ai';
@@ -9,10 +9,9 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import WorkListCard from './WorkListCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteList } from '../../../../lib/workListAPI';
-import { listDelete } from '../../../../modules/workspaceList';
-import { addCard } from '../../../../lib/workListAPI';
+import { listDelete, listUpdate } from '../../../../modules/workspaceList';
 import { cardAdd } from '../../../../modules/workspaceCard';
+import { AiFillEdit } from 'react-icons/all';
 
 const PlusIcon = {
   fontSize: '1.5rem',
@@ -27,20 +26,22 @@ const WorkListCardList = (props) => {
   console.log(props)
   const { ws_id, list, listId } = props;
   const cardInputEl = useRef(null);
+  const [listName, setListName] = useState("");
   const [cardTitle, setCardTitle] = useState('');
-  const [cardDesc, setCardDesc] = useState('');
-  const [cardStartDate, setCardStartDate] = useState('');
-  const [cardEndDate, setCardEndDate] = useState('');
+  const [position, setPosition] = useState(0);
   const [showCardInput, setShowCardInput] = useState(false);
-  const cards = useSelector(state=>state.workspaceCard.cards);
-  console.log("cards:",cards)
+  const cards = useSelector(state => state.workspaceCard.cards);
   const dispatch = useDispatch();
 
   const onChange = useCallback((e) => {
     setCardTitle(e.target.value);
   }, []);
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const onListNameChange = useCallback(e=>{
+    setListName(e.target.value);
+  },[]);
+
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -50,34 +51,57 @@ const WorkListCardList = (props) => {
     setAnchorEl(null);
   };
 
-  const onListRemove = async () => {
-    try {
-      await deleteList(listId);
-      dispatch(listDelete(listId));
-    } catch (e) {
-      console.log(e);
-    }
+  const onListRemove = () => {
+    dispatch(listDelete({ list_id: listId }));
   };
 
-  const onCardAdd = async() =>{
-    try{
-      const response = await addCard(cardTitle, cardDesc, listId, ws_id, cardStartDate, cardEndDate);
-      console.log(cardDesc);
-      dispatch(cardAdd(response.data));
-    }catch(e){
-      console.log(e);
-    }
+  const onCardAdd = () => {
+    dispatch(cardAdd({
+      list_id: listId,
+      ws_id: ws_id,
+      card_name: cardTitle,
+      card_desc: "",
+      card_start_date: "",
+      card_end_date: "",
+      position: position,
+    }));
   };
 
+  useEffect(() => {
+    setPosition(
+      cards.filter(
+        card=>card.list_id === listId
+      ).length
+    )
+  }, [cards]);
+
+  useEffect(()=>{
+    setListName(list.list_name);
+  },[])
+
+  console.log(position);
   return (
-    <Card className="ListStyle">
-      <Card.Header className="CardHeaderStyle">
-        {' '}
-        {list.list_name}{' '}
+    <Card className='ListStyle'>
+      <Card.Header
+        className='CardHeaderStyle'
+      >
+        <input
+          defaultValue={listName}
+          onChange={onListNameChange}
+        />
         <AiOutlinePlusCircle style={PlusIcon} onClick={handleClick} />
+        <AiFillEdit
+          style={{
+            float: 'right',
+            fontSize: '1.5rem',
+          }}
+          onClick={e => {
+            dispatch(listUpdate({...list, list_name:listName}));
+          }}
+        />
       </Card.Header>
       <Menu
-        id="simple-menu"
+        id='simple-menu'
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
@@ -102,7 +126,7 @@ const WorkListCardList = (props) => {
         </MenuItem>
       </Menu>
 
-      <Card.Body>
+      <Card.Body className='ListBodyStyle'>
         {cards
           .filter((card) => {
             return card.list_id === listId;
@@ -116,20 +140,21 @@ const WorkListCardList = (props) => {
           <div>
             <input
               //value={cardTitle}
-              onChange={(e) => setCardTitle(e.target.value)}
+              onChange={onChange}
               ref={cardInputEl}
-              // onBlur={(e) => {
-              //   e.target.value = '';
-              //   setShowCardInput(false);
-              // }}
-              // onfocusout={(e) => {
-              //   e.target.value = '';
-              // }}
+              onBlur={(e) => {
+                e.target.value = '';
+                setShowCardInput(false);
+              }}
             />
             <Button
               onClick={(e) => {
-                onCardAdd();
-                cardInputEl.current.value = "";
+                if (cardInputEl.current.value !== '') {
+                  onCardAdd();
+                  cardInputEl.current.value = '';
+                  setCardTitle('');
+                }
+                setShowCardInput(!showCardInput);
               }}
             >
               save
@@ -140,12 +165,11 @@ const WorkListCardList = (props) => {
 
       <Card.Footer>
         <Button
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
           onClick={async (e) => {
             await setShowCardInput(true);
             cardInputEl.current.focus();
-            // console.log(cardInputEl.current);
           }}
         >
           + Add Another Card
