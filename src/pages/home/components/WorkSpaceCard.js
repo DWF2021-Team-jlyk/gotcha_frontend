@@ -3,9 +3,10 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import noImg from '../../../image/gotcha.png';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
-import { changeWorkspaceFav } from '../../../modules/workspace';
+import { changeWorkspaceFav, updateWorkspace } from '../../../modules/workspace';
 import { useDispatch } from 'react-redux';
 import HomeStyles from '../HomeStyles';
+
 
 const WorkSpaceCard = ({ workspace }) => {
   const isFav = is_fav => is_fav ? true : false;
@@ -13,6 +14,7 @@ const WorkSpaceCard = ({ workspace }) => {
   const [ws, setWs] = useState({...workspace});
   const onToggle = useCallback(
     ws_id => dispatch(changeWorkspaceFav(ws_id)),
+    dispatch(updateWorkspace({...workspace, is_fav: (workspace.is_fav? "0" : "1")}))
     [dispatch],
   );
   useEffect(()=>{

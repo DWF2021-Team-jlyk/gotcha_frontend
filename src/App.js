@@ -5,6 +5,8 @@ import Header from './layout/Header';
 import Login from './pages/user/Login';
 import { Route } from 'react-router-dom';
 import loadable from '@loadable/component';
+import PublicRoute from './lib/pulblicRoute';
+import PrivateRoute from './lib/privateRoute';
 import './layout/css/font.css';
 
 const Workspace = loadable(() => import('./pages/workspace'));
@@ -37,11 +39,12 @@ const App = () => {
   return (
     <div className='font'>
       {/*<Switch>*/}
-      <Route exact path='/Login'>
+      {/* <Route exact path='/Login'>
         <div>
           <Login />
         </div>
-      </Route>
+      </Route> */}
+      <PublicRoute restricted={true} component={Login} exact path='/Login'/>
 
       {/*<Route exact path="/">*/}
       <Header />
@@ -59,7 +62,7 @@ const App = () => {
         </div>
         <div>
           <div>
-            <Route exact path='/'>
+            {/* <Route exact path='/'>
               <Home />
             </Route>
             <Route exact path='/workspace/:ws_id'>
@@ -76,7 +79,13 @@ const App = () => {
             </Route>
             <Route exact path='/Pwdfind'>
               <Pwdfind />
-            </Route>
+            </Route> */}
+            <PrivateRoute component={Home} exact path='/' />
+            <PrivateRoute component={Workspace} exact path='/workspace/:ws_id' />
+            <PublicRoute restricted={true} component={Join} exact path='/Join' />
+            <PublicRoute restricted={true} component={Code} exact path='/Code' />
+            <PrivateRoute component={Mypage} exact path='/Mypage' />
+            <PublicRoute restricted={true} component={Pwdfind} exact path='/Pwdfind' />
           </div>
         </div>
       </div>
