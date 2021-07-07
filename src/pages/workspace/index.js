@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect} from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import '../../layout/css/Layout.css';
 import loadable from '@loadable/component';

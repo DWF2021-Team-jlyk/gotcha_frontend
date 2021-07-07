@@ -24,6 +24,7 @@ export const cardAdd = createRequest(CARD_ADD, api.addCard);
 export const cardUpdate = createRequest(CARD_UPDATE, api.updateCard);
 export const cardDelete = createRequest(CARD_DELETE, api.deleteCard);
 
+
 const initialState = {
   cards: [],
 };
@@ -33,6 +34,11 @@ const workspaceCard = handleActions(
     [POST_CARD_SUCCESS]: (state, action) =>
       produce(state, draft => {
         draft.cards = action.payload;
+        draft.cards.sort((card1, card2)=>{
+          if(card1.position > card2.position)
+            return 1;
+          else return -1;
+        })
       }),
     [CARD_ADD_SUCCESS]: (state, action) =>
       produce(state, draft => {
@@ -41,7 +47,13 @@ const workspaceCard = handleActions(
 
     [CARD_UPDATE_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.cards.find(card=> card.card_id === action.payload.card_id);
+        const index = draft.cards.findIndex(card=>card.card_id === action.payload.card_id);
+        draft.cards.splice(index, 1, action.payload);
+        draft.cards.sort((card1, card2) => {
+          if(card1.position > card2.position)
+            return 1;
+          else return -1;
+        })
       }),
 
     [CARD_DELETE_SUCCESS]: (state, action) =>

@@ -25,6 +25,8 @@ export const postWorkspaces = createRequest(POST_WORKSPACES, api.postGetWorkspac
 export const addWorkspaces = createRequest(ADD_WORKSPACE, api.postAddWorkspace);
 export const updateWorkspace = createRequest(UPDATE_WORKSPACE, api.updateWorkspace);
 
+export const updateWorkspace = createRequest(UPDATE_WORKSPACE, api.updateWorkspace);
+
 const initialState = {
   workspaces: [],
 };

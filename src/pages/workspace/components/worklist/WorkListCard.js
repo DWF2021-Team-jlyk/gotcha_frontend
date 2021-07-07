@@ -1,90 +1,103 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import loadable from '@loadable/component';
 import { AiFillEdit } from 'react-icons/all';
+import '../../css/WorkListCard.css';
+import { Button } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { cardUpdate } from '../../../../modules/workspaceCard';
 
 const WorkListCardModal = loadable(() => import('./WorkListCardModal'));
 
-const WorkListCard = (props) => {
-  const { card } = props;
+const WorkListCard = ({card}) => {
   const [openModal, setOpenModal] = useState(false);
   const [editable, setEditable] = useState(false);
   const [editbutton, setEditButton] = useState(false);
+  const [cardName, setCardName] = useState("");
+  const dispatch = useDispatch();
   const handleModal = () => {
     setOpenModal(false);
   };
   const cardInputEL = useRef(null);
 
-  const onClick = () => {
+  const onActiveInputClick = () => {
     if (editable === false) {
       setOpenModal(true);
     }
   };
+
+  const onSaveCard =useCallback( cardName=> {
+    console.log(cardName);
+    dispatch(cardUpdate({...card, card_name:cardName}));
+  }, [dispatch]);
+
+
   const handleEditable = async (e) => {
-    await setEditable(true)
+    await setEditable(true);
     cardInputEL.current.focus();
   };
-  const handleDisEditable = () => setEditable(false);
+  const handleDisEditable = (e) => {
+    setEditable(false);
+    console.log(e);
+    if(e._reactName !== "onKeyPress")
+      cardInputEL.current.value=card.card_name;
+  }
   const showEditButton = () => setEditButton(true);
   const noShowEditButton = () => setEditButton(false);
+
+  useEffect(()=>{
+    setCardName(card.card_name);
+  }, []);
+
   return (
     <>
       <div
-        style={{
-          height: '50px',
-          marginTop: '15px',
-          boxShadow: '0 0 2px 2px #666',
-          width: '250px',
-          display: 'flex',
-          verticalAlign: 'middle',
-        }}
         onMouseOver={showEditButton}
         onMouseOut={noShowEditButton}
+        onBlur={handleDisEditable}
       >
-        <div
-          onClick={onClick}
-          onBlur={handleDisEditable}
-          style={{
-            height: 'inherit',
-            width: '220px',
-            verticalAlign: 'middle',
-          }}
-        >
-          <input
-            defaultValue={card.card_name}
-            disabled={!editable}
-            ref={cardInputEL}
-            style={{
-              height: 'inherit',
-              width: 'inherit',
-              verticalAlign: 'middle',
-            }}
-          />
-        </div>
-
-        <div
-          onClick={handleEditable}
-          style={{ width: 30, height: 50 }}
-        >
-          <AiFillEdit
-            opacity={!editbutton ? 0 : '0.5'}
-            size='20'
-          />
+        <div className='cardInfoDiv'>
+          <div
+            className='cardInputDiv'
+            onClick={onActiveInputClick}
+          >
+            <input
+              className='cardInput'
+              defaultValue={cardName}
+              disabled={!editable}
+              ref={cardInputEL}
+              onChange={(e)=>{
+                setCardName(e.target.value);
+              }}
+              onKeyPress={e=>{
+                if(e.key === "Enter"){
+                  onSaveCard(cardName);
+                  handleDisEditable(e);
+                }
+              }}
+            />
+          </div>
+          <div
+            onClick={handleEditable}
+            className='cardButton'
+          >
+            <AiFillEdit
+              opacity={!editbutton ? 0 : '0.5'}
+              size='20'
+            />
+          </div>
         </div>
       </div>
       {
         openModal
         &&
         <WorkListCardModal
-          cardName={card?.card_name}
-          cardId={card?.card_id}
-          cardDesc={card?.card_desc}
+          cardId={card.card_id}
           show={openModal}
           handle={handleModal}
-
         />
       }
     </>
   );
-}
+};
 
 export default WorkListCard;

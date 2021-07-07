@@ -1,12 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Button from '@material-ui/core/Button';
-import axios from 'axios';
-import WorkSpaceData from '../../DummyData/WorkSpaceData';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { listAdd } from '../../modules/workspaceList';
 import WorkListCardList from './components/worklist/WorkListCardList';
-import { addList } from '../../lib/workListAPI';
-//import {addList} from '../../modules/addlist';
 
 
 const listStyle = {
@@ -27,23 +23,23 @@ const WorkList = (props) => {
   const dispatch = useDispatch();
 
   const onListAdd = () => {
-    dispatch(listAdd({list_name:listName, ws_id:ws_id, position:nextPosition}));
-  }
+    dispatch(
+      listAdd({
+        list_name: listName,
+        ws_id: ws_id,
+        position: nextPosition,
+      }),
+    );
+  };
 
-  useEffect(()=>{
-    setNextPosition(Math.max(lists.map(list=>list.position))+1);
-    console.log(nextPosition);
-  },[lists]);
+  useEffect(() => {
+    setNextPosition(lists.length);
+  }, [lists]);
 
-
+  console.log(nextPosition);
   return (
     <>
-      <input
-        onChange={(e) =>
-          setListName(e.target.value)
-        }
-        ref={listEL}
-      />
+      <input onChange={(e) => setListName(e.target.value)} ref={listEL} />
       <Button
         variant='contained'
         color='primary'
@@ -56,8 +52,7 @@ const WorkList = (props) => {
       </Button>
 
       <div style={listStyle}>
-        {lists
-          .map((list, index) => {
+        {lists.map((list, index) => {
           return (
             <div key={index}>
               <WorkListCardList

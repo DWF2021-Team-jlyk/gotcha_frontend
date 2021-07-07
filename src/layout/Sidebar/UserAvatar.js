@@ -37,7 +37,7 @@ const UserAvatar = (props) => {
           
        
           <div style={{ display: 'flex', marginTop: 5 }}>
-              <div><Button variant='danger' style={{ fontSize: '.8rem' }}> Member 추방하기</Button></div>
+              <div><Button variant='danger' style={{ fontSize: '.8rem' }}> 내보내기</Button></div>
             </div>
          
         </div>

@@ -1,7 +1,22 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Button, Col, Form, Modal, ModalBody, ModalFooter, ModalTitle, Row } from 'react-bootstrap';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  Button,
+  Col,
+  Form,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  ModalTitle,
+  OverlayTrigger,
+  PopoverContent,
+  Row,
+} from 'react-bootstrap';
 import ModalHeader from 'react-bootstrap/ModalHeader';
+import UserAvatar from '../Sidebar/UserAvatar';
+import Popover from 'react-bootstrap/Popover';
+import axios from 'axios';
+import SearchMember from '../../components/SearchMember';
 import { useDispatch } from 'react-redux';
 import { addWorkspaces } from '../../modules/workspace';
 
@@ -11,18 +26,21 @@ const WorkSpaceAddModal = (props) => {
   const [inviteMember, setInviteMember] = useState('');
   const [image, setImage] = useState('')
   const [previewImg, setPreviewImg] = useState();
-  // 모달 초기화
-  useEffect(() => {
-    if (props.clicked == true) {
-      setWorkspaceName('')
-      setInviteMember('')
-      setImage('')
-    }
-  }, [props.clicked])
+  const [userEmail, setUserEmail] = useState('');
+  const [emailList, setEmailList] = useState([]);
+  const emailEl = useRef(null);
+    // 모달 초기화
+    useEffect(() => {
+      if (props.clicked == true) {
+        setWorkspaceName('')
+        setInviteMember('')
+        setImage('')
+        setUserEmail('');
+        setEmailList([]);
+      }
+    }, [props.clicked])
 
-  
-
-  // 워크스페이스 추가
+      // 워크스페이스 추가
   const addWorkspaceClick = async (e) =>{
     e.preventDefault();
     const formData = new FormData();
@@ -98,22 +116,6 @@ const WorkSpaceAddModal = (props) => {
           </Form.Group>
           <br />
           <Form.Group>
-            <Form.Label>WorkSpace 멤버</Form.Label>
-            <Row>
-              <Col sm={8}>
-                <Form.Control type='email'
-                  name='inviteMember'
-                  value={inviteMember}
-                  onChange={onInviteChange}
-                />
-              </Col>
-              <Col sm={4}>
-                <Button onClick={inviteMemberBtn}>멤버 초대하기</Button>
-              </Col>
-            </Row>
-          </Form.Group>
-          <br />
-          <Form.Group>
             <Form.Label>WorkSpace Thumbnail 사진</Form.Label>
             <Row>
               <Col sm={8}>
@@ -132,8 +134,14 @@ const WorkSpaceAddModal = (props) => {
               }
             </Row>
           </Form.Group>
-
+          <br />
+          <SearchMember emailList={emailList} setEmailList={setEmailList}/>
         </Form>
+        <Row>
+          {emailList.map((email, index) => {
+            return <UserAvatar user_id={email} key={index} />;
+          })}
+        </Row>
       </ModalBody>
       <ModalFooter>
         <Button variant='danger' onClick={props.handleClose}>
