@@ -1,8 +1,48 @@
-import React from 'react';
-import { Button, Col, Form, Modal, ModalBody, ModalFooter, ModalTitle, Row } from 'react-bootstrap';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  Button,
+  Col,
+  Form,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalTitle,
+  OverlayTrigger,
+  PopoverContent,
+  Row,
+} from 'react-bootstrap';
 import ModalHeader from 'react-bootstrap/ModalHeader';
+import UserAvatar from '../Sidebar/UserAvatar';
+import Popover from 'react-bootstrap/Popover';
+import axios from 'axios';
+import SearchMember from '../../components/SearchMember';
+
+const EmailContent = async () => {
+  const list = await axios({
+    url: '/home/getAllUsers',
+    method:'post',
+    headers: { 'content-type': 'application/json' },
+  });
+  console.log(list)
+  return (
+    <Popover id="popover-contained">
+      <PopoverContent>
+        {list.data.map(email=><p key={email}>email</p>)}
+      </PopoverContent>
+    </Popover>
+  );
+};
 
 const WorkSpaceAddModal = (props) => {
+  const [userEmail, setUserEmail] = useState('');
+  const [emailList, setEmailList] = useState([]);
+  const emailEl = useRef(null);
+
+  useEffect(() => {
+    setUserEmail('');
+    setEmailList([]);
+  }, []);
+
   return (
     <Modal
       size={'lg'}
@@ -25,18 +65,6 @@ const WorkSpaceAddModal = (props) => {
           </Form.Group>
           <br />
           <Form.Group>
-            <Form.Label>WorkSpace 멤버</Form.Label>
-            <Row>
-              <Col sm={8}>
-                <Form.Control type='email' />
-              </Col>
-              <Col sm={4}>
-                <Button>멤버 초대하기</Button>
-              </Col>
-            </Row>
-          </Form.Group>
-          <br />
-          <Form.Group>
             <Form.Label>WorkSpace Thumbnail 사진</Form.Label>
             <Row>
               <Col sm={8}>
@@ -47,8 +75,14 @@ const WorkSpaceAddModal = (props) => {
               </Col>
             </Row>
           </Form.Group>
-
+          <br />
+          <SearchMember emailList={emailList} setEmailList={setEmailList}/>
         </Form>
+        <Row>
+          {emailList.map((email, index) => {
+            return <UserAvatar user_id={email} key={index} />;
+          })}
+        </Row>
       </ModalBody>
       <ModalFooter>
         <Button variant='danger' onClick={props.handleClose}>

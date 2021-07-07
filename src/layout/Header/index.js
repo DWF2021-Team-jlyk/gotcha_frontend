@@ -5,6 +5,7 @@ import {IoPersonCircleOutline,} from "react-icons/all";
 import NotiButton from "./NotiButton";
 import WorkSpaceAddButton from "./WorkSpaceAddButton";
 import headerImg from "../../image/header.png";
+import SearchWorkspace from './SearchWorkspace';
 
 const Header = () => {
 
@@ -27,21 +28,22 @@ const Header = () => {
                 <img src={headerImg} alt={"gotcha"} width="50"/>
                 GotCha
             </Navbar.Brand>
-            <Form className="d-flex">
-                <FormControl
-                    type="search"
-                    placeholder="Search"
-                    className="mr-2"
-                    aria-label="Search"
-                    style={{
-                        marginRight: 10,
-                        width: 300,
-                    }}
-                />
-                <Button variant="light" style={{color: "#3f51b5"}}>
-                    Search
-                </Button>
-            </Form>
+            <SearchWorkspace/>
+            {/*<Form className="d-flex">*/}
+            {/*    <FormControl*/}
+            {/*        type="search"*/}
+            {/*        placeholder="Search"*/}
+            {/*        className="mr-2"*/}
+            {/*        aria-label="Search"*/}
+            {/*        style={{*/}
+            {/*            marginRight: 10,*/}
+            {/*            width: 300,*/}
+            {/*        }}*/}
+            {/*    />*/}
+            {/*    <Button variant="light" style={{color: "#3f51b5"}}>*/}
+            {/*        Search*/}
+            {/*    </Button>*/}
+            {/*</Form>*/}
             <div
                 style={{
                     marginRight: 20,

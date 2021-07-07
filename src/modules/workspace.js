@@ -12,6 +12,9 @@ const POST_WORKSPACES = 'workspace/POST_WORKSPACES';
 const POST_WORKSPACES_SUCCESS = 'workspace/POST_WORKSPACES_SUCCESS';
 const POST_WORKSPACES_FAILURE = 'workspace/POST_WORKSPACES_FAILURE';
 
+const UPDATE_WORKSPACE = 'workspace/UPDATE_WORKSPACE';
+const UPDATE_WORKSPACE_SUCCESS = 'workspace/UPDATE_WORKSPACE_SUCCESS';
+
 export const addWorkspace =
   createAction(ADD_WORKSPACE, workspace => workspace);
 export const deleteWorkspace =
@@ -20,6 +23,8 @@ export const changeWorkspaceFav =
   createAction(CHANGE_WORKSPACE_FAV, ws_id => ws_id);
 
 export const postWorkspaces = createRequest(POST_WORKSPACES, api.postGetWorkspaces);
+
+export const updateWorkspace = createRequest(UPDATE_WORKSPACE, api.updateWorkspace);
 
 const initialState = {
   workspaces: [],
@@ -47,6 +52,13 @@ const workspace = handleActions(
       produce(state, draft => {
         draft.workspaces = action.payload;
       }),
+
+    [UPDATE_WORKSPACE_SUCCESS]:(state, action)=>
+      produce(state, draft=>{
+        const index = draft.workspaces
+          .findIndex(ws=>ws.ws_id === action.payload.ws_id);
+        draft.workspaces.splice(index, 1, action.payload);
+      })
   },
   initialState,
 );
