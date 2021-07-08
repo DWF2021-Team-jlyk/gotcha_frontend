@@ -10,7 +10,7 @@ const initialState = 0
 const cardId = handleActions(
   {
     [GET_CARD_ID]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         draft = action.card_id;
       }),
   },

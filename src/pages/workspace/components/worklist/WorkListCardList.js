@@ -90,6 +90,7 @@ const WorkListCardList = (props) => {
           onChange={onListNameChange}
         />
         <AiOutlinePlusCircle style={PlusIcon} onClick={handleClick} />
+        
         <AiFillEdit
           style={{
             float: 'right',
@@ -100,6 +101,7 @@ const WorkListCardList = (props) => {
           }}
         />
       </Card.Header>
+
       <Menu
         id='simple-menu'
         anchorEl={anchorEl}
@@ -135,7 +137,10 @@ const WorkListCardList = (props) => {
             return (
               <WorkListCard ws_id={ws_id} card={card} />
             );
-          })}
+          })
+          
+    }
+          
         {showCardInput && (
           <div>
             <input
@@ -146,6 +151,7 @@ const WorkListCardList = (props) => {
                 e.target.value = '';
                 setShowCardInput(false);
               }}
+
             />
             <Button
               onClick={(e) => {

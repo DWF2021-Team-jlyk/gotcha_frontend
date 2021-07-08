@@ -8,8 +8,11 @@ import { FaUserFriends } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { postWorkspaceMember } from '../../../../modules/workspaceMember';
-import {addCardMember} from '../../../../lib/cardDetailAPI';
-import {insertCardMember } from '../../../../modules/cardMember';
+import {addCardMember} from '../../../../lib/cardActAPI';
+import {insertCardMember, deleteCardMember} from '../../../../modules/cardMember';
+import {AiOutlineCheck} from "react-icons/ai";
+
+
 
 const buttonStyle = {
   width: 120,
@@ -27,6 +30,7 @@ const memberButton = {
 export default function AddMember(props) {
   const { cardId, ws_id } = props;
 
+
   const handleClick = (event) => {
     setShow(!show);
     setTarget(event.target);
@@ -35,21 +39,12 @@ export default function AddMember(props) {
 
   const wsMembers = useSelector((state) => state.workspaceMember.wsMembers);
   const cardMember = useSelector((state) => state.cardMember.members);
-  const insertMember = async(user_id, card_id) => {
-    try{
-      const response = await addCardMember(user_id, card_id);
-      dispatch(insertCardMember(response.data));
-    }catch(e){
-      console.log(e);
-    }
-  };
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(postWorkspaceMember(ws_id));
   }, []);
-
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
@@ -91,16 +86,20 @@ export default function AddMember(props) {
                 <b>Board Member List</b>
 
                 {wsMembers?.map((value, key) => {
+             
                   if (cardMember?.map((mem) => mem.user_id).includes(value)) {
                     return (
                       <div>
                         <Button
                           style={memberButton}
                           variant="contained"
-                          disabled
+                          onClick={()=>
+                            dispatch(deleteCardMember({user_id:value, card_id:cardId}))
+                          }
                         >
-                          {value}
+                          {value} 
                         </Button>
+                        <b><AiOutlineCheck style={{marginLeft:10, fontSize:"1rem"}}/></b>
                       </div>
                     );
                   }
@@ -114,7 +113,7 @@ export default function AddMember(props) {
                             dispatch(insertCardMember({user_id:value, card_id:cardId}));
                           }}
                         >
-                          {value}
+                          {value} 
                         </Button>
                       </div>
                     );

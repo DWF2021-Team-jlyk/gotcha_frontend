@@ -11,10 +11,10 @@ const buttonStyle = {
   width: '150px',
   marginTop: '5px'
 }
-export const FunctionalAddOn = ({ws_id, cardId}) => {
+export const FunctionalAddOn = ({ws_id, card}) => {
   return (
     <>
-      <AddMember cardId ={cardId} ws_id={ws_id}></AddMember>
+      <AddMember cardId ={card.card_id} ws_id={ws_id}></AddMember>
       <AddDate></AddDate>
       <AddTodo></AddTodo>
       <AddFile></AddFile>

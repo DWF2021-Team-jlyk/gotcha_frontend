@@ -40,6 +40,7 @@ const workspaceCard = handleActions(
           else return -1;
         })
       }),
+      
     [CARD_ADD_SUCCESS]: (state, action) =>
       produce(state, draft => {
         draft.cards.push(action.payload);

@@ -19,18 +19,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { postCardMember } from '../../../../modules/cardMember';
 
 const WorkListCardModal = (props) => {
-  const {ws_id, cardId} = props;
-  // const cardId = useSelector(state => state.cardId);
-  const cardMembers = useSelector((state) => state.cardMember.members);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(postCardMember(cardId));
-
-  }, [cardId]);
-
-
+  
   return (
     <Modal
       size={'lg'}
@@ -44,16 +33,17 @@ const WorkListCardModal = (props) => {
       <ModalBody>
         <Row>
           <Col sm={9}>
-            <CardMember cardMember = {cardMembers}></CardMember>
-            <CardDesc></CardDesc>
-            <CardTodo ></CardTodo>
-            <CardAct></CardAct>  
+          {/* {props.card.card_id} */}
+            <CardMember card={props.card}></CardMember>
+            <CardDesc card={props.card}></CardDesc>
+           {/*  <CardTodo ></CardTodo>  */}
+            <CardAct card={props.card}></CardAct>  
           </Col>
 
           <Col sm={3}>
             <div>
               <h5>ADD TO CARD</h5>
-              <FunctionalAddOn cardId = {cardId} ws_id={ws_id} />
+              <FunctionalAddOn card={props.card} ws_id={props.ws_id} />
             </div>
             <br />
             <div>

@@ -12,11 +12,15 @@ const WorkListCard = (props) => {
   const { ws_id , card } = props;
   const [openModal, setOpenModal] = useState(false);
   const [editable, setEditable] = useState(false);
+
   const [editbutton, setEditButton] = useState(false);
   const [cardName, setCardName] = useState('');
+  const dispatch = useDispatch();
+  
   const handleModal = () => {
     setOpenModal(false);
   };
+
   const cardInputEL = useRef(null);
 
   const onClick = () => {
@@ -45,14 +49,19 @@ const WorkListCard = (props) => {
           <div
             className='cardInputDiv'
             onClick={onClick}
+            // 모달열리는 onClick
           >
+
             <input
               className='cardInput'
               defaultValue={card.card_name}
               disabled={!editable}
               ref={cardInputEL}
+          
             />
+
           </div>
+
           <div
             onClick={handleEditable}
             className='cardButton'
@@ -62,6 +71,7 @@ const WorkListCard = (props) => {
               size='20'
             />
           </div>
+
         </div>
         {
           editable &&
@@ -72,7 +82,8 @@ const WorkListCard = (props) => {
         openModal
         &&
         <WorkListCardModal
-          cardId={card.card_id}
+          card={card}
+     
           show={openModal}
           ws_id={ws_id}
           

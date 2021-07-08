@@ -6,6 +6,8 @@ import {
   Form,
 } from 'react-bootstrap';
 import axios from 'axios';
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
 
 
 const listButton = {
@@ -17,7 +19,7 @@ const listButton = {
   };
   
 
-const CardTodo = ({ cardTodo }) => {
+const CardTodo = () => {
   const [listDateShow, setListDateShow] = useState(false);
 
   const handleClose = () => setListDateShow(false);
@@ -36,83 +38,45 @@ const CardTodo = ({ cardTodo }) => {
   
   };
 
-console.log(cardTodo)
+
   return (
     <div>
+
       <div style={{ marginTop: 30, marginBottom: 20 }}>
         <h5>
           <BsCheckBox /> TodoList
         </h5>
       </div>
 
-      {/* 입력된 todolist들 */}
-      <div>
-        {cardTodo.map((value, key) => {
-          console.log(value.todo_isdone);
-          return (
-            <div style={{ display: 'flex' }}>
-              <div style={{ padding: 5 }}>
-                {value.todo_isdone === 1 ? (
-                  //1이면 check됨
-                  <div style={{ display: 'flex' }}>
-                    <Form.Check
-                      type="checkbox"
-                      id="autoSizingCheck"
-                      className="mb-2"
-                      checked="checked"
-                      onClick={() => changeTodoIsDone(value.todo_id, 0)}
-                    />
-                    <div style={{ marginLeft: 5 }}>
-                      <del>{value.todo_name}</del>
-                    </div>
-                  </div>
-                ) : (
-                  <div style={{ display: 'flex' }}>
-                    <Form.Check
-                      type="checkbox"
-                      id="autoSizingCheck"
-                      className="mb-2"
-                      onClick={() => changeTodoIsDone(value.todo_id, 1)}
-                    />
-                    <div style={{ marginLeft: 5 }}>{value.todo_name}</div>
-                  </div>
-                )}
-              </div>
 
-              <Button onClick={handleShow} style={listButton}>
-                기간 설정
-              </Button>
-            </div>
-          );
-        })}
+      <Row md={2}>
+        <div style={{ padding: 5 }}>
 
-        <Modal
-          show={listDateShow}
-          onHide={handleClose}
-          style={{ marginTop: '300px' }}
-        >
-          <Modal.Header
-            closeButton
-            style={{
-              background: '#f7f7f7',
-            }}
-          >
-            <Modal.Title>Todolist 기간 설정</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            Start date(누르면 달력나오게) <br></br>
-            End date
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Save
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </div>
+          <div style={{ display: 'flex' }}>
+            <Col>
+              <Form.Check
+                type="checkbox"
+                id="autoSizingCheck"
+                className="mb-2"
+                checked="checked"
+            
+              />
+              </Col>
+              <Col>
+                <div style={{ marginLeft: 5 }}>
+                  <del>이름이름</del>
+                </div>
+              </Col>
+              <Col>
+                <Button onClick={handleShow} style={listButton}>
+                  기간 설정
+                </Button>
+              </Col>
+          </div>
+
+        </div>
+      </Row>
+
     </div>
   );
 };
