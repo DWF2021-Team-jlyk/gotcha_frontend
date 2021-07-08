@@ -6,7 +6,9 @@ const WorkSpaceAddModal = loadable(()=>import('./WorkSpaceAddModal'));
 
 const WorkSpaceAddButton = () => {
     const [clicked, setClicked] = useState(false);
-    const handleClose = () => setClicked(false);
+    const handleClose = () => {
+        setClicked(false)
+    };
     return (
         <>
             <IoMdAdd

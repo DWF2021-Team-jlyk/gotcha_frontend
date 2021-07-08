@@ -3,20 +3,21 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import noImg from '../../../image/gotcha.png';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
-import { changeWorkspaceFav } from '../../../modules/workspace';
+import { changeWorkspaceFav, updateWorkspace } from '../../../modules/workspace';
 import { useDispatch } from 'react-redux';
 import HomeStyles from '../HomeStyles';
+
 
 const WorkSpaceCard = ({ workspace }) => {
   const isFav = is_fav => is_fav ? true : false;
   const dispatch = useDispatch();
-  const [ws, setWs] = useState({...workspace});
-  const onToggle = useCallback(
-    ws_id => dispatch(changeWorkspaceFav(ws_id)),
+  const [ws, setWs] = useState({ ...workspace });
+  const onToggle = useCallback(() =>
+      dispatch(updateWorkspace({ ...workspace, is_fav: (workspace.is_fav ? '0' : '1') })),
     [dispatch],
   );
-  useEffect(()=>{
-    setWs({...workspace});
+  useEffect(() => {
+    setWs({ ...workspace });
   }, [workspace]);
   return (
     <Card style={HomeStyles.cardStyle}>
@@ -33,8 +34,8 @@ const WorkSpaceCard = ({ workspace }) => {
               </Link>
             </div>
             <div>
-              {isFav(ws.is_fav) && <AiFillStar style={HomeStyles.starStyle} onClick={e=>onToggle(ws.ws_id)} />}
-              {!isFav(ws.is_fav) && <AiOutlineStar style={HomeStyles.starStyle} onClick={e=>onToggle(ws.ws_id)} />}
+              {isFav(ws.is_fav) && <AiFillStar style={HomeStyles.starStyle} onClick={e => onToggle(ws.ws_id)} />}
+              {!isFav(ws.is_fav) && <AiOutlineStar style={HomeStyles.starStyle} onClick={e => onToggle(ws.ws_id)} />}
             </div>
           </Card.Text>
         </Row>

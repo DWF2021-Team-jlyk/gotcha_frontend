@@ -23,23 +23,23 @@ const IconMargin = {
 };
 
 const WorkListCardList = (props) => {
-  console.log(props)
+  console.log(props);
   const { ws_id, list, listId } = props;
   const cardInputEl = useRef(null);
-  const [listName, setListName] = useState("");
+  const [listName, setListName] = useState('');
   const [cardTitle, setCardTitle] = useState('');
   const [position, setPosition] = useState(0);
   const [showCardInput, setShowCardInput] = useState(false);
   const cards = useSelector(state => state.workspaceCard.cards);
   const dispatch = useDispatch();
 
-  const onChange = useCallback((e) => {
+  const onChange = useCallback(e => {
     setCardTitle(e.target.value);
   }, []);
 
-  const onListNameChange = useCallback(e=>{
+  const onListNameChange = useCallback(e => {
     setListName(e.target.value);
-  },[]);
+  }, []);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -60,14 +60,26 @@ const WorkListCardList = (props) => {
       list_id: listId,
       ws_id: ws_id,
       card_name: cardTitle,
-      card_desc: "",
-      card_start_date: "",
-      card_end_date: "",
+      card_desc: '',
+      card_isdone:'0',
+      card_start_date: '',
+      card_end_date: '',
       position: position,
     }));
   };
 
-  console.log("WorkListCardList cards",cards);
+  useEffect(() => {
+    setPosition(
+      cards.filter(
+        card => card.list_id === listId,
+      ).length,
+    );
+  }, [cards]);
+
+  useEffect(() => {
+    setListName(list.list_name);
+  }, []);
+
   return (
     <Card className='ListStyle'>
       <Card.Header
@@ -85,7 +97,7 @@ const WorkListCardList = (props) => {
             fontSize: '1.5rem',
           }}
           onClick={e => {
-            dispatch(listUpdate({...list, list_name:listName}));
+            dispatch(listUpdate({ ...list, list_name: listName }));
           }}
         />
       </Card.Header>
@@ -121,32 +133,48 @@ const WorkListCardList = (props) => {
           .filter((card) => {
             return card.list_id === listId;
           })
-          .map((card) => {
+          .map((card, index) => {
             return (
-              <WorkListCard ws_id={ws_id} card={card} />
+              <WorkListCard key={index} ws_id={ws_id} card={card} />
             );
           })
           
     }
           
         {showCardInput && (
-          <div>
+          <div
+            onBlur={(e) => {
+              e.target.value = '';
+              setShowCardInput(false);
+            }}
+          >
             <input
               onChange={(e) => setCardTitle(e.target.value)}
               ref={cardInputEl}
-            />
-            <Button
-              onClick={(e) => {
-                if (cardInputEl.current.value !== '') {
-                  onCardAdd();
-                  cardInputEl.current.value = '';
-                  setCardTitle('');
+              onKeyPress={e => {
+                if (e.key === 'Enter') {
+                  if (e.target.value !== '') {
+                    console.log(cardTitle);
+                    onCardAdd();
+                    e.target.value = '';
+                    setCardTitle('');
+                    setShowCardInput(!showCardInput);
+                  }
                 }
-                setShowCardInput(!showCardInput);
               }}
-            >
-              save
-            </Button>
+            />
+            {/*<Button*/}
+            {/*  onClick={(e) => {*/}
+            {/*    if (cardInputEl.current.value !== '') {*/}
+            {/*      onCardAdd();*/}
+            {/*      cardInputEl.current.value = '';*/}
+            {/*      setCardTitle('');*/}
+            {/*    }*/}
+            {/*    setShowCardInput(!showCardInput);*/}
+            {/*  }}*/}
+            {/*>*/}
+            {/*  save*/}
+            {/*</Button>*/}
           </div>
         )}
       </Card.Body>

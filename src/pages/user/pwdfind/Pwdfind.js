@@ -49,6 +49,7 @@ const Pwdfind = () => {
     }).then(res => {
       alert("이메일을 확인해 주시기 바랍니다.")
       console.log(res)
+      history.push('/Login')
     });
   }
   return (

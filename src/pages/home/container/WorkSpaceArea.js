@@ -22,7 +22,6 @@ const WorkSpaceArea = ({ areaType }) => {
       <div><FaUserCog size='25' style={{ marginRight: 20 }} />Admin Workspace</div> :
       <div><FaUsers size='25' style={{ marginRight: 20 }} />Member Workspace</div>;
   };
-
   return (
     <Card style={workspaceStyle.style}>
       <Card.Header>
@@ -38,7 +37,7 @@ const WorkSpaceArea = ({ areaType }) => {
                 <WorkSpaceCard
                   workspace={workspace}
                   key={workspace.ws_id}
-                />,
+                />
               )
           }
         </Row>

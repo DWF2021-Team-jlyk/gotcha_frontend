@@ -14,7 +14,7 @@ export const addList = ({ list_name, ws_id, position }) =>
   );
 
 export const updateList = (data) =>
-  apiAxios('/main/wsList/list/update', { ...data });
+  apiAxios('/main/wsList/list/update', data);
 
 export const deleteList = ({ list_id }) =>
   apiAxios('/main/wsList/list/delete', {
@@ -45,7 +45,7 @@ export const addCard = ({
   });
 
 export const updateCard = (data) =>
-  apiAxios('/main/wsList/list/card/update', {...data });
+  apiAxios('/main/wsList/list/card/update', data);
 
 export const deleteCard = ({ card_id }) =>
   apiAxios('/main/wsList/list/card/delete', {
