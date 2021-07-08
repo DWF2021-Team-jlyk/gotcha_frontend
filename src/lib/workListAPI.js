@@ -13,7 +13,7 @@ export const addList = ({ list_name, ws_id, position }) =>
   );
 
 export const updateList = (data) =>
-  apiAxios('/main/wsList/list/update', { ...data });
+  apiAxios('/main/wsList/list/update', {listVO:{ ...data }});
 
 export const deleteList = ({ list_id }) =>
   apiAxios('/main/wsList/list/delete', {

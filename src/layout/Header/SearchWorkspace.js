@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { Button, FormControl, Overlay, Popover } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const SearchWorkspace = () => {
   const ref = useRef(null);
@@ -65,12 +65,6 @@ const SearchWorkspace = () => {
           </Popover>
         )}
       </Overlay>
-      <Button
-        variant='light'
-        style={{ color: '#3f51b5' }}
-      >
-        Search
-      </Button>
     </Form>
   );
 };

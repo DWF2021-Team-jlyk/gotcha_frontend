@@ -1,6 +1,6 @@
 import * as api from '../lib/workListAPI';
 import createRequest from '../lib/createRequest';
-import { handleActions } from 'redux-actions';
+import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 
 const POST_CARD = 'workspace/POST_CARD';
@@ -19,10 +19,13 @@ const CARD_DELETE = 'workspace/CARD_DELETE';
 const CARD_DELETE_SUCCESS = 'workspace/CARD_DELETE_SUCCESS';
 const CARD_DELETE_FAILURE = 'workspace/CARD_DELETE_FAILURE';
 
+const CARD_UNMOUNT = "workspace/CARD_UNMOUNT";
+
 export const postCard = createRequest(POST_CARD, api.postCard);
 export const cardAdd = createRequest(CARD_ADD, api.addCard);
 export const cardUpdate = createRequest(CARD_UPDATE, api.updateCard);
 export const cardDelete = createRequest(CARD_DELETE, api.deleteCard);
+export const cardUnmount = createAction(CARD_UNMOUNT);
 
 
 const initialState = {
@@ -62,6 +65,10 @@ const workspaceCard = handleActions(
           .findIndex(card=>card.card_id === action.payload.card_id);
         draft.cards.splice(index,1);
       }),
+    [CARD_UNMOUNT]:(state, action)=>
+      produce(state, draft=>{
+        draft.cards = [];
+      })
   },
   initialState,
 );

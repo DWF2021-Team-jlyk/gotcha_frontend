@@ -17,22 +17,22 @@ const NotiCard = ({ noti }) => {
   )
   const returnTypeColor = (type) => {
     switch (type) {
-      case 'card':
+      case 'c':
         return 'primary'; //card
-      case 'board':
+      case 'b':
         return 'danger'; //board
-      case 'invite':
+      case 'i':
         return 'success'; //invite
       default:
         return 'secondary'; //todo
     }
   };
   return (
-    <Alert variant={returnTypeColor(noti.type)}>
+    <Alert variant={returnTypeColor(noti.noti_type)}>
       <div style={{display:"flex"}}>
         <div>
           <Alert.Link as={Link} to={`/workspace/${noti.ws_id}`} style={{ textDecoration: 'none' }}>
-            <h4 style={{ marginBottom: 20 }}>{noti.workspaceName}</h4>
+            <h4 style={{ marginBottom: 20 }}>{noti.ws_name}</h4>
           </Alert.Link>
         </div> 
 
@@ -43,10 +43,10 @@ const NotiCard = ({ noti }) => {
       </div>
       <Card>
         <Card.Header>
-          {noti.title}
+          {noti.ws_name}
         </Card.Header>
-        <Card.Body>{noti.desc}</Card.Body>
-        <Card.Footer>{noti.endDate}</Card.Footer>
+        <Card.Body>{noti.noti_desc}</Card.Body>
+        <Card.Footer>{noti.noti_time}</Card.Footer>
       </Card>
     </Alert>
   );

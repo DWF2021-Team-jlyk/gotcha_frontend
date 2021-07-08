@@ -5,6 +5,7 @@ import '../../css/WorkListCard.css';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { cardUpdate } from '../../../../modules/workspaceCard';
+import { registerCard } from '../../../../modules/cardForModal';
 
 const WorkListCardModal = loadable(() => import('./WorkListCardModal'));
 
@@ -19,9 +20,10 @@ const WorkListCard = ({card}) => {
   };
   const cardInputEL = useRef(null);
 
-  const onActiveInputClick = () => {
+  const onActiveInputClick = (card) => {
     if (editable === false) {
       setOpenModal(true);
+      dispatch(registerCard(card));
     }
   };
 
@@ -58,7 +60,7 @@ const WorkListCard = ({card}) => {
         <div className='cardInfoDiv'>
           <div
             className='cardInputDiv'
-            onClick={onActiveInputClick}
+            onClick={e=>onActiveInputClick(card)}
           >
             <input
               className='cardInput'

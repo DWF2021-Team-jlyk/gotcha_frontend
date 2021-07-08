@@ -17,14 +17,12 @@ const UPDATE_WORKSPACE = 'workspace/UPDATE_WORKSPACE';
 const UPDATE_WORKSPACE_SUCCESS = 'workspace/UPDATE_WORKSPACE_SUCCESS';
 
 export const deleteWorkspace =
-  createAction(DELETE_WORKSPACE, ws_id=>ws_id);
+  createAction(DELETE_WORKSPACE, ws_id => ws_id);
 export const changeWorkspaceFav =
   createAction(CHANGE_WORKSPACE_FAV, ws_id => ws_id);
 
 export const postWorkspaces = createRequest(POST_WORKSPACES, api.postGetWorkspaces);
 export const addWorkspaces = createRequest(ADD_WORKSPACE, api.postAddWorkspace);
-export const updateWorkspace = createRequest(UPDATE_WORKSPACE, api.updateWorkspace);
-
 export const updateWorkspace = createRequest(UPDATE_WORKSPACE, api.updateWorkspace);
 
 const initialState = {
@@ -36,7 +34,7 @@ const workspace = handleActions(
     [ADD_WORKSPACE_SUCCESS]: (state, action) =>
       produce(state, draft => {
         draft.workspaces.push(action.payload);
-    }),
+      }),
     [CHANGE_WORKSPACE_FAV]: (state, { payload: ws_id }) =>
       produce(state, draft => {
         const workspace = draft.workspaces.find(ws => ws.ws_id === ws_id);
@@ -52,10 +50,10 @@ const workspace = handleActions(
       produce(state, draft => {
         draft.workspaces = action.payload;
       }),
-    [UPDATE_WORKSPACE_SUCCESS]: (state, action) => 
+    [UPDATE_WORKSPACE_SUCCESS]: (state, action) =>
       produce(state, draft => {
         const index = draft.workspaces
-          .findIndex(ws=> ws.ws_id === action.payload.ws_id);
+          .findIndex(ws => ws.ws_id === action.payload.ws_id);
         draft.workspaces.splice(index, 1, action.payload);
       }),
   },

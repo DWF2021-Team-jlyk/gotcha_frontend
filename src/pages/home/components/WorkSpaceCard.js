@@ -11,14 +11,13 @@ import HomeStyles from '../HomeStyles';
 const WorkSpaceCard = ({ workspace }) => {
   const isFav = is_fav => is_fav ? true : false;
   const dispatch = useDispatch();
-  const [ws, setWs] = useState({...workspace});
-  const onToggle = useCallback(
-    ws_id => dispatch(changeWorkspaceFav(ws_id)),
-    dispatch(updateWorkspace({...workspace, is_fav: (workspace.is_fav? "0" : "1")}))
+  const [ws, setWs] = useState({ ...workspace });
+  const onToggle = useCallback(() =>
+      dispatch(updateWorkspace({ ...workspace, is_fav: (workspace.is_fav ? '0' : '1') })),
     [dispatch],
   );
-  useEffect(()=>{
-    setWs({...workspace});
+  useEffect(() => {
+    setWs({ ...workspace });
   }, [workspace]);
   return (
     <Card style={HomeStyles.cardStyle}>
@@ -35,8 +34,8 @@ const WorkSpaceCard = ({ workspace }) => {
               </Link>
             </div>
             <div>
-              {isFav(ws.is_fav) && <AiFillStar style={HomeStyles.starStyle} onClick={e=>onToggle(ws.ws_id)} />}
-              {!isFav(ws.is_fav) && <AiOutlineStar style={HomeStyles.starStyle} onClick={e=>onToggle(ws.ws_id)} />}
+              {isFav(ws.is_fav) && <AiFillStar style={HomeStyles.starStyle} onClick={e => onToggle(ws.ws_id)} />}
+              {!isFav(ws.is_fav) && <AiOutlineStar style={HomeStyles.starStyle} onClick={e => onToggle(ws.ws_id)} />}
             </div>
           </Card.Text>
         </Row>

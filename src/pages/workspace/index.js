@@ -5,8 +5,8 @@ import loadable from '@loadable/component';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { postList } from '../../modules/workspaceList';
-import { postCard } from '../../modules/workspaceCard';
+import { listUnmount, listUpdate, postList } from '../../modules/workspaceList';
+import { cardUnmount, postCard } from '../../modules/workspaceCard';
 
 const WorkList = loadable(()=>import('./WorkList'));
 const Calendar = loadable(() => import('../calendar'));

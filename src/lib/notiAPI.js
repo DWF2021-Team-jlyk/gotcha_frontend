@@ -1,7 +1,7 @@
 import apiAxios from './apiAxios';
 
-export const postGetNoti =
-  user_id => apiAxios('/home/notiList', { user_id: user_id });
+export const postNoti =
+  () => apiAxios('/home/notiList');
 
 export const postDeleteNoti =
   noti_id => apiAxios('/home/deleteNoti', {noti_id:noti_id});

@@ -4,7 +4,6 @@ import {
   Col,
   Form,
   Modal,
-  ModalHeader,
   ModalBody,
   ModalFooter,
   ModalTitle,
@@ -24,40 +23,40 @@ const WorkSpaceAddModal = (props) => {
   const dispatch = useDispatch();
   const [workspaceName, setWorkspaceName] = useState('');
   const [inviteMember, setInviteMember] = useState('');
-  const [image, setImage] = useState('')
+  const [image, setImage] = useState('');
   const [previewImg, setPreviewImg] = useState();
   const [userEmail, setUserEmail] = useState('');
   const [emailList, setEmailList] = useState([]);
   const emailEl = useRef(null);
-    // 모달 초기화
-    useEffect(() => {
-      if (props.clicked == true) {
-        setWorkspaceName('')
-        setInviteMember('')
-        setImage('')
-        setUserEmail('');
-        setEmailList([]);
-      }
-    }, [props.clicked])
+  // 모달 초기화
+  useEffect(() => {
+    if (props.clicked == true) {
+      setWorkspaceName('');
+      setInviteMember('');
+      setImage('');
+      setUserEmail('');
+      setEmailList([]);
+    }
+  }, [props.clicked]);
 
-      // 워크스페이스 추가
-  const addWorkspaceClick = async (e) =>{
+  // 워크스페이스 추가
+  const addWorkspaceClick = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("ws_name",workspaceName)
-    console.log('ws_isImage : ',image);
-    formData.append("ws_isImage", image)
+    formData.append('ws_name', workspaceName);
+    console.log('ws_isImage : ', image);
+    formData.append('ws_isImage', image);
     for (let key of formData.keys())
-    console.log('key',key);
+      console.log('key', key);
     for (let value of formData.values())
-    console.log('value',value);
+      console.log('value', value);
     // dispatch(addWorkspaces(formData))
-    const response = await axios.post("/home/addWorkspace", {
+    const response = await axios.post('/home/addWorkspace', {
       formData,
-      'accessToken': sessionStorage.getItem('accessToken')
+      'accessToken': sessionStorage.getItem('accessToken'),
     });
-    console.log('???',response);
-  }
+    console.log('???', response);
+  };
 
   // 워크스페이스 이름
   function onNameChange(e) {
@@ -66,28 +65,28 @@ const WorkSpaceAddModal = (props) => {
 
   // 멤버초대 input
   function onInviteChange(e) {
-    setInviteMember(e.target.value)
+    setInviteMember(e.target.value);
   }
 
   // 멤버초대 버튼
   function inviteMemberBtn() {
-    alert(inviteMember)
-    
+    alert(inviteMember);
+
   }
-  
+
   // 파일 추가 버튼
   function onFileChange(e) {
     let reader = new FileReader();
     reader.onloadend = () => {
       const prev = reader.result;
-      if(prev)
-      setPreviewImg(prev.toString());
-    }
-    if(e.target.files[0]) {
+      if (prev)
+        setPreviewImg(prev.toString());
+    };
+    if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0]);
-      setImage(e.target.files[0]);  
+      setImage(e.target.files[0]);
     }
-    
+
   }
 
   return (
@@ -106,11 +105,11 @@ const WorkSpaceAddModal = (props) => {
             <Form.Label>WorkSpace Name</Form.Label>
             <Row>
               <Col sm={8}>
-                <Form.Control 
-                  type='text' 
+                <Form.Control
+                  type='text'
                   name='workspaceName'
                   value={workspaceName}
-                  onChange={onNameChange}/>
+                  onChange={onNameChange} />
               </Col>
             </Row>
           </Form.Group>
@@ -119,7 +118,7 @@ const WorkSpaceAddModal = (props) => {
             <Form.Label>WorkSpace Thumbnail 사진</Form.Label>
             <Row>
               <Col sm={8}>
-                <Form.Control 
+                <Form.Control
                   type='file'
                   accept='image/png,image/jpeg,image/gif'
                   name='imgFile'
@@ -130,16 +129,23 @@ const WorkSpaceAddModal = (props) => {
                 <Button>사진 추가하기</Button>
               </Col> */}
               {
-                image === '' ? null : <img src={previewImg} alt="img" height={"200px"}/>
+                image === '' ? null : <img src={previewImg} alt='img' height={'200px'} />
               }
             </Row>
           </Form.Group>
           <br />
-          <SearchMember emailList={emailList} setEmailList={setEmailList}/>
+          <SearchMember emailList={emailList} setEmailList={setEmailList} />
         </Form>
         <Row>
           {emailList.map((email, index) => {
-            return <UserAvatar user_id={email} key={index} />;
+            return (
+              <UserAvatar
+                key={index}
+                list={emailList}
+                setList={setEmailList}
+                user_id={email}
+              />
+            );
           })}
         </Row>
       </ModalBody>
