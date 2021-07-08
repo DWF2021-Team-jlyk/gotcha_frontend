@@ -53,8 +53,10 @@ const WorkListCardModal = (props) => {
         <Row>
           <Col sm={9}>
 
-            <CardMember cardMember = {cardMembers}></CardMember>
-            <CardDesc></CardDesc>
+            <CardMember cardMember = {cardMembers}>
+              card={card}
+            </CardMember>
+            <CardDesc card ={card}></CardDesc>
             <CardTodo 
             cardTodo = {cardTodos}
             cardId = {cardId}></CardTodo>

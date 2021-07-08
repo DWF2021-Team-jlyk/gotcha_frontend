@@ -4,7 +4,8 @@ import { Button, Form } from 'react-bootstrap';
 import { cardUpdate } from '../../../../modules/workspaceCard';
 import { useDispatch } from 'react-redux';
 
-const CardDesc = ({ card }) => {
+const CardDesc = (props) => {
+  const{card} = props;
   const [desc, setDesc] = useState(false);
   const [changeDesc, setChangeDesc] = useState('');
 
