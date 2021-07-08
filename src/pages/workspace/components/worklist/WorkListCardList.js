@@ -62,7 +62,7 @@ const WorkListCardList = (props) => {
     }
   };
 
-  console.log(cards);
+  console.log("WorkListCardList cards",cards);
   return (
     <Card className="ListStyle">
       <Card.Header className="CardHeaderStyle">
@@ -109,16 +109,8 @@ const WorkListCardList = (props) => {
         {showCardInput && (
           <div>
             <input
-              //value={cardTitle}
               onChange={(e) => setCardTitle(e.target.value)}
               ref={cardInputEl}
-              // onBlur={(e) => {
-              //   e.target.value = '';
-              //   setShowCardInput(false);
-              // }}
-              // onfocusout={(e) => {
-              //   e.target.value = '';
-              // }}
             />
             <Button
               onClick={(e) => {
@@ -139,7 +131,6 @@ const WorkListCardList = (props) => {
           onClick={async (e) => {
             await setShowCardInput(true);
             cardInputEl.current.focus();
-            // console.log(cardInputEl.current);
           }}
         >
           + Add Another Card

@@ -8,5 +8,5 @@ export default function apiAxios(url, data){
     data:{
       ...data
     }
-  })
+  }) 
 }

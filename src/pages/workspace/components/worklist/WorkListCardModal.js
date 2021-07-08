@@ -14,49 +14,31 @@ import axios from 'axios';
 import CardMember from '../CardModal/CardMember';
 import CardAct from '../CardModal/CardAct';
 import CardDesc from '../CardModal/CardDesc';
-import CardTodo from '../CardModal/CardTodo';
+import CardTodo from '../CardModal/CardTodo.js';
 import CardModalHeader from '../CardModal/CardModalHeader';
 import { useSelector, useDispatch } from 'react-redux';
-import postCardMember from '../../../../modules/cardMember'
+import {postCardMember} from '../../../../modules/cardMember'
+import { postCardTodo } from '../../../../modules/cardTodo';
+import { cardDelete } from '../../../../modules/workspaceCard';
 
 
 const WorkListCardModal = (props) => {
 
-  const {card_id} = props;
-  
+ const {cardId, card} = props
+  console.log("WorkListCardModal card:",card);
   const cardMembers = useSelector((state) => state.cardMember.members);
+  const cardTodos = useSelector((state)=> state.cardTodo.todos);
 
   const dispatch = useDispatch();
   
   useEffect(() => {
-    dispatch(postCardMember(card_id));
-
-  }, [card_id]);
-
-  console.log(card_id);
-  // const [cardDTO, setCardDTO] = useState({}); //gc_card 
-  // const [cardAct, setCardAct] = useState([]);
-  // const [cardFile, setCardFile] = useState({});
-  // const [cardMember, setCardmember] = useState([]);
-  // const [cardTodo, setCardTodo] = useState([]);
-
-
-  // useEffect(() => {
-  //   getDetail();
-  // }, []);
-
-  // const getDetail = async () => {
-  //   const result = await axios.post('/card/cardDetail', {
-  //     card_id: props.cardId
-  //   });
-  //   console.log(result.data);
-
-  //   setCardDTO(result.data.cardDTO);
-  //   setCardAct(result.data.cardActs);
-  //   setCardFile(result.data.cardFiles);
-  //   setCardmember(result.data.cardMembers);
-  //   setCardTodo(result.data.cardTodos);
-  // };
+    dispatch(
+      postCardMember(cardId));
+    dispatch(
+      postCardTodo(cardId)
+    );
+  }, [cardId]);
+  
 
   return (
     <Modal
@@ -73,14 +55,18 @@ const WorkListCardModal = (props) => {
           <Col sm={9}>
             <CardMember cardMember = {cardMembers}></CardMember>
             <CardDesc></CardDesc>
-            <CardTodo ></CardTodo>
-            <CardAct></CardAct>  
+            <CardTodo 
+            cardTodo = {cardTodos}
+            cardId = {cardId}></CardTodo>
+            {/* <CardAct></CardAct>   */}
           </Col>
 
           <Col sm={3}>
             <div>
               <h5>ADD TO CARD</h5>
-              <FunctionalAddOn />
+              <FunctionalAddOn 
+              cardId = {cardId}
+              card={card} />
             </div>
             <br />
             <div>

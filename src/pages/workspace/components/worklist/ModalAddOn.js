@@ -11,12 +11,15 @@ const buttonStyle = {
   width: '150px',
   marginTop: '5px'
 }
-export const FunctionalAddOn = () => {
+
+export const FunctionalAddOn = (props) => {
+  const {cardId, card} = props
+  console.log("ModalAddOn card:",card);
   return (
     <>
       <AddMember></AddMember>
-      <AddDate></AddDate>
-      <AddTodo></AddTodo>
+      <AddDate card = {card}></AddDate>
+      <AddTodo cardId = {cardId}></AddTodo>
       <AddFile></AddFile>
     </>
   );

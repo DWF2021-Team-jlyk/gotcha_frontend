@@ -11,7 +11,7 @@ export const startLoading = createAction(
 export const finishLoading = createAction(
   FINISH_LOADING,
   requestType => requestType,
-)();
+);
 
 const initialState = {};
 

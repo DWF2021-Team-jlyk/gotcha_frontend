@@ -43,11 +43,12 @@ export const addCard = ({
   });
 
 export const updateCard = ({
-                             card_name, card_desc, list_id, ws_id, card_isdone,
+                             card_id,card_name, card_desc, list_id, ws_id, card_isdone,
                              card_start_date, card_end_date,
                            }) =>
-  apiAxios('main/wsList/list/card/update',
+  apiAxios('/main/wsList/list/card/update',
     {
+      card_id:card_id,
       card_name: card_name,
       card_desc: card_desc,
       list_id: list_id,
@@ -58,6 +59,6 @@ export const updateCard = ({
     });
 
 export const deleteCard = ({ card_id }) =>
-  apiAxios('main/wsList/list/card/delete', {
+  apiAxios('/main/wsList/list/card/delete', {
     card_id: card_id,
   });

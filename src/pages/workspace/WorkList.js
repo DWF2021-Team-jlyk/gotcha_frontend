@@ -5,8 +5,7 @@ import WorkSpaceData from '../../DummyData/WorkSpaceData';
 import { useDispatch, useSelector } from 'react-redux';
 import { listAdd } from '../../modules/workspaceList';
 import WorkListCardList from './components/worklist/WorkListCardList';
-import { addList } from '../../lib/workListAPI';
-//import {addList} from '../../modules/addlist';
+
 
 
 const listStyle = {
@@ -57,7 +56,6 @@ const WorkList = (props) => {
                 list={list}
                 listId={list.list_id}
                 ws_id={ws_id}
-                // setList={setLists}
               />
             </div>
           );
