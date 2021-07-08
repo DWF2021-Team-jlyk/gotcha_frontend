@@ -11,7 +11,7 @@ const CardModalHeader = () => {
       closeButton
     >
       <h3 style={{ color: 'white' }}>
-        <TiDocument />
+        <TiDocument /> 
       </h3>
     </ModalHeader>
   )

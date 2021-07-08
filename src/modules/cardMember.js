@@ -1,37 +1,43 @@
 import createRequest from '../lib/createRequest';
-import * as api from '../lib/cardDetailAPI';
+import * as api from '../lib/cardMemberAPI';
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 
 
 const POST_CARD_MEMBER = 'cardDetail/POST_CARD_MEMBER';
 const POST_CARD_MEMBER_SUCCESS = 'cardDetail/POST_CARD_MEMBER_SUCCESS';
-const POST_CARD_MEMBER_FAILURE = 'cardDetail/POST_CARD_MEMBER_FAILURE';
+
+const INSERT_CARD_MEMBER = 'cardDetail/INSERT_CARD_MEMBER';
+const INSERT_CARD_MEMBER_SUCCESS = 'cardDetail/INSERT_CARD_MEMBER_SUCCESS';
+
+const DELETE_CARD_MEMBER = 'cardDetail/DELETE_CARD_MEMBER';
+const DELETE_CARD_MEMBER_SUCCESS = 'cardDetail/DELETE_CARD_MEMBER_SUCCESS';
 
 export const postCardMember = createRequest(POST_CARD_MEMBER, api.postMember);
-
+export const insertCardMember = createRequest(INSERT_CARD_MEMBER, api.addCardMember);
+export const deleteCardMember = createRequest(DELETE_CARD_MEMBER, api.removeCardMember);
 
 const initialState = {
-  loading: {
-    POST_CARD_MEMBER: false,
-  },
   members: [],
 };
 
 const cardMember = handleActions(
   {
-    [POST_CARD_MEMBER]: (state, action) =>
-      produce(state, draft=>{
-        draft.loading.POST_CARD_MEMBER = true;
-      }),
     [POST_CARD_MEMBER_SUCCESS]: (state, action) =>
-      produce(state, draft=>{
-        draft.loading.POST_CARD_MEMBER = false;
-        draft.todos = action.payload;
+      produce(state, (draft) => {
+        draft.members = action.payload;
       }),
-    [POST_CARD_MEMBER_FAILURE]: (state, action) =>
-      produce(state, draft=>{
-        draft.loading.POST_CARD_MEMBER = false;
+
+    [INSERT_CARD_MEMBER_SUCCESS]: (state, action) =>
+      produce(state, (draft) => {
+        draft.members.push(action.payload);
+      }),
+
+    [DELETE_CARD_MEMBER_SUCCESS]: (state, action) =>
+      produce(state, (draft) => {
+        const index = 
+        draft.members.findIndex(member => member.user_id === action.payload.user_id);
+        draft.members.splice(index, 1);
       }),
   },
   initialState,

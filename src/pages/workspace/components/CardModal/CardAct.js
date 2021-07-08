@@ -1,10 +1,10 @@
-import React , {useState} from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { AiOutlineAlignLeft } from 'react-icons/ai';
 import { Avatar } from '@material-ui/core';
-import {
-  Button,
-  Form
-} from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import ActArea from './ActArea';
+import { postCardAct, insertCardAct } from '../../../../modules/cardAct';
 
 const avatarIcon = (id) => {
   let returnStr = id.charAt(0);
@@ -15,12 +15,52 @@ const avatarIcon = (id) => {
   return returnStr;
 };
 
-const CardAct = ({ cardAct }) => {
+const CardAct = ({ card }) => {
   const [showLog, setShowLog] = useState(false);
+  const [actDesc, setActDesc] = useState('');
+  const [isActive, setIsActive] = useState(true);
+
+  const cardAct = useSelector((state) => state.cardAct.acts);
+  const dispatch = useDispatch();
+
+  // useCallback(()=>
+  //   dispatch(postCardAct(card.card_id))
+  // );
+
+
+  const insertAct = (card_id, user_id, islog, act_desc) =>{
+    dispatch(
+      insertCardAct({
+        card_id: card_id,
+        user_id: user_id,
+        islog: islog,
+        act_desc: act_desc,
+      })
+    )
+  };
+  useEffect(() => {
+    dispatch(postCardAct(card.card_id));
+  },[]);
+
+  useEffect(() => {
+    if (actDesc.length > 0) {
+      setIsActive(false);
+    } else {
+      setIsActive(true);
+    }
+  }, [actDesc]);
+
+  const actInputEL = useRef(null);
 
   const onClickShowLog = () => {
     setShowLog(!showLog);
   };
+
+  const actDescInput = (e) => {
+    setActDesc(e.target.value);
+  };
+
+  const result = cardAct.filter((act) => act.islog == 0);
 
   return (
     <>
@@ -54,6 +94,8 @@ const CardAct = ({ cardAct }) => {
               type="text"
               placeholder="Write a comment..."
               style={{ width: 445, marginRight: 10, height: 40 }}
+              onChange={actDescInput}
+              ref={actInputEL}
             />
             <Button
               style={{
@@ -61,6 +103,13 @@ const CardAct = ({ cardAct }) => {
                 border: '1px solid #7986CB',
                 height: 40,
               }}
+              onClick={() => {
+                insertAct(card.card_id, 'user01@naver.com', '0', actDesc);
+                setActDesc('');
+                actInputEL.current.value = '';
+              }}
+
+              disabled={isActive}
             >
               입력
             </Button>
@@ -68,95 +117,11 @@ const CardAct = ({ cardAct }) => {
         </div>
       </Form.Group>
 
-      <div style={{ height: 200 }}>
+      <div>
         {showLog === true ? (
-          <>
-            {cardAct.map((value, key) => {
-              return (
-                <>
-                  <div style={{ display: 'flex', marginBottom: 7 }}>
-                    <div>
-                      <Avatar
-                        onClick={(event) => {}}
-                        style={{ margin: '10px 10px 0px 5px' }}
-                      >
-                        {avatarIcon(value.user_id)}
-                      </Avatar>
-                    </div>
-
-                    <div>
-                      <div style={{ marginTop: 7, fontSize: '.9rem' }}>
-                        <b>{value.user_id}</b>{' '}
-                        <span style={{ fontSize: '0.8rem' }}>
-                          {value.created_date}
-                        </span>
-                      </div>
-                      <div style={{ marginTop: 10, marginBottom: 10 }}>
-                        <span
-                          style={{
-                            border: '1px solid #ced4da',
-                            fontSize: '.95rem',
-                            padding: 5,
-                            borderRadius: 4,
-                          }}
-                        >
-                          {value.act_desc}
-                        </span>
-                      </div>
-                      <div style={{ marginTop: 3, fontSize: '.8rem' }}>
-                        Edit Delete
-                      </div>
-                    </div>
-                  </div>
-                </>
-              );
-            })}
-          </>
+          <ActArea cardId={card.card_id} cardAct={cardAct} />
         ) : (
-          <>
-            {cardAct.map((value, key) => {
-              if (value.islog == 0) {
-                return (
-                  <>
-                    <div style={{ display: 'flex', marginBottom: 7 }}>
-                      <div>
-                        <Avatar
-                          onClick={(event) => {}}
-                          style={{ margin: '10px 10px 0px 5px' }}
-                        >
-                          {avatarIcon(value.user_id)}
-                        </Avatar>
-                      </div>
-
-                      <div>
-                        <div style={{ marginTop: 7, fontSize: '.9rem' }}>
-                          <b>{value.user_id}</b>{' '}
-                          <span style={{ fontSize: '0.8rem' }}>
-                            {value.created_date}
-                          </span>
-                        </div>
-                        <div style={{ marginTop: 10, marginBottom: 10 }}>
-                          <span
-                            style={{
-                              border: '1px solid #ced4da',
-                              fontSize: '.95rem',
-                              padding: 5,
-                              borderRadius: 4,
-                            }}
-                          >
-                            {value.act_desc}
-                          </span>
-                        </div>
-                        <div style={{ marginTop: 3, fontSize: '.8rem' }}>
-                          Edit Delete
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                );
-              }
-            })}
-          </>
+          <ActArea cardId={card.card_id} cardAct={result}></ActArea>
         )}
       </div>
     </>
