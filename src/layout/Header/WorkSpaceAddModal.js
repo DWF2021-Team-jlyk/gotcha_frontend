@@ -27,7 +27,7 @@ const WorkSpaceAddModal = (props) => {
   const history = useHistory();
   const [workspaceName, setWorkspaceName] = useState('');
   const [inviteMember, setInviteMember] = useState('');
-  const [image, setImage] = useState('')
+  const [image, setImage] = useState('');
   const [previewImg, setPreviewImg] = useState();
   const [emailList, setEmailList] = useState([]);
   const emailEl = useRef(null);
@@ -55,9 +55,9 @@ const WorkSpaceAddModal = (props) => {
     formData.append("ws_isImage", image)
     console.log('ws_isImage : ',image);
     for (let key of formData.keys())
-    console.log('key',key);
+      console.log('key', key);
     for (let value of formData.values())
-    console.log('value',value);
+      console.log('value', value);
     // dispatch(addWorkspaces(formData))
     const token = sessionStorage.getItem('accessToken')
     console.log("token",token)
@@ -93,14 +93,14 @@ const WorkSpaceAddModal = (props) => {
     let reader = new FileReader();
     reader.onloadend = () => {
       const prev = reader.result;
-      if(prev)
-      setPreviewImg(prev.toString());
-    }
-    if(e.target.files[0]) {
+      if (prev)
+        setPreviewImg(prev.toString());
+    };
+    if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0]);
-      setImage(e.target.files[0]);  
+      setImage(e.target.files[0]);
     }
-    
+
   }
 
   return (
@@ -119,11 +119,11 @@ const WorkSpaceAddModal = (props) => {
             <Form.Label>WorkSpace Name</Form.Label>
             <Row>
               <Col sm={8}>
-                <Form.Control 
-                  type='text' 
+                <Form.Control
+                  type='text'
                   name='workspaceName'
                   value={workspaceName}
-                  onChange={onNameChange}/>
+                  onChange={onNameChange} />
               </Col>
             </Row>
           </Form.Group>
@@ -132,7 +132,7 @@ const WorkSpaceAddModal = (props) => {
             <Form.Label>WorkSpace Thumbnail 사진</Form.Label>
             <Row>
               <Col sm={8}>
-                <Form.Control 
+                <Form.Control
                   type='file'
                   accept='image/png,image/jpeg,image/gif'
                   name='imgFile'
@@ -143,16 +143,23 @@ const WorkSpaceAddModal = (props) => {
                 <Button>사진 추가하기</Button>
               </Col> */}
               {
-                image === '' ? null : <img src={previewImg} alt="img" height={"200px"}/>
+                image === '' ? null : <img src={previewImg} alt='img' height={'200px'} />
               }
             </Row>
           </Form.Group>
           <br />
-          <SearchMember emailList={emailList} setEmailList={setEmailList}/>
+          <SearchMember emailList={emailList} setEmailList={setEmailList} />
         </Form>
         <Row>
           {emailList.map((email, index) => {
-            return <UserAvatar user_id={email} key={index} />;
+            return (
+              <UserAvatar
+                key={index}
+                list={emailList}
+                setList={setEmailList}
+                user_id={email}
+              />
+            );
           })}
         </Row>
       </ModalBody>

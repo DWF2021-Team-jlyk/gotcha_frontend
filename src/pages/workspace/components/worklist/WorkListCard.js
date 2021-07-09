@@ -1,32 +1,38 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import loadable from '@loadable/component';
 import { AiFillEdit } from 'react-icons/all';
-import '../../css/WorkListCard.css';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
+import { Button } from 'react-bootstrap';
 import { cardUpdate } from '../../../../modules/workspaceCard';
+import { registerCard } from '../../../../modules/cardForModal';
+import "../../css/WorkListCard.css"
 
 const WorkListCardModal = loadable(() => import('./WorkListCardModal'));
 
-const WorkListCard = ({card}) => {
+const WorkListCard = (props) => {
+  const { card, ws_id } = props;
   const [openModal, setOpenModal] = useState(false);
   const [editable, setEditable] = useState(false);
+
   const [editbutton, setEditButton] = useState(false);
   const [cardName, setCardName] = useState("");
   const dispatch = useDispatch();
   const handleModal = () => {
     setOpenModal(false);
   };
+
   const cardInputEL = useRef(null);
 
-  const onActiveInputClick = () => {
+  const onActiveInputClick = (card) => {
     if (editable === false) {
+      // console.log(card.cardId);
+      console.log(card.card_id);
       setOpenModal(true);
+      dispatch(registerCard(card));
     }
   };
 
   const onSaveCard =useCallback( cardName=> {
-    console.log(cardName);
     dispatch(cardUpdate({...card, card_name:cardName}));
   }, [dispatch]);
 
@@ -58,8 +64,9 @@ const WorkListCard = ({card}) => {
         <div className='cardInfoDiv'>
           <div
             className='cardInputDiv'
-            onClick={onActiveInputClick}
+            onClick={e=>onActiveInputClick(card)}
           >
+
             <input
               className='cardInput'
               defaultValue={cardName}
@@ -75,7 +82,9 @@ const WorkListCard = ({card}) => {
                 }
               }}
             />
+
           </div>
+
           <div
             onClick={handleEditable}
             className='cardButton'
@@ -85,14 +94,17 @@ const WorkListCard = ({card}) => {
               size='20'
             />
           </div>
+
         </div>
       </div>
       {
         openModal
         &&
         <WorkListCardModal
-          cardId={card.card_id}
+          card={card}
+          cardId = {card.card_id}
           show={openModal}
+          ws_id={ws_id}
           handle={handleModal}
         />
       }

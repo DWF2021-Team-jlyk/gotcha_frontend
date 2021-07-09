@@ -1,19 +1,18 @@
 import React from 'react';
-import Sidebar from './layout/Sidebar';
-import Home from './pages/home';
-import Header from './layout/Header';
 import Login from './pages/user/Login';
-import { Route } from 'react-router-dom';
 import loadable from '@loadable/component';
 import PublicRoute from './lib/pulblicRoute';
 import PrivateRoute from './lib/privateRoute';
 import './layout/css/font.css';
 
+const Home = loadable(()=>import('./pages/home'));
 const Workspace = loadable(() => import('./pages/workspace'));
 const Join = loadable(() => import('./pages/user/signUp'));
 const Code = loadable(() => import('./pages/user/signUp/Code'));
 const Mypage = loadable(() => import('./pages/user/mypage/mypage'));
 const Pwdfind = loadable(() => import('./pages/user/pwdfind/Pwdfind'));
+const Sidebar = loadable(()=>import('./layout/Sidebar'));
+const Header = loadable(()=>import('./layout/Header'));
 
 const style = {
   display: 'flex',
@@ -38,64 +37,23 @@ const side = {
 const App = () => {
   return (
     <div className='font'>
-      {/*<Switch>*/}
-      {/* <Route exact path='/Login'>
-        <div>
-          <Login />
-        </div>
-      </Route> */}
       <PublicRoute restricted={true} component={Login} exact path='/Login'/>
-
-      {/*<Route exact path="/">*/}
-      <PrivateRoute component={Header} path='/' />
-      {/* <Header /> */}
-      {/*<div style={{*/}
-      {/*    display:"flex",*/}
-      {/*    height:"100%"*/}
-      {/*}}>*/}
-      {/*    <Sidebar/>*/}
-      {/*    <Home/>*/}
-      {/*    /!*<Workspace/>*!/*/}
-      {/*</div>*/}
+      <PublicRoute restricted={true} component={Code} exact path='/Code' />
+      <PublicRoute restricted={true} component={Join} exact path='/Join' />
+      <PublicRoute restricted={true} component={Pwdfind} exact path='/Pwdfind' />
+      <PrivateRoute component={Header} path='/'/>
       <div style={style}>
         <div style={side}>
-          <PrivateRoute component={Sidebar} path='/' />
-          {/* <Sidebar/> */}
+          <PrivateRoute component={Sidebar} path='/'/>
         </div>
         <div>
           <div>
-            {/* <Route exact path='/'>
-              <Home />
-            </Route>
-            <Route exact path='/workspace/:ws_id'>
-              <Workspace />
-            </Route>
-            <Route exact path='/Join'>
-              <Join />
-            </Route>
-            <Route exact path='/Code'>
-              <Code />
-            </Route>
-            <Route exact path='/Mypage'>
-              <Mypage />
-            </Route>
-            <Route exact path='/Pwdfind'>
-              <Pwdfind />
-            </Route> */}
             <PrivateRoute component={Home} exact path='/' />
             <PrivateRoute component={Workspace} exact path='/workspace/:ws_id' />
-            <PublicRoute restricted={true} component={Join} exact path='/Join' />
-            <PublicRoute restricted={true} component={Code} exact path='/Code' />
             <PrivateRoute component={Mypage} exact path='/Mypage' />
-            <PublicRoute restricted={true} component={Pwdfind} exact path='/Pwdfind' />
           </div>
         </div>
       </div>
-      {/* <footer>
-        this is footer
-      </footer> */}
-      {/*</Route>*/}
-      {/*</Switch>*/}
     </div>
   );
 };

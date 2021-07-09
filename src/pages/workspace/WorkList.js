@@ -15,7 +15,7 @@ const listStyle = {
 };
 
 const WorkList = (props) => {
-  const { cards, lists, ws_id } = props;
+  const { lists, ws_id } = props;
   const [listName, setListName] = useState('');
   const listEL = useRef(null);
   const [nextPosition, setNextPosition] = useState(0);
@@ -61,7 +61,6 @@ const WorkList = (props) => {
                 list={list}
                 listId={list.list_id}
                 ws_id={ws_id}
-                // setList={setLists}
               />
             </div>
           );

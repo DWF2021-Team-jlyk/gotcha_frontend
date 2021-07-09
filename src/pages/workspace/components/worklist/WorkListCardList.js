@@ -80,7 +80,6 @@ const WorkListCardList = (props) => {
     setListName(list.list_name);
   }, []);
 
-  console.log(position);
   return (
     <Card className='ListStyle'>
       <Card.Header
@@ -91,6 +90,7 @@ const WorkListCardList = (props) => {
           onChange={onListNameChange}
         />
         <AiOutlinePlusCircle style={PlusIcon} onClick={handleClick} />
+        
         <AiFillEdit
           style={{
             float: 'right',
@@ -101,6 +101,7 @@ const WorkListCardList = (props) => {
           }}
         />
       </Card.Header>
+
       <Menu
         id='simple-menu'
         anchorEl={anchorEl}
@@ -134,9 +135,12 @@ const WorkListCardList = (props) => {
           })
           .map((card, index) => {
             return (
-              <WorkListCard key={index} card={card} />
+              <WorkListCard key={index} ws_id={ws_id} card={card} />
             );
-          })}
+          })
+          
+    }
+          
         {showCardInput && (
           <div
             onBlur={(e) => {
@@ -145,8 +149,7 @@ const WorkListCardList = (props) => {
             }}
           >
             <input
-              //value={cardTitle}
-              onChange={onChange}
+              onChange={(e) => setCardTitle(e.target.value)}
               ref={cardInputEl}
               onKeyPress={e => {
                 if (e.key === 'Enter') {

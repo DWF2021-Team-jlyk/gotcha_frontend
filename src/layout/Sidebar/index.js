@@ -25,7 +25,7 @@ const Sidebar = () => {
     const member = workspaces.filter(workspace=>workspace.role_id===2);
 
     useEffect(()=>{
-        dispatch(postWorkspaces("user01@naver.com"));
+        dispatch(postWorkspaces());
     },[]);
 
     return (

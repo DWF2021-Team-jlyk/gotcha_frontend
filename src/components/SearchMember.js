@@ -29,10 +29,13 @@ const SearchMember = ({ emailList, setEmailList }) => {
   useEffect(() => {
     axios({
       method: 'post',
-      headers: { "Authorization": sessionStorage.getItem('accessToken'),'content-type': 'application/json' },
+      headers: {
+        'content-type': 'application/json',
+        "Authorization":sessionStorage.getItem("accessToken"),
+      },
       url: '/home/getAllUsers',
-      // data: {"accessToken":sessionStorage.getItem('accessToken')}
-      data:{}
+      data: {
+      }
     }).then(res => {
       setAllUsers([...res.data]);
     }).catch(error => {
@@ -62,7 +65,7 @@ const SearchMember = ({ emailList, setEmailList }) => {
               {(props) => (
                 <Popover id='popover-contained' {...props}>
                   <Popover.Content>
-                    <ListGroup style={{ overflowY: 'scroll', maxHeight: 300, width:500 }}>
+                    <ListGroup style={{ overflowY: 'scroll', maxHeight: 300,}}>
                       {allUsers
                         .filter(email => email.indexOf(userEmail) >= 0)
                         .filter(email => emailList.findIndex(e=>email===e)===-1)

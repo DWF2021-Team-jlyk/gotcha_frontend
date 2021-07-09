@@ -1,6 +1,6 @@
 import * as api from '../lib/workListAPI';
 import createRequest from '../lib/createRequest';
-import { handleActions } from 'redux-actions';
+import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 
 const POST_LIST = 'workspaceList/POST_LIST';
@@ -19,10 +19,13 @@ const LIST_DELETE = 'workspaceList/LIST_DELETE';
 const LIST_DELETE_SUCCESS = 'workspaceList/LIST_DELETE_SUCCESS';
 const LIST_DELETE_FAILURE = 'workspaceList/LIST_DELETE_FAILURE';
 
+const LIST_UNMOUNT = 'workspaceList/LIST_UNMOUNT';
+
 export const postList = createRequest(POST_LIST, api.postList);
 export const listAdd = createRequest(LIST_ADD, api.addList);
 export const listUpdate = createRequest(LIST_UPDATE, api.updateList);
 export const listDelete = createRequest(LIST_DELETE, api.deleteList);
+export const listUnmount = createAction(LIST_UNMOUNT);
 
 
 const initialState = {
@@ -33,19 +36,19 @@ const workspaceList = handleActions(
   {
     [POST_LIST_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        action.payload.sort((list1, list2)=>{
-          if(list1.position > list2.position)
+        action.payload.sort((list1, list2) => {
+          if (list1.position > list2.position)
             return 1;
           else
             return -1;
-        })
+        });
         draft.lists = action.payload;
       }),
     [LIST_ADD_SUCCESS]: (state, action) =>
       produce(state, draft => {
         draft.lists.push(action.payload);
-        draft.lists.sort((list1, list2)=>{
-          if(list1.position > list2.position)
+        draft.lists.sort((list1, list2) => {
+          if (list1.position > list2.position)
             return 1;
           else
             return -1;
@@ -58,18 +61,22 @@ const workspaceList = handleActions(
 
         draft.lists.splice(index, 1, action.payload);
 
-        draft.lists.sort((list1, list2)=>{
-          if(list1.position > list2.position)
+        draft.lists.sort((list1, list2) => {
+          if (list1.position > list2.position)
             return 1;
           else
             return -1;
-        })
+        });
       }),
     [LIST_DELETE_SUCCESS]: (state, action) =>
       produce(state, draft => {
         const index = draft.lists
           .findIndex(list => list.list_id === action.payload.list_id);
         draft.lists.splice(index, 1);
+      }),
+    [LIST_UNMOUNT]: (state, action) =>
+      produce(state, draft => {
+        draft.lists = [];
       }),
   },
   initialState,

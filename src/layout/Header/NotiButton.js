@@ -62,7 +62,7 @@ const NotiButton = () => {
   };
 
   useEffect(()=>{
-    dispatch(postNoti("user01@naver.com"));
+    dispatch(postNoti());
   }, []);
 
   return (
@@ -82,10 +82,11 @@ const NotiButton = () => {
       >
         {
           notification
-            .filter(noti => !noti.noti_read)
+            .filter(noti => !noti.noti_checked)
             .map(noti => {
               return <StyledMenuItem key={noti.noti_id}>
                 <ListItem
+                  key={noti.noti_id}
                   onClick={e=>{
                     onClick(noti);
                     handleClose();

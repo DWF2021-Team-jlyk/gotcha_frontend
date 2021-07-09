@@ -1,5 +1,5 @@
 import createRequest from '../lib/createRequest';
-import { postFile } from '../lib/cardDetailAPI';
+import { postFile } from '../lib/cardFileAPI';
 import { handleActions } from 'redux-actions';
 import produce from 'immer';
 

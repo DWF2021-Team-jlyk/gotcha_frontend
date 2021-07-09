@@ -13,23 +13,26 @@ import { FunctionalAddOn, ActionAddOn } from './ModalAddOn';
 import CardMember from '../CardModal/CardMember';
 import CardAct from '../CardModal/CardAct';
 import CardDesc from '../CardModal/CardDesc';
-import CardTodo from '../CardModal/CardTodo';
+import CardTodo from '../CardModal/CardTodo.js';
 import CardModalHeader from '../CardModal/CardModalHeader';
 import { useSelector, useDispatch } from 'react-redux';
 import { postCardMember } from '../../../../modules/cardMember';
+import { postCardTodo } from '../../../../modules/cardTodo';
+import { cardDelete } from '../../../../modules/workspaceCard';
 
 const WorkListCardModal = (props) => {
-  const {cardId} = props;
-  console.log({cardId})
+  const { cardId, card } = props;
+  // console.log('WorkListCardModal card:', card);
   const cardMembers = useSelector((state) => state.cardMember.members);
+  const cardTodos = useSelector((state) => state.cardTodo.todos);
 
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
+    console.log("cardModal card Todo" + card);
     dispatch(postCardMember(cardId));
-
+    dispatch(postCardTodo(cardId));
   }, [cardId]);
-
 
   return (
     <Modal
@@ -38,22 +41,30 @@ const WorkListCardModal = (props) => {
       onHide={props.handle}
       style={{ marginTop: '100px' }}
     >
-     
-      <CardModalHeader></CardModalHeader>
+      <CardModalHeader/>
 
       <ModalBody>
         <Row>
           <Col sm={9}>
-            <CardMember cardMember = {cardMembers}></CardMember>
-            <CardDesc></CardDesc>
-            <CardTodo ></CardTodo>
-            <CardAct></CardAct>  
+            <CardMember cardMember={cardMembers} card={card}/>
+            <CardDesc card={card}/>
+            <CardTodo cardTodo={cardTodos} cardId={cardId}/>
+            {/* <CardAct></CardAct>   */}
+
+            {/* {props.card.card_id}
+            <CardMember card={props.card}></CardMember>
+            <CardDesc card={props.card}></CardDesc>
+           {/*  <CardTodo ></CardTodo>  
+            <CardAct card={props.card}></CardAct>   */}
           </Col>
 
           <Col sm={3}>
             <div>
               <h5>ADD TO CARD</h5>
-              <FunctionalAddOn />
+
+              <FunctionalAddOn cardId={cardId} card={card} />
+
+              {/* <FunctionalAddOn card={props.card} ws_id={props.ws_id} /> */}
             </div>
             <br />
             <div>
@@ -63,16 +74,14 @@ const WorkListCardModal = (props) => {
           </Col>
         </Row>
       </ModalBody>
-           
+
       <ModalFooter>
-        <Button variant='primary'>Save</Button>
-        <Button variant='danger'>Delete</Button>
-        <Button variant='secondary'>Cancel</Button>
+        <Button variant="primary">Save</Button>
+        <Button variant="danger">Delete</Button>
+        <Button variant="secondary">Cancel</Button>
       </ModalFooter>
     </Modal>
   );
-
-  
 };
 
 export default WorkListCardModal;

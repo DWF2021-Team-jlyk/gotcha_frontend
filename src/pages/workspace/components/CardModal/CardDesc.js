@@ -1,12 +1,30 @@
-import React,{ useState } from 'react';
-import { AiFillEdit, AiOutlineClose} from 'react-icons/ai';
-import {
-    Button,
-    Form
-  } from 'react-bootstrap';
+import React, { useState, useEffect, useCallback } from 'react';
+import { AiFillEdit, AiOutlineClose } from 'react-icons/ai';
+import { Button, Form } from 'react-bootstrap';
+import { cardUpdate } from '../../../../modules/workspaceCard';
+import { useDispatch } from 'react-redux';
 
-const CardDesc = ({ cardDTO }) => {
-const [desc, setDesc] = useState(false);
+const CardDesc = (props) => {
+  const{card} = props;
+  const [desc, setDesc] = useState(false);
+  const [changeDesc, setChangeDesc] = useState('');
+
+  const dispatch = useDispatch();
+
+  // const DescInput = (e) => {
+  //   setChangeDesc(e.target.value);
+  // };
+
+  const updateDesc = useCallback(
+    (changeDesc)=>
+      dispatch(
+        cardUpdate({
+          ...card, 
+          card_desc:changeDesc
+        }),
+        ),
+        [dispatch],
+  );
 
   return (
     <>
@@ -19,11 +37,12 @@ const [desc, setDesc] = useState(false);
         <div
           onClick={(e) => {
             setDesc(!desc);
+            setChangeDesc();
           }}
         >
           <Form.Control
             as="textarea"
-            value={cardDTO?.card_name}
+            value={card.card_desc}
             style={{ height: '100px', resize: 'none' }}
             disabled
           />
@@ -32,13 +51,18 @@ const [desc, setDesc] = useState(false);
         // Description값 수정하기
         <div>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Control as="textarea" style={{ height: '180px' }}>
-              {cardDTO.card_name}
+            <Form.Control
+              as="textarea"
+              style={{ height: '180px' }}
+              onChange={(e)=>setChangeDesc(e.target.value)}
+            >
+              {card.card_desc}
             </Form.Control>
             <div style={{ marginTop: 5, float: 'right' }}>
               <Button
                 onClick={(e) => {
                   setDesc(!desc);
+                  updateDesc(changeDesc)
                 }}
                 style={{
                   backgroundColor: '#7986CB',
@@ -50,6 +74,7 @@ const [desc, setDesc] = useState(false);
               <AiOutlineClose
                 style={{ marginLeft: 10, fontSize: 26 }}
                 onClick={(e) => {
+                  
                   setDesc(!desc);
                 }}
               />
