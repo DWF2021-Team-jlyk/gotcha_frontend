@@ -1,11 +1,9 @@
 import React, { useRef, useCallback, useState, useEffect } from 'react';
 import { Avatar } from '@material-ui/core';
 import { Button } from 'react-bootstrap';
-import { useDispatch} from 'react-redux';
-import ActDesc from './ActDesc'
-import {
-    deleteCardAct
-  } from '../../../../modules/cardAct';
+import { useDispatch } from 'react-redux';
+import ActDesc from './ActDesc';
+import { deleteCardAct } from '../../../../modules/cardAct';
 
 const avatarIcon = (id) => {
   let returnStr = id.charAt(0);
@@ -16,11 +14,10 @@ const avatarIcon = (id) => {
   return returnStr;
 };
 
-const ActArea = ({cardAct, cardId}) => {
+// 컴포넌트 합치기..
 
-  useEffect(()=>{
-
-  }, [cardAct])
+const ActArea = ({ cardAct, cardId }) => {
+  useEffect(() => {}, [cardAct]);
   return (
     <>
       {cardAct.map((value, key) => {
@@ -29,7 +26,7 @@ const ActArea = ({cardAct, cardId}) => {
             <div style={{ display: 'flex', marginBottom: 7 }}>
               <div>
                 <Avatar
-                  onClick={(event) => {}}
+                  // onClick={(event) => {}}
                   style={{ margin: '10px 10px 0px 5px' }}
                 >
                   {avatarIcon(value.user_id)}
@@ -41,11 +38,15 @@ const ActArea = ({cardAct, cardId}) => {
                   <b>{value.user_id}</b>{' '}
                   <span style={{ fontSize: '0.8rem' }}>
                     {value.created_date}
-                    {value.isedit == 1 ? <span><b> (edit)</b></span> : null}
-                  
+                    {value.isedit == 1 ? (
+                      <span>
+                        <b> (edit)</b>
+                      </span>
+                    ) : null}
                   </span>
                 </div>
-                <ActDesc cardId ={cardId} cardAct={value}/>
+                <ActDesc cardId={cardId} cardAct={value} />
+                
               </div>
             </div>
           </>

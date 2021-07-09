@@ -20,14 +20,11 @@ const CardAct = ({ card }) => {
   const [actDesc, setActDesc] = useState('');
   const [isActive, setIsActive] = useState(true);
 
+  //cardAct 받아옴
   const cardAct = useSelector((state) => state.cardAct.acts);
   const dispatch = useDispatch();
 
-  // useCallback(()=>
-  //   dispatch(postCardAct(card.card_id))
-  // );
-
-
+  //cardAct 추가
   const insertAct = (card_id, user_id, islog, act_desc) =>{
     dispatch(
       insertCardAct({
@@ -38,10 +35,13 @@ const CardAct = ({ card }) => {
       })
     )
   };
+  
+  //cardAct추가할 때 useEffect
   useEffect(() => {
     dispatch(postCardAct(card.card_id));
   },[]);
 
+  //댓글 입력 버튼 막아둠 
   useEffect(() => {
     if (actDesc.length > 0) {
       setIsActive(false);
@@ -52,14 +52,17 @@ const CardAct = ({ card }) => {
 
   const actInputEL = useRef(null);
 
+  //showloh
   const onClickShowLog = () => {
     setShowLog(!showLog);
   };
 
+  //댓글 입력창 set
   const actDescInput = (e) => {
     setActDesc(e.target.value);
   };
 
+  //cardAct 구분
   const result = cardAct.filter((act) => act.islog == 0);
 
   return (
@@ -84,11 +87,12 @@ const CardAct = ({ card }) => {
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
         <div style={{ display: 'flex' }}>
           <Avatar
-            onClick={(event) => {}}
+            // onClick={(event) => {}}
             style={{ margin: '10px 10px 0px 5px' }}
           >
             {avatarIcon('user01@naver.com')}
           </Avatar>
+          
           <div style={{ display: 'flex', marginTop: 10 }}>
             <Form.Control
               type="text"
@@ -105,13 +109,13 @@ const CardAct = ({ card }) => {
               }}
               onClick={() => {
                 insertAct(card.card_id, 'user01@naver.com', '0', actDesc);
-                setActDesc('');
                 actInputEL.current.value = '';
+                setActDesc('');
               }}
 
               disabled={isActive}
             >
-              입력
+              입력 
             </Button>
           </div>
         </div>
