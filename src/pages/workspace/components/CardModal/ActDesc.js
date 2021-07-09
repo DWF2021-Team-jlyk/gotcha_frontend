@@ -5,19 +5,22 @@ import { deleteCardAct, updateCardAct } from '../../../../modules/cardAct';
 
 const ActDesc = ({ cardAct, cardId }) => {
   const [editable, setEditable] = useState(false);
-  const cardInputEL = useRef(cardAct.act_desc);
-  const [changeDesc, setChangeDesc] = useState('');
-  const [desc , setDesc] = useState(cardAct.act_desc);
+  const cardInputEL = useRef();
+  const [changeDesc, setChangeDesc] = useState(cardAct.act_desc);
+  const [desc , setDesc] = useState('');
+    
+  const dispatch = useDispatch();
 
+  //수정 focus
   const handleEditable = async (e) => {
     await setEditable(true);
     cardInputEL.current.focus();
   };
 
+  //수정시 바뀌는 값 set
   const editDesc = (e) => {
     setChangeDesc(e.target.value);
   };
-  const dispatch = useDispatch();
 
   const actDelete = useCallback(
     (act_id) =>
@@ -42,7 +45,7 @@ const ActDesc = ({ cardAct, cardId }) => {
           act_id: act_id,
         }),
       ),
-    [dispatch],
+    [],
   );
 
   useEffect(() => {
@@ -55,7 +58,7 @@ const ActDesc = ({ cardAct, cardId }) => {
   };
 
   return (
-    <>
+    <div>
       <div style={{ marginTop: 10, marginBottom: 10 }}>
         <input
           style={{
@@ -70,6 +73,7 @@ const ActDesc = ({ cardAct, cardId }) => {
           onChange={editDesc}
         ></input>
 
+
         {editable && (
           <Button
             style={{
@@ -78,8 +82,10 @@ const ActDesc = ({ cardAct, cardId }) => {
               backgroundColor: '#7986CB',
               border: '1px solid #7986CB',
             }}
-            onClick={() =>
-              save(cardId, 'user01@naver.com', 0, changeDesc, cardAct.act_id)
+            onClick={() =>{
+                save(cardId, 'user01@naver.com', 0, changeDesc, cardAct.act_id)
+
+              }
             }
           >
             Save
@@ -105,7 +111,8 @@ const ActDesc = ({ cardAct, cardId }) => {
           Delete
         </div>
       </div>
-    </>
+
+    </div>
   );
 };
 

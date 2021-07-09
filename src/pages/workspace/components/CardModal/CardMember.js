@@ -37,8 +37,8 @@ const CardMember = ({card}) => {
         {cardMem?.map((value, key) => {
           return (
             <Avatar
-              onClick={(event) => {
-              }}
+              // onClick={(event) => {
+              // }}
               style={{ margin: '10px 10px 0px 5px' }}
             >
         
