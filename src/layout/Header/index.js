@@ -6,9 +6,11 @@ import NotiButton from "./NotiButton";
 import WorkSpaceAddButton from "./WorkSpaceAddButton";
 import headerImg from "../../image/header.png";
 import SearchWorkspace from './SearchWorkspace';
+import { useDispatch } from "react-redux";
+import { initWorkspace } from "../../modules/workspace";
 
 const Header = () => {
-
+    const dispatch = useDispatch();
     return (
         <Navbar
             variant="dark"
@@ -73,6 +75,7 @@ const Header = () => {
         </Navbar>
     );
     function onClick() {
+        dispatch(initWorkspace());
         const accessToken = sessionStorage.getItem("accessToken")
         if(accessToken !== null || accessToken !== '') {
             sessionStorage.removeItem("accessToken")

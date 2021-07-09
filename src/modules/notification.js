@@ -6,8 +6,8 @@ const DELETE_NOTI = 'notification/DELETE_NOTI';
 const CHANGE_NOTI_READ = 'notification/CHANGE_NOTI_READ';
 
 const POST_NOTI = 'notification/POST_NOTI';
-const POST_NOTI_SUCCESS = 'workspace/POST_NOTI_SUCCESS';
-const POST_NOTI_FAILURE = 'workspace/POST_NOTI_FAILURE';
+const POST_NOTI_SUCCESS = 'notification/POST_NOTI_SUCCESS';
+const POST_NOTI_FAILURE = 'notification/POST_NOTI_FAILURE';
 
 
 export const addNoti = noti => ({ type: ADD_NOTI, noti });

@@ -29,8 +29,10 @@ const SearchMember = ({ emailList, setEmailList }) => {
   useEffect(() => {
     axios({
       method: 'post',
-      headers: { 'content-type': 'application/json' },
+      headers: { "Authorization": sessionStorage.getItem('accessToken'),'content-type': 'application/json' },
       url: '/home/getAllUsers',
+      // data: {"accessToken":sessionStorage.getItem('accessToken')}
+      data:{}
     }).then(res => {
       setAllUsers([...res.data]);
     }).catch(error => {

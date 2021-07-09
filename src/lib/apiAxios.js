@@ -5,10 +5,13 @@ export default function apiAxios(url, data){
   return axios({
     url:url,
     method:'post',
-    headers: {'content-type' : 'application/json'},
+    headers: {
+      "Authorization": sessionStorage.getItem('accessToken'),
+      'content-type' : 'application/json'
+    },
     data:{
       ...data,
-      "accessToken":sessionStorage.getItem("accessToken"),
+      // "accessToken":sessionStorage.getItem("accessToken"),
     }
   })
 }

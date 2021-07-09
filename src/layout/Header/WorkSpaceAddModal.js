@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, history } from 'react';
 import {
   Button,
   Col,
   Form,
   Modal,
-  ModalHeader,
   ModalBody,
   ModalFooter,
   ModalTitle,
@@ -19,14 +18,17 @@ import axios from 'axios';
 import SearchMember from '../../components/SearchMember';
 import { useDispatch } from 'react-redux';
 import { addWorkspaces } from '../../modules/workspace';
+import { useHistory } from 'react-router-dom';
+import { AddAlertRounded } from '@material-ui/icons';
+
 
 const WorkSpaceAddModal = (props) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [workspaceName, setWorkspaceName] = useState('');
   const [inviteMember, setInviteMember] = useState('');
   const [image, setImage] = useState('')
   const [previewImg, setPreviewImg] = useState();
-  const [userEmail, setUserEmail] = useState('');
   const [emailList, setEmailList] = useState([]);
   const emailEl = useRef(null);
     // 모달 초기화
@@ -35,44 +37,55 @@ const WorkSpaceAddModal = (props) => {
         setWorkspaceName('')
         setInviteMember('')
         setImage('')
-        setUserEmail('');
         setEmailList([]);
       }
     }, [props.clicked])
 
-      // 워크스페이스 추가
+  // 워크스페이스 추가
   const addWorkspaceClick = async (e) =>{
     e.preventDefault();
+    if(workspaceName.length === 0) {
+      alert('workspace name is required')
+      return;
+    }
     const formData = new FormData();
     formData.append("ws_name",workspaceName)
-    console.log('ws_isImage : ',image);
+    console.log('ws_name : ',workspaceName);
+    // formData.append('accessToken',sessionStorage.getItem('accessToken'))
     formData.append("ws_isImage", image)
+    console.log('ws_isImage : ',image);
     for (let key of formData.keys())
     console.log('key',key);
     for (let value of formData.values())
     console.log('value',value);
     // dispatch(addWorkspaces(formData))
-    const response = await axios.post("/home/addWorkspace", {
-      formData,
-      'accessToken': sessionStorage.getItem('accessToken')
-    });
-    console.log('???',response);
+    const token = sessionStorage.getItem('accessToken')
+    console.log("token",token)
+    const url = "/home/addWorkspace";
+
+    const options = {
+      method: 'POST',
+      headers: { 
+        "Authorization": token,
+      },
+      data: formData,
+      url,
+    };
+
+    await axios(options).then( (res) => {
+      console.log(res)
+      if(res.data === true) {
+        props.handleClose()
+        history.push('/');
+      }
+    })
+    // dispatch(addWorkspaces(formData))
+    props.handleClose()
   }
 
   // 워크스페이스 이름
   function onNameChange(e) {
     setWorkspaceName(e.target.value);
-  }
-
-  // 멤버초대 input
-  function onInviteChange(e) {
-    setInviteMember(e.target.value)
-  }
-
-  // 멤버초대 버튼
-  function inviteMemberBtn() {
-    alert(inviteMember)
-    
   }
   
   // 파일 추가 버튼

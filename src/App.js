@@ -47,7 +47,8 @@ const App = () => {
       <PublicRoute restricted={true} component={Login} exact path='/Login'/>
 
       {/*<Route exact path="/">*/}
-      <Header />
+      <PrivateRoute component={Header} path='/' />
+      {/* <Header /> */}
       {/*<div style={{*/}
       {/*    display:"flex",*/}
       {/*    height:"100%"*/}
@@ -58,7 +59,8 @@ const App = () => {
       {/*</div>*/}
       <div style={style}>
         <div style={side}>
-          <Sidebar/>
+          <PrivateRoute component={Sidebar} path='/' />
+          {/* <Sidebar/> */}
         </div>
         <div>
           <div>
@@ -89,9 +91,9 @@ const App = () => {
           </div>
         </div>
       </div>
-      <footer>
+      {/* <footer>
         this is footer
-      </footer>
+      </footer> */}
       {/*</Route>*/}
       {/*</Switch>*/}
     </div>

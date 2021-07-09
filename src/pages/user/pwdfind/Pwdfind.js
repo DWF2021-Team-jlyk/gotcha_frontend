@@ -47,9 +47,13 @@ const Pwdfind = () => {
     axios.post('/user/pwdFind',{
       "user_id": data.email,
     }).then(res => {
-      alert("이메일을 확인해 주시기 바랍니다.")
       console.log(res)
-      history.push('/Login')
+      if(res.data === true) {
+        alert("이메일을 확인해 주시기 바랍니다.")
+        history.push('/Login')
+      }else if (res.data === false) {
+        alert("가입하지 않은 이메일입니다.")
+      }     
     });
   }
   return (
