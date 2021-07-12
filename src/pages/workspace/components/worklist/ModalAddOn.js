@@ -13,14 +13,16 @@ const buttonStyle = {
 }
 
 export const FunctionalAddOn = (props) => {
-  const {cardId, card} = props
+  const {cardId, card, ws_id} = props
   console.log("ModalAddOn card:",card);
   return (
     <>
-      <AddMember></AddMember>
+      <AddMember 
+      cardId = {cardId}
+      ws_id = {ws_id} ></AddMember>
       <AddDate card = {card}></AddDate>
       <AddTodo cardId = {cardId}></AddTodo>
-      <AddFile></AddFile>
+      <AddFile cardId = {cardId}></AddFile>
     </>
   );
 };

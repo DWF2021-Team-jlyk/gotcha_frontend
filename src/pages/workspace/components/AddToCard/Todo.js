@@ -21,6 +21,7 @@ export default function AddTodo(props) {
   const [show, setShow] = useState(false);
   const [listDateShow, setListDateShow] = useState(false);
   const [target, setTarget] = useState(null);
+  //const target = useRef(null);
   const ref= useRef(null);
   const todoEL = useRef(null);
   
@@ -59,7 +60,7 @@ export default function AddTodo(props) {
       <Overlay
         show={show}
         target={target}
-        placement="bottom"
+        placement="right"
         container={ref.current}
         containerPadding={40}
       >
