@@ -2,7 +2,7 @@ import React from 'react';
 import ModalHeader from 'react-bootstrap/ModalHeader';
 import { TiDocument } from 'react-icons/ti';
 
-const CardModalHeader = () => {
+const CardModalHeader = ({card}) => {
   return (
     <ModalHeader
       style={{
@@ -11,7 +11,7 @@ const CardModalHeader = () => {
       closeButton
     >
       <h3 style={{ color: 'white' }}>
-        <TiDocument /> 
+        <TiDocument /> <span style={{fontSize:"1.5rem"}}>{card.card_name}</span>
       </h3>
     </ModalHeader>
   )

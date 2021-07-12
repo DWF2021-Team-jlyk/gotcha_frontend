@@ -7,10 +7,7 @@ import AddFile from '../AddToCard/File'
 import CardMove from '../Actions/Move'
 import CardCopy from '../Actions/Copy'
 
-const buttonStyle = {
-  width: '150px',
-  marginTop: '5px'
-}
+
 export const FunctionalAddOn = ({ws_id, card}) => {
   return (
     <>
@@ -18,15 +15,7 @@ export const FunctionalAddOn = ({ws_id, card}) => {
       <AddDate></AddDate>
       <AddTodo></AddTodo>
       <AddFile></AddFile>
-    </>
-  );
-};
-
-export const ActionAddOn = () => {
-  return (
-    <>
-      <CardMove></CardMove>
-      <CardCopy></CardCopy>
+      <CardMove card = {card} ws_id={ws_id}> </CardMove>
     </>
   );
 };

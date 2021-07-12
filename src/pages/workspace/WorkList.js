@@ -16,6 +16,7 @@ const listStyle = {
 
 const WorkList = (props) => {
   const { cards, lists, ws_id } = props;
+  console.log('lllllllllllllllllllllllllllllllll' , lists);
   const [listName, setListName] = useState('');
   const listEL = useRef(null);
   const [nextPosition, setNextPosition] = useState(0);

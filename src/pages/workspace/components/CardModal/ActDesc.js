@@ -48,6 +48,7 @@ const ActDesc = ({ cardAct, cardId }) => {
     [],
   );
 
+  //acts로
   useEffect(() => {
     setDesc(cardAct.act_desc)
   }, [cardAct]);

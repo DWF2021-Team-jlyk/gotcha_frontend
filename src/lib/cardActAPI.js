@@ -1,6 +1,5 @@
 import apiAxios from './apiAxios';
 
-
 export const postAct =
   card_id => apiAxios('/cardDetail/act/selectList', {card_id:card_id})
 

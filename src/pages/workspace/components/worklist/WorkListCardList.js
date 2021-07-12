@@ -31,6 +31,7 @@ const WorkListCardList = (props) => {
   const [position, setPosition] = useState(0);
   const [showCardInput, setShowCardInput] = useState(false);
   const cards = useSelector(state => state.workspaceCard.cards);
+  
   const dispatch = useDispatch();
 
   const onChange = useCallback((e) => {

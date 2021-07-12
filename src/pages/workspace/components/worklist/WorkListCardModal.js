@@ -17,6 +17,7 @@ import CardTodo from '../CardModal/CardTodo';
 import CardModalHeader from '../CardModal/CardModalHeader';
 import { useSelector, useDispatch } from 'react-redux';
 import { postCardMember } from '../../../../modules/cardMember';
+import Form from 'react-bootstrap/Form'
 
 const WorkListCardModal = (props) => {
   
@@ -28,9 +29,10 @@ const WorkListCardModal = (props) => {
       style={{ marginTop: '100px' }}
     >
      
-      <CardModalHeader></CardModalHeader>
+      <CardModalHeader card={props.card}></CardModalHeader>
 
       <ModalBody>
+    
         <Row>
           <Col sm={9}>
           {/* {props.card.card_id} */}
@@ -42,14 +44,11 @@ const WorkListCardModal = (props) => {
 
           <Col sm={3}>
             <div>
-              <h5>ADD TO CARD</h5>
+              <h5 style={{marginBottom:20}}>Card Behavior</h5>
+
               <FunctionalAddOn card={props.card} ws_id={props.ws_id} />
             </div>
-            <br />
-            <div>
-              <h5>ACTIONS</h5>
-              <ActionAddOn />
-            </div>
+
           </Col>
         </Row>
       </ModalBody>
