@@ -1,6 +1,6 @@
 import * as api from '../lib/workListAPI';
 import createRequest from '../lib/createRequest';
-import { handleActions } from 'redux-actions';
+import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 
 const POST_CARD = 'workspace/POST_CARD';
@@ -60,7 +60,6 @@ const workspaceCard = handleActions(
           else return -1;
         });
       }),
-
     [CARD_ADD_SUCCESS]: (state, action) =>
       produce(state, (draft) => {
         draft.cards.push(action.payload);
@@ -72,6 +71,11 @@ const workspaceCard = handleActions(
           (card) => card.card_id === action.payload.card_id,
         );
         draft.cards.splice(index, 1, action.payload);
+        draft.cards.sort((card1, card2) => {
+          if(card1.position > card2.position)
+            return 1;
+          else return -1;
+        })
       }),
 
     [CARD_DELETE_SUCCESS]: (state, action) =>

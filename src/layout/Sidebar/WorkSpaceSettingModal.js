@@ -26,12 +26,16 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
   const leaveModalShow = () => setLeaveModal(true);
 
   const url = '/home/wsUserList';
-  const datas = workspace.ws_id;
 
   const options = {
     method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    data: JSON.stringify(datas),
+    headers: {
+      'content-type': 'application/json',
+      "Authorization":sessionStorage.getItem("accessToken"),
+    },
+    data: {
+      ws_id:parseInt(workspace.ws_id)
+    },
     url,
   };
 
@@ -43,7 +47,7 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [workspace]);
 
   console.log(userList);
 

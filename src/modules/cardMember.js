@@ -3,6 +3,7 @@ import * as api from '../lib/cardMemberAPI';
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 
+
 const POST_CARD_MEMBER = 'cardDetail/POST_CARD_MEMBER';
 const POST_CARD_MEMBER_SUCCESS = 'cardDetail/POST_CARD_MEMBER_SUCCESS';
 

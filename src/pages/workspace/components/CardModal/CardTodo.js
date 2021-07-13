@@ -1,42 +1,24 @@
-import React, {useEffect, useState}from 'react';
+import React, { useEffect } from 'react';
 import { BsCheckBox } from 'react-icons/bs';
-import {
-  Button,
-  Modal,
-  Form,
-} from 'react-bootstrap';
-import axios from 'axios';
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
+import { useDispatch, useSelector} from 'react-redux';
+import 'react-datepicker/dist/react-datepicker.css';
+import TodoCheckTrue from './TodoCheckTrue';
+import TodoCheckFalse from './TodoCheckFalse';
+import { postCardTodo } from '../../../../modules/cardTodo';
+import { updateCardTodo } from '../../../../modules/cardTodo';
 
+const CardTodo = (props) => {
+  const{cardId} = props;
+  console.log('cardTodo cardId',cardId);
 
-const listButton = {
-    backgroundColor: '#7986CB',
-    border: '1px solid #7986CB',
-    marginLeft: 10,
-    fontSize: 13,
-    height: 30,
-  };
-  
+  const todos = useSelector(state => state.cardTodo.todos);
+  console.log('cardTodo todos',todos);
+  const dispatch = useDispatch();
 
-const CardTodo = () => {
-  const [listDateShow, setListDateShow] = useState(false);
+  useEffect(()=>{
+    dispatch(postCardTodo(cardId));
+  },[]);
 
-  const handleClose = () => setListDateShow(false);
-  const handleShow = () => setListDateShow(true);
-
-  useEffect(() => {
-    changeTodoIsDone();
-  }, []);
-
-   
-  const changeTodoIsDone = async (todo_id, isdone) => {
-    const result = await axios.post('/card/todoIsDoneChange', {
-      todo_id: todo_id,
-      todo_isdone: isdone,
-    });
-  
-  };
 
 
   return (
@@ -48,35 +30,24 @@ const CardTodo = () => {
         </h5>
       </div>
 
+      {/* 입력된 todolist들 */}
+      <div>
+        {todos?.map((todo) => {
+          return (
+            <div style={{ display: 'flex' }}>
+              <div style={{ padding: 5 }}>
+                {todo.todo_isdone === '1' ? (
+                  //1이면 check됨
 
-      <Row md={2}>
-        <div style={{ padding: 5 }}>
-
-          <div style={{ display: 'flex' }}>
-            <Col>
-              <Form.Check
-                type="checkbox"
-                id="autoSizingCheck"
-                className="mb-2"
-                checked="checked"
-            
-              />
-              </Col>
-              <Col>
-                <div style={{ marginLeft: 5 }}>
-                  <del>이름이름</del>
-                </div>
-              </Col>
-              <Col>
-                <Button onClick={handleShow} style={listButton}>
-                  기간 설정
-                </Button>
-              </Col>
-          </div>
-
-        </div>
-      </Row>
-
+                  <TodoCheckTrue todo={todo} />
+                ) : (
+                  <TodoCheckFalse todo={todo} />
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

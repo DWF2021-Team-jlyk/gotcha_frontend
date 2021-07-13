@@ -7,15 +7,24 @@ import AddFile from '../AddToCard/File'
 import CardMove from '../Actions/Move'
 import CardCopy from '../Actions/Copy'
 
+const buttonStyle = {
+  width: '150px',
+  marginTop: '5px'
+}
 
-export const FunctionalAddOn = ({ws_id, card}) => {
+export const FunctionalAddOn = (props) => {
+  const {cardId, card, ws_id} = props
+  console.log("ModalAddOn card:",card);
   return (
     <>
-      <AddMember cardId ={card.card_id} ws_id={ws_id}></AddMember>
-      <AddDate></AddDate>
-      <AddTodo></AddTodo>
-      <AddFile></AddFile>
+      <AddMember 
+      cardId = {cardId}
+      ws_id = {ws_id} ></AddMember>
+      <AddDate card = {card}></AddDate>
+      <AddTodo cardId = {cardId}></AddTodo>
+      <AddFile cardId = {cardId}></AddFile>
       <CardMove card = {card} ws_id={ws_id}> </CardMove>
     </>
   );
 };
+

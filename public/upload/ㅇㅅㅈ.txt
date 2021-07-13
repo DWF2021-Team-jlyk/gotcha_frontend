@@ -1,0 +1,29 @@
+boolean fileUpload = false;
+    	userId = getLoginUser(principalDetails);
+    	
+    	if(req.getFile("ws_isImage") != null) {
+			
+			
+			String fileName = file.getOriginalFilename();
+			
+			byte[] fileByte = file.getBytes();
+			
+			
+			
+			fileUpload = homeService.fileUpload(ws_name,fileName,fileByte, file);
+			
+
+			if(fileUpload == true) {
+				homeService.createWorkspace(userId,ws_name, file.getOriginalFilename(),member_id);
+			}
+			
+
+		}else {
+			
+			
+			homeService.createWorkspace(userId,ws_name, null, member_id);
+		}
+    	
+ 
+
+    	return fileUpload;

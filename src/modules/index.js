@@ -6,19 +6,18 @@ import workspaceCard from './workspaceCard';
 import cardMember from './cardMember'
 import workspaceMember from './workspaceMember'
 import insertCardMember from './cardMember'
-import addList from './addList';
+//import addList from './addList';
 import loading from './loading';
-import cardId from './cardId';
 import cardTodo from './cardTodo';
 import cardAct from './cardAct';
 import cardFile from './cardFile';
+import cardForModal from './cardForModal';
 
 const rootReducer = combineReducers({
   workspace,
   notification,
   workspaceList,
   workspaceCard,
-  addList,
   cardTodo,
   cardAct,
   cardFile,
@@ -26,7 +25,7 @@ const rootReducer = combineReducers({
   loading,
   workspaceMember,
   insertCardMember,
-  cardId
+  cardForModal,
 });
 
 export default rootReducer;
