@@ -9,20 +9,19 @@ import { postCardFile } from '../../../../modules/cardFile';
 import FileCheckTrue from './FileCheckTrue';
 import FileCheckFalse from './FileCheckFalse';
 
-
 const CardFile = (props) => {
-  const {cardId} = props;
-  console.log('CardFile cardId',cardId);
+  const { cardId } = props;
+  console.log('CardFile cardId', cardId);
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
-  const files = useSelector(state=>state.cardFile.files);
-  console.log('CardFile files',files)
+  const files = useSelector((state) => state.cardFile.files);
+  console.log('CardFile files', files);
   const dispatch = useDispatch();
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(postCardFile(cardId));
-  },[cardId]);
+  }, [cardId]);
 
   const handleClick = () => {
     setShow(!show);
@@ -37,28 +36,30 @@ const CardFile = (props) => {
       </div>
 
       <div>
-        {files.map((file)=>{
-          return(
-            <div style={{display:'flex'}}>
-              <div style = {{padding:5}}>
-                {file.file_ischecked === '1'?(
-                  <FileCheckTrue 
-                  file={file}
-                  cardId={cardId}/>
-                ):(
-                  <FileCheckFalse file={file}/>
+        {files.map((file) => {
+          return (
+            <div style={{ display: 'flex' }}>
+              <div style={{ padding: 5 }}>
+                {file.file_ischecked === '1' ? (
+                  <FileCheckTrue file={file} cardId={cardId} />
+                ) : (
+                  <FileCheckFalse file={file} />
                 )}
-  
-          </div>
-          </div>
-          )
+              </div>
+            </div>
+          );
         })}
       </div>
 
       <div ref={ref}>
-        <Button onClick={(e)=>
-        {handleClick();
-        setTarget(e.target);}}>+ Add a file</Button>
+        <Button
+          onClick={(e) => {
+            handleClick();
+            setTarget(e.target);
+          }}
+        >
+          + Add a file
+        </Button>
 
         <Overlay
           show={show}
@@ -74,11 +75,11 @@ const CardFile = (props) => {
             </Popover.Title>
 
             <Popover.Content>
-              <CardFileForm 
-              show = {show}
-              target = {target}
-              handleClick={handleClick}
-              cardId = {cardId}
+              <CardFileForm
+                show={show}
+                target={target}
+                handleClick={handleClick}
+                cardId={cardId}
               />
             </Popover.Content>
           </Popover>
