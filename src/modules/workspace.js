@@ -46,6 +46,7 @@ const workspace = handleActions(
         const index = draft.workspaces.findIndex(ws => ws.ws_id === ws_id);
         draft.workspaces.splice(index, 1);
       }),
+      
     [POST_WORKSPACES_SUCCESS]: (state, action) =>
       produce(state, draft => {
         draft.workspaces = action.payload;

@@ -35,8 +35,7 @@ const CardAct = ({ card }) => {
       })
     )
   };
-  
-  //cardAct추가할 때 useEffect
+
   useEffect(() => {
     dispatch(postCardAct(card.card_id));
   },[]);

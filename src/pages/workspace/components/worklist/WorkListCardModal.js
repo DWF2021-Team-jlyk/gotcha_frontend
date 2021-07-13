@@ -20,6 +20,7 @@ import { postCardMember } from '../../../../modules/cardMember';
 import { postCardTodo } from '../../../../modules/cardTodo';
 import { cardDelete } from '../../../../modules/workspaceCard';
 import CardDate from '../CardModal/CardDate';
+import Form from 'react-bootstrap/Form'
 
 const WorkListCardModal = (props) => {
   const { cardId, card } = props;
@@ -43,9 +44,11 @@ const WorkListCardModal = (props) => {
       onHide={props.handle}
       style={{ marginTop: '100px' }}
     >
-      <CardModalHeader/>
+     
+      <CardModalHeader card={props.card}></CardModalHeader>
 
       <ModalBody>
+    
         <Row>
           <Col sm={9}>
             <CardMember card={props.card}/>
@@ -57,17 +60,11 @@ const WorkListCardModal = (props) => {
 
           <Col sm={3}>
             <div>
-              <h5>ADD TO CARD</h5>
+              <h5 style={{marginBottom:20}}>Card Behavior</h5>
 
-              <FunctionalAddOn cardId={cardId} card={card} num={num} setNum={setNum}/>
+              <FunctionalAddOn card={props.card} ws_id={props.ws_id} />
+            </div>
 
-              {/* <FunctionalAddOn card={props.card} ws_id={props.ws_id} /> */}
-            </div>
-            <br />
-            <div>
-              <h5>ACTIONS</h5>
-              <ActionAddOn num={num} setNum={setNum}/>
-            </div>
           </Col>
         </Row>
       </ModalBody>

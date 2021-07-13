@@ -6,6 +6,7 @@ import NotiButton from "./NotiButton";
 import WorkSpaceAddButton from "./WorkSpaceAddButton";
 import headerImg from "../../image/header.png";
 import SearchWorkspace from './SearchWorkspace';
+import headerImg from "../../image/gc_header.png";
 
 const Header = () => {
 

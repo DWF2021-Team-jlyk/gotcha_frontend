@@ -51,3 +51,37 @@ export const deleteCard = ({ card_id }) =>
   apiAxios('/main/wsList/list/card/delete', {
     card_id: card_id,
   });
+
+  
+export const modifyCardMove = ({
+                                 ws_id: ws_id,
+                                 list_id: list_id,
+                                 position: position,
+                                 card_id: card_id
+                               }) => 
+    apiAxios('/cardDetail/Action/updateCardMove', {
+        ws_id: ws_id,
+        list_id: list_id,
+        position: position,
+        card_id: card_id
+    });
+
+
+// export const updateDestPosition = ({
+//                                     ws_id: ws_id,
+//                                     list_id: list_id,
+//                                     position: position,
+//                                     card_id: card_id
+//                                   }) => 
+//     apiAxios('/cardDetail/Action/updateNowPosition',{
+//         ws_id: ws_id,
+//         list_id: list_id,
+//         position: position,
+//         card_id: card_id
+//     });
+    
+export const modifyNowPosition = ({list_id: list_id, position:position}) =>
+    apiAxios('/cardDetail/Action/updateNowPosition', {
+      list_id: list_id, 
+      position:position
+    });

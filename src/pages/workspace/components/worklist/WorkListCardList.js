@@ -8,10 +8,12 @@ import { AiFillDelete } from 'react-icons/ai';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import WorkListCard from './WorkListCard';
+//import { postCard } from '../../../../lib/workListAPI';
 import { useDispatch, useSelector } from 'react-redux';
 import { listDelete, listUpdate } from '../../../../modules/workspaceList';
 import { cardAdd } from '../../../../modules/workspaceCard';
-import { AiFillEdit } from 'react-icons/all';
+import { AiFillEdit, GiConsoleController } from 'react-icons/all';
+import { postCard } from '../../../../lib/workListAPI';
 
 const PlusIcon = {
   fontSize: '1.5rem',
@@ -31,6 +33,7 @@ const WorkListCardList = (props) => {
   const [position, setPosition] = useState(0);
   const [showCardInput, setShowCardInput] = useState(false);
   const cards = useSelector(state => state.workspaceCard.cards);
+ 
   const dispatch = useDispatch();
 
   const onChange = useCallback(e => {
