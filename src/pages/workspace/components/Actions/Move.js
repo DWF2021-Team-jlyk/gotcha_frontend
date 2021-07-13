@@ -12,13 +12,16 @@ const buttonStyle = {
   marginBottom: 8,
 };
 
-export default function CardMove() {
+export default function CardMove(props) {
+  const {num, setNum} = props;
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
 
   const handleClick = (event) => {
-    setShow(!show);
+    if(num != 5)
+      setNum(5);
+    else setNum(0);
     setTarget(event.target);
   };
 
@@ -29,7 +32,7 @@ export default function CardMove() {
       </Button>
 
       <Overlay
-        show={show}
+        show={num===5}
         target={target}
         placement="bottom"
         container={ref.current}

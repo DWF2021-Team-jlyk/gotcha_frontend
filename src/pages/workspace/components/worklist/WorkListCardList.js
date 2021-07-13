@@ -74,7 +74,7 @@ const WorkListCardList = (props) => {
         card => card.list_id === listId,
       ).length,
     );
-  }, [cards]);
+  }, [cards, list]);
 
   useEffect(() => {
     setListName(list.list_name);

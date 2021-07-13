@@ -34,7 +34,7 @@ export default function Notification() {
             </Card.Header>
             <Card.Body className='notification'>
               {notification
-                .filter(noti=>!noti.noti_read)
+                .filter(noti=>noti.noti_checked !== "1")
                 .map(noti => {
                   return (
                     <NotiCard key={noti.noti_id} noti={noti}/>
@@ -51,7 +51,7 @@ export default function Notification() {
             </Card.Header>
             <Card.Body className='notification'>
               {notification
-                .filter(noti=>noti.noti_read)
+                .filter(noti=>noti.noti_checked === "1")
                 .map(noti => {
                   return (
                     <NotiCard key={noti.noti_id} noti={noti}/>

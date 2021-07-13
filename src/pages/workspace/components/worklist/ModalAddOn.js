@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import AddMember from '../AddToCard/Member'
 import AddDate from '../AddToCard/Date'
@@ -13,23 +13,25 @@ const buttonStyle = {
 }
 
 export const FunctionalAddOn = (props) => {
-  const {cardId, card} = props
+  const {cardId, card, num, setNum} = props
+  // const [num, setNum] = useState(0);
   console.log("ModalAddOn card:",card);
   return (
     <>
-      <AddMember></AddMember>
-      <AddDate card = {card}></AddDate>
-      <AddTodo cardId = {cardId}></AddTodo>
-      <AddFile></AddFile>
+      <AddMember card={card} num={num} setNum={setNum}/>
+      <AddDate card={card} num={num} setNum={setNum}/>
+      <AddTodo cardId={cardId} num={num} setNum={setNum}/>
+      <AddFile card={card} num={num} setNum={setNum}/>
     </>
   );
 };
 
-export const ActionAddOn = () => {
+export const ActionAddOn = (props) => {
+  const {num, setNum} = props;
   return (
     <>
-      <CardMove></CardMove>
-      <CardCopy></CardCopy>
+      <CardMove num={num} setNum={setNum}/>
+      <CardCopy num={num} setNum={setNum}/>
     </>
   );
 };

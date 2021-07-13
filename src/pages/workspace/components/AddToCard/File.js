@@ -11,13 +11,16 @@ const buttonStyle = {
   marginBottom:8
 }
 
-export default function AddFile() {
+export default function AddFile(props) {
+  const {card, num, setNum} = props;
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
 
   const handleClick = (event) => {
-    setShow(!show);
+    if(num != 4)
+      setNum(4);
+    else setNum(0);
     setTarget(event.target);
   };
 
@@ -28,14 +31,13 @@ export default function AddFile() {
       </Button>
 
       <Overlay
-        show={show}
+        show={num===4}
         target={target}
         placement="bottom"
         container={ref.current}
         containerPadding={40}
-      
       >
-        <Popover id="popover-contained">
+        <Popover id="popover-contained" >
           <Popover.Title as="h3"> <b>File 첨부</b> </Popover.Title>
 
           <Popover.Content> 

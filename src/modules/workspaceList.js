@@ -56,10 +56,11 @@ const workspaceList = handleActions(
       }),
     [LIST_UPDATE_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        const index = draft.lists
-          .findIndex(list => list.list_id === action.payload.list_id);
+        const list = draft.lists
+          .find(list => list.list_id === action.payload.list_id);
 
-        draft.lists.splice(index, 1, action.payload);
+        list.list_name = action.payload.list_name;
+        list.position = action.payload.position;
 
         draft.lists.sort((list1, list2) => {
           if (list1.position > list2.position)

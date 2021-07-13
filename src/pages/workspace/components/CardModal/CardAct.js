@@ -125,7 +125,7 @@ const CardAct = ({ card }) => {
         {showLog === true ? (
           <ActArea cardId={card.card_id} cardAct={cardAct} />
         ) : (
-          <ActArea cardId={card.card_id} cardAct={result}></ActArea>
+          <ActArea cardId={card.card_id} cardAct={result} />
         )}
       </div>
     </>

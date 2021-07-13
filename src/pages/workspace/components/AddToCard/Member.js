@@ -28,13 +28,19 @@ const memberButton = {
 };
 
 export default function AddMember(props) {
-  const { cardId, ws_id } = props;
+  const { card, num, setNum } = props;
+  const [click, setClick] = useState(false);
 
+  const onClick = (e) =>{
+    setClick(true);
+  }
 
-  const handleClick = (event) => {
-    setShow(!show);
-    setTarget(event.target);
-    console.log(ws_id);
+  const handleClick = (e) => {
+    setTarget(e.target);
+    if(num != 1)
+      setNum(1);
+    else setNum(0);
+    console.log(card.ws_id);
   };
 
   const wsMembers = useSelector((state) => state.workspaceMember.wsMembers);
@@ -43,7 +49,7 @@ export default function AddMember(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(postWorkspaceMember(ws_id));
+    dispatch(postWorkspaceMember(card.ws_id));
   }, []);
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
@@ -57,7 +63,7 @@ export default function AddMember(props) {
       </Button>
 
       <Overlay
-        show={show}
+        show={num===1}
         target={target}
         placement="bottom"
         container={ref.current}
@@ -69,24 +75,23 @@ export default function AddMember(props) {
             <b>Members</b>{' '}
           </Popover.Title>
 
-          <Popover.Content>
+          <Popover.Content onClick={e=>e.stopPropagation()}>
             <div>
               추가할 멤버 검색
               <Form.Group controlId="formBasicEmail">
                 <Form.Control
                   size="sm"
                   style={{ marginTop: 10 }}
-                  size="small"
                   type="text"
                   placeholder="Search members"
+                  onClick={onClick}
                 />
               </Form.Group>
-              <hr></hr>
+              <hr/>
               <div style={{ marginTop: 15 }}>
                 <b>Board Member List</b>
 
                 {wsMembers?.map((value, key) => {
-             
                   if (cardMember?.map((mem) => mem.user_id).includes(value)) {
                     return (
                       <div>
@@ -94,7 +99,7 @@ export default function AddMember(props) {
                           style={memberButton}
                           variant="contained"
                           onClick={()=>
-                            dispatch(deleteCardMember({user_id:value, card_id:cardId}))
+                            dispatch(deleteCardMember({user_id:value, card_id:card.card_id}))
                           }
                         >
                           {value} 
@@ -110,8 +115,9 @@ export default function AddMember(props) {
                           style={memberButton}
                           variant="contained"
                           onClick={()=>{
-                            dispatch(insertCardMember({user_id:value, card_id:cardId}));
+                            dispatch(insertCardMember({user_id:value, card_id:card.card_id}));
                           }}
+                          onBlur={setClick(false)}
                         >
                           {value} 
                         </Button>

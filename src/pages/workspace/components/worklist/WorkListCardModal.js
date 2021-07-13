@@ -19,12 +19,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { postCardMember } from '../../../../modules/cardMember';
 import { postCardTodo } from '../../../../modules/cardTodo';
 import { cardDelete } from '../../../../modules/workspaceCard';
+import CardDate from '../CardModal/CardDate';
 
 const WorkListCardModal = (props) => {
   const { cardId, card } = props;
   // console.log('WorkListCardModal card:', card);
   const cardMembers = useSelector((state) => state.cardMember.members);
   const cardTodos = useSelector((state) => state.cardTodo.todos);
+  const [num, setNum] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -46,30 +48,25 @@ const WorkListCardModal = (props) => {
       <ModalBody>
         <Row>
           <Col sm={9}>
-            <CardMember cardMember={cardMembers} card={card}/>
-            <CardDesc card={card}/>
+            <CardMember card={props.card}/>
+            <CardDesc card={props.card}/>
+            {card?.card_start_date !==null && <CardDate card={card}/>}
             <CardTodo cardTodo={cardTodos} cardId={cardId}/>
-            {/* <CardAct></CardAct>   */}
-
-            {/* {props.card.card_id}
-            <CardMember card={props.card}></CardMember>
-            <CardDesc card={props.card}></CardDesc>
-           {/*  <CardTodo ></CardTodo>  
-            <CardAct card={props.card}></CardAct>   */}
+            <CardAct card={props.card}/>
           </Col>
 
           <Col sm={3}>
             <div>
               <h5>ADD TO CARD</h5>
 
-              <FunctionalAddOn cardId={cardId} card={card} />
+              <FunctionalAddOn cardId={cardId} card={card} num={num} setNum={setNum}/>
 
               {/* <FunctionalAddOn card={props.card} ws_id={props.ws_id} /> */}
             </div>
             <br />
             <div>
               <h5>ACTIONS</h5>
-              <ActionAddOn />
+              <ActionAddOn num={num} setNum={setNum}/>
             </div>
           </Col>
         </Row>

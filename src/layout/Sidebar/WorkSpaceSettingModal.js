@@ -78,9 +78,7 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
                   disabled={role !== 'ADMIN'}
                 />
               </Col>
-
               <Col>
-            
                 <div>
                   {role === 'ADMIN' ?  <Button>변경하기</Button> : null}
                 </div>

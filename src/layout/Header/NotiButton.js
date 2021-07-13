@@ -5,7 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { IoIosNotificationsOutline } from 'react-icons/all';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { changeNotiRead, postNoti } from '../../modules/notification';
+import { changeNotiCheck, postNoti } from '../../modules/notification';
 import { ListItem } from '@material-ui/core';
 
 const StyledMenu = withStyles({
@@ -43,7 +43,7 @@ const NotiButton = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const changeRead = useCallback(
-    noti_id=>dispatch(changeNotiRead(noti_id)),
+    noti_id=>dispatch(changeNotiCheck(noti_id)),
     [dispatch]
   )
   const onClick = noti => {
@@ -82,7 +82,7 @@ const NotiButton = () => {
       >
         {
           notification
-            .filter(noti => !noti.noti_checked)
+            .filter(noti => noti.noti_checked !== "1")
             .map(noti => {
               return <StyledMenuItem key={noti.noti_id}>
                 <ListItem

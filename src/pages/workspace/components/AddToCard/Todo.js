@@ -17,7 +17,7 @@ const buttonStyle = {
 
 
 export default function AddTodo(props) {
-  const {cardId} = props;
+  const {cardId, num, setNum} = props;
   const [show, setShow] = useState(false);
   const [listDateShow, setListDateShow] = useState(false);
   const [target, setTarget] = useState(null);
@@ -32,7 +32,9 @@ export default function AddTodo(props) {
   const [isDisabled, setIsDisabled] = useState(true);
 
   const handleClick = (event) => {
-    setShow(!show);
+    if(num != 3)
+      setNum(3);
+    else setNum(0);
     setTarget(event.target);           
   };
 
@@ -57,7 +59,7 @@ export default function AddTodo(props) {
       </Button>
 
       <Overlay
-        show={show}
+        show={num===3}
         target={target}
         placement="bottom"
         container={ref.current}

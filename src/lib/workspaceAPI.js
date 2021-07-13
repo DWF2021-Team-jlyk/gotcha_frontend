@@ -9,4 +9,4 @@ export const updateWorkspace = (data) =>
   apiAxios('/home/updateWorkspace', data);
 
 export const postGetWorkspaceMembers = (ws_id) =>
-  apiAxios('/home/wsUserList', { ws_id: ws_id });
+  apiAxios('/home/wsUserList',  ws_id);

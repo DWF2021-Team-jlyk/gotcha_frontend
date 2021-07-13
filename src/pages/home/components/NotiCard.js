@@ -3,7 +3,7 @@ import { Alert, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Button from 'react-bootstrap/Button';
-import { changeNotiRead, deleteNoti } from '../../../modules/notification';
+import { changeNotiCheck, deleteNoti } from '../../../modules/notification';
 
 const NotiCard = ({ noti }) => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const NotiCard = ({ noti }) => {
     [dispatch]
   )
   const onToggle = useCallback(
-    noti_id=>dispatch(changeNotiRead(noti_id)),
+    noti_id=>dispatch(changeNotiCheck(noti_id)),
     [dispatch]
   )
   const returnTypeColor = (type) => {

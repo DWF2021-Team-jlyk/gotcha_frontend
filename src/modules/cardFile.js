@@ -5,7 +5,6 @@ import produce from 'immer';
 
 const POST_CARD_FILE = 'cardDetail/POST_CARD_FILE';
 const POST_CARD_FILE_SUCCESS = 'cardDetail/POST_CARD_FILE_SUCCESS';
-const POST_CARD_FILE_FAILURE = 'cardDetail/POST_CARD_FILE_FAILURE';
 
 export const postCardFile = createRequest(POST_CARD_FILE, postFile);
 
