@@ -44,7 +44,7 @@ const TodoCheckFalse = (props) => {
               todo_name:todoName,
           }),
       )
-  },[dispatch])
+  },[dispatch]);
 
   const deleteTodos = useCallback(
     (todo_id) =>

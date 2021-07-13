@@ -13,29 +13,32 @@ import { FunctionalAddOn, ActionAddOn } from './ModalAddOn';
 import CardMember from '../CardModal/CardMember';
 import CardAct from '../CardModal/CardAct';
 import CardDesc from '../CardModal/CardDesc';
+import CardFile from '../CardModal/CardFile';
 import CardTodo from '../CardModal/CardTodo.js';
 import CardModalHeader from '../CardModal/CardModalHeader';
 import { useSelector, useDispatch } from 'react-redux';
 import { postCardMember } from '../../../../modules/cardMember';
 import { postCardTodo } from '../../../../modules/cardTodo';
+import { postCardFile } from '../../../../modules/cardFile';
 import { cardDelete } from '../../../../modules/workspaceCard';
 import CardDate from '../CardModal/CardDate';
 import Form from 'react-bootstrap/Form'
 
 const WorkListCardModal = (props) => {
-  const { cardId, card } = props;
+  const { cardId, card, ws_id } = props;
   // console.log('WorkListCardModal card:', card);
-  const cardMembers = useSelector((state) => state.cardMember.members);
-  const cardTodos = useSelector((state) => state.cardTodo.todos);
-  const [num, setNum] = useState(0);
+  // const cardMembers = useSelector((state) => state.cardMember.members);
+  // const cardTodos = useSelector((state) => state.cardTodo.todos);
+  // const cardFiles = useSelector((state)=> state.cardFile.files);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log("cardModal card Todo" + card);
-    dispatch(postCardMember(cardId));
-    dispatch(postCardTodo(cardId));
-  }, [cardId]);
+  // useEffect(() => {
+  //   console.log('cardModal card Todo' + card);
+  //   dispatch(postCardMember(cardId));
+  //   dispatch(postCardTodo(cardId));
+  //   dispatch(postCardFile(cardId));
+  // }, [cardId]);
 
   return (
     <Modal
@@ -54,6 +57,7 @@ const WorkListCardModal = (props) => {
             <CardMember card={props.card}/>
             <CardDesc card={props.card}/>
             {card?.card_start_date !==null && <CardDate card={card}/>}
+            <CardFile cardId = {cardId}></CardFile>
             <CardTodo cardTodo={cardTodos} cardId={cardId}/>
             <CardAct card={props.card}/>
           </Col>
