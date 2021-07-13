@@ -11,8 +11,7 @@ import { postWorkspaceMember } from '../../../../modules/workspaceMember';
 import {addCardMember} from '../../../../lib/cardActAPI';
 import {insertCardMember, deleteCardMember} from '../../../../modules/cardMember';
 import {AiOutlineCheck} from "react-icons/ai";
-
-
+import {insertCardAct } from '../../../../modules/cardAct';
 
 const buttonStyle = {
   width: 120,
@@ -29,6 +28,18 @@ const memberButton = {
 
 export default function AddMember(props) {
   const { cardId, ws_id } = props;
+
+   //log
+   const insertLog = (card_id, user_id, islog, act_desc) =>{
+    dispatch(
+      insertCardAct({
+        card_id: card_id,
+        user_id: user_id,
+        islog: islog,
+        act_desc: act_desc,
+      })
+    )
+  };
 
 
   const handleClick = (event) => {
@@ -93,8 +104,12 @@ export default function AddMember(props) {
                         <Button
                           style={memberButton}
                           variant="contained"
-                          onClick={()=>
-                            dispatch(deleteCardMember({user_id:value, card_id:cardId}))
+                          onClick={()=>{
+                            const desc = '로그인한 아이디'+'(이)가 '+ value +'(을)를 Card Member에서 제외했습니다.';
+                            console.log(desc);
+                            dispatch(deleteCardMember({user_id:value, card_id:cardId}));
+                            insertLog(cardId, value, '1', desc);
+                          }
                           }
                         >
                           {value} 
@@ -110,7 +125,9 @@ export default function AddMember(props) {
                           style={memberButton}
                           variant="contained"
                           onClick={()=>{
+                            const desc = '로그인한 아이디'+'(이)가 '+ value +'(을)를 Card Member로 추가했습니다.';
                             dispatch(insertCardMember({user_id:value, card_id:cardId}));
+                            insertLog(cardId, 'user01@naver.com', '1', desc);
                           }}
                         >
                           {value} 

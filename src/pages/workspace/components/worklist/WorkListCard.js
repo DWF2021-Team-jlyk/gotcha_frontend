@@ -83,10 +83,8 @@ const WorkListCard = (props) => {
         &&
         <WorkListCardModal
           card={card}
-     
           show={openModal}
           ws_id={ws_id}
-          
           handle={handleModal}
         />
       }

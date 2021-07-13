@@ -74,7 +74,6 @@ const ActDesc = ({ cardAct, cardId }) => {
           onChange={editDesc}
         ></input>
 
-
         {editable && (
           <Button
             style={{
