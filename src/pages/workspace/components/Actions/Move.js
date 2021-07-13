@@ -10,6 +10,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import { useDispatch, useSelector } from 'react-redux';
 import { postWorkspaces } from '../../../../modules/workspace';
 import { postList } from '../../../../modules/workspaceList';
+import { postCard } from '../../../../modules/workspaceCard'; 
 import { updateCardWsMove,updateCardMove, updateNowPosition} from '../../../../modules/workspaceCard';
 import axios from 'axios';
 
@@ -34,14 +35,14 @@ export default function CardMove({ card, ws_id }) {
   //select box에 들어갈 전체 워크스페이스
   const workspaces = useSelector((state) => state.workspace.workspaces);
   //select box에 들어갈 list
-  const lists = useSelector((state) => state.workspaceList.lists);
+  // const lists = useSelector((state) => state.workspaceList.lists);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(postWorkspaces());
   }, []);
 
-  
 
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
@@ -57,9 +58,10 @@ export default function CardMove({ card, ws_id }) {
   //select box에서 선택한 workspace ws_id
   const [selectWsId, setSelectWsId] = useState(ws_id);
   const [selectListId, setSelectListId] = useState();
-  // const [lists, setLists] = useState([{}]);
+  const [lists, setLists] = useState([{}]);
   const [position, setPosition] = useState();
   const [selectPosition, setSelectPosition] = useState();
+ 
 
   //select box 선택한 값 저장
   const wsIdChange = (event) => {
@@ -68,7 +70,22 @@ export default function CardMove({ card, ws_id }) {
 
   //select box에 list 불러오기(select box에서 워크스페이스를 선택할 때 실행된다)
   useEffect(() => {
-    dispatch(postList(selectWsId))
+     const url = '/main/wsList/list';
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      data: {
+        ws_id: selectWsId,
+      },
+      url,
+    };
+
+    axios(options).then((res) => {
+      setLists(res.data);
+    });
   }, [selectWsId]);
 
   const listIdChange = (event) => {
@@ -92,15 +109,15 @@ export default function CardMove({ card, ws_id }) {
     }; 
 
     axios(options).then((res) => {
-      setPosition(res.data + 1);
+      setPosition(res.data + 2);
     });
-
-    
   }, [selectListId]);
 
   const positionChange = (event) => {
     setSelectPosition(event.target.value)
   }
+
+  
 
   const move = useCallback((ws_id, list_id, position, card_id, nowList_id, nowPosition)=>{
       //같은 워크스페이스에서 list만 변경 될 때

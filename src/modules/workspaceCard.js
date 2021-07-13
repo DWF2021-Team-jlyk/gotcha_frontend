@@ -33,9 +33,18 @@ export const postCard = createRequest(POST_CARD, api.postCard);
 export const cardAdd = createRequest(CARD_ADD, api.addCard);
 export const cardUpdate = createRequest(CARD_UPDATE, api.updateCard);
 export const cardDelete = createRequest(CARD_DELETE, api.deleteCard);
-export const updateCardMove = createRequest(UPDATE_CARD_MOVE, api.modifyCardMove);
-export const updateCardWsMove = createRequest(UPDATE_CARD_WS_MOVE, api.modifyCardMove);
-export const updateNowPosition = createRequest(UPDATE_NOW_POSITION, api.modifyNowPosition);
+export const updateCardMove = createRequest(
+  UPDATE_CARD_MOVE,
+  api.modifyCardMove,
+);
+export const updateCardWsMove = createRequest(
+  UPDATE_CARD_WS_MOVE,
+  api.modifyCardMove,
+);
+export const updateNowPosition = createRequest(
+  UPDATE_NOW_POSITION,
+  api.modifyNowPosition,
+);
 
 const initialState = {
   cards: [],
@@ -73,39 +82,46 @@ const workspaceCard = handleActions(
         draft.cards.splice(index, 1);
       }),
 
-      //리스트에서만 바꿀때
+    //리스트에서만 바꿀때
     [UPDATE_CARD_MOVE_SUCCESS]: (state, action) =>
       produce(state, (draft) => {
         const card = draft.cards.find(
           (card) => card.card_id === action.payload.card_id,
-           //변하기 전 상태
+          //변하기 전 상태
         );
         const originListId = card.list_id;
         const originPosition = card.position;
+        console.log('originListId' , originListId)
         // draft.cards.splice(index, 1, action.payload);
-        const cards = draft.cards.map((card)=>{
-          if(card.list_id === action.list_id && card.position >= action.position){
+        const cards = draft.cards.map((card) => {
+          if (
+            card.list_id === action.list_id &&
+            card.position >= action.position
+          ) {
             card.position = card.position + 1;
           }
 
-          if(card.list_id === originListId && card.position >= originPosition){
+          if (
+            card.list_id === originListId &&
+            card.position >= originPosition
+          ) {
             card.position = card.position - 1;
           }
 
           // if(card.card_id === action.payload.card_id)
-          //   card = action.payload;   
-          if(card.card_id === action.payload.card_id){
-              card.card_id = action.payload.card_id;
-              card.list_id = action.payload.list_id;
-              card.ws_id = action.payload.ws_id;
-              card.position = action.payload.position;
+          //   card = action.payload;
+          if (card.card_id === action.payload.card_id) {
+            card.card_id = action.payload.card_id;
+            card.list_id = action.payload.list_id;
+            card.ws_id = action.payload.ws_id;
+            card.position = action.payload.position;
           }
           return card;
-        })                                                   
+        });
         draft.cards = cards;
       }),
 
-      //워크스페이스도 바꿀때
+    //워크스페이스도 바꿀때
     [UPDATE_CARD_WS_MOVE_SUCCESS]: (state, action) =>
       produce(state, (draft) => {
         const card = draft.cards.findIndex(
@@ -113,24 +129,30 @@ const workspaceCard = handleActions(
           //변하기 전 상태
         );
         const originListId = card.list_id;
+        console.log('originListId' , originListId)
         const originPosition = card.position;
 
-        const cards = draft.cards.map((card)=>{
-          if(card.list_id === originListId && card.position >= originPosition){
+        const cards = draft.cards.map((card) => {
+          if (
+            card.list_id === originListId &&
+            card.position >= originPosition
+          ) {
             card.position = card.position - 1;
           }
-    
-            const index = draft.cards.findIndex(
-              (card) => card.card_id === action.payload.card_id,
-            );
-            draft.cards.splice(index, 1);
-          
+
+          const index = draft.cards.findIndex(
+            (card) => card.card_id === action.payload.card_id,
+          );
+
+          draft.cards.splice(index, 1);
+        
           return card;
-        })
-         draft.cards = cards;
+        });
+        draft.cards = cards;
       }),
-      [UPDATE_NOW_POSITION_SUCCESS]:(state, action) =>
-        produce(state, draft=>{}),
+
+    [UPDATE_NOW_POSITION_SUCCESS]: (state, action) =>
+      produce(state, (draft) => {}),
   },
   initialState,
 );

@@ -53,7 +53,7 @@ const Workspace = () => {
             <WorkList
               ws_id={ws_id}
               lists={lists}
-              cards={cards}
+              // cards={cards}
             />
           </Tab>
           <Tab
