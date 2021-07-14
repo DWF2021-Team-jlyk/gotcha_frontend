@@ -36,9 +36,12 @@ const CardFile = (props) => {
       </div>
 
       <div>
-        {files.map((file) => {
+        {files.map((file, index) => {
           return (
-            <div style={{ display: 'flex' }}>
+            <div
+              style={{ display: 'flex' }}
+              key={index}
+            >
               <div style={{ padding: 5 }}>
                 {file.file_ischecked === '1' ? (
                   <FileCheckTrue file={file} cardId={cardId} />

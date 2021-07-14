@@ -21,9 +21,12 @@ const ActArea = ({ cardAct, cardId }) => {
   }, []);
   return (
     <>
-      {cardAct.map((value, key) => {
+      {cardAct.map((value, index) => {
         return (
-          <div style={{ display: 'flex', marginBottom: 7 }}>
+          <div
+            style={{ display: 'flex', marginBottom: 7 }}
+            key={index}
+          >
             <div>
               <Avatar style={{ margin: '10px 10px 0px 5px' }}>
                 {avatarIcon(value.user_id)}

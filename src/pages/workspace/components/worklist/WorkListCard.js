@@ -17,9 +17,9 @@ const WorkListCard = (props) => {
   const [editbutton, setEditButton] = useState(false);
   const [cardName, setCardName] = useState("");
   const dispatch = useDispatch();
-  const handleModal = () => {
+  const handleModal = useCallback(() => {
     setOpenModal(false);
-  };
+  },[]);
 
   const cardInputEL = useRef(null);
 

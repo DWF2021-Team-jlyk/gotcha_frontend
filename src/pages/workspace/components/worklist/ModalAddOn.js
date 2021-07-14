@@ -11,10 +11,10 @@ import CardCopy from '../Actions/Copy'
 export const FunctionalAddOn = ({ws_id, card}) => {
   return (
     <>
-      <AddMember cardId ={card.card_id} ws_id={ws_id}/>
+      <AddMember cardId ={card?.card_id} ws_id={ws_id}/>
       <AddDate card = {card}/>
-      <AddTodo cardId = {cardId}/>
-      <AddFile cardId = {cardId}/>
+      <AddTodo cardId = {card?.card_id}/>
+      <AddFile cardId = {card?.card_id}/>
       <CardMove card = {card} ws_id={ws_id}/>
     </>
   );

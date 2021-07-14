@@ -6,24 +6,15 @@ import { useDispatch } from 'react-redux';
 import {postWorkspaceMember} from '../../../../modules/workspaceMember'
 import { postCardMember } from '../../../../modules/cardMember';
 import Form from 'react-bootstrap/Form'
+import AvatarIcon from '../../../../Functions/AvatarIcon';
 
-const avatarIcon = (id) => {
-  let returnStr = id.charAt(0);
-  for (let i = 1; i < id.length; i++) {
-    if (id.charAt(i) === '@') break;
-    if (id.charAt(i) === id.charAt(i).toUpperCase())
-      returnStr += id.charAt(i);
-  }
-  return returnStr;
-};
-
-
-const CardMember = ({card}) => {
+const CardMember = () => {
   const cardMem = useSelector(state=>state.cardMember.members);
+  const card = useSelector(state=>state.cardForModal.card);
   const dispatch = useDispatch();
   useEffect(()=>{
-    dispatch(postCardMember(card.card_id));
-  }, []);
+    dispatch(postCardMember(card?.card_id));
+  }, [card]);
 
  return (
     <div>
@@ -37,12 +28,9 @@ const CardMember = ({card}) => {
         {cardMem?.map((value, key) => {
           return (
             <Avatar
-              // onClick={(event) => {
-              // }}
-              style={{ margin: '10px 10px 0px 5px' }}
-            >
-        
-              {avatarIcon(value.user_id)}
+              key={value.user_id}
+              style={{ margin: '10px 10px 0px 5px' }}>
+              {AvatarIcon(value.user_id)}
             </Avatar>
           );
         })}

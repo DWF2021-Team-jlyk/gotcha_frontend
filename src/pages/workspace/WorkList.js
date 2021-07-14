@@ -35,8 +35,6 @@ const WorkList = (props) => {
   useEffect(() => {
     setNextPosition(lists.length);
   }, [lists]);
-
-  console.log(nextPosition);
   return (
     <>
       <input onChange={(e) => setListName(e.target.value)} ref={listEL} />

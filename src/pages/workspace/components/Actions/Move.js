@@ -9,8 +9,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import { useDispatch, useSelector } from 'react-redux';
 import { postWorkspaces } from '../../../../modules/workspace';
-import { postList } from '../../../../modules/workspaceList';
-import { postCard } from '../../../../modules/workspaceCard'; 
 import { updateCardWsMove,updateCardMove, updateNowPosition} from '../../../../modules/workspaceCard';
 import axios from 'axios';
 
@@ -37,8 +35,6 @@ export default function CardMove({ card, ws_id }) {
   //select box에 들어갈 list
   // const lists = useSelector((state) => state.workspaceList.lists);
 
-  const {num, setNum} = props;
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -53,9 +49,7 @@ export default function CardMove({ card, ws_id }) {
   const classes = useStyles();
 
   const handleClick = (event) => {
-    if(num != 5)
-      setNum(5);
-    else setNum(0);
+    setShow(!show);
     setTarget(event.target);
   };
 
@@ -163,7 +157,7 @@ export default function CardMove({ card, ws_id }) {
       </Button>
 
       <Overlay
-        show={num===5}
+        show={show}
         target={target}
         placement="bottom"
         container={ref.current}

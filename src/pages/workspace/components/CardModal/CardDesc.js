@@ -5,7 +5,7 @@ import { cardUpdate } from '../../../../modules/workspaceCard';
 import { useDispatch } from 'react-redux';
 
 const CardDesc = (props) => {
-  const{card} = props;
+  const { card } = props;
   const [desc, setDesc] = useState(false);
   const [changeDesc, setChangeDesc] = useState('');
 
@@ -16,14 +16,14 @@ const CardDesc = (props) => {
   // };
 
   const updateDesc = useCallback(
-    (changeDesc)=>
+    (changeDesc) =>
       dispatch(
         cardUpdate({
-          ...card, 
-          card_desc:changeDesc
+          ...card,
+          card_desc: changeDesc,
         }),
-        ),
-        [dispatch],
+      ),
+    [dispatch],
   );
 
   return (
@@ -41,8 +41,8 @@ const CardDesc = (props) => {
           }}
         >
           <Form.Control
-            as="textarea"
-            value={card.card_desc}
+            as='textarea'
+            value={card?.card_desc}
             style={{ height: '100px', resize: 'none' }}
             disabled
           />
@@ -50,11 +50,11 @@ const CardDesc = (props) => {
       ) : (
         // Description값 수정하기
         <div>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+          <Form.Group className='mb-3' controlId='exampleForm.ControlTextarea1'>
             <Form.Control
-              as="textarea"
+              as='textarea'
               style={{ height: '180px' }}
-              onChange={(e)=>setChangeDesc(e.target.value)}
+              onChange={(e) => setChangeDesc(e.target.value)}
             >
               {card.card_desc}
             </Form.Control>
@@ -62,7 +62,7 @@ const CardDesc = (props) => {
               <Button
                 onClick={(e) => {
                   setDesc(!desc);
-                  updateDesc(changeDesc)
+                  updateDesc(changeDesc);
                 }}
                 style={{
                   backgroundColor: '#7986CB',
@@ -74,7 +74,7 @@ const CardDesc = (props) => {
               <AiOutlineClose
                 style={{ marginLeft: 10, fontSize: 26 }}
                 onClick={(e) => {
-                  
+
                   setDesc(!desc);
                 }}
               />

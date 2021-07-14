@@ -1,0 +1,7 @@
+.acts {
+    scroll: none;
+}
+
+.acts::-webkit-scrollbar {
+    display: none;
+}

@@ -35,7 +35,7 @@ export default function AddFile(props) {
       </Button>
 
       <Overlay
-        show={num===4}
+        show={show}
         target={target}
         placement="right"
         container={ref.current}

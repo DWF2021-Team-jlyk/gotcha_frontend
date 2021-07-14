@@ -28,7 +28,8 @@ const memberButton = {
 };
 
 export default function AddMember(props) {
-  const { card, num, setNum } = props;
+  const { num, setNum } = props;
+  const card = useSelector(state=>state.cardForModal.card);
   const [click, setClick] = useState(false);
 
   const onClick = (e) =>{
@@ -49,7 +50,7 @@ export default function AddMember(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(postWorkspaceMember(card.ws_id));
+    dispatch(postWorkspaceMember(card?.ws_id));
   }, []);
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);

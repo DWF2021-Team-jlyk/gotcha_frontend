@@ -14,22 +14,24 @@ const buttonStyle = {
   marginBottom: 8,
 };
 
+const setDefaultDate = () => {
+
+}
+
 export default function AddDate(props) {
   const { card, num, setNum } = props;
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
-  const defaultStartDate = card.card_start_date !== null ? new Date(card.card_start_date):new Date();
-  const defaultEndDate = card.card_end_date !== null ? new Date(card.card_end_date):new Date();
-  const [startDate, setStartDate] = useState(defaultStartDate);
-  const [endDate, setEndDate] = useState(defaultEndDate);
+  const defaultStartDate = card?.card_start_date !== null ? new Date(card?.card_start_date):new Date();
+  const defaultEndDate = card?.card_end_date !== null ? new Date(card?.card_end_date):new Date();
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   const dispatch = useDispatch();
   const ref = useRef(null);
 
   const handleClick = (event) => {
-    if(num != 2)
-      setNum(2);
-    else setNum(0);
+    setShow(!show);
     setTarget(event.target);
   };
 
@@ -59,7 +61,7 @@ export default function AddDate(props) {
       </Button>
 
       <Overlay
-        show={num===2}
+        show={show}
         target={target}
         placement="bottom"
         container={ref.current}

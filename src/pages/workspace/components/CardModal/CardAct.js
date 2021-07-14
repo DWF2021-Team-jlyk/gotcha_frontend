@@ -5,64 +5,49 @@ import { Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import ActArea from './ActArea';
 import { postCardAct, insertCardAct } from '../../../../modules/cardAct';
-
-const avatarIcon = (id) => {
-  let returnStr = id.charAt(0);
-  for (let i = 1; i < id.length; i++) {
-    if (id.charAt(i) === '@') break;
-    if (id.charAt(i) === id.charAt(i).toUpperCase()) returnStr += id.charAt(i);
-  }
-  return returnStr;
-};
+import AvatarIcon from '../../../../Functions/AvatarIcon';
 
 const CardAct = ({ card }) => {
   const [showLog, setShowLog] = useState(false);
   const [actDesc, setActDesc] = useState('');
   const [isActive, setIsActive] = useState(true);
+  const actInputEL = useRef(null);
 
   //cardAct 받아옴
   const cardAct = useSelector((state) => state.cardAct.acts);
   const dispatch = useDispatch();
 
   //cardAct 추가
-  const insertAct = (card_id, user_id, islog, act_desc) =>{
+  const insertAct = useCallback((card_id, user_id, islog, act_desc) =>{
     dispatch(
-      insertCardAct({
-        card_id: card_id,
-        user_id: user_id,
-        islog: islog,
-        act_desc: act_desc,
-      })
+      insertCardAct(
+        { card_id: card_id, user_id: user_id, islog: islog, act_desc: act_desc, }
+      )
     )
-  };
+  },[dispatch]);
 
   useEffect(() => {
-    dispatch(postCardAct(card.card_id));
+    dispatch(postCardAct(card?.card_id));
+  },[card]);
+
+  //show log
+  const onClickShowLog = useCallback(() => {
+    setShowLog(!showLog);
   },[]);
 
-  //댓글 입력 버튼 막아둠 
-  useEffect(() => {
-    if (actDesc.length > 0) {
-      setIsActive(false);
-    } else {
-      setIsActive(true);
-    }
-  }, [actDesc]);
-
-  const actInputEL = useRef(null);
-
-  //showloh
-  const onClickShowLog = () => {
-    setShowLog(!showLog);
-  };
-
   //댓글 입력창 set
-  const actDescInput = (e) => {
+  const actDescInput =useCallback((e) => {
     setActDesc(e.target.value);
-  };
+  },[]);
 
   //cardAct 구분
   const result = cardAct.filter((act) => act.islog == 0);
+
+  const buttonClick = useCallback(()=>{
+    insertAct(card.card_id, 'user01@naver.com', '0', actDesc);
+    actInputEL.current.value = '';
+    setActDesc('');
+  },[]);
 
   return (
     <>
@@ -89,7 +74,7 @@ const CardAct = ({ card }) => {
             // onClick={(event) => {}}
             style={{ margin: '10px 10px 0px 5px' }}
           >
-            {avatarIcon('user01@naver.com')}
+            {AvatarIcon('user01@naver.com')}
           </Avatar>
           
           <div style={{ display: 'flex', marginTop: 10 }}>
@@ -106,13 +91,9 @@ const CardAct = ({ card }) => {
                 border: '1px solid #7986CB',
                 height: 40,
               }}
-              onClick={() => {
-                insertAct(card.card_id, 'user01@naver.com', '0', actDesc);
-                actInputEL.current.value = '';
-                setActDesc('');
-              }}
+              onClick={() => buttonClick()}
 
-              disabled={isActive}
+              disabled={actDesc.length > 0 ? false : true}
             >
               입력 
             </Button>
@@ -122,9 +103,9 @@ const CardAct = ({ card }) => {
 
       <div>
         {showLog === true ? (
-          <ActArea cardId={card.card_id} cardAct={cardAct} />
+          <ActArea cardId={card?.card_id} cardAct={cardAct} />
         ) : (
-          <ActArea cardId={card.card_id} cardAct={result} />
+          <ActArea cardId={card?.card_id} cardAct={result} />
         )}
       </div>
     </>

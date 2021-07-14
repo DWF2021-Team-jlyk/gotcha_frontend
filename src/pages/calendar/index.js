@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import events from './events';
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
@@ -42,14 +42,20 @@ const MyCalendar = () => {
 
   const [loadModal, setLoadModal] = useState(false);
   const [cardId, setCardId] = useState(0);
+
+  const handleModal = useCallback(() => {
+    setLoadModal(false);
+  },[]);
+
+
   return (
     <div style={{ height: 800 }}>
       <div>
-        {lists.map(list => (
+        {lists.map((list,index) => (
           <>
             <input
               type='checkBox'
-              key={list.list_id}
+              key={index}
               value={list.list_id}
               name={list.list_name}
               onClick={async e => {
@@ -79,7 +85,15 @@ const MyCalendar = () => {
           setCardId(event.card_id);
         }}
       />
-      {<WorkListCardModal show={loadModal} card_id={cardId} />}
+      {loadModal&&
+      <WorkListCardModal
+        show={loadModal}
+        handle={handleModal}
+        card={
+          cards.filter(card=>card.card_id === cardId)[0]
+        }
+        cardId={cardId}
+      />}
     </div>
   );
 };

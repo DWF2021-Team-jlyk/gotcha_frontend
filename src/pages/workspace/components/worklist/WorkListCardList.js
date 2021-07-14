@@ -25,15 +25,15 @@ const IconMargin = {
 };
 
 const WorkListCardList = (props) => {
-  console.log(props);
   const { ws_id, list, listId } = props;
   const cardInputEl = useRef(null);
   const [listName, setListName] = useState('');
   const [cardTitle, setCardTitle] = useState('');
   const [position, setPosition] = useState(0);
   const [showCardInput, setShowCardInput] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
   const cards = useSelector(state => state.workspaceCard.cards);
- 
+
   const dispatch = useDispatch();
 
   const onChange = useCallback(e => {
@@ -44,21 +44,19 @@ const WorkListCardList = (props) => {
     setListName(e.target.value);
   }, []);
 
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleClick = (event) => {
+  const handleClick = useCallback ((event) => {
     setAnchorEl(event.currentTarget);
-  };
+  },[]);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setAnchorEl(null);
-  };
+  }, []);
 
-  const onListRemove = () => {
+  const onListRemove = useCallback(() => {
     dispatch(listDelete({ list_id: listId }));
-  };
+  },[dispatch]);
 
-  const onCardAdd = () => {
+  const onCardAdd = useCallback(() => {
     dispatch(cardAdd({
       list_id: listId,
       ws_id: ws_id,
@@ -69,7 +67,7 @@ const WorkListCardList = (props) => {
       card_end_date: '',
       position: position,
     }));
-  };
+  },[dispatch]);
 
   useEffect(() => {
     setPosition(
@@ -81,7 +79,7 @@ const WorkListCardList = (props) => {
 
   useEffect(() => {
     setListName(list.list_name);
-  }, []);
+  }, [list]);
 
   return (
     <Card className='ListStyle'>

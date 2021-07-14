@@ -13,10 +13,10 @@ const CardDate = ({card}) => {
         </h5>
       </div>
       <span>시작 날짜 : </span>
-      {card.card_start_date}
+      {card?.card_start_date}
       <br/>
       <span>종료 날짜 : </span>
-      {card.card_end_date}
+      {card?.card_end_date}
     </div>
   )
 }

@@ -12,7 +12,7 @@ const CardModalHeader = ({card}) => {
       closeButton
     >
       <h3 style={{ color: 'white' }}>
-        <TiDocument /> <span style={{fontSize:"1.5rem"}}>{card.card_name}</span>
+        <TiDocument /> <span style={{fontSize:"1.5rem"}}>{card?.card_name}</span>
       </h3>
     </ModalHeader>
   )
