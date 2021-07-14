@@ -39,6 +39,8 @@ export default function CardMove({ card, ws_id }) {
   //select box에 들어갈 전체 워크스페이스
   const workspaces = useSelector((state) => state.workspace.workspaces);
 
+  //log에 필요한 userid
+  const userId = useSelector(state=>state.userInfo.userId);
 
   const dispatch = useDispatch();
 
@@ -288,8 +290,9 @@ export default function CardMove({ card, ws_id }) {
                     card.position,
                   );    
                   const result = lists.filter((list) => list.list_id == selectListId)
-                  const desc = '로그인한 아이디'+'(이)가 card를' + result[0].list_name +'(으)로 이동하였습니다.';
-                  insertLog(card.card_id,'user01@naver.com', '1', desc)
+                  console.log('rrrrrrrrrrrrrrrrrr' , result)
+                  const desc = userId +'(이)가 card를' + result[0].list_name +'(으)로 이동하였습니다.';
+                  insertLog(card.card_id, userId, '1', desc)
                 }}
               >
                 {' '}

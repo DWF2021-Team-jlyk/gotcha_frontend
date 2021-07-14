@@ -33,6 +33,7 @@ export const addCard = ({
                           card_start_date,
                           card_end_date,
                           position,
+                          user_id
                         }) =>
   apiAxios('/main/wsList/list/card/insert', {
     card_name: card_name,
@@ -42,6 +43,7 @@ export const addCard = ({
     card_start_date: card_start_date,
     card_end_date: card_end_date,
     position: position,
+    user_id: user_id
   });
 
 export const updateCard = (data) =>

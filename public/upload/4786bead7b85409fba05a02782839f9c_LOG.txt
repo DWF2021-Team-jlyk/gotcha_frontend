@@ -1,0 +1,22 @@
+
+로그 (
+
+2 member추가될때 -> 삭제할 때도(보류) ㅇ
+user_name(이)가 member을(를) 카드 멤버로 추가했습니다.
+
+3 todo 추가될때 ㅇ
+user_name(이)가 카드에 todo(todo_name)를 추가했습니다.
+
+4 move ㅇ
+user_name(이)가 카드를 list_name으로 이동하였습니다.
+
+5 파일 추가할 때, 파일 삭제(보류)
+user_name(이)가 카드에 file_name을 추가했습니다.
+
+6 date 
+추가할 때 -> x
+is_done될 때 -> user_name(이)가 날짜 완료를 체크하였습니다.
+) 
+
+1 card 추가할때 
+user_name(이)가 card_name을 추가했습니다.

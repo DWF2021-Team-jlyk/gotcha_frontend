@@ -43,7 +43,6 @@ const WorkListCardModal = (props) => {
       size={'lg'}
       show={props.show}
       onHide={props.handle}
-      style={{ marginTop: '100px' }}
     >
      
       <CardModalHeader card={props.card}></CardModalHeader>
@@ -54,7 +53,7 @@ const WorkListCardModal = (props) => {
           <Col sm={9}>
             <CardMember card={card} ws_id={ws_id} />
             <CardDesc card={card}></CardDesc>
-            <CardFile cardId = {cardId}></CardFile>
+            <CardFile card= {card} cardId = {cardId}></CardFile>
             <CardTodo cardId={cardId} />
             <CardAct card={card}></CardAct>
           </Col>

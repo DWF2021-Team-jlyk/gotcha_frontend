@@ -6,7 +6,7 @@ import { BsListCheck } from 'react-icons/bs';
 import Form from 'react-bootstrap/Form';
 import { addCardTodo } from '../../../../modules/cardTodo';
 import { useDispatch, useSelector } from 'react-redux';
-
+import {insertCardAct } from '../../../../modules/cardAct';
 
 const buttonStyle = {
   width:120, 
@@ -31,6 +31,21 @@ export default function AddTodo(props) {
   const [todoEndDate, setTodoEndDate] = useState('');
   const [todoIsdone, setTodoIsdone] = useState(0);
   const [isDisabled, setIsDisabled] = useState(true);
+
+  //log
+  const userId = useSelector(state=>state.userInfo.userId);
+
+  const insertLog = (card_id, user_id, islog, act_desc) =>{
+    dispatch(
+      insertCardAct({
+        card_id: card_id,
+        user_id: user_id,
+        islog: islog,
+        act_desc: act_desc,
+      })
+    )
+  };
+
 
   const handleClick = (event) => {
     setShow(!show);
@@ -81,8 +96,12 @@ export default function AddTodo(props) {
             onClick={(e)=> 
               {   
               onTodoAdd();
+              const desc = userId +'(이)가 카드에 todo' + todoName + '를 추가했습니다'
+              insertLog(cardId, userId, '1', desc);
+
               setTodoName('');
               todoEL.current.value='';
+             
                }}
                >Add</Button>
 

@@ -8,12 +8,13 @@ import { AiFillDelete } from 'react-icons/ai';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import WorkListCard from './WorkListCard';
-//import { postCard } from '../../../../lib/workListAPI';
 import { useDispatch, useSelector } from 'react-redux';
 import { listDelete, listUpdate } from '../../../../modules/workspaceList';
 import { cardAdd } from '../../../../modules/workspaceCard';
 import { AiFillEdit, GiConsoleController } from 'react-icons/all';
-import { postCard } from '../../../../lib/workListAPI';
+import { postCard } from '../../../../modules/workspaceCard';
+import { insertCardAct } from '../../../../modules/cardAct';
+import axios from 'axios';
 
 const PlusIcon = {
   fontSize: '1.5rem',
@@ -32,15 +33,18 @@ const WorkListCardList = (props) => {
   const [cardTitle, setCardTitle] = useState('');
   const [position, setPosition] = useState(0);
   const [showCardInput, setShowCardInput] = useState(false);
-  const cards = useSelector(state => state.workspaceCard.cards);
- 
+
+  const cards = useSelector((state) => state.workspaceCard.cards);
+  const userId = useSelector((state) => state.userInfo.userId);
+
   const dispatch = useDispatch();
 
-  const onChange = useCallback(e => {
+
+  const onChange = useCallback((e) => {
     setCardTitle(e.target.value);
   }, []);
 
-  const onListNameChange = useCallback(e => {
+  const onListNameChange = useCallback((e) => {
     setListName(e.target.value);
   }, []);
 
@@ -59,24 +63,25 @@ const WorkListCardList = (props) => {
   };
 
   const onCardAdd = () => {
-    dispatch(cardAdd({
-      list_id: listId,
-      ws_id: ws_id,
-      card_name: cardTitle,
-      card_desc: '',
-      card_isdone:'0',
-      card_start_date: '',
-      card_end_date: '',
-      position: position,
-    }));
+    dispatch(
+      cardAdd({
+        list_id: listId,
+        ws_id: ws_id,
+        card_name: cardTitle,
+        card_desc: '',
+        card_isdone: '0',
+        card_start_date: '',
+        card_end_date: '',
+        position: position,
+        user_id: userId
+      }),
+
+    );
+
   };
 
   useEffect(() => {
-    setPosition(
-      cards.filter(
-        card => card.list_id === listId,
-      ).length,
-    );
+    setPosition(cards.filter((card) => card.list_id === listId).length);
   }, [cards]);
 
   useEffect(() => {
@@ -84,29 +89,24 @@ const WorkListCardList = (props) => {
   }, []);
 
   return (
-    <Card className='ListStyle'>
-      <Card.Header
-        className='CardHeaderStyle'
-      >
-        <input
-          defaultValue={listName}
-          onChange={onListNameChange}
-        />
+    <Card className="ListStyle">
+      <Card.Header className="CardHeaderStyle">
+        <input defaultValue={listName} onChange={onListNameChange} />
         <AiOutlinePlusCircle style={PlusIcon} onClick={handleClick} />
-        
+
         <AiFillEdit
           style={{
             float: 'right',
             fontSize: '1.5rem',
           }}
-          onClick={e => {
+          onClick={(e) => {
             dispatch(listUpdate({ ...list, list_name: listName }));
           }}
         />
       </Card.Header>
 
       <Menu
-        id='simple-menu'
+        id="simple-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
@@ -131,19 +131,15 @@ const WorkListCardList = (props) => {
         </MenuItem>
       </Menu>
 
-      <Card.Body className='ListBodyStyle'>
+      <Card.Body className="ListBodyStyle">
         {cards
           .filter((card) => {
             return card.list_id === listId;
           })
           .map((card, index) => {
-            return (
-              <WorkListCard key={index} ws_id={ws_id} card={card} />
-            );
-          })
-          
-    }
-          
+            return <WorkListCard key={index} ws_id={ws_id} card={card} />;
+          })}
+
         {showCardInput && (
           <div
             onBlur={(e) => {
@@ -154,10 +150,9 @@ const WorkListCardList = (props) => {
             <input
               onChange={(e) => setCardTitle(e.target.value)}
               ref={cardInputEl}
-              onKeyPress={e => {
+              onKeyPress={(e) => {
                 if (e.key === 'Enter') {
                   if (e.target.value !== '') {
-                    console.log(cardTitle);
                     onCardAdd();
                     e.target.value = '';
                     setCardTitle('');
@@ -184,8 +179,8 @@ const WorkListCardList = (props) => {
 
       <Card.Footer>
         <Button
-          variant='contained'
-          color='primary'
+          variant="contained"
+          color="primary"
           onClick={async (e) => {
             await setShowCardInput(true);
             cardInputEl.current.focus();

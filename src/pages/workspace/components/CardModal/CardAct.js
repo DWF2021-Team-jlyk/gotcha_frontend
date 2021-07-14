@@ -20,6 +20,9 @@ const CardAct = ({ card }) => {
   const [actDesc, setActDesc] = useState('');
   const [isActive, setIsActive] = useState(true);
 
+  const userName = useSelector(state=>state.userInfo.userName);
+  const userId = useSelector(state=>state.userInfo.userId);
+
   //cardAct 받아옴
   const cardAct = useSelector((state) => state.cardAct.acts);
   const dispatch = useDispatch();
@@ -89,7 +92,7 @@ const CardAct = ({ card }) => {
             // onClick={(event) => {}}
             style={{ margin: '10px 10px 0px 5px' }}
           >
-            {avatarIcon('user01@naver.com')}
+            {avatarIcon(userName)}
           </Avatar>
           
           <div style={{ display: 'flex', marginTop: 10 }}>
@@ -107,7 +110,7 @@ const CardAct = ({ card }) => {
                 height: 40,
               }}
               onClick={() => {
-                insertAct(card.card_id, 'user01@naver.com', '0', actDesc);
+                insertAct(card.card_id, userId, '0', actDesc);
                 actInputEL.current.value = '';
                 setActDesc('');
               }}

@@ -28,6 +28,7 @@ const memberButton = {
 
 export default function AddMember(props) {
   const { cardId, ws_id } = props;
+  const userId = useSelector(state=>state.userInfo.userId);
 
    //log
    const insertLog = (card_id, user_id, islog, act_desc) =>{
@@ -105,10 +106,10 @@ export default function AddMember(props) {
                           style={memberButton}
                           variant="contained"
                           onClick={()=>{
-                            const desc = '로그인한 아이디'+'(이)가 '+ value +'(을)를 Card Member에서 제외했습니다.';
-                            console.log(desc);
+                            const desc = userId +'(이)가 '+ value +'(을)를 Card Member에서 제외했습니다.';
+
                             dispatch(deleteCardMember({user_id:value, card_id:cardId}));
-                            insertLog(cardId, value, '1', desc);
+                            insertLog(cardId, userId, '1', desc);
                           }
                           }
                         >
@@ -125,9 +126,9 @@ export default function AddMember(props) {
                           style={memberButton}
                           variant="contained"
                           onClick={()=>{
-                            const desc = '로그인한 아이디'+'(이)가 '+ value +'(을)를 Card Member로 추가했습니다.';
+                            const desc = userId +'(이)가 '+ value +'(을)를 Card Member로 추가했습니다.';
                             dispatch(insertCardMember({user_id:value, card_id:cardId}));
-                            insertLog(cardId, 'user01@naver.com', '1', desc);
+                            insertLog(cardId, userId, '1', desc);
                           }}
                         >
                           {value} 

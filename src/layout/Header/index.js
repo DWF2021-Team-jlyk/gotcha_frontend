@@ -1,11 +1,11 @@
 import React from "react";
-import {Button, Form, FormControl, Navbar} from "react-bootstrap";
+import {Navbar} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import {IoPersonCircleOutline,} from "react-icons/all";
 import NotiButton from "./NotiButton";
 import WorkSpaceAddButton from "./WorkSpaceAddButton";
 import headerImg from "../../image/gc_header.png";
-
+import SearchWorkspace from "./SearchWorkspace";
+import ToMyPage from "./ToMyPage";
 const Header = () => {
 
     return (
@@ -52,9 +52,7 @@ const Header = () => {
                 &ensp;
                 <NotiButton/>
                 &ensp;
-                <Link to="/mypage">
-                    <IoPersonCircleOutline color="#FFFFFF" size="30"/>
-                </Link>
+                <ToMyPage/>
                 &ensp;
                 <Link
                     to="/Login"

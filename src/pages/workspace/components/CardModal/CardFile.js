@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { postCardFile } from '../../../../modules/cardFile';
 import FileCheckTrue from './FileCheckTrue';
 import FileCheckFalse from './FileCheckFalse';
+import { insertCardAct } from '../../../../modules/cardAct';
 
 const CardFile = (props) => {
   const { cardId } = props;
@@ -23,9 +24,12 @@ const CardFile = (props) => {
     dispatch(postCardFile(cardId));
   }, [cardId]);
 
+ 
+
   const handleClick = () => {
     setShow(!show);
   };
+
 
   return (
     <>
@@ -75,12 +79,15 @@ const CardFile = (props) => {
             </Popover.Title>
 
             <Popover.Content>
+
               <CardFileForm
                 show={show}
                 target={target}
                 handleClick={handleClick}
                 cardId={cardId}
+          
               />
+
             </Popover.Content>
           </Popover>
         </Overlay>

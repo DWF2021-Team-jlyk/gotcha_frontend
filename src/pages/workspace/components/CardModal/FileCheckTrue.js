@@ -38,9 +38,7 @@ const FileCheckTrue = (props) => {
     [dispatch],
   );
 
-  const saveFiles = () =>{
-    
-  };
+
 
   return (
     <div style={{ display: 'flex' }}>
@@ -67,7 +65,7 @@ const FileCheckTrue = (props) => {
                 //if (!updateCheck) {
                   //console.log(item);
                   Helpers.httpRequest(
-                    `http://192.168.20.200:3000${file.file_path}`,
+                    `http://localhost/:3000${file.file_path}`,
                     "get"
                   )
                     .then((response) => response.blob())
