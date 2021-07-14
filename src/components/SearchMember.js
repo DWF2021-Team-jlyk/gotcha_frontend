@@ -1,8 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Button, Col, Form, ListGroup, Overlay, Popover, Row } from 'react-bootstrap';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { postInviteMember } from '../modules/workspace';
+import apiAxios from '../lib/apiAxios';
 
-const SearchMember = ({ emailList, setEmailList }) => {
+const SearchMember = ({member, ws_id, emailList, setEmailList, invite }) => {
+  const dispatch = useDispatch();
   const [userEmail, setUserEmail] = useState('');
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
@@ -25,6 +29,16 @@ const SearchMember = ({ emailList, setEmailList }) => {
     setUserEmail('');
     emailEl.current.value = '';
   }, [emailList]);
+  
+  const inviteBtn = () => {
+    // dispatch(postInviteMember(emailList));
+    apiAxios('/home/inviteMember', {
+      ws_id,
+      emailList
+    }).then(
+      setEmailList([])
+    );
+  }
 
   useEffect(() => {
     axios({
@@ -35,17 +49,18 @@ const SearchMember = ({ emailList, setEmailList }) => {
       },
       url: '/home/getAllUsers',
       data: {
+        ws_id,
+        emailList: member
       }
     }).then(res => {
       setAllUsers([...res.data]);
     }).catch(error => {
       console.log(error);
     });
-  }, []);
+  }, [emailList]);
 
   return (
     <Form.Group>
-      <Form.Label>WorkSpaceMember</Form.Label>
       <Row>
         <Col sm={8}>
           <div ref={ref}>
@@ -69,6 +84,7 @@ const SearchMember = ({ emailList, setEmailList }) => {
                       {allUsers
                         .filter(email => email.indexOf(userEmail) >= 0)
                         .filter(email => emailList.findIndex(e=>email===e)===-1)
+                        .filter(email=> member.findIndex(e=>email === e)===-1)
                         .map(email => (
                           <ListGroup.Item
                             key={email}
@@ -82,16 +98,19 @@ const SearchMember = ({ emailList, setEmailList }) => {
             </Overlay>
           </div>
         </Col>
-        <Col sm={4}>
-          <Button
-            onClick={e => {
-              setEmailList(emailList.concat(userEmail));
-              emailEl.current.value = '';
-              setUserEmail('');
-            }}
-            disabled
-          >멤버 초대하기</Button>
-        </Col>
+        {
+          invite?
+          <Col sm={4}>
+            <Button
+              onClick={inviteBtn}
+              disabled={
+                emailList.length === 0 ? 
+                true : false
+              }>멤버 초대하기</Button>
+          </Col>
+          :
+          null
+        }
       </Row>
     </Form.Group>
   );

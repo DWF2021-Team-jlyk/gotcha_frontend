@@ -13,3 +13,14 @@ export default function apiAxios(url, data){
     }
   }) 
 }
+
+export function fileAxios(url, data){
+  return axios({
+    url:url,
+    method:'post',
+    headers: {
+      "Authorization":sessionStorage.getItem("accessToken"),
+    },
+    data:data,
+  }) 
+} 

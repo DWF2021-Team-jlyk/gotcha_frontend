@@ -1,9 +1,10 @@
 import { Card, Row } from 'react-bootstrap';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import noImg from '../../../image/gotcha.png';
+
+// import uploadImg from '../../../upload/workspaces';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
-import { changeWorkspaceFav, updateWorkspace } from '../../../modules/workspace';
+import { changeWorkspaceFav, updateWorkspace, postWorkspaces } from '../../../modules/workspace';
 import { useDispatch } from 'react-redux';
 import HomeStyles from '../HomeStyles';
 
@@ -16,13 +17,18 @@ const WorkSpaceCard = ({ workspace }) => {
       dispatch(updateWorkspace({ ...workspace, is_fav: (workspace.is_fav ? '0' : '1') })),
     [dispatch],
   );
+
   useEffect(() => {
     setWs({ ...workspace });
   }, [workspace]);
+
+  const imgSrc = `upload/workspaces/${ws.ws_id}/bg/${ws.ws_isImage}`;
+  const noImg = 'gotcha.png';
+
   return (
     <Card style={HomeStyles.cardStyle}>
       <div style={{ textAlign: 'center' }}>
-        <Card.Img variant='top' style={{ width: 150 }} src={noImg} />
+        <Card.Img variant='top' style={{ width:'100%', height: 150}} src={ws.ws_isImage === null ? noImg : imgSrc} />
       </div>
 
       <Card.Body style={{ backgroundColor: '#f7f7f7' }}>
