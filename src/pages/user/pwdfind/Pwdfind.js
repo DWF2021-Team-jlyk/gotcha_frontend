@@ -1,9 +1,10 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
+import Grid from '@material-ui/core/Grid';
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory} from 'react-router-dom';
+import { Link, Switch, useHistory} from 'react-router-dom';
 import axios from "axios";
 import {useForm} from "react-hook-form";
 
@@ -47,9 +48,13 @@ const Pwdfind = () => {
     axios.post('/user/pwdFind',{
       "user_id": data.email,
     }).then(res => {
-      alert("이메일을 확인해 주시기 바랍니다.")
       console.log(res)
-      history.push('/Login')
+      if(res.data === true) {
+        alert("이메일을 확인해 주시기 바랍니다.")
+        history.push('/Login')
+      }else if (res.data === false) {
+        alert("가입하지 않은 이메일입니다.")
+      }     
     });
   }
   return (
@@ -95,7 +100,15 @@ const Pwdfind = () => {
           >
             Send New Password
           </Button>
-        
+          <Switch>
+            <Grid container>
+              <Grid item>
+                <Link to="/" variant="body2">
+                  Sign in
+                </Link>
+              </Grid>
+            </Grid>
+          </Switch>
         </form>
       </div>
     </Container>
