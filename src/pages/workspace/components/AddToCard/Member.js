@@ -34,12 +34,13 @@ export default function AddMember(props) {
   const { num, setNum } = props;
   const card = useSelector((state) => state.cardModal.card);
   const userId = useSelector((state) => state.userInfo.userId);
+  const wsMembers = useSelector((state) => state.workspaceMember.wsMembers);
+  const cardMember = useSelector((state) => state.cardMember.members);
+
   const [click, setClick] = useState(false);
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
-  const wsMembers = useSelector((state) => state.workspaceMember.wsMembers);
-  const cardMember = useSelector((state) => state.cardMember.members);
   const { ws_id } = useParams();
 
   const dispatch = useDispatch();
@@ -122,10 +123,10 @@ export default function AddMember(props) {
                               dispatch(
                                 deleteCardMember({
                                   user_id: value,
-                                  card_id: cardId,
+                                  card_id: card?.card_id,
                                 }),
                               );
-                              insertLog(cardId, userId, '1', desc);
+                              insertLog(card?.card_id, userId, '1', desc);
                             }}
                           >
                             {value}
@@ -152,10 +153,10 @@ export default function AddMember(props) {
                               dispatch(
                                 insertCardMember({
                                   user_id: value,
-                                  card_id: cardId,
+                                  card_id: card?.card_id,
                                 }),
                               );
-                              insertLog(cardId, userId, '1', desc);
+                              insertLog(card?.card_id, userId, '1', desc);
                             }}
                           >
                             {value}

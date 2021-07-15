@@ -15,18 +15,14 @@ const buttonStyle = {
   marginBottom: 8,
 };
 
-const setDefaultDate = () => {
-
-};
-
 export default function AddDate(props) {
   const { card, num, setNum } = props;
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
   const defaultStartDate = card?.card_start_date !== null ? new Date(card?.card_start_date) : new Date();
   const defaultEndDate = card?.card_end_date !== null ? new Date(card?.card_end_date) : new Date();
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(defaultStartDate);
+  const [endDate, setEndDate] = useState(defaultEndDate);
 
   const dispatch = useDispatch();
   const ref = useRef(null);
@@ -43,7 +39,7 @@ export default function AddDate(props) {
   const onUpdateDate = useCallback(
     (startDate, endDate) => {
       dispatch(cardUpdate({ ...card, card_start_date: startDate, card_end_date: endDate }));
-      dispatch(updateCard({...card, card_start_date:startDate, card_end_date:endDate}));
+      dispatch(updateCard({ ...card, card_start_date: startDate, card_end_date: endDate }));
     }, [card],
   );
 
@@ -62,36 +58,41 @@ export default function AddDate(props) {
         container={ref.current}
         containerPadding={40}
       >
-        <Popover id='popover-contained'>
-          <Popover.Title as='h3'>
-            {' '}
-            <b>Date</b>{' '}
-          </Popover.Title>
+        {(props) => (
 
-          <Popover.Content>
-            <div>
-              Start date:
-              <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-              />
-              <br></br>
-              End date:
-              <DatePicker
-                selected={endDate}
-                onChange={(date) => setEndDate(date)}
-              />
-              <Button
-                size='small'
-                onClick={() => {
-                  onUpdateDate(startDate.toISOString(), endDate.toISOString());
-                }}
-              >
-                save
-              </Button>
-            </div>
-          </Popover.Content>
-        </Popover>
+          <Popover id='popover-contained' {...props}>
+            <Popover.Title as='h3'>
+              {' '}<b>Date</b>{' '}
+            </Popover.Title>
+
+            <Popover.Content>
+              <div>
+                Start date:
+                <DatePicker
+                  selected={startDate}
+                  dateFormat="yyyy/MM/dd hh:mm aa"
+                  onChange={(date) => setStartDate(date)}
+                  showTimeInput
+                />
+                End date:
+                <DatePicker
+                  selected={endDate}
+                  dateFormat="yyyy/MM/dd hh:mm aa"
+                  onChange={(date) => setEndDate(date)}
+                  showTimeInput
+                />
+                <Button
+                  size='small'
+                  onClick={() => {
+                    onUpdateDate(startDate.toISOString(), endDate.toISOString());
+                  }}
+                >
+                  save
+                </Button>
+              </div>
+            </Popover.Content>
+          </Popover>
+        )}
       </Overlay>
     </div>
   );

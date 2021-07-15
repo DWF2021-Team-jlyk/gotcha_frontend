@@ -19,20 +19,20 @@ const FileCheckFalse = (props) => {
     }, []);
 
 
-  return <div style={{display:'flex'}}>
-      <Form.Check
-      type="checkbox"
-      id="autoSizingCheck"
-      className="mb-2"
+  return <div style={{ display: 'flex' }}>
+    <Form.Check
+      type='checkbox'
+      id='autoSizingCheck'
+      className='mb-2'
       onClick={() =>
         updateFileIschecked('1')
       }
     />
     <div
-        style={{ marginLeft: 5, width: '100%', minWidth: 200 }}
-      >
-        {file.file_name}
-      </div>
+      style={{ marginLeft: 5, width: '100%', minWidth: 200 }}
+    >
+      {file.file_name}
+    </div>
 
   </div>;
 };

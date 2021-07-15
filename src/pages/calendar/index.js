@@ -11,6 +11,8 @@ import makeAnimated from 'react-select/animated';
 import Form from 'react-bootstrap/Form';
 import { InputGroup } from 'react-bootstrap';
 import { registerCard } from '../../modules/cardModal';
+import ListSelector from './ListSelector';
+import EventProps from './EventProps';
 
 moment.locale('ko');
 BigCalendar.momentLocalizer(moment);
@@ -34,9 +36,9 @@ const MyCalendar = () => {
           return {
             card_id: card.card_id,
             title: card.card_name,
-            allDay: true,
-            start: card.card_start_date,
-            end: card.card_end_date,
+            allDay: false,
+            start: new Date(card.card_start_date),
+            end: new Date(card.card_end_date),
             card:card
           };
         }),
@@ -53,34 +55,12 @@ const MyCalendar = () => {
 
   return (
     <div style={{ height: 800 }}>
-      <div>
-        {lists.map((list,index) => (
-          <>
-            <input
-              type='checkBox'
-              key={index}
-              value={list.list_id}
-              name={list.list_name}
-              onClick={async e => {
-                const index = await listId.findIndex(value => value === list.list_id);
-                if (index === -1) {
-                  setListId(listId.concat(list.list_id));
-                } else {
-                  setListId(listId.filter(value => value !== list.list_id));
-                }
-                console.log(listId);
-                console.log(events);
-              }}
-            />
-            &nbsp;{list.list_name} &nbsp;
-          </>
-        ))}
-      </div>
+      <ListSelector listId={listId} setListId={setListId} lists={lists}/>
       <BigCalendar
         events={events}
         step={60}
         views={BigCalendar.Views.values}
-        defaultDate={new Date(Date.now())}
+        defaultDate={new Date()}
         selectable
         onSelectSlot={(slotInfo) => console.log(slotInfo)}
         onSelectEvent={(event, e) => {
@@ -88,6 +68,7 @@ const MyCalendar = () => {
           setCardId(event.card_id);
           dispatch(registerCard(event.card));
         }}
+        eventPropGetter={(EventProps)}
       />
       {loadModal&&
       <WorkListCardModal

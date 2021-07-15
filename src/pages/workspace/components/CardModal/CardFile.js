@@ -24,7 +24,6 @@ const CardFile = (props) => {
     dispatch(postCardFile(cardId));
   }, [cardId]);
 
- 
 
   const handleClick = () => {
     setShow(!show);
@@ -47,11 +46,11 @@ const CardFile = (props) => {
               key={index}
             >
               <div style={{ padding: 5 }}>
-                {file.file_ischecked === '1' ? (
                   <FileCheckTrue file={file} cardId={cardId} />
-                ) : (
-                  <FileCheckFalse file={file} />
-                )}
+                {/*{file.file_ischecked === '1' ? (*/}
+                {/*) : (*/}
+                {/*  <FileCheckFalse file={file} />*/}
+                {/*)}*/}
               </div>
             </div>
           );
@@ -71,28 +70,27 @@ const CardFile = (props) => {
         <Overlay
           show={show}
           target={target}
-          placement="right"
+          placement='right'
           container={ref.current}
           containerPadding={40}
         >
-          <Popover id="popover-contained">
-            <Popover.Title as="h3">
-              {' '}
-              <b>File 첨부</b>{' '}
-            </Popover.Title>
+          {(props) => (
+            <Popover id='popover-contained' {...props}>
+              <Popover.Title as='h3'>
+                {' '}
+                <b>File 첨부</b>{' '}
+              </Popover.Title>
 
-            <Popover.Content>
-
-              <CardFileForm
-                show={show}
-                target={target}
-                handleClick={handleClick}
-                cardId={cardId}
-          
-              />
-
-            </Popover.Content>
-          </Popover>
+              <Popover.Content>
+                <CardFileForm
+                  show={show}
+                  target={target}
+                  handleClick={handleClick}
+                  cardId={cardId}
+                />
+              </Popover.Content>
+            </Popover>
+          )}
         </Overlay>
       </div>
     </>
