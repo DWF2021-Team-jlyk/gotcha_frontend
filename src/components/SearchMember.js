@@ -83,8 +83,8 @@ const SearchMember = ({member, ws_id, emailList, setEmailList, invite }) => {
                     <ListGroup style={{ overflowY: 'scroll', maxHeight: 300,}}>
                       {allUsers
                         .filter(email => email.indexOf(userEmail) >= 0)
-                        .filter(email => emailList.findIndex(e=>email===e)===-1)
-                        .filter(email=> member.findIndex(e=>email === e)===-1)
+                        .filter(email => emailList?.findIndex(e=>email===e)===-1)
+                        // .filter(email=> member?.findIndex(e=>email === e)===-1)
                         .map(email => (
                           <ListGroup.Item
                             key={email}

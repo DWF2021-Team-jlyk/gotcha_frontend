@@ -22,8 +22,6 @@ import axios from 'axios';
 import SearchMember from '../../components/SearchMember';
 import { useDispatch } from 'react-redux';
 import { postWorkspaces } from '../../modules/workspace';
-import { useHistory } from 'react-router-dom';
-import { AddAlertRounded } from '@material-ui/icons';
 import { fileAxios } from '../../lib/apiAxios';
 
 const useStyles = makeStyles((theme) => ({
@@ -39,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 
 const WorkSpaceAddModal = (props) => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const classes = useStyles();
 
   const [workspaceName, setWorkspaceName] = useState('');
@@ -47,20 +44,23 @@ const WorkSpaceAddModal = (props) => {
   const [image, setImage] = useState('');
   const [previewImg, setPreviewImg] = useState();
   const [emailList, setEmailList] = useState([]);
-  const emailEl = useRef(null);
-    // 모달 초기화
-    useEffect(() => {
-      if (props.clicked == true) {
-        setWorkspaceName('')
-        setInviteMember('')
-        setImage('')
-        setPreviewImg('')
-        setEmailList([]);
-      }
-    }, [props.clicked])
+  const [imageName, setImageName] = useState([]);
+
+  // 모달 초기화
+  useEffect(() => {
+    if (props.clicked == true) {
+      setWorkspaceName('')
+      setInviteMember('')
+      setImage('')
+      setImageName('')
+      setPreviewImg('')
+      setEmailList([]);
+    }
+  }, [props.clicked])
   useEffect(()=>{
     console.log('emailList',emailList)
   },[emailList])
+
   // 워크스페이스 추가
   const addWorkspaceClick = async (e) =>{
     e.preventDefault();
@@ -68,9 +68,6 @@ const WorkSpaceAddModal = (props) => {
       alert('workspace name is required')
       return;
     }
-    // if(image === '') {
-    //   setImage(null)
-    // }
 
     const formData = new FormData();
     formData.append("ws_name",workspaceName)
@@ -95,9 +92,7 @@ const WorkSpaceAddModal = (props) => {
       data: formData,
       url,
     };
-    // await fileAxios('/home/addWorkspace',{formData}).then(res => {
-    //   console.log(res)
-    // })
+
     const response = await axios(options);
     dispatch(postWorkspaces());
     props.handleClose()
@@ -107,22 +102,28 @@ const WorkSpaceAddModal = (props) => {
   function onNameChange(e) {
     setWorkspaceName(e.target.value);
   }
-  
+
   // 파일 추가 버튼
-  function onFileChange(e) {
-    console.log(e.target.files[0]);
+function onFileChange(e) {
+  let file = e.target.files[0]
+  const reg = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/i;
+  if(reg.test(file.name)) {
     let reader = new FileReader();
     reader.onloadend = () => {
-      const prev = reader.result;
-      if (prev)
-        setPreviewImg(prev.toString());
+    const prev = reader.result;
+    if (prev)
+      setPreviewImg(prev.toString());
     };
-    if (e.target.files[0]) {
-      reader.readAsDataURL(e.target.files[0]);
-      setImage(e.target.files[0].name);
+    if (file) {
+      reader.readAsDataURL(file);
+      setImage(file);
+      setImageName(file.name);
     }
-
+  }else {
+    alert('이미지 파일만 선택 가능합니다.');
   }
+  
+}
 
   return (
     <Modal
@@ -155,12 +156,12 @@ const WorkSpaceAddModal = (props) => {
             <Col sm={8}>
                 <Form.Control
                   type="text"
-                  value={image}
+                  value={imageName}
                   disabled
                 />
               </Col>
               <Col sm={4}>
-                <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={onFileChange} />
+                <input accept="image/png,image/jpeg,image/gif" className={classes.input} id="icon-button-file" type="file" onChange={onFileChange} />
                 <label htmlFor="icon-button-file">
                   <IconButton color="primary" aria-label="upload picture" component="span">
                     <PhotoCamera />

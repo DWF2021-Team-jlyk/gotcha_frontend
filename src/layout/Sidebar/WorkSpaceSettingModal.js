@@ -155,7 +155,12 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
     dispatch(postWorkspaces());
   }
 
-  console.log('imageName ', workspace.ws_id);
+  console.log('imageName ', workspace.user_id);
+
+  const leaveHandler = () => {
+    leaveModalShow()
+  }
+
   return (
     <Modal
       size={'lg'}
@@ -283,15 +288,17 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
 
       </ModalBody>
 
-      <ModalFooter>
-        <Button variant="danger" onClick={leaveModalShow}>
+      <ModalFooter>      
+        <Button variant="danger" onClick={leaveHandler}>
           Leave Workspace
         </Button>
-
+       
         <LeaveModal 
           leaveModal={leaveModal} 
           leaveModalClose={leaveModalClose} 
-          userList={userList} 
+          userList={userList}
+          user_id={workspace.user_id}
+          ws_id={workspace.ws_id}
           role={role}
         />
 

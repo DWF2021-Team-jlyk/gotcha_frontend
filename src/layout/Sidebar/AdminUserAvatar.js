@@ -3,8 +3,21 @@ import { Avatar } from '@material-ui/core';
 import { Button, Col} from 'react-bootstrap';
 import '../css/workspaceSettingModal.css';
 import AvatarIcon from '../../Functions/AvatarIcon';
+import apiAxios from '../../lib/apiAxios';
+import { confirmAlert } from 'react-confirm-alert';
+import { useDispatch } from 'react-redux';
+import { postWorkspaces } from '../../modules/workspace';
 
 const AdminUserAvatar = (props) => {
+  const dispatch = useDispatch();
+  
+  const toAdminHandler = () => {
+    apiAxios('/home/leaveWorkspace', {ws_id: props.ws_id, user_id:props.user_id}).then(
+      dispatch(postWorkspaces())  
+    );
+    
+  }
+
   return (
     <Col md={4} style={{ marginTop: 10 }}>
       <div className='avatorBorder'>
@@ -24,7 +37,7 @@ const AdminUserAvatar = (props) => {
           </div>
 
           <div style={{ display: 'flex', marginTop: 5 }}>
-            <div><Button variant='primary' style={{ fontSize: '.8rem' }}> To Admin</Button></div>
+            <div><Button variant='primary' style={{ fontSize: '.8rem' }} onClick={toAdminHandler}> To Admin</Button></div>
           </div>
         </div>
       </div>
