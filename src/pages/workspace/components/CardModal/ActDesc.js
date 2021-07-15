@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { deleteCardAct, updateCardAct } from '../../../../modules/cardAct';
 
-const ActDesc = ({ cardAct, cardId }) => {
+const ActDesc = ({ cardAct, cardId, acts }) => {
   const [editable, setEditable] = useState(false);
   const cardInputEL = useRef();
   const [changeDesc, setChangeDesc] = useState(cardAct.act_desc);
@@ -18,9 +18,9 @@ const ActDesc = ({ cardAct, cardId }) => {
   };
 
   //수정시 바뀌는 값 set
-  const editDesc = (e) => {
+  const editDesc = useCallback((e) => {
     setChangeDesc(e.target.value);
-  };
+  },[]);
 
   const actDelete = useCallback(
     (act_id) =>
@@ -29,9 +29,7 @@ const ActDesc = ({ cardAct, cardId }) => {
           act_id: act_id,
         }),
       ),
-
-
-    [dispatch],
+    [],
   );
 
   const actUpdate = useCallback(
@@ -50,7 +48,7 @@ const ActDesc = ({ cardAct, cardId }) => {
 
   //acts로
   useEffect(() => {
-    setDesc(cardAct.act_desc)
+    setChangeDesc(cardAct.act_desc)
   }, [cardAct]);
 
   const save = (card_id, user_id, islog, act_desc, act_id) => {
@@ -68,11 +66,11 @@ const ActDesc = ({ cardAct, cardId }) => {
             padding: 5,
             borderRadius: 4,
           }}
-          defaultValue={desc}
+          defaultValue={changeDesc}
           disabled={!editable}
           ref={cardInputEL}
           onChange={editDesc}
-        ></input>
+        />
 
         {editable && (
           <Button
@@ -84,7 +82,6 @@ const ActDesc = ({ cardAct, cardId }) => {
             }}
             onClick={() =>{
                 save(cardId, 'user01@naver.com', 0, changeDesc, cardAct.act_id)
-
               }
             }
           >
@@ -111,7 +108,6 @@ const ActDesc = ({ cardAct, cardId }) => {
           Delete
         </div>
       </div>
-
     </div>
   );
 };

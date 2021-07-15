@@ -16,6 +16,17 @@ const POST_WORKSPACES_FAILURE = 'workspace/POST_WORKSPACES_FAILURE';
 const UPDATE_WORKSPACE = 'workspace/UPDATE_WORKSPACE';
 const UPDATE_WORKSPACE_SUCCESS = 'workspace/UPDATE_WORKSPACE_SUCCESS';
 
+const UPDATE_WORKSPACE_NAME = 'workspace/UPDATE_WORKSPACE_NAME';
+const UPDATE_WORKSPACE_NAME_SUCCESS = 'workspace/UPDATE_WORKSPACE_NAME_SUCCESS';
+
+const GET_WORKSPACE_FILE_NAME = 'workspace/GET_WORKSPACE_FILE_NAME';
+const GET_WORKSPACE_FILE_NAME_SUCCESS = 'workspace/GET_WORKSPACE_FILE_NAME_SUCCESS';
+
+const INVITE_MEMBER = 'workspace/POST_INVITE_MEMBER';
+const INVITE_MEMBER_SUCCESS = 'workspace/POST_INVITE_MEMBER_SUCCESS';
+
+const INIT_WORKSPACE = 'workspace/INIT_WORKSPACE';
+
 export const deleteWorkspace =
   createAction(DELETE_WORKSPACE, ws_id => ws_id);
 export const changeWorkspaceFav =
@@ -24,6 +35,10 @@ export const changeWorkspaceFav =
 export const postWorkspaces = createRequest(POST_WORKSPACES, api.postGetWorkspaces);
 export const addWorkspaces = createRequest(ADD_WORKSPACE, api.postAddWorkspace);
 export const updateWorkspace = createRequest(UPDATE_WORKSPACE, api.updateWorkspace);
+export const updateWorkspaceName = createRequest(UPDATE_WORKSPACE_NAME, api.updateWorkspaceName);
+export const initWorkspace = createAction(INIT_WORKSPACE);
+export const getFileName = createAction(GET_WORKSPACE_FILE_NAME, api.getFileName);
+export const postInviteMember = createAction(INVITE_MEMBER, api.postInviteMember);
 
 const initialState = {
   workspaces: [],
@@ -34,6 +49,11 @@ const workspace = handleActions(
     [ADD_WORKSPACE_SUCCESS]: (state, action) =>
       produce(state, draft => {
         draft.workspaces.push(action.payload);
+        draft.workspaces.sort((ws1, ws2)=>{
+          if(ws1.ws_id < ws2.ws_id)
+            return 1;
+          else return -1;
+        })
       }),
     [CHANGE_WORKSPACE_FAV]: (state, { payload: ws_id }) =>
       produce(state, draft => {
@@ -50,6 +70,11 @@ const workspace = handleActions(
     [POST_WORKSPACES_SUCCESS]: (state, action) =>
       produce(state, draft => {
         draft.workspaces = action.payload;
+        draft.workspaces.sort((ws1, ws2)=>{
+          if(ws1.ws_id < ws2.ws_id)
+            return 1;
+          else return -1;
+        })
       }),
     [UPDATE_WORKSPACE_SUCCESS]: (state, action) =>
       produce(state, draft => {
@@ -57,7 +82,26 @@ const workspace = handleActions(
           .findIndex(ws => ws.ws_id === action.payload.ws_id);
         draft.workspaces.splice(index, 1, action.payload);
       }),
+    [INIT_WORKSPACE]: (state, action) =>
+      produce(state, draft => {
+        draft.workspaces = [];
+      }),
+    [UPDATE_WORKSPACE_NAME_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        const index = draft.workspaces
+        .findIndex(ws => ws.ws_id === action.payload.ws_id);
+        draft.workspaces.splice(index, 1, action.payload)
+      }),
+    [GET_WORKSPACE_FILE_NAME_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        draft.workspaces.push(action.payload);
+      }),
+    [INVITE_MEMBER_SUCCESS]: (state, action) =>
+        produce(state, draft => {
+
+      }),
   },
+
   initialState,
 );
 

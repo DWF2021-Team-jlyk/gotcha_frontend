@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, history } from 'react';
 import {
   Button,
   Col,
@@ -11,71 +11,106 @@ import {
   PopoverContent,
   Row,
 } from 'react-bootstrap';
+import { makeStyles } from '@material-ui/core/styles';
+import FileBtn from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import ModalHeader from 'react-bootstrap/ModalHeader';
 import UserAvatar from '../Sidebar/UserAvatar';
 import Popover from 'react-bootstrap/Popover';
 import axios from 'axios';
 import SearchMember from '../../components/SearchMember';
 import { useDispatch } from 'react-redux';
-import { addWorkspaces } from '../../modules/workspace';
+import { postWorkspaces } from '../../modules/workspace';
+import { useHistory } from 'react-router-dom';
+import { AddAlertRounded } from '@material-ui/icons';
+import { fileAxios } from '../../lib/apiAxios';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  input: {
+    display: 'none',
+  },
+}));
 
 const WorkSpaceAddModal = (props) => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const classes = useStyles();
+
   const [workspaceName, setWorkspaceName] = useState('');
   const [inviteMember, setInviteMember] = useState('');
   const [image, setImage] = useState('');
   const [previewImg, setPreviewImg] = useState();
-  const [userEmail, setUserEmail] = useState('');
   const [emailList, setEmailList] = useState([]);
   const emailEl = useRef(null);
-  // 모달 초기화
-  useEffect(() => {
-    if (props.clicked == true) {
-      setWorkspaceName('');
-      setInviteMember('');
-      setImage('');
-      setUserEmail('');
-      setEmailList([]);
-    }
-  }, [props.clicked]);
-
+    // 모달 초기화
+    useEffect(() => {
+      if (props.clicked == true) {
+        setWorkspaceName('')
+        setInviteMember('')
+        setImage('')
+        setPreviewImg('')
+        setEmailList([]);
+      }
+    }, [props.clicked])
+  useEffect(()=>{
+    console.log('emailList',emailList)
+  },[emailList])
   // 워크스페이스 추가
-  const addWorkspaceClick = async (e) => {
+  const addWorkspaceClick = async (e) =>{
     e.preventDefault();
+    if(workspaceName.length === 0) {
+      alert('workspace name is required')
+      return;
+    }
+    // if(image === '') {
+    //   setImage(null)
+    // }
+
     const formData = new FormData();
-    formData.append('ws_name', workspaceName);
-    console.log('ws_isImage : ', image);
-    formData.append('ws_isImage', image);
+    formData.append("ws_name",workspaceName)
+    console.log('ws_name : ',workspaceName);
+    formData.append("ws_isImage", image)
+    console.log('ws_isImage : ',image);
+    formData.append('member',emailList)
     for (let key of formData.keys())
       console.log('key', key);
     for (let value of formData.values())
       console.log('value', value);
-    // dispatch(addWorkspaces(formData))
-    const response = await axios.post('/home/addWorkspace', {
-      formData,
-      'accessToken': sessionStorage.getItem('accessToken'),
-    });
-    console.log('???', response);
-  };
+
+    const token = sessionStorage.getItem('accessToken')
+    console.log("token",token)
+    const url = "/home/addWorkspace";
+
+    const options = {
+      method: 'POST',
+      headers: { 
+        "Authorization": token,
+      },
+      data: formData,
+      url,
+    };
+    // await fileAxios('/home/addWorkspace',{formData}).then(res => {
+    //   console.log(res)
+    // })
+    const response = await axios(options);
+    dispatch(postWorkspaces());
+    props.handleClose()
+  }
 
   // 워크스페이스 이름
   function onNameChange(e) {
     setWorkspaceName(e.target.value);
   }
-
-  // 멤버초대 input
-  function onInviteChange(e) {
-    setInviteMember(e.target.value);
-  }
-
-  // 멤버초대 버튼
-  function inviteMemberBtn() {
-    alert(inviteMember);
-
-  }
-
+  
   // 파일 추가 버튼
   function onFileChange(e) {
+    console.log(e.target.files[0]);
     let reader = new FileReader();
     reader.onloadend = () => {
       const prev = reader.result;
@@ -84,7 +119,7 @@ const WorkSpaceAddModal = (props) => {
     };
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0]);
-      setImage(e.target.files[0]);
+      setImage(e.target.files[0].name);
     }
 
   }
@@ -117,19 +152,23 @@ const WorkSpaceAddModal = (props) => {
           <Form.Group>
             <Form.Label>WorkSpace Thumbnail 사진</Form.Label>
             <Row>
-              <Col sm={8}>
+            <Col sm={8}>
                 <Form.Control
-                  type='file'
-                  accept='image/png,image/jpeg,image/gif'
-                  name='imgFile'
-                  onChange={onFileChange}
+                  type="text"
+                  value={image}
+                  disabled
                 />
               </Col>
-              {/* <Col sm={4}>
-                <Button>사진 추가하기</Button>
-              </Col> */}
+              <Col sm={4}>
+                <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={onFileChange} />
+                <label htmlFor="icon-button-file">
+                  <IconButton color="primary" aria-label="upload picture" component="span">
+                    <PhotoCamera />
+                  </IconButton>
+                </label>
+              </Col>
               {
-                image === '' ? null : <img src={previewImg} alt='img' height={'200px'} />
+                previewImg === '' || previewImg === undefined ? null : <img src={previewImg} alt='img' height={'200px'} />
               }
             </Row>
           </Form.Group>

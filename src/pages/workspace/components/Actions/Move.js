@@ -9,13 +9,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import { useDispatch, useSelector } from 'react-redux';
 import { postWorkspaces } from '../../../../modules/workspace';
+import { updateCardWsMove,updateCardMove, updateNowPosition} from '../../../../modules/workspaceCard';
 import {insertCardAct } from '../../../../modules/cardAct';
-
-import {
-  updateCardWsMove,
-  updateCardMove,
-  updateNowPosition,
-} from '../../../../modules/workspaceCard';
 import axios from 'axios';
 
 const buttonStyle = {

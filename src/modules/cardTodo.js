@@ -21,10 +21,14 @@ const CARD_TODO_DELETE_FAILURE = 'cardDetail/CARD_TODO_DELETE_FAILURE';
 
 //const CHANGE_TODO_ISDONE = 'cardDetail/CHANGE_TODO_ISDONE';
 
+const CARD_TODO_UNMOUNT = 'cardDetail/CARD_TODO_UNMOUNT';
+
 export const postCardTodo = createRequest(POST_CARD_TODO, api.postTodo);
 export const addCardTodo = createRequest(CARD_TODO_ADD, api.addTodo);
 export const updateCardTodo = createRequest(CARD_TODO_UPDATE, api.updateTodo);
 export const deleteCardTodo = createRequest(CARD_TODO_DELETE, api.deleteTodo);
+
+export const unmountCardTodo = ()=>({type:CARD_TODO_UNMOUNT})
 
 
 const initialState = {
@@ -92,6 +96,10 @@ const cardTodo = handleActions(
     [CARD_TODO_DELETE_FAILURE]: (state, action) =>
       produce(state, draft => {
         draft.loading.POST_CARD_TODO = false;
+      }),
+    [CARD_TODO_UNMOUNT]:(state,action)=>
+      produce(state, draft=>{
+        draft.todos = [];
       }),
   },
   initialState,

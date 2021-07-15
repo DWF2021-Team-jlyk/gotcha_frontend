@@ -11,13 +11,16 @@ const buttonStyle = {
     marginBottom:8
   }
   
-export default function CardCopy() {
+export default function CardCopy(props) {
+  const {card, num, setNum} = props;
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
 
   const handleClick = (event) => {
-    setShow(!show);
+    if(num != 6)
+      setNum(6);
+    else setNum(0);
     setTarget(event.target);
   };
 
@@ -28,7 +31,7 @@ export default function CardCopy() {
       </Button>
 
       <Overlay
-        show={show}
+        show={num===6}
         target={target}
         placement="bottom"
         container={ref.current}

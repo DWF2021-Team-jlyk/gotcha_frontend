@@ -1,28 +1,22 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Button from '@material-ui/core/Button';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { listAdd } from '../../modules/workspaceList';
 import WorkListCardList from './components/worklist/WorkListCardList';
-
-
-const listStyle = {
-  width: '97%',
-  height: 800,
-  display: 'flex',
-  overflowX: 'auto',
-  margin: '10px',
-  whiteSpace: 'nowrap',
-};
+import WorkListCardModal from './components/worklist/WorkListCardModal';
+import { disappearModal } from '../../modules/cardModal';
+import "./css/WorkList.css"
 
 const WorkList = (props) => {
   const { lists, ws_id } = props;
   const [listName, setListName] = useState('');
   const listEL = useRef(null);
   const [nextPosition, setNextPosition] = useState(0);
+  const show = useSelector(state => state.cardModal.modalShow);
 
   const dispatch = useDispatch();
 
-  const onListAdd = () => {
+  const onListAdd = useCallback(() => {
     dispatch(
       listAdd({
         list_name: listName,
@@ -30,13 +24,15 @@ const WorkList = (props) => {
         position: nextPosition,
       }),
     );
-  };
+  }, []);
+
+  const closeModal = useCallback(() => {
+    dispatch(disappearModal());
+  }, []);
 
   useEffect(() => {
     setNextPosition(lists.length);
   }, [lists]);
-
-  console.log(nextPosition);
   return (
     <>
       <input onChange={(e) => setListName(e.target.value)} ref={listEL} />
@@ -51,7 +47,7 @@ const WorkList = (props) => {
         + Add Another List
       </Button>
 
-      <div style={listStyle}>
+      <div className="listStyle">
         {lists.map((list, index) => {
           return (
             <div key={index}>
@@ -65,8 +61,8 @@ const WorkList = (props) => {
             </div>
           );
         })}
-        <div style={{ margin: 10 }}></div>
       </div>
+      {show && <WorkListCardModal show={show} handle={closeModal} />}
     </>
   );
 };

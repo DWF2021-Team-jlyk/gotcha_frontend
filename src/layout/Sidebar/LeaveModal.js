@@ -21,9 +21,9 @@ function RoleModal({ role, leaveModal, leaveModalClose, userList }) {
         <Modal.Body>
           <div>Member 선택</div>
           <Row lg={2} style={{ marginTop: 20 }}>
-            {userList.map((value, index) => {
+            {/* {userList.map((value, index) => {
               return <AdminUserAvatar user_id={value} key={index} />;
-            })}
+            })} */}
 
           </Row>
         </Modal.Body>

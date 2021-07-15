@@ -1,6 +1,7 @@
 import React from 'react';
 import ModalHeader from 'react-bootstrap/ModalHeader';
 import { TiDocument } from 'react-icons/ti';
+import { useSelector } from 'react-redux';
 
 const CardModalHeader = ({card}) => {
   return (
@@ -11,7 +12,7 @@ const CardModalHeader = ({card}) => {
       closeButton
     >
       <h3 style={{ color: 'white' }}>
-        <TiDocument /> <span style={{fontSize:"1.5rem"}}>{card.card_name}</span>
+        <TiDocument /> <span style={{fontSize:"1.5rem"}}>{card?.card_name}</span>
       </h3>
     </ModalHeader>
   )

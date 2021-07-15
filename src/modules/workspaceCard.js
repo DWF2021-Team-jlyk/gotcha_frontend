@@ -19,6 +19,7 @@ const CARD_DELETE = 'workspace/CARD_DELETE';
 const CARD_DELETE_SUCCESS = 'workspace/CARD_DELETE_SUCCESS';
 const CARD_DELETE_FAILURE = 'workspace/CARD_DELETE_FAILURE';
 
+const CARD_UNMOUNT = "workspace/CARD_UNMOUNT";
 //card move
 const UPDATE_CARD_MOVE = 'cardAction/UPDATE_CARD_MOVE';
 const UPDATE_CARD_MOVE_SUCCESS = 'cardAction/UPDATE_CARD_MOVE_SUCCESS';
@@ -33,6 +34,8 @@ export const postCard = createRequest(POST_CARD, api.postCard);
 export const cardAdd = createRequest(CARD_ADD, api.addCard);
 export const cardUpdate = createRequest(CARD_UPDATE, api.updateCard);
 export const cardDelete = createRequest(CARD_DELETE, api.deleteCard);
+export const cardUnmount = createAction(CARD_UNMOUNT);
+
 export const updateCardMove = createRequest(
   UPDATE_CARD_MOVE,
   api.modifyCardMove,
@@ -123,6 +126,10 @@ const workspaceCard = handleActions(
           return card;
         });
         draft.cards = cards;
+      }),
+    [CARD_UNMOUNT]:(state, action)=>
+      produce(state, draft=>{
+        draft.cards = [];
       }),
 
     //워크스페이스도 바꿀때

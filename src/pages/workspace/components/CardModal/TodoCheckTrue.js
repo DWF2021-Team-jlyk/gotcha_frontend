@@ -29,7 +29,7 @@ const TodoCheckTrue = (props) => {
         todo_isdone: todoIsdone,
       }),
     );
-  },[dispatch]);
+  },[]);
 
   return (
     <div style={{ display: 'flex' }}>

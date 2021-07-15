@@ -113,7 +113,7 @@ const Mypage = () => {
     })
     .then(res=>{
       setUserId(res.data.user_id)
-      setUserName(res.data.user_name)
+      setUserName(res.data.user_name) 
     })
   },[])
 

@@ -44,13 +44,12 @@ const SearchWorkspace = () => {
       >
         {(props) => (
           <Popover id='search-container' {...props}>
-            <Popover.Content>
+            <Popover.Content as={'div'} style={{maxHeight:500, overflowY:"scroll"}}>
               {workspaces
                 .filter(ws=>ws.ws_name.indexOf(search) >= 0)
                 .map(ws =>
                 <div
                   key={ws.ws_id}
-                  style={{width:1200}}
                 >
                   <Link
                     key={ws.ws_id}

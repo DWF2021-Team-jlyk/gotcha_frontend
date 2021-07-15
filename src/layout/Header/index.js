@@ -3,11 +3,14 @@ import {Navbar} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import NotiButton from "./NotiButton";
 import WorkSpaceAddButton from "./WorkSpaceAddButton";
-import headerImg from "../../image/gc_header.png";
-import SearchWorkspace from "./SearchWorkspace";
 import ToMyPage from "./ToMyPage";
-const Header = () => {
+import SearchWorkspace from './SearchWorkspace';
+import headerImg from "../../image/gc_header.png";
+import { useDispatch } from "react-redux";
+import { initWorkspace } from "../../modules/workspace";
 
+const Header = () => {
+    const dispatch = useDispatch();
     return (
         <Navbar
             variant="dark"
@@ -70,6 +73,7 @@ const Header = () => {
         </Navbar>
     );
     function onClick() {
+        dispatch(initWorkspace());
         const accessToken = sessionStorage.getItem("accessToken")
         if(accessToken !== null || accessToken !== '') {
             sessionStorage.removeItem("accessToken")

@@ -35,7 +35,7 @@ const TodoCheckFalse = (props) => {
         todo_isdone: todoIsdone,
       }),
     );
-  },[dispatch]);
+  },[]);
 
   const updateTodoName = useCallback((todoName)=>{
       dispatch(
@@ -44,7 +44,7 @@ const TodoCheckFalse = (props) => {
               todo_name:todoName,
           }),
       )
-  },[dispatch]);
+  },[]);
 
   const deleteTodos = useCallback(
     (todo_id) =>
@@ -53,8 +53,7 @@ const TodoCheckFalse = (props) => {
           todo_id: todo_id,
         }),
       ),
-    [dispatch],
-  );
+    []);
 
   return (
     <div style={{ display: 'flex' }}>

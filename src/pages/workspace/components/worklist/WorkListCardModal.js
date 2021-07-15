@@ -1,78 +1,69 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Button,
-  Col,
-  Modal,
-  ModalBody,
-  ModalFooter,
-  Row,
-} from 'react-bootstrap';
-
+import React, { useCallback, useEffect } from 'react';
+import { Button, Col, Modal, ModalBody, ModalFooter, Row } from 'react-bootstrap';
 import { FunctionalAddOn, ActionAddOn } from './ModalAddOn';
-
 import CardMember from '../CardModal/CardMember';
 import CardAct from '../CardModal/CardAct';
 import CardDesc from '../CardModal/CardDesc';
 import CardFile from '../CardModal/CardFile';
 import CardTodo from '../CardModal/CardTodo.js';
 import CardModalHeader from '../CardModal/CardModalHeader';
-import { useSelector, useDispatch } from 'react-redux';
-import { postCardMember } from '../../../../modules/cardMember';
-import { postCardTodo } from '../../../../modules/cardTodo';
-import { postCardFile } from '../../../../modules/cardFile';
+import CardDate from '../CardModal/CardDate';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerCard, unmountCard } from '../../../../modules/cardModal';
+import { useParams } from 'react-router-dom';
+import { unmountCardTodo } from '../../../../modules/cardTodo';
+import { unmountCardAct } from '../../../../modules/cardAct';
+import { unmountCardMember } from '../../../../modules/cardMember';
+import { unmountCardFile } from '../../../../modules/cardFile';
 import { cardDelete } from '../../../../modules/workspaceCard';
 
 const WorkListCardModal = (props) => {
-  const { cardId, card, ws_id } = props;
-  // console.log('WorkListCardModal card:', card);
-  // const cardMembers = useSelector((state) => state.cardMember.members);
-  // const cardTodos = useSelector((state) => state.cardTodo.todos);
-  // const cardFiles = useSelector((state)=> state.cardFile.files);
-
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   console.log('cardModal card Todo' + card);
-  //   dispatch(postCardMember(cardId));
-  //   dispatch(postCardTodo(cardId));
-  //   dispatch(postCardFile(cardId));
-  // }, [cardId]);
-
+  const { cardId, card_id, show, handle } = props;
+  const card = useSelector(state => state.cardModal.card);
+  const {ws_id} = useParams();
+  const dispatch = useDispatch();
+  const unMountFunc = useCallback(()=>{
+    dispatch(unmountCardMember());
+    dispatch(unmountCardAct());
+    dispatch(unmountCardTodo());
+    dispatch(unmountCardFile());
+    dispatch(unmountCard());
+  })
+  useEffect(()=>{
+    dispatch(registerCard(card));
+    return unMountFunc;
+  },[cardId]);
   return (
     <Modal
       size={'lg'}
-      show={props.show}
-      onHide={props.handle}
+      show={show}
+      onHide={handle}
+      // scrollable
     >
-     
-      <CardModalHeader card={props.card}></CardModalHeader>
-
+      <CardModalHeader card={card} />
       <ModalBody>
-    
         <Row>
           <Col sm={9}>
-            <CardMember card={card} ws_id={ws_id} />
-            <CardDesc card={card}></CardDesc>
-            <CardFile card= {card} cardId = {cardId}></CardFile>
-            <CardTodo cardId={cardId} />
-            <CardAct card={card}></CardAct>
+            <CardMember/>
+            <CardDesc card={card} />
+            {card?.card_start_date !== null && <CardDate card={card} />}
+            <CardFile cardId={card?.card_id} />
+            <CardTodo cardId={card?.card_id} />
+            <CardAct card={card} />
           </Col>
-
           <Col sm={3}>
             <div>
-              <h5 style={{marginBottom:20}}>Card Behavior</h5>
-
-              <FunctionalAddOn card={props.card} ws_id={props.ws_id} />
+              <h5 style={{ marginBottom: 20 }}>Card Behavior</h5>
+              <FunctionalAddOn card={card} ws_id={ws_id} />
             </div>
-
           </Col>
         </Row>
       </ModalBody>
 
       <ModalFooter>
-        <Button variant="primary">Save</Button>
-        <Button variant="danger">Delete</Button>
-        <Button variant="secondary">Cancel</Button>
+        <Button variant='primary'>Save</Button>
+        <Button variant='danger'>Delete</Button>
+        <Button variant='secondary'>Cancel</Button>
       </ModalFooter>
     </Modal>
   );

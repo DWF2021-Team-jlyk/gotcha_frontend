@@ -40,9 +40,8 @@ export default function AddFile(props) {
         placement="right"
         container={ref.current}
         containerPadding={40}
-      
       >
-        <Popover id="popover-contained">
+        <Popover id="popover-contained" >
           <Popover.Title as="h3"> <b>File 첨부</b> </Popover.Title>
 
           <Popover.Content > 

@@ -6,13 +6,11 @@ export default function createRequest(type, request) {
 
   
   return (params) => async dispatch => {
-    console.log("data" + params);
     dispatch({ type });
     dispatch(startLoading(type));
     // 요청을 보내고
     try {
       const response = await request(params);
-      console.log(response);
       //성공하면
       if (response !== undefined) {
         dispatch({

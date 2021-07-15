@@ -26,14 +26,13 @@ const IconMargin = {
 };
 
 const WorkListCardList = (props) => {
-  console.log(props);
   const { ws_id, list, listId } = props;
   const cardInputEl = useRef(null);
   const [listName, setListName] = useState('');
   const [cardTitle, setCardTitle] = useState('');
   const [position, setPosition] = useState(0);
   const [showCardInput, setShowCardInput] = useState(false);
-
+  const [anchorEl, setAnchorEl] = useState(null);
   const cards = useSelector((state) => state.workspaceCard.cards);
   const userId = useSelector((state) => state.userInfo.userId);
 
@@ -48,45 +47,43 @@ const WorkListCardList = (props) => {
     setListName(e.target.value);
   }, []);
 
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleClick = (event) => {
+  const handleClick = useCallback ((event) => {
     setAnchorEl(event.currentTarget);
-  };
+  },[]);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setAnchorEl(null);
-  };
+  }, []);
 
-  const onListRemove = () => {
+  const onListRemove = useCallback(() => {
     dispatch(listDelete({ list_id: listId }));
-  };
+  },[]);
 
-  const onCardAdd = () => {
-    dispatch(
-      cardAdd({
-        list_id: listId,
-        ws_id: ws_id,
-        card_name: cardTitle,
-        card_desc: '',
-        card_isdone: '0',
-        card_start_date: '',
-        card_end_date: '',
-        position: position,
-        user_id: userId
-      }),
-
-    );
-
-  };
+  const onCardAdd = useCallback(() => {
+    dispatch(cardAdd({
+      list_id: list.list_id,
+      ws_id: ws_id,
+      card_name: cardTitle,
+      card_desc: '',
+      card_isdone:'0',
+      card_start_date: '',
+      card_end_date: '',
+      position: position,
+      user_id: userId
+    }));
+  },[list, cards]);
 
   useEffect(() => {
-    setPosition(cards.filter((card) => card.list_id === listId).length);
-  }, [cards]);
+    setPosition(
+      cards.filter(
+        card => card.list_id === listId,
+      ).length,
+    );
+  }, [cards, list]);
 
   useEffect(() => {
     setListName(list.list_name);
-  }, []);
+  }, [list]);
 
   return (
     <Card className="ListStyle">
@@ -148,7 +145,7 @@ const WorkListCardList = (props) => {
             }}
           >
             <input
-              onChange={(e) => setCardTitle(e.target.value)}
+              onChange={onChange}
               ref={cardInputEl}
               onKeyPress={(e) => {
                 if (e.key === 'Enter') {

@@ -11,8 +11,8 @@ import loading from './loading';
 import cardTodo from './cardTodo';
 import cardAct from './cardAct';
 import cardFile from './cardFile';
-import cardForModal from './cardForModal';
 import userInfo from './userInfo'
+import cardModal from './cardModal';
 
 const rootReducer = combineReducers({
   workspace,
@@ -26,7 +26,7 @@ const rootReducer = combineReducers({
   loading,
   workspaceMember,
   insertCardMember,
-  cardForModal,
+  cardModal,
   userInfo,
 });
 

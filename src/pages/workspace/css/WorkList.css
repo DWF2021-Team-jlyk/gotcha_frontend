@@ -1,0 +1,8 @@
+.listStyle {
+    width:97%;
+    height:800px;
+    display: flex;
+    overflow-x: auto;
+    margin: 10px;
+    white-space: nowrap;
+}

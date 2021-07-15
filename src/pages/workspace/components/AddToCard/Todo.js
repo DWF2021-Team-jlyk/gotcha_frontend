@@ -17,7 +17,7 @@ const buttonStyle = {
 
 
 export default function AddTodo(props) {
-  const {cardId} = props;
+  const {cardId, num, setNum} = props;
   const [show, setShow] = useState(false);
   const [listDateShow, setListDateShow] = useState(false);
   const [target, setTarget] = useState(null);

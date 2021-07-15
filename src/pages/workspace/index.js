@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { listUnmount, listUpdate, postList } from '../../modules/workspaceList';
 import { cardUnmount, postCard } from '../../modules/workspaceCard';
+import { postWorkspaceMember } from '../../modules/workspaceMember';
 
 const WorkList = loadable(() => import('./WorkList'));
 const Calendar = loadable(() => import('../calendar'));
@@ -23,6 +24,7 @@ const Workspace = () => {
   useEffect(() => {
     dispatch(postList({ ws_id: ws_id }));
     dispatch(postCard({ ws_id: ws_id }));
+    dispatch(postWorkspaceMember(ws_id));
   }, [ws_id]);
 
   return (
@@ -43,6 +45,7 @@ const Workspace = () => {
             background: '#F7F7F7',
             marginBottom: 10,
           }}
+          mountOnEnter={true}
         >
           <Tab
             title="WorkList"
@@ -51,11 +54,7 @@ const Workspace = () => {
               margin: 5,
             }}
           >
-            <WorkList
-              ws_id={ws_id}
-              lists={lists}
-              // cards={cards}
-            />
+            <WorkList ws_id={ws_id} lists={lists} cards={cards} />
           </Tab>
           <Tab
             title="Calendar"

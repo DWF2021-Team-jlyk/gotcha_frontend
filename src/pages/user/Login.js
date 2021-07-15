@@ -168,7 +168,7 @@ function Copyright() {
                 </Link>
               </Grid>
             </Grid>
-            </Switch>
+          </Switch>
           </form>
         </div>
         <Box mt={8}>
