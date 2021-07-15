@@ -3,17 +3,18 @@ import { postFile, updateFile, deleteFile, addFile } from '../lib/cardFileAPI';
 import { handleActions } from 'redux-actions';
 import produce from 'immer';
 
-const POST_CARD_FILE = 'cardDetail/POST_CARD_FILE';
-const POST_CARD_FILE_SUCCESS = 'cardDetail/POST_CARD_FILE_SUCCESS';
+const POST_CARD_FILE = 'cardFile/POST_CARD_FILE';
+const POST_CARD_FILE_SUCCESS = 'cardFile/POST_CARD_FILE_SUCCESS';
+const POST_CARD_FILE_FAILURE = 'cardFile/POST_CARD_FILE_FAILURE';
 
-const CARD_FILE_UPDATE = 'cardDetail/CARD_FILE_UPDATE';
-const CARD_FILE_UPDATE_SUCCESS = 'cardDetail/FILE_UPDATE_SUCCESS';
+const CARD_FILE_UPDATE = 'cardFile/CARD_FILE_UPDATE';
+const CARD_FILE_UPDATE_SUCCESS = 'cardFile/FILE_UPDATE_SUCCESS';
 
-const CARD_FILE_DELETE = 'cardDetail/CARD_FILE_DELETE';
-const CARD_FILE_DELETE_SUCCESS = 'cardDetail/CARD_FILE_DELETE_SUCCESS';
+const CARD_FILE_DELETE = 'cardFile/CARD_FILE_DELETE';
+const CARD_FILE_DELETE_SUCCESS = 'cardFile/CARD_FILE_DELETE_SUCCESS';
 
-const CARD_FILE_ADD = 'cardDetail/CARD_FILE_ADD';
-const CARD_FILE_ADD_SUCCESS = 'cardDetail/CARD_FILE_ADD_SUCCESS';
+const CARD_FILE_ADD = 'cardFile/CARD_FILE_ADD';
+const CARD_FILE_ADD_SUCCESS = 'cardFile/CARD_FILE_ADD_SUCCESS';
 
 const CARD_FILE_UNMOUNT = 'cardDetail/CARD_FILE_UNMOUNT';
 

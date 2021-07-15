@@ -8,10 +8,12 @@ import { useDispatch } from 'react-redux';
 import { listUnmount, listUpdate, postList } from '../../modules/workspaceList';
 import { cardUnmount, postCard } from '../../modules/workspaceCard';
 import { postWorkspaceMember } from '../../modules/workspaceMember';
+import { MyTable } from '../board/index';
 
 const WorkList = loadable(() => import('./WorkList'));
 const Calendar = loadable(() => import('../calendar'));
-const Board = loadable(() => import('../board'));
+// const Board = loadable(() => import('../board'));
+//const MyTable = loadable(() => import('../board'));
 
 const Workspace = () => {
   // const {  ws_id, lists, cards } = props;
@@ -72,7 +74,7 @@ const Workspace = () => {
               margin: 5,
             }}
           >
-            <Board />
+            <MyTable ws_id = {ws_id}/>
           </Tab>
         </Tabs>
       </div>

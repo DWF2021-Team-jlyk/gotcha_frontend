@@ -41,6 +41,7 @@ export default function CardFileForm(props) {
       }
     };
     if (e.target.files[0]) {
+      console.log('fileInfo ', e.target.files[0])
       reader.readAsDataURL(e.target.files[0]);
       setFile(e.target.files[0]);
 

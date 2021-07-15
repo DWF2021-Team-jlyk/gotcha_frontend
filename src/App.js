@@ -3,6 +3,8 @@ import Login from './pages/user/Login';
 import loadable from '@loadable/component';
 import PublicRoute from './lib/pulblicRoute';
 import PrivateRoute from './lib/privateRoute';
+import { Router, Route } from 'react-router';
+
 import './layout/css/font.css';
 
 const Home = loadable(()=>import('./pages/home'));
@@ -13,6 +15,7 @@ const Mypage = loadable(() => import('./pages/user/mypage/mypage'));
 const Pwdfind = loadable(() => import('./pages/user/pwdfind/Pwdfind'));
 const Sidebar = loadable(()=>import('./layout/Sidebar'));
 const Header = loadable(()=>import('./layout/Header'));
+const Content = loadable(()=>import('./pages/board/board_content/Content'));
 
 const style = {
   display: 'flex',
@@ -51,6 +54,7 @@ const App = () => {
             <PrivateRoute component={Home} exact path='/' />
             <PrivateRoute component={Workspace} exact path='/workspace/:ws_id' />
             <PrivateRoute component={Mypage} exact path='/Mypage' />
+            <PrivateRoute component={Content} exact path='/board_content'/>
           </div>
         </div>
       </div>
@@ -59,3 +63,8 @@ const App = () => {
 };
 
 export default App;
+
+
+
+
+
