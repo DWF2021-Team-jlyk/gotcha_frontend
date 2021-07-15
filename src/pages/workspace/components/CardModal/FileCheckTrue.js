@@ -26,7 +26,7 @@ const FileCheckTrue = (props) => {
           file_ischecked: fileIsChecked,
         }),
       );
-    },[dispatch]);
+    },[]);
 
   const deleteCardFiles = useCallback(
     (file_id) =>
@@ -35,7 +35,7 @@ const FileCheckTrue = (props) => {
           file_id: file_id,
         }),
       ),
-    [dispatch],
+    [],
   );
 
   const saveFiles = () =>{

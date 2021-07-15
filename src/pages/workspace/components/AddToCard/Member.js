@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import Form from 'react-bootstrap/Form';
@@ -8,10 +8,10 @@ import { FaUserFriends } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { postWorkspaceMember } from '../../../../modules/workspaceMember';
-import {addCardMember} from '../../../../lib/cardActAPI';
-import {insertCardMember, deleteCardMember} from '../../../../modules/cardMember';
-import {AiOutlineCheck} from "react-icons/ai";
-
+import { addCardMember } from '../../../../lib/cardActAPI';
+import { insertCardMember, deleteCardMember } from '../../../../modules/cardMember';
+import { AiOutlineCheck } from 'react-icons/ai';
+import { useParams } from 'react-router-dom';
 
 
 const buttonStyle = {
@@ -29,34 +29,30 @@ const memberButton = {
 
 export default function AddMember(props) {
   const { num, setNum } = props;
-  const card = useSelector(state=>state.cardForModal.card);
+  const card = useSelector(state => state.cardModal.card);
   const [click, setClick] = useState(false);
-
-  const onClick = (e) =>{
-    setClick(true);
-  }
-
-  const handleClick = (e) => {
-    setTarget(e.target);
-    if(num != 1)
-      setNum(1);
-    else setNum(0);
-    console.log(card.ws_id);
-  };
-
-  const wsMembers = useSelector((state) => state.workspaceMember.wsMembers);
-  const cardMember = useSelector((state) => state.cardMember.members);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(postWorkspaceMember(card?.ws_id));
-  }, []);
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
+  const wsMembers = useSelector((state) => state.workspaceMember.wsMembers);
+  const cardMember = useSelector((state) => state.cardMember.members);
+  const { ws_id } = useParams();
 
-  console.log(wsMembers);
+  const dispatch = useDispatch();
+
+  const onClick = useCallback((e) => {
+    setClick(true);
+  }, []);
+
+  const handleClick = (e) => {
+    setTarget(e.target);
+    setShow(!show);
+  };
+
+  useEffect(() => {
+    dispatch(postWorkspaceMember(ws_id));
+  }, [ws_id]);
+
   return (
     <div ref={ref}>
       <Button onClick={handleClick} style={buttonStyle}>
@@ -64,69 +60,70 @@ export default function AddMember(props) {
       </Button>
 
       <Overlay
-        show={num===1}
+        show={show}
         target={target}
-        placement="bottom"
+        placement='bottom'
         container={ref.current}
         containerPadding={40}
       >
-        <Popover id="popover-contained">
-          <Popover.Title as="h3">
-            {' '}
-            <b>Members</b>{' '}
-          </Popover.Title>
+        {(props) => (
 
-          <Popover.Content onClick={e=>e.stopPropagation()}>
-            <div>
-              추가할 멤버 검색
-              <Form.Group controlId="formBasicEmail">
-                <Form.Control
-                  size="sm"
-                  style={{ marginTop: 10 }}
-                  type="text"
-                  placeholder="Search members"
-                  onClick={onClick}
-                />
-              </Form.Group>
-              <hr/>
-              <div style={{ marginTop: 15 }}>
-                <b>Board Member List</b>
+          <Popover id='popover-contained' {...props}>
+            <Popover.Title as='h3'>
+              {' '}
+              <b>Members</b>{' '}
+            </Popover.Title>
 
-                {wsMembers?.map((value, key) => {
-                  if (cardMember?.map((mem) => mem.user_id).includes(value)) {
-                    return (
-                      <div>
-                        <Button
-                          style={memberButton}
-                          variant="contained"
-                          onClick={()=>
-                            dispatch(deleteCardMember({user_id:value, card_id:card.card_id}))
-                          }
-                        >
-                          {value} 
-                        </Button>
-                        <b><AiOutlineCheck style={{marginLeft:10, fontSize:"1rem"}}/></b>
-                      </div>
-                    );
-                  }
-                  else {
-                    return (
-                      <div>
-                        <Button
-                          style={memberButton}
-                          variant="contained"
-                          onClick={()=>{
-                            dispatch(insertCardMember({user_id:value, card_id:card.card_id}));
-                          }}
-                          onBlur={setClick(false)}
-                        >
-                          {value} 
-                        </Button>
-                      </div>
-                    );
-                  }
-                })}
-                {/* {wsMembers?.filter(
+            <Popover.Content onClick={e => e.stopPropagation()}>
+              <div>
+                추가할 멤버 검색
+                <Form.Group controlId='formBasicEmail'>
+                  <Form.Control
+                    size='sm'
+                    style={{ marginTop: 10 }}
+                    type='text'
+                    placeholder='Search members'
+                    onClick={onClick}
+                  />
+                </Form.Group>
+                <hr />
+                <div style={{ marginTop: 15 }}>
+                  <b>Board Member List</b>
+
+                  {wsMembers?.map((value, key) => {
+                    if (cardMember?.map((mem) => mem.user_id).includes(value)) {
+                      return (
+                        <div key={key}>
+                          <Button
+                            style={memberButton}
+                            variant='contained'
+                            onClick={() =>
+                              dispatch(deleteCardMember({ user_id: value, card_id: card.card_id }))
+                            }
+                          >
+                            {value}
+                          </Button>
+                          <b><AiOutlineCheck style={{ marginLeft: 10, fontSize: '1rem' }} /></b>
+                        </div>
+                      );
+                    } else {
+                      return (
+                        <div key={key}>
+                          <Button
+                            style={memberButton}
+                            variant='contained'
+                            onClick={() => {
+                              dispatch(insertCardMember({ user_id: value, card_id: card.card_id }));
+                            }}
+                            onBlur={setClick(false)}
+                          >
+                            {value}
+                          </Button>
+                        </div>
+                      );
+                    }
+                  })}
+                  {/* {wsMembers?.filter(
                   value=>!cardMember?.map(mem=>mem.user_id).includes(value))
                   .map((value, key) => {
                   return (
@@ -137,10 +134,11 @@ export default function AddMember(props) {
                   </div>
                   )
                 })} */}
+                </div>
               </div>
-            </div>
-          </Popover.Content>
-        </Popover>
+            </Popover.Content>
+          </Popover>
+        )}
       </Overlay>
     </div>
   );

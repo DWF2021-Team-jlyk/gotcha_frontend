@@ -35,7 +35,7 @@ const CardTodo = () => {
       card_id:card_id,
       todo_isdone:todo_isdone
       })),
-     [dispatch]
+     []
     // console.log("changeTodoIsDone",  todo_id)
   );
 

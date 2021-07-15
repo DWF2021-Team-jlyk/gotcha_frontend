@@ -8,7 +8,8 @@ const POST_WS_MEMBER_SUCCESS = 'home/POST_WS_MEMBER_SUCCESS'
 // const POST_WS_MEMBER_FAILURE = 'home/POST_WS_MEMBER_FAILURE'
 
 
-export const postWorkspaceMember = createRequest(POST_WS_MEMBER, api.postGetWorkspaceMembers);
+export const postWorkspaceMember =
+  createRequest(POST_WS_MEMBER, api.postGetWorkspaceMembers);
 
 const initialState = {
   wsMembers: [],

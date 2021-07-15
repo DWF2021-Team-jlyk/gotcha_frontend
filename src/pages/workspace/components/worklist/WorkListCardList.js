@@ -54,11 +54,11 @@ const WorkListCardList = (props) => {
 
   const onListRemove = useCallback(() => {
     dispatch(listDelete({ list_id: listId }));
-  },[dispatch]);
+  },[]);
 
   const onCardAdd = useCallback(() => {
     dispatch(cardAdd({
-      list_id: listId,
+      list_id: list.list_id,
       ws_id: ws_id,
       card_name: cardTitle,
       card_desc: '',
@@ -67,7 +67,7 @@ const WorkListCardList = (props) => {
       card_end_date: '',
       position: position,
     }));
-  },[dispatch]);
+  },[list, cards]);
 
   useEffect(() => {
     setPosition(
@@ -150,7 +150,7 @@ const WorkListCardList = (props) => {
             }}
           >
             <input
-              onChange={(e) => setCardTitle(e.target.value)}
+              onChange={onChange}
               ref={cardInputEl}
               onKeyPress={e => {
                 if (e.key === 'Enter') {

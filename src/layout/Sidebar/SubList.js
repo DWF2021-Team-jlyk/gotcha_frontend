@@ -37,7 +37,6 @@ const SubList = ({ workspaces, open, category }) => {
   return (
     <Collapse className={classes.sub} in={open} timeout="auto" unmountOnExit>
       {workspaces.map((workspace) => {
-        console.log('workspace List--> ', workspace)
         return (
           <List key={workspace.ws_id} component="div" disablePadding>
             <ListItem className={classes.nested}>

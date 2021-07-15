@@ -29,7 +29,7 @@ const ActDesc = ({ cardAct, cardId, acts }) => {
           act_id: act_id,
         }),
       ),
-    [dispatch],
+    [],
   );
 
   const actUpdate = useCallback(
@@ -43,7 +43,7 @@ const ActDesc = ({ cardAct, cardId, acts }) => {
           act_id: act_id,
         }),
       ),
-    [dispatch],
+    [],
   );
 
   //acts로

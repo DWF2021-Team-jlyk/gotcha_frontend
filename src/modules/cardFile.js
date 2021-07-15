@@ -1,5 +1,5 @@
 import createRequest from '../lib/createRequest';
-import { postFile ,updateFile, deleteFile, addFile } from '../lib/cardFileAPI';
+import { postFile, updateFile, deleteFile, addFile } from '../lib/cardFileAPI';
 import { handleActions } from 'redux-actions';
 import produce from 'immer';
 
@@ -15,56 +15,62 @@ const CARD_FILE_DELETE_SUCCESS = 'cardDetail/CARD_FILE_DELETE_SUCCESS';
 const CARD_FILE_ADD = 'cardDetail/CARD_FILE_ADD';
 const CARD_FILE_ADD_SUCCESS = 'cardDetail/CARD_FILE_ADD_SUCCESS';
 
+const CARD_FILE_UNMOUNT = 'cardDetail/CARD_FILE_UNMOUNT';
+
 export const postCardFile = createRequest(POST_CARD_FILE, postFile);
-export const updateCardFile = createRequest(CARD_FILE_UPDATE,updateFile);
-export const deleteCardFile = createRequest(CARD_FILE_DELETE,deleteFile);
+export const updateCardFile = createRequest(CARD_FILE_UPDATE, updateFile);
+export const deleteCardFile = createRequest(CARD_FILE_DELETE, deleteFile);
 export const addCardFile = createRequest(CARD_FILE_ADD, addFile);
 
+export const unmountCardFile = () => ({ type: CARD_FILE_UNMOUNT });
+
 const initialState = {
-  loading:{
-    POST_CARD_FILE:false,
+  loading: {
+    POST_CARD_FILE: false,
   },
-  files : [],
-}
+  files: [],
+};
 
 const cardFile = handleActions(
   {
     [POST_CARD_FILE_SUCCESS]: (state, action) =>
-      produce(state, draft=>{
+      produce(state, draft => {
         draft.loading.POST_CARD_FILE = false;
         draft.files = action.payload;
         draft.files.sort((file1, file2) => {
-          if(file1.file_id > file2.file_id){
+          if (file1.file_id > file2.file_id) {
             return 1;
-          }
-          else return -1;
+          } else return -1;
         });
       }),
-    [CARD_FILE_UPDATE_SUCCESS]:(state,action)=>
-      produce(state, draft=>{
-        draft.loading.POST_CARD_FILE=false;
+    [CARD_FILE_UPDATE_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        draft.loading.POST_CARD_FILE = false;
         const index = draft.files
-        .findIndex(file => file.file_id === action.payload.file_id);
-        draft.files.splice(index,1,action.payload);
+          .findIndex(file => file.file_id === action.payload.file_id);
+        draft.files.splice(index, 1, action.payload);
       }),
-    [CARD_FILE_DELETE_SUCCESS]:(state,action)=>
-      produce(state, draft =>{
-        draft.loading.POST_CARD_FILE=false;
+    [CARD_FILE_DELETE_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        draft.loading.POST_CARD_FILE = false;
         const index = draft.files
-        .findIndex(file=> file.file_id === action.payload.file_id);
-        draft.files.splice(index,1);
+          .findIndex(file => file.file_id === action.payload.file_id);
+        draft.files.splice(index, 1);
       }),
-      [CARD_FILE_ADD_SUCCESS]:(state, action)=>
-      produce(state, draft=>{
+    [CARD_FILE_ADD_SUCCESS]: (state, action) =>
+      produce(state, draft => {
         draft.files.push(action.payload);
         draft.files.sort((file1, file2) => {
-          if(file1.file_id > file2.file_id){
+          if (file1.file_id > file2.file_id) {
             return 1;
-          }
-          else return -1;
+          } else return -1;
         });
       }),
-    },
+    [CARD_FILE_UNMOUNT]: (state, action) =>
+      produce(state, draft => {
+        draft.files = [];
+      }),
+  },
   initialState,
 );
 

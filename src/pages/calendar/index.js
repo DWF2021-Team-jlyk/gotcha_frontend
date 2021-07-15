@@ -5,11 +5,12 @@ import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import CalendarTestData from '../../DummyData/CalendarTestData';
 import WorkListCardModal from '../workspace/components/worklist/WorkListCardModal';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import Form from 'react-bootstrap/Form';
 import { InputGroup } from 'react-bootstrap';
+import { registerCard } from '../../modules/cardModal';
 
 moment.locale('ko');
 BigCalendar.momentLocalizer(moment);
@@ -23,6 +24,7 @@ const MyCalendar = () => {
   const cards = useSelector(state => state.workspaceCard.cards);
   const [listId, setListId] = useState([]);
   const [events, setEvents] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setEvents(
@@ -35,6 +37,7 @@ const MyCalendar = () => {
             allDay: true,
             start: card.card_start_date,
             end: card.card_end_date,
+            card:card
           };
         }),
     );
@@ -83,16 +86,13 @@ const MyCalendar = () => {
         onSelectEvent={(event, e) => {
           setLoadModal(!loadModal);
           setCardId(event.card_id);
+          dispatch(registerCard(event.card));
         }}
       />
       {loadModal&&
       <WorkListCardModal
         show={loadModal}
         handle={handleModal}
-        card={
-          cards.filter(card=>card.card_id === cardId)[0]
-        }
-        cardId={cardId}
       />}
     </div>
   );

@@ -6,6 +6,7 @@ import Overlay from 'react-bootstrap/Overlay';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import DatePicker from 'react-datepicker';
 import { cardUpdate } from '../../../../modules/workspaceCard';
+import { updateCard } from '../../../../modules/cardModal';
 
 const buttonStyle = {
   width: 120,
@@ -16,14 +17,14 @@ const buttonStyle = {
 
 const setDefaultDate = () => {
 
-}
+};
 
 export default function AddDate(props) {
   const { card, num, setNum } = props;
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
-  const defaultStartDate = card?.card_start_date !== null ? new Date(card?.card_start_date):new Date();
-  const defaultEndDate = card?.card_end_date !== null ? new Date(card?.card_end_date):new Date();
+  const defaultStartDate = card?.card_start_date !== null ? new Date(card?.card_start_date) : new Date();
+  const defaultEndDate = card?.card_end_date !== null ? new Date(card?.card_end_date) : new Date();
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
@@ -41,15 +42,9 @@ export default function AddDate(props) {
 
   const onUpdateDate = useCallback(
     (startDate, endDate) => {
-      dispatch(
-        cardUpdate({
-          ...card,
-          card_start_date: startDate,
-          card_end_date: endDate,
-        }),
-      );
-    },
-    [dispatch],
+      dispatch(cardUpdate({ ...card, card_start_date: startDate, card_end_date: endDate }));
+      dispatch(updateCard({...card, card_start_date:startDate, card_end_date:endDate}));
+    }, [card],
   );
 
   console.log('Date ...card', { ...card });
@@ -63,12 +58,12 @@ export default function AddDate(props) {
       <Overlay
         show={show}
         target={target}
-        placement="bottom"
+        placement='bottom'
         container={ref.current}
         containerPadding={40}
       >
-        <Popover id="popover-contained">
-          <Popover.Title as="h3">
+        <Popover id='popover-contained'>
+          <Popover.Title as='h3'>
             {' '}
             <b>Date</b>{' '}
           </Popover.Title>
@@ -87,9 +82,9 @@ export default function AddDate(props) {
                 onChange={(date) => setEndDate(date)}
               />
               <Button
-                size="small"
+                size='small'
                 onClick={() => {
-                  onUpdateDate(startDate, endDate);
+                  onUpdateDate(startDate.toISOString(), endDate.toISOString());
                 }}
               >
                 save

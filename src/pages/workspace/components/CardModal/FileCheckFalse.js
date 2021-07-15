@@ -16,9 +16,7 @@ const FileCheckFalse = (props) => {
           file_ischecked: fileIsChecked,
         }),
       );
-    },
-    [dispatch],
-  );
+    }, []);
 
 
   return <div style={{display:'flex'}}>

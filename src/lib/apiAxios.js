@@ -5,8 +5,8 @@ export default function apiAxios(url, data){
     url:url,
     method:'post',
     headers: {
-      "Authorization":sessionStorage.getItem("accessToken"),
       'content-type' : 'application/json',
+      "Authorization":sessionStorage.getItem("accessToken"),
     },
     data:{
       ...data,
@@ -19,7 +19,7 @@ export const fileAxios = (url,data) =>
     url:url,
     method:'POST',
     headers:{
-      "Authorization": sessionStorage.getItem('accessToken'),
+      "Authorization":sessionStorage.getItem("accessToken"),
     },
     data:data,
   });

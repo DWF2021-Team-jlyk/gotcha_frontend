@@ -21,10 +21,9 @@ const CardAct = ({ card }) => {
   const insertAct = useCallback((card_id, user_id, islog, act_desc) =>{
     dispatch(
       insertCardAct(
-        { card_id: card_id, user_id: user_id, islog: islog, act_desc: act_desc, }
-      )
-    )
-  },[dispatch]);
+        { card_id: card_id, user_id: user_id, islog: islog, act_desc: act_desc}
+      ))
+  },[cardAct]);
 
   useEffect(() => {
     dispatch(postCardAct(card?.card_id));
@@ -101,7 +100,7 @@ const CardAct = ({ card }) => {
         </div>
       </Form.Group>
 
-      <div>
+      <div style={{maxHeight:500, overflowY:'scroll'}}>
         {showLog === true ? (
           <ActArea cardId={card?.card_id} cardAct={cardAct} />
         ) : (

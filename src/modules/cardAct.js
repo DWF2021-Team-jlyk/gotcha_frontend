@@ -15,10 +15,14 @@ const DELETE_CARD_ACT_SUCCESS = 'cardDetail/DELETE_CARD_ACT_SUCCESS';
 const UPDATE_CARD_ACT = 'cardDetail/UPDATE_CARD_ACT';
 const UPDATE_CARD_ACT_SUCCESS = 'cardDetail/UPDATE_CARD_ACT_SUCCESS';
 
+const UNMOUNT_CARD_ACT = 'cardDetail/UNMOUNT_CARD_ACT';
+
 export const postCardAct = createRequest(POST_CARD_ACT, api.postAct);
 export const insertCardAct = createRequest(INSERT_CARD_ACT, api.addCardAct);
 export const deleteCardAct = createRequest(DELETE_CARD_ACT, api.removeCardAct);
 export const updateCardAct = createRequest(UPDATE_CARD_ACT, api.modifyCardAct);
+
+export const unmountCardAct = ()=>({type:UNMOUNT_CARD_ACT})
 
 const initialState = {
   acts: [],
@@ -51,6 +55,10 @@ const cardAct = handleActions(
         );
         draft.acts.splice(index, 1, action.payload);
       }),
+    [UNMOUNT_CARD_ACT]:(state, action)=>
+      produce(state, draft=>{
+        draft.acts = [];
+      })
   },
   initialState,
 );

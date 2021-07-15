@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Button, Col, Modal, ModalBody, ModalFooter, Row } from 'react-bootstrap';
 import { FunctionalAddOn, ActionAddOn } from './ModalAddOn';
 import CardMember from '../CardModal/CardMember';
@@ -9,20 +9,34 @@ import CardTodo from '../CardModal/CardTodo.js';
 import CardModalHeader from '../CardModal/CardModalHeader';
 import CardDate from '../CardModal/CardDate';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerCard } from '../../../../modules/cardForModal';
+import { registerCard, unmountCard } from '../../../../modules/cardModal';
+import { useParams } from 'react-router-dom';
+import { unmountCardTodo } from '../../../../modules/cardTodo';
+import { unmountCardAct } from '../../../../modules/cardAct';
+import { unmountCardMember } from '../../../../modules/cardMember';
+import { unmountCardFile } from '../../../../modules/cardFile';
 
 const WorkListCardModal = (props) => {
-  const { cardId, ws_id, card_id, card } = props;
-  // const card = useSelector(state => state.cardForModal.card);
+  const { cardId, card_id, show, handle } = props;
+  const card = useSelector(state => state.cardModal.card);
+  const {ws_id} = useParams();
   const dispatch = useDispatch();
+  const unMountFunc = useCallback(()=>{
+    dispatch(unmountCardMember());
+    dispatch(unmountCardAct());
+    dispatch(unmountCardTodo());
+    dispatch(unmountCardFile());
+    dispatch(unmountCard());
+  })
   useEffect(()=>{
     dispatch(registerCard(card));
+    return unMountFunc;
   },[cardId]);
   return (
     <Modal
       size={'lg'}
-      show={props.show}
-      onHide={props.handle}
+      show={show}
+      onHide={handle}
       // scrollable
     >
       <CardModalHeader card={card} />
@@ -32,8 +46,8 @@ const WorkListCardModal = (props) => {
             <CardMember/>
             <CardDesc card={card} />
             {card?.card_start_date !== null && <CardDate card={card} />}
-            <CardFile cardId={cardId} />
-            <CardTodo cardId={cardId} />
+            <CardFile cardId={card?.card_id} />
+            <CardTodo cardId={card?.card_id} />
             <CardAct card={card} />
           </Col>
           <Col sm={3}>

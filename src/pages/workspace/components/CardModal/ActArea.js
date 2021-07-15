@@ -4,21 +4,15 @@ import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import ActDesc from './ActDesc';
 import { deleteCardAct, postCardAct } from '../../../../modules/cardAct';
-
-const avatarIcon = (id) => {
-  let returnStr = id.charAt(0);
-  for (let i = 1; i < id.length; i++) {
-    if (id.charAt(i) === '@') break;
-    if (id.charAt(i) === id.charAt(i).toUpperCase()) returnStr += id.charAt(i);
-  }
-  return returnStr;
-};
+import AvatarIcon from '../../../../Functions/AvatarIcon';
 
 // 컴포넌트 합치기..
 
 const ActArea = ({ cardAct, cardId }) => {
+
   useEffect(() => {
-  }, []);
+  }, [cardAct]);
+
   return (
     <>
       {cardAct.map((value, index) => {
@@ -29,7 +23,7 @@ const ActArea = ({ cardAct, cardId }) => {
           >
             <div>
               <Avatar style={{ margin: '10px 10px 0px 5px' }}>
-                {avatarIcon(value.user_id)}
+                {AvatarIcon(value.user_id)}
               </Avatar>
             </div>
             <div>

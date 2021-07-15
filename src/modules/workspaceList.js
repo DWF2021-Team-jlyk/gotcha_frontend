@@ -5,19 +5,15 @@ import produce from 'immer';
 
 const POST_LIST = 'workspaceList/POST_LIST';
 const POST_LIST_SUCCESS = 'workspaceList/POST_LIST_SUCCESS';
-const POST_LIST_FAILURE = 'workspaceList/POST_LIST_FAILURE';
 
 const LIST_ADD = 'workspaceList/LIST_ADD';
 const LIST_ADD_SUCCESS = 'workspaceList/LIST_ADD_SUCCESS';
-const LIST_ADD_FAILURE = 'workspaceList/LIST_ADD_FAILURE';
 
 const LIST_UPDATE = 'workspaceList/LIST_UPDATE';
 const LIST_UPDATE_SUCCESS = 'workspaceList/LIST_UPDATE_SUCCESS';
-const LIST_UPDATE_FAILURE = 'workspaceList/LIST_UPDATE_FAILURE';
 
 const LIST_DELETE = 'workspaceList/LIST_DELETE';
 const LIST_DELETE_SUCCESS = 'workspaceList/LIST_DELETE_SUCCESS';
-const LIST_DELETE_FAILURE = 'workspaceList/LIST_DELETE_FAILURE';
 
 const LIST_UNMOUNT = 'workspaceList/LIST_UNMOUNT';
 

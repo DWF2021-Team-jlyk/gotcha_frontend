@@ -81,16 +81,27 @@ const SearchMember = ({member, ws_id, emailList, setEmailList, invite }) => {
                 <Popover id='popover-contained' {...props}>
                   <Popover.Content>
                     <ListGroup style={{ overflowY: 'scroll', maxHeight: 300,}}>
-                      {allUsers
+                      {member?
+                        allUsers
                         .filter(email => email.indexOf(userEmail) >= 0)
                         .filter(email => emailList.findIndex(e=>email===e)===-1)
-                        .filter(email=> member.findIndex(e=>email === e)===-1)
+                        .filter(email=> member?.findIndex(e=>email === e)===-1)
                         .map(email => (
                           <ListGroup.Item
                             key={email}
                             onClick={e=>onClick(email)}>{email}
                           </ListGroup.Item>
-                        ))}
+                        )):
+                        allUsers
+                          .filter(email => email.indexOf(userEmail) >= 0)
+                          .filter(email => emailList.findIndex(e=>email===e)===-1)
+                          .map(email => (
+                            <ListGroup.Item
+                              key={email}
+                              onClick={e=>onClick(email)}>{email}
+                            </ListGroup.Item>
+                          ))
+                      }
                     </ListGroup>
                   </Popover.Content>
                 </Popover>

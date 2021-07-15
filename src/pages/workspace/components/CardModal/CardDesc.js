@@ -3,6 +3,7 @@ import { AiFillEdit, AiOutlineClose } from 'react-icons/ai';
 import { Button, Form } from 'react-bootstrap';
 import { cardUpdate } from '../../../../modules/workspaceCard';
 import { useDispatch } from 'react-redux';
+import { updateCard } from '../../../../modules/cardModal';
 
 const CardDesc = (props) => {
   const { card } = props;
@@ -11,20 +12,20 @@ const CardDesc = (props) => {
 
   const dispatch = useDispatch();
 
-  // const DescInput = (e) => {
-  //   setChangeDesc(e.target.value);
-  // };
-
-  const updateDesc = useCallback(
-    (changeDesc) =>
-      dispatch(
-        cardUpdate({
-          ...card,
-          card_desc: changeDesc,
-        }),
-      ),
+  const updateDesc = useCallback(changeDesc =>
+      dispatch(cardUpdate({ ...card, card_desc: changeDesc })),
     [dispatch],
   );
+
+  useEffect(() => {
+    setChangeDesc(card?.card_desc);
+  }, [card]);
+
+  const saveDesc = useCallback(()=>{
+    setDesc(!desc);
+    dispatch(cardUpdate({...card,card_desc:changeDesc}));
+    dispatch(updateCard({...card,card_desc:changeDesc}));
+  },[card]);
 
   return (
     <>
@@ -37,12 +38,12 @@ const CardDesc = (props) => {
         <div
           onClick={(e) => {
             setDesc(!desc);
-            setChangeDesc();
           }}
         >
           <Form.Control
             as='textarea'
-            value={card?.card_desc}
+            // defalueValue={card?.card_desc}
+            value={changeDesc}
             style={{ height: '100px', resize: 'none' }}
             disabled
           />
@@ -56,14 +57,11 @@ const CardDesc = (props) => {
               style={{ height: '180px' }}
               onChange={(e) => setChangeDesc(e.target.value)}
             >
-              {card.card_desc}
+              {changeDesc}
             </Form.Control>
             <div style={{ marginTop: 5, float: 'right' }}>
               <Button
-                onClick={(e) => {
-                  setDesc(!desc);
-                  updateDesc(changeDesc);
-                }}
+                onClick={saveDesc}
                 style={{
                   backgroundColor: '#7986CB',
                   border: '1px solid #7986CB',
@@ -74,7 +72,6 @@ const CardDesc = (props) => {
               <AiOutlineClose
                 style={{ marginLeft: 10, fontSize: 26 }}
                 onClick={(e) => {
-
                   setDesc(!desc);
                 }}
               />

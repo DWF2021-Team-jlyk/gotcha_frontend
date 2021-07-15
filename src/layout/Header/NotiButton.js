@@ -44,7 +44,7 @@ const NotiButton = () => {
   const dispatch = useDispatch();
   const changeRead = useCallback(
     noti_id=>dispatch(changeNotiCheck(noti_id)),
-    [dispatch]
+    []
   )
   const onClick = noti => {
     history.push(`/workspace/${noti.ws_id}`);

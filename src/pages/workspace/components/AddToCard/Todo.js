@@ -33,9 +33,7 @@ export default function AddTodo(props) {
   const [isDisabled, setIsDisabled] = useState(true);
 
   const handleClick = (event) => {
-    if(num != 3)
-      setNum(3);
-    else setNum(0);
+    setShow(!show);
     setTarget(event.target);           
   };
 
@@ -60,7 +58,7 @@ export default function AddTodo(props) {
       </Button>
 
       <Overlay
-        show={num===3}
+        show={show}
         target={target}
         placement="right"
         container={ref.current}

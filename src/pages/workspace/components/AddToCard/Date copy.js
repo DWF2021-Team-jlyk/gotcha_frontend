@@ -40,7 +40,7 @@ export default function AddDate(props) {
         }),
       );
     },
-    [dispatch],
+    [],
   );
 
   console.log('Date ...card', { ...card });

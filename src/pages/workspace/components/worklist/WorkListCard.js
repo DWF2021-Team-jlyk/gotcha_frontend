@@ -4,7 +4,7 @@ import { AiFillEdit } from 'react-icons/all';
 import { useDispatch } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { cardUpdate } from '../../../../modules/workspaceCard';
-import { registerCard } from '../../../../modules/cardForModal';
+import { registerCard, showModal } from '../../../../modules/cardModal';
 import "../../css/WorkListCard.css"
 
 const WorkListCardModal = loadable(() => import('./WorkListCardModal'));
@@ -23,36 +23,41 @@ const WorkListCard = (props) => {
 
   const cardInputEL = useRef(null);
 
-  const onActiveInputClick = (card) => {
+  const onActiveInputClick = useCallback((card) => {
     if (editable === false) {
       // console.log(card.cardId);
       console.log(card.card_id);
-      setOpenModal(true);
+      // setOpenModal(true);
+      dispatch(showModal());
       dispatch(registerCard(card));
     }
-  };
+  },[]);
 
   const onSaveCard =useCallback( cardName=> {
     dispatch(cardUpdate({...card, card_name:cardName}));
-  }, [dispatch]);
+  }, []);
 
 
-  const handleEditable = async (e) => {
+  const handleEditable = useCallback( async (e) => {
     await setEditable(true);
     cardInputEL.current.focus();
-  };
-  const handleDisEditable = (e) => {
+  },[]);
+  const handleDisEditable = useCallback((e) => {
     setEditable(false);
     console.log(e);
     if(e._reactName !== "onKeyPress")
       cardInputEL.current.value=card.card_name;
-  }
-  const showEditButton = () => setEditButton(true);
-  const noShowEditButton = () => setEditButton(false);
+  },[]);
+  const showEditButton = useCallback(() =>
+    setEditButton(true),[]
+  );
+  const noShowEditButton = useCallback(() =>
+    setEditButton(false),[]
+  );
 
   useEffect(()=>{
     setCardName(card.card_name);
-  }, []);
+  }, [card]);
 
   return (
     <>
@@ -97,17 +102,17 @@ const WorkListCard = (props) => {
 
         </div>
       </div>
-      {
-        openModal
-        &&
-        <WorkListCardModal
-          card={card}
-          cardId = {card.card_id}
-          show={openModal}
-          ws_id={ws_id}
-          handle={handleModal}
-        />
-      }
+      {/*{*/}
+      {/*  openModal*/}
+      {/*  &&*/}
+      {/*  <WorkListCardModal*/}
+      {/*    card={card}*/}
+      {/*    cardId = {card.card_id}*/}
+      {/*    show={openModal}*/}
+      {/*    ws_id={ws_id}*/}
+      {/*    handle={handleModal}*/}
+      {/*  />*/}
+      {/*}*/}
     </>
   );
 };

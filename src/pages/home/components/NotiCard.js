@@ -9,11 +9,11 @@ const NotiCard = ({ noti }) => {
   const dispatch = useDispatch();
   const onRemove = useCallback(
     noti_id=>dispatch(deleteNoti(noti_id)),
-    [dispatch]
+    []
   )
   const onToggle = useCallback(
     noti_id=>dispatch(changeNotiCheck(noti_id)),
-    [dispatch]
+    []
   )
   const returnTypeColor = (type) => {
     switch (type) {

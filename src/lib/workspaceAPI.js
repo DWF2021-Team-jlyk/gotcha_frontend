@@ -9,15 +9,13 @@ export const updateWorkspace = (data) =>
   apiAxios('/home/favUpdate', data);
 
 export const postGetWorkspaceMembers = (ws_id) =>
-  apiAxios('/home/wsUserList', { ws_id: ws_id });
+  apiAxios('/home/wsUserList', {ws_id:ws_id} );
 
 export const updateWorkspaceName = (data) => 
   apiAxios('/home/updateWsName', data);
 
-export const getFileName = (ws_id) => {
+export const getFileName = (ws_id) =>
   apiAxios('/home/getFileName', { ws_id:ws_id });
-}
 
-export const postInviteMember = ({emailList}) => {
+export const postInviteMember = ({emailList}) =>
   apiAxios('/home/inviteMember', emailList);
-}
