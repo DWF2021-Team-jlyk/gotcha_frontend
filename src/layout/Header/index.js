@@ -6,6 +6,7 @@ import NotiButton from "./NotiButton";
 import WorkSpaceAddButton from "./WorkSpaceAddButton";
 import headerImg from "../../image/header.png";
 import SearchWorkspace from './SearchWorkspace';
+import ToMyPage from "./ToMyPage";
 
 const Header = () => {
 
@@ -53,9 +54,7 @@ const Header = () => {
                 &ensp;
                 <NotiButton/>
                 &ensp;
-                <Link to="/mypage">
-                    <IoPersonCircleOutline color="#FFFFFF" size="30"/>
-                </Link>
+                <ToMyPage/>
                 &ensp;
                 <Link
                     to="/Login"

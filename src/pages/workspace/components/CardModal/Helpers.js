@@ -5,7 +5,7 @@ const Helpers = {
       const config = {
         method,
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json; charset=utf-8",
           "Access-Control-Allow-Origin": "*",
           "Authorization": sessionStorage.getItem('accessToken'),
         },

@@ -5,7 +5,7 @@ import axios from 'axios';
 import { fileAxios } from '../../../../lib/apiAxios';
 import { useDispatch } from 'react-redux';
 import { addCardFile } from '../../../../modules/cardFile';
-import Helpers from './Helpers';
+
 
 export default function CardFileForm(props) {
   const { show, target, handleClick, cardId } = props;
@@ -24,6 +24,7 @@ export default function CardFileForm(props) {
       }
     };
     if (e.target.files[0]) {
+      console.log('fileInfo ', e.target.files[0])
       reader.readAsDataURL(e.target.files[0]);
       setFile(e.target.files[0]);
     }
