@@ -64,6 +64,20 @@ const FileCheckTrue = (props) => {
       });
   }, []);
 
+  const download = () =>{
+    fetch(`/cardDetail/file/download/${file.file_id}`,
+      {headers:{"Authorization": sessionStorage.getItem('accessToken')}}
+    )
+      .then(response=>response.blob())
+      .then(blob=>{
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = file.file_name;
+        a.click();
+      })
+  }
+
   return (
     <div style={{ display: 'flex' }}>
       <Form.Check
@@ -87,29 +101,30 @@ const FileCheckTrue = (props) => {
           name={file.file_id}
           //key={key}
           onClick={
-            Helpers.httpRequest(
-              `http://localhost:3000${file.file_path}`,
-              'get',
-            )
-              .then((response) => response.blob())
-              .then((blob) => {
-                // create blob link
-                const url = window.URL.createObjectURL(
-                  new Blob([blob]),
-                );
-                const link = document.createElement('a');
-                link.href = url;
-                link.setAttribute(
-                  'download',
-                  `${file.file_name}`,
-                );
-                // append to html
-                document.body.appendChild(link);
-                // download
-                link.click();
-                // remove
-                link.parentNode.removeChild(link);
-              })
+            // Helpers.httpRequest(
+            //   `http://localhost:3000${file.file_path}`,
+            //   'get',
+            // )
+            //   .then((response) => response.blob())
+            //   .then((blob) => {
+            //     // create blob link
+            //     const url = window.URL.createObjectURL(
+            //       new Blob([blob]),
+            //     );
+            //     const link = document.createElement('a');
+            //     link.href = url;
+            //     link.setAttribute(
+            //       'download',
+            //       `${file.file_name}`,
+            //     );
+            //     // append to html
+            //     document.body.appendChild(link);
+            //     // download
+            //     link.click();
+            //     // remove
+            //     link.parentNode.removeChild(link);
+            //   })
+            download
           }
         >
           download

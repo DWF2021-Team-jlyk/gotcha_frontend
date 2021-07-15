@@ -4,7 +4,6 @@ import { Button, Col} from 'react-bootstrap';
 import '../css/workspaceSettingModal.css';
 import AvatarIcon from '../../Functions/AvatarIcon';
 import apiAxios from '../../lib/apiAxios';
-import { confirmAlert } from 'react-confirm-alert';
 import { useDispatch } from 'react-redux';
 import { postWorkspaces } from '../../modules/workspace';
 
