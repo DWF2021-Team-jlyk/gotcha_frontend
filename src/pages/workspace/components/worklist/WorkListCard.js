@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { cardUpdate } from '../../../../modules/workspaceCard';
 import { registerCard } from '../../../../modules/cardForModal';
+import { Form } from 'react-bootstrap';
 import "../../css/WorkListCard.css"
 
 const WorkListCardModal = loadable(() => import('./WorkListCardModal'));
@@ -37,6 +38,8 @@ const WorkListCard = (props) => {
   }, [dispatch]);
 
 
+
+
   const handleEditable = async (e) => {
     await setEditable(true);
     cardInputEL.current.focus();
@@ -61,7 +64,9 @@ const WorkListCard = (props) => {
         onMouseOut={noShowEditButton}
         onBlur={handleDisEditable}
       >
+        
         <div className='cardInfoDiv'>
+         
           <div
             className='cardInputDiv'
             onClick={e=>onActiveInputClick(card)}
@@ -93,6 +98,7 @@ const WorkListCard = (props) => {
               opacity={!editbutton ? 0 : '0.5'}
               size='20'
             />
+             
           </div>
 
         </div>

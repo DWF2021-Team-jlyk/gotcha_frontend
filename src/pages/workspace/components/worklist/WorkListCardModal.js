@@ -21,6 +21,7 @@ import { postCardMember } from '../../../../modules/cardMember';
 import { postCardTodo } from '../../../../modules/cardTodo';
 import { postCardFile } from '../../../../modules/cardFile';
 import { cardDelete } from '../../../../modules/workspaceCard';
+import { Form } from 'react-bootstrap';
 
 const WorkListCardModal = (props) => {
   const { cardId, card, ws_id } = props;

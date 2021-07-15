@@ -10,8 +10,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import WorkListCard from './WorkListCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { listDelete, listUpdate } from '../../../../modules/workspaceList';
-import { cardAdd } from '../../../../modules/workspaceCard';
+import { cardAdd, cardUpdate } from '../../../../modules/workspaceCard';
 import { AiFillEdit } from 'react-icons/all';
+import { Form } from 'react-bootstrap';
+
 
 const PlusIcon = {
   fontSize: '1.5rem',
@@ -67,6 +69,12 @@ const WorkListCardList = (props) => {
       position: position,
     }));
   };
+
+  // const changeCardIsdone = useCallback(cardIsdone =>{
+  //   dispatch(cardUpdate({...card, card_isdone:cardIsdone}));
+  // },[dispatch]);
+
+  // console.log('...card, card.card_isdone',{...card},card.card_isdone);
 
   useEffect(() => {
     setPosition(
@@ -135,11 +143,43 @@ const WorkListCardList = (props) => {
           })
           .map((card, index) => {
             return (
+              <>
+              <div style={{display:'flex' , padding:5, float:'left'}}>
+              {card.card_isdone === '1' ? (
+                <Form.Check  
+                type="checkbox"
+                id="auto"
+                className="mb-2"
+                checked="checked"
+                onClick={e => {
+                  dispatch(cardUpdate({...card, card_isdone:'0'})
+                  );
+                }}
+                />
+                //changeCardIsdone('0')}
+              ) : (
+                <Form.Check
+                type="checkbox"
+                id="autoSizingCheck"
+                className="mb-2"
+                onClick={e=>{
+                  dispatch(cardUpdate({...card, card_isdone:'1'}));
+                }
+                }
+                />
+                //changeCardIsdone('1')}
+              ) 
+            }
+            
+              </div>
               <WorkListCard key={index} ws_id={ws_id} card={card} />
-            );
-          })
-          
-    }
+              
+              </>
+              
+              );
+           }
+          )
+          }
           
         {showCardInput && (
           <div
