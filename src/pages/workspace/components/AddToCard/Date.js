@@ -54,7 +54,7 @@ export default function AddDate(props) {
       <Overlay
         show={show}
         target={target}
-        placement='bottom'
+        placement='right'
         container={ref.current}
         containerPadding={40}
       >
@@ -64,35 +64,51 @@ export default function AddDate(props) {
             <Popover.Title as='h3'>
               {' '}<b>Date</b>{' '}
             </Popover.Title>
-
-            <Popover.Content>
+          <Popover.Content>
+            <div>
               <div>
-                Start date:
+            
+                <span style={{fontWeight:500}}>Start date: </span> 
                 <DatePicker
                   selected={startDate}
                   dateFormat="yyyy/MM/dd hh:mm aa"
                   onChange={(date) => setStartDate(date)}
                   showTimeInput
                 />
-                End date:
+               
+       
+              </div>
+
+              <div style={{margin:'10px 0 10px 0'}}>
+          
+                <span style={{fontWeight:500}}>End date: </span>
                 <DatePicker
                   selected={endDate}
                   dateFormat="yyyy/MM/dd hh:mm aa"
                   onChange={(date) => setEndDate(date)}
                   showTimeInput
                 />
-                <Button
-                  size='small'
-                  onClick={() => {
-                    onUpdateDate(startDate.toISOString(), endDate.toISOString());
-                  }}
-                >
-                  save
-                </Button>
+           
               </div>
-            </Popover.Content>
-          </Popover>
-        )}
+
+              <div style={{float:'right', marginBottom:10}}>
+              <Button
+                  style={{
+                    backgroundColor: '#7986CB',
+                    border: '1px solid #7986CB',
+                    color:'white'
+                  }}
+                size='small'
+                onClick={() => {
+                  onUpdateDate(startDate.toISOString(), endDate.toISOString());
+                }}
+              >
+                save
+              </Button>
+              </div>
+            </div>
+          </Popover.Content>
+        </Popover>
       </Overlay>
     </div>
   );

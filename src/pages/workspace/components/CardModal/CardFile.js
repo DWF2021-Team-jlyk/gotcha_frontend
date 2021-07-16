@@ -38,8 +38,8 @@ const CardFile = (props) => {
         </h5>
       </div>
 
-      <div>
-        {files.map((file) => {
+      <div style={{maxHeight:500, overflowY:'scroll'}}>
+        {files.map((file, index) => {
           return (
             <div
               style={{ display: 'flex' }}
@@ -52,6 +52,7 @@ const CardFile = (props) => {
                 {/*  <FileCheckFalse file={file} />*/}
                 {/*)}*/}
               </div>
+
             </div>
           );
         })}
@@ -59,9 +60,11 @@ const CardFile = (props) => {
 
       <div ref={ref}>
         <Button
+
           onClick={(e) => {
             handleClick();
             setTarget(e.target);
+      
           }}
         >
           + Add a file

@@ -28,25 +28,29 @@ export default function TodoPeriodModal(props) {
         style={{ marginTop: '300px' }}
       >
         <Modal.Header
-          closeButton
           style={{
-            background: '#f7f7f7',
+            background: '#3f51b5',
           }}
         >
-          <Modal.Title>Todolist 기간 설정</Modal.Title>
+          <Modal.Title><span style={{color:'white'}}>Todolist 기간 설정</span></Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Start date:
+          
+        <div>
+         <b> Start date: </b>
           <DatePicker
             selected={startDate}
             onChange={(date) => setStartDate(date)}
           />
-          <br></br>
-          End date:
+          </div>
+
+          <div style={{marginTop:10}}>
+          <b> End date: </b>
           <DatePicker
             selected={endDate}
             onChange={(date) => setEndDate(date)}
           />
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

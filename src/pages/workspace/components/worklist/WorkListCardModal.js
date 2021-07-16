@@ -15,13 +15,21 @@ import { unmountCardTodo } from '../../../../modules/cardTodo';
 import { unmountCardAct } from '../../../../modules/cardAct';
 import { unmountCardMember } from '../../../../modules/cardMember';
 import { unmountCardFile } from '../../../../modules/cardFile';
-import { cardDelete } from '../../../../modules/workspaceCard';
+import { disappearModal } from '../../../../modules/cardModal';
+import { AiOutlineBars } from 'react-icons/ai'
+import {cardDelete} from '../../../../modules/workspaceCard'
 
 const WorkListCardModal = (props) => {
   const { cardId, card_id, show, handle } = props;
   const card = useSelector(state => state.cardModal.card);
   const {ws_id} = useParams();
   const dispatch = useDispatch();
+
+  const cardDelete = useCallback(()=>{
+    dispatch(
+      cardDelete({card_id:card.card_id})
+    )
+  },[]);
   const unMountFunc = useCallback(()=>{
     dispatch(unmountCardMember());
     dispatch(unmountCardAct());
@@ -29,10 +37,12 @@ const WorkListCardModal = (props) => {
     dispatch(unmountCardFile());
     dispatch(unmountCard());
   })
+
   useEffect(()=>{
     dispatch(registerCard(card));
     return unMountFunc;
   },[cardId]);
+
   return (
     <Modal
       size={'lg'}
@@ -53,7 +63,7 @@ const WorkListCardModal = (props) => {
           </Col>
           <Col sm={3}>
             <div>
-              <h5 style={{ marginBottom: 20 }}>Card Behavior</h5>
+              <h5 style={{ marginBottom: 20 }}><AiOutlineBars/> Behavior</h5>
               <FunctionalAddOn card={card} ws_id={ws_id} />
             </div>
           </Col>
@@ -61,9 +71,8 @@ const WorkListCardModal = (props) => {
       </ModalBody>
 
       <ModalFooter>
-        <Button variant='primary'>Save</Button>
-        <Button variant='danger'>Delete</Button>
-        <Button variant='secondary'>Cancel</Button>
+        <Button variant='danger' onClick={}>Card Delete</Button>
+        <Button variant='secondary' onClick={()=>dispatch(disappearModal())}>Close</Button>
       </ModalFooter>
     </Modal>
   );

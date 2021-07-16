@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import { insertCardAct } from '../../../../modules/cardAct';
 
 export default function CardFileForm(props) {
-  const { show, target, handleClick, cardId} = props;
+  const { show, target, handleClick, cardId } = props;
 
   const userId = useSelector((state) => state.userInfo.userId);
 
@@ -19,8 +19,8 @@ export default function CardFileForm(props) {
 
   const dispatch = useDispatch();
 
-   //log
-   const insertLog = (card_id, user_id, islog, act_desc) => {
+  //log
+  const insertLog = (card_id, user_id, islog, act_desc) => {
     dispatch(
       insertCardAct({
         card_id: card_id,
@@ -30,7 +30,6 @@ export default function CardFileForm(props) {
       }),
     );
   };
-  
 
   const onFileChange = (e) => {
     let reader = new FileReader();
@@ -45,9 +44,12 @@ export default function CardFileForm(props) {
       reader.readAsDataURL(e.target.files[0]);
       setFile(e.target.files[0]);
 
-      const desc = userId +'(이)가 카드에 ' + e.target.files[0].name +'(을)를 추가했습니다.';
+      const desc =
+        userId +
+        '(이)가 카드에 ' +
+        e.target.files[0].name +
+        '(을)를 추가했습니다.';
       insertLog(cardId, userId, '1', desc);
-
     }
   };
 
@@ -88,20 +90,26 @@ export default function CardFileForm(props) {
   return (
     <Form>
       <FormGroup>
-        <FormLabel>업로드</FormLabel>
         <Form.Control type="file" onChange={onFileChange} />
         {file === '' ? null : <img src={fileprev} alt="img" height={'200px'} />}
       </FormGroup>
 
-      <Button
-        onClick={() => {
-          onFileClick();
-          handleClick();
-
-        }}
-      >
-        save
-      </Button>
+      <div style={{float:'right'}}>
+        <Button
+          style={{
+            backgroundColor: '#7986CB',
+            border: '1px solid #7986CB',
+            color: 'white',
+            marginBottom:10
+          }}
+          onClick={() => {
+            onFileClick();
+            handleClick();
+          }}
+        >
+          save
+        </Button>
+      </div>
     </Form>
   );
 }

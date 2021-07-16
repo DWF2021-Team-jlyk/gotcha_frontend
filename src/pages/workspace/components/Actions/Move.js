@@ -180,7 +180,7 @@ export default function CardMove({ card, ws_id }) {
       <Overlay
         show={show}
         target={target}
-        placement="bottom"
+        placement="right"
         container={ref.current}
         containerPadding={40}
       >

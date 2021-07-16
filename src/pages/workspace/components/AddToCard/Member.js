@@ -31,7 +31,7 @@ const memberButton = {
 };
 
 export default function AddMember(props) {
-  const { num, setNum } = props;
+  const { num, setNum, cardId } = props;
   const card = useSelector((state) => state.cardModal.card);
   const userId = useSelector((state) => state.userInfo.userId);
   const wsMembers = useSelector((state) => state.workspaceMember.wsMembers);
@@ -79,7 +79,7 @@ export default function AddMember(props) {
       <Overlay
         show={show}
         target={target}
-        placement="bottom"
+        placement="right"
         container={ref.current}
         containerPadding={40}
       >

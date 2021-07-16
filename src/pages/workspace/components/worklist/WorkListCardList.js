@@ -15,6 +15,9 @@ import { AiFillEdit, GiConsoleController } from 'react-icons/all';
 import { postCard } from '../../../../modules/workspaceCard';
 import { insertCardAct } from '../../../../modules/cardAct';
 import axios from 'axios';
+import Badge from '@material-ui/core/Badge';
+import {AiOutlineCheck} from "react-icons/ai"
+
 
 const PlusIcon = {
   fontSize: '1.5rem',
@@ -29,7 +32,7 @@ const WorkListCardList = (props) => {
   const { ws_id, list, listId } = props;
   const cardInputEl = useRef(null);
   const [listName, setListName] = useState('');
-  const [cardTitle, setCardTitle] = useState('');
+  const [cardTitle, setCardTitle] = useState('sss');
   const [position, setPosition] = useState(0);
   const [showCardInput, setShowCardInput] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -38,10 +41,9 @@ const WorkListCardList = (props) => {
 
   const dispatch = useDispatch();
 
-
-  const onChange = useCallback((e) => {
+  const onChange = (e) => {
     setCardTitle(e.target.value);
-  }, []);
+  };
 
   const onListNameChange = useCallback((e) => {
     setListName(e.target.value);
@@ -59,7 +61,21 @@ const WorkListCardList = (props) => {
     dispatch(listDelete({ list_id: listId }));
   },[]);
 
-  const onCardAdd = useCallback(() => {
+  // const onCardAdd = useCallback(() => {
+  //   dispatch(cardAdd({
+  //     list_id: list.list_id,
+  //     ws_id: ws_id,
+  //     card_name: cardTitle,
+  //     card_desc: '',
+  //     card_isdone:'0',
+  //     card_start_date: '',
+  //     card_end_date: '',
+  //     position: position,
+  //     user_id: userId
+  //   }));
+  // },[list, cards]);
+
+  const onCardAdd = () => {
     dispatch(cardAdd({
       list_id: list.list_id,
       ws_id: ws_id,
@@ -71,7 +87,7 @@ const WorkListCardList = (props) => {
       position: position,
       user_id: userId
     }));
-  },[list, cards]);
+  };
 
   useEffect(() => {
     setPosition(
@@ -150,6 +166,7 @@ const WorkListCardList = (props) => {
               onKeyPress={(e) => {
                 if (e.key === 'Enter') {
                   if (e.target.value !== '') {
+                    console.log('TTTTTTTTTTTTTTTT',cardTitle)
                     onCardAdd();
                     e.target.value = '';
                     setCardTitle('');

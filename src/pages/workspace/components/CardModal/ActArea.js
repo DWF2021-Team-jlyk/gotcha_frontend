@@ -23,12 +23,13 @@ const ActArea = ({ cardAct, cardId }) => {
           >
             <div>
               <Avatar
-                style={{ margin: '10px 10px 0px 5px' }}
+                style={{ margin: '13px 10px 0px 5px' }}
                 defaultValue={AvatarIcon(value.user_id)}
               />
             </div>
             <div>
-              <div style={{ marginTop: 7, fontSize: '.9rem' }}>
+
+              <div style={{ marginTop: 7,  marginLeft: 8, fontSize: '.9rem' }}>
                 <b>{value.user_id}</b>{' '}
                 <span style={{ fontSize: '0.8rem' }}>
                   {value.created_date}

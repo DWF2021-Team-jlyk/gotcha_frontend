@@ -1,12 +1,14 @@
 import React, { useRef, useCallback, useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteCardAct, postCardAct, updateCardAct } from '../../../../modules/cardAct';
+import { useDispatch } from 'react-redux';
+import { deleteCardAct, updateCardAct } from '../../../../modules/cardAct';
+import TextField from '@material-ui/core/TextField';
 
 const ActDesc = ({ cardAct, cardId, acts }) => {
   const [editable, setEditable] = useState(false);
   const cardInputEL = useRef();
-  const [changeDesc, setChangeDesc] = useState('');
+  const [changeDesc, setChangeDesc] = useState(cardAct.act_desc);
+  const [desc, setDesc] = useState('');
   const userInfo = useSelector((state) => state.userInfo);
 
   const dispatch = useDispatch();
@@ -18,7 +20,9 @@ const ActDesc = ({ cardAct, cardId, acts }) => {
   };
 
   //수정시 바뀌는 값 set
-  const editDesc = e=>setChangeDesc(e.target.value);
+  const editDesc = useCallback((e) => {
+    setChangeDesc(e.target.value);
+  }, []);
 
   const actDelete = useCallback(
     () => dispatch(deleteCardAct({act_id: cardAct.act_id})),
@@ -42,18 +46,26 @@ const ActDesc = ({ cardAct, cardId, acts }) => {
   return (
     <div>
       <div style={{ marginTop: 10, marginBottom: 10 }}>
-        <input
+        <TextField
+          id="outlined-basic"
+          variant="outlined"
+          multiline
+          maxRows={10}
+          as="textarea"
+          size="small"
           style={{
-            border: '1px solid #ced4da',
+            // border: '1px solid #ced4da',
             fontSize: '.95rem',
             padding: 5,
             borderRadius: 4,
+            width: 490,
+            
           }}
-          defaultValue={changeDesc}
           disabled={!editable}
           ref={cardInputEL}
+          defaultValue={changeDesc}
           onChange={editDesc}
-        />
+        ></TextField>
 
         {editable && (
           <Button
@@ -70,11 +82,11 @@ const ActDesc = ({ cardAct, cardId, acts }) => {
         )}
       </div>
 
-      { userInfo.userId === cardAct.user_id&&
+      {(cardAct.islog === '0' || userInfo.userId === cardAct.user_id) && (
         <div
           style={{
             display: 'flex',
-            marginTop: 3,
+            marginLeft: 8,
             fontSize: '.8rem',
           }}
         >
@@ -89,7 +101,7 @@ const ActDesc = ({ cardAct, cardId, acts }) => {
             Delete
           </div>
         </div>
-      }
+      )}
     </div>
   );
 };
