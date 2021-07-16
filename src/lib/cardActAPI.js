@@ -20,17 +20,5 @@ export const addCardAct = ({
 export const removeCardAct = 
 ({act_id}) => apiAxios('/cardDetail/act/deleteCardAct', {act_id: act_id})
 
-export const modifyCardAct = ({
-                            card_id,
-                            user_id,
-                            islog,
-                            act_desc,
-                            act_id,
-                          }) =>
-apiAxios('/cardDetail/act/updateCardAct', {
-    card_id :card_id,
-    user_id: user_id,
-    islog: islog,
-    act_desc: act_desc,
-    act_id:act_id
-});
+export const modifyCardAct = (data) =>
+apiAxios('/cardDetail/act/updateCardAct', data);

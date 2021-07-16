@@ -9,7 +9,7 @@ import AvatarIcon from '../../../../Functions/AvatarIcon';
 
 const CardAct = ({ card }) => {
   const [showLog, setShowLog] = useState(false);
-  const [actDesc, setActDesc] = useState('');
+  const [actDesc, setActDesc] = useState("");
   const [isActive, setIsActive] = useState(true);
   const actInputEL = useRef(null);
 
@@ -23,33 +23,31 @@ const CardAct = ({ card }) => {
   //cardAct 추가
   const insertAct = useCallback((card_id, user_id, islog, act_desc) =>{
     dispatch(
-      insertCardAct(
-        { card_id: card_id, user_id: user_id, islog: islog, act_desc: act_desc}
-      ))
+      insertCardAct({ card_id: card_id, user_id: user_id, islog: islog, act_desc: act_desc}))
   },[cardAct]);
 
-  useEffect(() => {
-    dispatch(postCardAct(card?.card_id));
-  },[card]);
-
   //show log
-  const onClickShowLog = useCallback(() => {
+  const onClickShowLog = useCallback((e) => {
     setShowLog(!showLog);
-  },[]);
+  },[showLog]);
 
   //댓글 입력창 set
   const actDescInput =useCallback((e) => {
     setActDesc(e.target.value);
-  },[]);
+  },[actDesc]);
 
   //cardAct 구분
-  const result = cardAct.filter((act) => act.islog == 0);
+  const result = cardAct.filter((act) => act.islog === "0");
 
-  const buttonClick = useCallback(()=>{
-    insertAct(card.card_id, userId, '0', actDesc);
+  const buttonClick = useCallback((cardId, uid, desc)=>{
+    insertAct(cardId, uid, '0', desc);
     actInputEL.current.value = '';
     setActDesc('');
   },[]);
+
+  useEffect(() => {
+    dispatch(postCardAct(card?.card_id));
+  },[card]);
 
   return (
     <>
@@ -66,24 +64,23 @@ const CardAct = ({ card }) => {
           }}
           onClick={onClickShowLog}
         >
-          {showLog === true ? <span>Hide Log</span> : <span>Show Log</span>}
+          {showLog === true ? "Hide Log" : "Show Log"}
         </Button>
       </div>
 
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
         <div style={{ display: 'flex' }}>
           <Avatar
-            // onClick={(event) => {}}
             style={{ margin: '10px 10px 0px 5px' }}
-          >
-            {AvatarIcon('user01@naver.com')}
-          </Avatar>
+            defaultValue={AvatarIcon(userId)}
+          />
           
           <div style={{ display: 'flex', marginTop: 10 }}>
             <Form.Control
               type="text"
               placeholder="Write a comment..."
               style={{ width: 445, marginRight: 10, height: 40 }}
+              defaultValue={actDesc}
               onChange={actDescInput}
               ref={actInputEL}
             />
@@ -93,7 +90,7 @@ const CardAct = ({ card }) => {
                 border: '1px solid #7986CB',
                 height: 40,
               }}
-              onClick={() => buttonClick()}
+              onClick={() => buttonClick(card?.card_id, userId, actDesc)}
 
               disabled={actDesc.length > 0 ? false : true}
             >
@@ -105,9 +102,9 @@ const CardAct = ({ card }) => {
 
       <div style={{maxHeight:500, overflowY:'scroll'}}>
         {showLog === true ? (
-          <ActArea cardId={card?.card_id} cardAct={cardAct} />
+          <ActArea cardId={card?.card_id} cardAct={cardAct}/>
         ) : (
-          <ActArea cardId={card?.card_id} cardAct={result} />
+          <ActArea cardId={card?.card_id} cardAct={result}/>
         )}
       </div>
     </>

@@ -14,7 +14,7 @@ const listButton = {
 };
 
 const TodoCheckTrue = (props) => {
-  const { todo} = props;
+  const { todo } = props;
   const [listDateShow, setListDateShow] = useState(false);
 
   const dispatch = useDispatch();
@@ -29,15 +29,15 @@ const TodoCheckTrue = (props) => {
         todo_isdone: todoIsdone,
       }),
     );
-  },[]);
+  }, []);
 
   return (
     <div style={{ display: 'flex' }}>
       <Form.Check
-        type="checkbox"
-        id="autoSizingCheck"
-        className="mb-2"
-        checked="checked"
+        type='checkbox'
+        id='autoSizingCheck'
+        className='mb-2'
+        checked='checked'
         onClick={() => updateTodoIsdone('0')}
       />
 
@@ -51,10 +51,10 @@ const TodoCheckTrue = (props) => {
       <Button onClick={handleShow} style={listButton}>
         기간 설정
       </Button>
-      {<TodoPeriodModal 
-      todo={todo} 
-      show={listDateShow} 
-      handleClose={handleClose} />}
+      {<TodoPeriodModal
+        todo={todo}
+        show={listDateShow}
+        handleClose={handleClose} />}
     </div>
   );
 };

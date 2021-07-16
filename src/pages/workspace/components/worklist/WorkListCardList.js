@@ -134,7 +134,7 @@ const WorkListCardList = (props) => {
             return card.list_id === listId;
           })
           .map((card, index) => {
-            return <WorkListCard key={index} ws_id={ws_id} card={card} />;
+            return <WorkListCard key={card.card_id} ws_id={ws_id} card={card} />;
           })}
 
         {showCardInput && (

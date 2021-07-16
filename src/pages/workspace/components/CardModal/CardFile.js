@@ -39,11 +39,11 @@ const CardFile = (props) => {
       </div>
 
       <div>
-        {files.map((file, index) => {
+        {files.map((file) => {
           return (
             <div
               style={{ display: 'flex' }}
-              key={index}
+              key={file.file_id}
             >
               <div style={{ padding: 5 }}>
                   <FileCheckTrue file={file} cardId={cardId} />

@@ -133,9 +133,9 @@ const WorkListCardList = (props) => {
           .filter((card) => {
             return card.list_id === listId;
           })
-          .map((card, index) => {
+          .map((card) => {
             return (
-              <WorkListCard key={index} ws_id={ws_id} card={card} />
+              <WorkListCard key={card.card_id} ws_id={ws_id} card={card} />
             );
           })
           

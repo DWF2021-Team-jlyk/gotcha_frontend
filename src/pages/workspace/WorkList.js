@@ -50,7 +50,7 @@ const WorkList = (props) => {
       <div className="listStyle">
         {lists.map((list, index) => {
           return (
-            <div key={index}>
+            <div key={list.list_id}>
               <WorkListCardList
                 key={index}
                 lists={lists}

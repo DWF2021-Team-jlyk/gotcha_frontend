@@ -13,7 +13,7 @@ const listButton = {
 };
 
 const TodoCheckFalse = (props) => {
-  const { todo} = props;
+  const { todo } = props;
 
   const [listDateShow, setListDateShow] = useState(false);
   const [todoName, setTodoName] = useState('');
@@ -26,7 +26,7 @@ const TodoCheckFalse = (props) => {
   const handleShow = () => setListDateShow(true);
   const handleClose = () => setListDateShow(false);
 
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
   const updateTodoIsdone = useCallback((todoIsdone) => {
     dispatch(
@@ -35,16 +35,16 @@ const TodoCheckFalse = (props) => {
         todo_isdone: todoIsdone,
       }),
     );
-  },[]);
+  }, []);
 
-  const updateTodoName = useCallback((todoName)=>{
-      dispatch(
-          updateCardTodo({
-              ...todo,
-              todo_name:todoName,
-          }),
-      )
-  },[]);
+  const updateTodoName = useCallback((todoName) => {
+    dispatch(
+      updateCardTodo({
+        ...todo,
+        todo_name: todoName,
+      }),
+    );
+  }, []);
 
   const deleteTodos = useCallback(
     (todo_id) =>
@@ -58,11 +58,11 @@ const TodoCheckFalse = (props) => {
   return (
     <div style={{ display: 'flex' }}>
       <Form.Check
-        type="checkbox"
-        id="autoSizingCheck"
-        className="mb-2"
+        type='checkbox'
+        id='autoSizingCheck'
+        className='mb-2'
         onClick={() =>
-            updateTodoIsdone('1')
+          updateTodoIsdone('1')
         }
       />
       <span contentEditable style={{ width: 200 }}>

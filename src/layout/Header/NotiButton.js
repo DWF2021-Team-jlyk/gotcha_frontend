@@ -83,10 +83,10 @@ const NotiButton = () => {
         {
           notification
             .filter(noti => noti.noti_checked !== "1")
-            .map((noti, index) => {
-              return <StyledMenuItem key={index}>
+            .map((noti) => {
+              return <StyledMenuItem key={noti.noti_id}>
                 <ListItem
-                  key={index}
+                  key={noti.noti_id}
                   onClick={e=>{
                     onClick(noti);
                     handleClose();
