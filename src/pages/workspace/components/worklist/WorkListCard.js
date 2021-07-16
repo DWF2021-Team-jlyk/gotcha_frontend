@@ -5,7 +5,9 @@ import { useDispatch } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { cardUpdate } from '../../../../modules/workspaceCard';
 import { registerCard, showModal } from '../../../../modules/cardModal';
+import { Badge } from '@material-ui/core';
 import "../../css/WorkListCard.css"
+import {BiCheck} from 'react-icons/bi'
 
 const WorkListCardModal = loadable(() => import('./WorkListCardModal'));
 
@@ -72,7 +74,27 @@ const WorkListCard = (props) => {
             onClick={e=>onActiveInputClick(card)}
           >
 
-            <input
+            {
+              card.card_isdone === '1' 
+              ?
+              <Badge badgeContent={'✓'} color="primary" >
+                <input
+                className='cardInput'
+                defaultValue={cardName}
+                disabled={!editable}
+                ref={cardInputEL}
+                onChange={(e)=>{
+                  setCardName(e.target.value);
+                }}
+                onKeyPress={e=>{
+                  if(e.key === "Enter"){
+                    onSaveCard(cardName);
+                    handleDisEditable(e);
+                  }
+                }}
+              />
+            </Badge>
+            :<input
               className='cardInput'
               defaultValue={cardName}
               disabled={!editable}
@@ -87,6 +109,9 @@ const WorkListCard = (props) => {
                 }
               }}
             />
+
+            }
+            
 
           </div>
 

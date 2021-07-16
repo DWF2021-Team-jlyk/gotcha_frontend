@@ -22,18 +22,20 @@ const ActArea = ({ cardAct, cardId }) => {
             key={index}
           >
             <div>
-              <Avatar style={{ margin: '10px 10px 0px 5px' }}>
+              <Avatar style={{ margin: '13px 10px 0px 5px' }}>
                 {AvatarIcon(value.user_id)}
               </Avatar>
             </div>
             <div>
-              <div style={{ marginTop: 7, fontSize: '.9rem' }}>
+
+              <div style={{ marginTop: 7,  marginLeft: 8, fontSize: '.9rem' }}>
                 <b>{value.user_id}</b>{' '}
                 <span style={{ fontSize: '0.8rem' }}>
                   {value.created_date}
                   {value.isedit ? (<span><b> (edit)</b></span>) : null}
                 </span>
               </div>
+
               <ActDesc cardId={cardId} acts={cardAct} cardAct={value} />
             </div>
           </div>

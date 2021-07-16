@@ -18,15 +18,14 @@ const FileCheckTrue = (props) => {
   //   dispatch(postCardFile(cardId));
   // },[file.file_id]);
 
-  const updateFileIschecked = useCallback(
-    (fileIsChecked) => {
-      dispatch(
-        updateCardFile({
-          ...file,
-          file_ischecked: fileIsChecked,
-        }),
-      );
-    },[]);
+  const updateFileIschecked = useCallback((fileIsChecked) => {
+    dispatch(
+      updateCardFile({
+        ...file,
+        file_ischecked: fileIsChecked,
+      }),
+    );
+  }, []);
 
   const deleteCardFiles = useCallback(
     (file_id) =>
@@ -38,8 +37,6 @@ const FileCheckTrue = (props) => {
     [],
   );
 
-
-
   return (
     <div style={{ display: 'flex' }}>
       <Form.Check
@@ -47,65 +44,68 @@ const FileCheckTrue = (props) => {
         id="autoSizingCheck"
         className="mb-2"
         checked="checked"
-        onClick={
-          () => updateFileIschecked('0')
-        }
+        onClick={() => updateFileIschecked('0')}
       />
-      <div style={{ marginLeft: 5, width: '100%', minWidth: 200 }}>
-        {file.file_name}
+      <div style={{ marginLeft: 5, width: '100%', minWidth: 100 }}>
+      {/* <div style={{ marginLeft: 5, width:'100px'}}> */}
+        {file.file_name}&ensp;
       </div>
+
       {/* <button>download</button>  */}
-      <button
-              block
-              variant="outline"
-              color="dark"
-              name={file.file_id}
-              //key={key}
-              onClick={(e) => {
-                //if (!updateCheck) {
-                  //console.log(item);
-                  Helpers.httpRequest(
-                    `http://localhost/:3000${file.file_path}`,
-                    "get"
-                  )
-                    .then((response) => response.blob())
-                    .then((blob) => {
-                      // create blob link
-                      const url = window.URL.createObjectURL(
-                        new Blob([blob])
-                      );
-                      const link = document.createElement("a");
-                      link.href = url;
-                      link.setAttribute(
-                        "download",
-                        `${file.file_name}`
-                      );
-            
-                      // append to html
-                      document.body.appendChild(link);
-            
-                      // download
-                      link.click();
-            
-                      // remove
-            
-                      link.parentNode.removeChild(link);
-                    })
-                    // .catch((error) => {
-                    //   error.json().then((json) => {});
-                    // });
-                  //}
-              }
-                }> download </button> &nbsp;
-      <button
+      <Button
+         style={{
+          backgroundColor: '#7986CB',
+          border: '1px solid #7986CB',
+          color:'white',
+          height:35
+        }}
+        block
+        variant="outline"
+        name={file.file_id}
+        //key={key}
+        onClick={(e) => {
+          //if (!updateCheck) {
+          //console.log(item);
+          Helpers.httpRequest(`http://localhost/:3000${file.file_path}`, 'get')
+            .then((response) => response.blob())
+            .then((blob) => {
+              // create blob link
+              const url = window.URL.createObjectURL(new Blob([blob]));
+              const link = document.createElement('a');
+              link.href = url;
+              link.setAttribute('download', `${file.file_name}`);
+
+              // append to html
+              document.body.appendChild(link);
+
+              // download
+              link.click();
+
+              // remove
+              link.parentNode.removeChild(link);
+            });
+          // .catch((error) => {
+          //   error.json().then((json) => {});
+          // });
+          //}
+        }}
+      >
+    
+        download
+      </Button>
+
+      &nbsp;
+
+      <Button
+        variant="danger"
+        style={{height:35}}
         onClick={() => {
           deleteCardFiles(file.file_id);
         }}
       >
         delete
-      </button>
-      {console.log('file.file_id', file.file_id)}
-      {console.log('updateFileIschecked ...file',{...file})}
+      </Button>
+   
     </div>
   );
 };

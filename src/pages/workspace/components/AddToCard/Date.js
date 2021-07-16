@@ -58,7 +58,7 @@ export default function AddDate(props) {
       <Overlay
         show={show}
         target={target}
-        placement='bottom'
+        placement='right'
         container={ref.current}
         containerPadding={40}
       >
@@ -70,18 +70,34 @@ export default function AddDate(props) {
 
           <Popover.Content>
             <div>
-              Start date:
-              <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-              />
-              <br></br>
-              End date:
-              <DatePicker
-                selected={endDate}
-                onChange={(date) => setEndDate(date)}
-              />
+              <div>
+            
+                <span style={{fontWeight:500}}>Start date: </span> 
+                <DatePicker
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                />
+               
+       
+              </div>
+
+              <div style={{margin:'10px 0 10px 0'}}>
+          
+                <span style={{fontWeight:500}}>End date: </span>
+                <DatePicker
+                  selected={endDate}
+                  onChange={(date) => setEndDate(date)}
+                />
+           
+              </div>
+
+              <div style={{float:'right', marginBottom:10}}>
               <Button
+                  style={{
+                    backgroundColor: '#7986CB',
+                    border: '1px solid #7986CB',
+                    color:'white'
+                  }}
                 size='small'
                 onClick={() => {
                   onUpdateDate(startDate.toISOString(), endDate.toISOString());
@@ -89,6 +105,7 @@ export default function AddDate(props) {
               >
                 save
               </Button>
+              </div>
             </div>
           </Popover.Content>
         </Popover>
