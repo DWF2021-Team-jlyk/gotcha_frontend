@@ -7,6 +7,7 @@ import Overlay from 'react-bootstrap/Overlay';
 import { FaUserFriends } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { FormControl } from 'react-bootstrap';
 import { postWorkspaceMember } from '../../../../modules/workspaceMember';
 import { addCardMember } from '../../../../lib/cardActAPI';
 import {
@@ -38,10 +39,24 @@ export default function AddMember(props) {
   const cardMember = useSelector((state) => state.cardMember.members);
 
   const [click, setClick] = useState(false);
-  const [show, setShow] = useState(false);
-  const [target, setTarget] = useState(null);
   const ref = useRef(null);
   const { ws_id } = useParams();
+  const [search, setSearch] = useState('');
+  const [target, setTarget] = useState(null);
+  const [show, setShow] = useState(false);
+
+  const onChange = useCallback((e) => {
+    setSearch(e.target.value);
+  }, []);
+
+  // const handleFocus = useCallback((e) => {
+  //   setShow(true);
+  //   setTarget(e.target);
+  // }, []);
+
+  const handleBlur = useCallback((e) => {
+    setShow(false);
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -79,7 +94,7 @@ export default function AddMember(props) {
       <Overlay
         show={show}
         target={target}
-        placement="right"
+        placement="bottom"
         container={ref.current}
         containerPadding={40}
       >
@@ -93,89 +108,83 @@ export default function AddMember(props) {
             <Popover.Content onClick={(e) => e.stopPropagation()}>
               <div>
                 추가할 멤버 검색
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Control
-                    size="sm"
-                    style={{ marginTop: 10 }}
-                    type="text"
-                    placeholder="Search members"
-                    onClick={onClick}
-                  />
-                </Form.Group>
+                <FormControl
+                  type="search"
+                  laceholder="Search members"
+                  aria-label="Search"
+                  onChange={onChange}
+                  // onFocus={handleFocus}
+
+                  style={{ marginTop: 10 }}
+                />
                 <hr />
                 <div style={{ marginTop: 15 }}>
                   <b>Board Member List</b>
+                  <div style={{maxHeight:300, overflowY:'scroll'}}>
+                    {wsMembers
+                      .filter((ws) => ws.indexOf(search) >= 0)
+                      .map((value, key) => {
+                        if (
+                          cardMember?.map((mem) => mem.user_id).includes(value)
+                        ) {
+                          return (
+                            <div key={key}>
+                              <Button
+                                style={memberButton}
+                                variant="contained"
+                                onClick={() => {
+                                  const desc =
+                                    userId +
+                                    '(이)가 ' +
+                                    value +
+                                    '(을)를 Card Member에서 제외했습니다.';
 
-                  {wsMembers?.map((value, key) => {
-                    if (cardMember?.map((mem) => mem.user_id).includes(value)) {
-                      return (
-                        <div>
-                          <Button
-                            style={memberButton}
-                            variant="contained"
-                            onClick={() => {
-                              const desc =
-                                userId +
-                                '(이)가 ' +
-                                value +
-                                '(을)를 Card Member에서 제외했습니다.';
-
-                              dispatch(
-                                deleteCardMember({
-                                  user_id: value,
-                                  card_id: card?.card_id,
-                                }),
-                              );
-                              insertLog(card?.card_id, userId, '1', desc);
-                            }}
-                          >
-                            {value}
-                          </Button>
-                          <b>
-                            <AiOutlineCheck
-                              style={{ marginLeft: 10, fontSize: '1rem' }}
-                            />
-                          </b>
-                        </div>
-                      );
-                    } else {
-                      return (
-                        <div>
-                          <Button
-                            style={memberButton}
-                            variant="contained"
-                            onClick={() => {
-                              const desc =
-                                userId +
-                                '(이)가 ' +
-                                value +
-                                '(을)를 Card Member로 추가했습니다.';
-                              dispatch(
-                                insertCardMember({
-                                  user_id: value,
-                                  card_id: card?.card_id,
-                                }),
-                              );
-                              insertLog(card?.card_id, userId, '1', desc);
-                            }}
-                          >
-                            {value}
-                          </Button>
-                        </div>
-                      );
-                    }
-                  })}
-                  {/* {wsMembers?.filter(
-                  value=>!cardMember?.map(mem=>mem.user_id).includes(value))
-                  .map((value, key) => {
-                  return (
-                    <div>
-                    <Button style={memberButton} variant="contained" onClick={insertMember}>
-                      {value}
-                    </Button>
+                                  dispatch(
+                                    deleteCardMember({
+                                      user_id: value,
+                                      card_id: cardId,
+                                    }),
+                                  );
+                                  insertLog(cardId, userId, '1', desc);
+                                }}
+                              >
+                                {value}
+                              </Button>
+                              <b>
+                                <AiOutlineCheck
+                                  style={{ marginLeft: 10, fontSize: '1rem' }}
+                                />
+                              </b>
+                            </div>
+                          );
+                        } else {
+                          return (
+                            <div key={key}>
+                              <Button
+                              style={memberButton}
+                              variant="contained"
+                              onClick={() => {
+                                const desc =
+                                  userId +
+                                  '(이)가 ' +
+                                  value +
+                                  '(을)를 Card Member로 추가했습니다.';
+                                dispatch(
+                                  insertCardMember({
+                                    user_id: value,
+                                    card_id: cardId,
+                                  }),
+                                );
+                                insertLog(cardId, userId, '1', desc);
+                              }}
+                            >
+                              {value}
+                            </Button>
+                            </div>
+                          );
+                        }
+                      })}
                   </div>
-                  )
-                })} */}
                 </div>
               </div>
             </Popover.Content>

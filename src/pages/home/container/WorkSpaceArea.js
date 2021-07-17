@@ -4,9 +4,10 @@ import WorkSpaceCard from '../components/WorkSpaceCard';
 import { useSelector } from 'react-redux';
 import { FaUserCog, FaUsers } from 'react-icons/fa';
 
+
 const workspaceStyle = {
   style: {
-    width: 1050,
+    width: 970,
     marginTop: 50,
     marginRight: 50,
     marginLeft: 50,

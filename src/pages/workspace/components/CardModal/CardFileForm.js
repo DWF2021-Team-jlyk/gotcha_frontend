@@ -91,7 +91,7 @@ export default function CardFileForm(props) {
     <Form>
       <FormGroup>
         <Form.Control type="file" onChange={onFileChange} />
-        {file === '' ? null : <img src={fileprev} alt="img" height={'200px'} />}
+        {file === '' ? null : <div style={{marginTop:10}}><img src={fileprev} alt="img" height={'200px'} /></div>}
       </FormGroup>
 
       <div style={{float:'right'}}>

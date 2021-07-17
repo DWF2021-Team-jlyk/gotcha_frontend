@@ -8,7 +8,6 @@ import SearchWorkspace from './SearchWorkspace';
 import headerImg from "../../image/gc_header.png";
 import { useDispatch } from "react-redux";
 import { initWorkspace } from "../../modules/workspace";
-
 const Header = () => {
     const dispatch = useDispatch();
     return (

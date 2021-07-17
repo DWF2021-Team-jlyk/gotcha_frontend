@@ -12,13 +12,6 @@ const CardDate = ({ card }) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userInfo.userId);
 
-  const dateCut = (dates) => {
-    const str = dates.split('T');
-    const date = str[0] + ' ' + str[1].substr(0, 8);
-
-    return date;
-  };
-
   const updatecheck = useCallback(
     (done) => {
       dispatch(cardUpdate({ ...card, card_isdone: done }));

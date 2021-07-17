@@ -3,6 +3,8 @@ import Form from 'react-bootstrap/Form';
 import { Button, FormControl, Overlay, Popover } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
+import {FaSearch} from 'react-icons/fa'
+import {GrFormNextLink} from 'react-icons/gr'
 
 const SearchWorkspace = () => {
   const ref = useRef(null);
@@ -23,6 +25,7 @@ const SearchWorkspace = () => {
   return (
     <Form className='d-flex'>
       <div ref={ref}></div>
+      <FaSearch size='24' color='white' style={{marginTop:7, marginRight:9}}/>
       <FormControl
         type='search'
         placeholder='Search'
@@ -54,9 +57,9 @@ const SearchWorkspace = () => {
                   <Link
                     key={ws.ws_id}
                     to={`/workspace/${ws.ws_id}`}
-                    style={{fontSize:20,}}
+                    style={{fontSize:18,color:'black', textDecoration:'none', }}
                   >
-                    {ws.ws_name}
+                   <b>{ws.ws_name}</b>
                   </Link>
                 </div>,
               )}
