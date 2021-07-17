@@ -10,13 +10,7 @@ import { insertCardAct } from '../../../../modules/cardAct';
 const CardDate = ({ card }) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userInfo.userId);
-  
-  const dateCut = (dates) => {
-    const str = dates.split('T');
-    const date = str[0] + ' ' +  str[1].substr(0,8)
 
-    return date;
-  }
 
   const updatecheck = useCallback(
     (done) => {
@@ -75,10 +69,10 @@ const CardDate = ({ card }) => {
         </div>
       </div>
       <span>시작 날짜 : </span>
-      {dateCut(card?.card_start_date)}
+      {card?.card_start_date}
       <br />
       <span>종료 날짜 : </span>
-      {dateCut(card?.card_end_date)}
+      {card?.card_end_date}
     </div>
   );
 };

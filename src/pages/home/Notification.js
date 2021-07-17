@@ -5,6 +5,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { useSelector } from 'react-redux';
 import NotiCard from './components/NotiCard';
+import {BsBellFill} from 'react-icons/bs';
 
 export default function Notification() {
   const notification = useSelector(state => state.notification.noti);
@@ -15,7 +16,7 @@ export default function Notification() {
         <Tab eventKey='allNoti' title='전체 알림'>
           <Card>
             <Card.Header style={{ textAlign: 'center' }}>
-              <h3>Notification</h3>
+              <h3> <BsBellFill size='25'/> Notification</h3>
             </Card.Header>
             <Card.Body className='notification'>
               {notification

@@ -15,11 +15,11 @@ const ActArea = ({ cardAct, cardId }) => {
 
   return (
     <>
-      {cardAct.map((value, index) => {
+      {cardAct.map((value) => {
         return (
           <div
             style={{ display: 'flex', marginBottom: 7 }}
-            key={index}
+            key={value.act_id}
           >
             <div>
               <Avatar style={{ margin: '13px 10px 0px 5px' }}>
@@ -36,7 +36,7 @@ const ActArea = ({ cardAct, cardId }) => {
                 </span>
               </div>
 
-              <ActDesc cardId={cardId} acts={cardAct} cardAct={value} />
+              <ActDesc key={value.act_id} cardId={cardId} acts={cardAct} cardAct={value} />
             </div>
           </div>
         );

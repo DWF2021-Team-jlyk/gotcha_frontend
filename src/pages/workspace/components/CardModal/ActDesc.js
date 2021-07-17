@@ -72,7 +72,7 @@ const ActDesc = ({ cardAct, cardId, acts }) => {
             fontSize: '.95rem',
             padding: 5,
             borderRadius: 4,
-            width: 490,
+            width: 430,
             
           }}
           disabled={!editable}
@@ -88,6 +88,7 @@ const ActDesc = ({ cardAct, cardId, acts }) => {
               fontSize: '.8rem',
               backgroundColor: '#7986CB',
               border: '1px solid #7986CB',
+              
             }}
             onClick={() => {
               save(cardId, 'user01@naver.com', 0, changeDesc, cardAct.act_id);

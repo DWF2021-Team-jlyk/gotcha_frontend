@@ -1,5 +1,12 @@
 import React, { useCallback, useEffect } from 'react';
-import { Button, Col, Modal, ModalBody, ModalFooter, Row } from 'react-bootstrap';
+import {
+  Button,
+  Col,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  Row,
+} from 'react-bootstrap';
 import { FunctionalAddOn, ActionAddOn } from './ModalAddOn';
 import CardMember from '../CardModal/CardMember';
 import CardAct from '../CardModal/CardAct';
@@ -16,32 +23,45 @@ import { unmountCardAct } from '../../../../modules/cardAct';
 import { unmountCardMember } from '../../../../modules/cardMember';
 import { unmountCardFile } from '../../../../modules/cardFile';
 import { disappearModal } from '../../../../modules/cardModal';
-import { AiOutlineBars } from 'react-icons/ai'
-import {cardDelete} from '../../../../modules/workspaceCard'
+import { AiOutlineBars } from 'react-icons/ai';
+import { cardDelete } from '../../../../modules/workspaceCard';
+import { postCard } from '../../../../modules/workspaceCard';
 
 const WorkListCardModal = (props) => {
   const { cardId, card_id, show, handle } = props;
-  const card = useSelector(state => state.cardModal.card);
-  const {ws_id} = useParams();
+  const card = useSelector((state) => state.cardModal.card);
+  const modalshow = useSelector((state)=> state.cardModal.showModal);
+  const { ws_id } = useParams();
   const dispatch = useDispatch();
 
-  const cardDelete = useCallback(()=>{
-    dispatch(
-      cardDelete({card_id:card.card_id})
-    )
-  },[]);
-  const unMountFunc = useCallback(()=>{
+  // const cardDelete = ()=>{
+  //   dispatch(
+  //     cardDelete({ card_id:card.card_id})
+  //   )
+  // };
+
+  const deleteCard = (card_id) => {
+    dispatch(cardDelete({ card_id: card_id }))
+    dispatch(disappearModal())
+  }
+
+  useEffect(() => {
+    dispatch(postCard(ws_id));
+  }, [modalshow]);
+
+
+  const unMountFunc = useCallback(() => {
     dispatch(unmountCardMember());
     dispatch(unmountCardAct());
     dispatch(unmountCardTodo());
     dispatch(unmountCardFile());
     dispatch(unmountCard());
-  })
+  });
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(registerCard(card));
     return unMountFunc;
-  },[cardId]);
+  }, [cardId]);
 
   return (
     <Modal
@@ -54,7 +74,7 @@ const WorkListCardModal = (props) => {
       <ModalBody>
         <Row>
           <Col sm={9}>
-            <CardMember/>
+            <CardMember />
             <CardDesc card={card} />
             {card?.card_start_date !== null && <CardDate card={card} />}
             <CardFile cardId={card?.card_id} />
@@ -63,7 +83,9 @@ const WorkListCardModal = (props) => {
           </Col>
           <Col sm={3}>
             <div>
-              <h5 style={{ marginBottom: 20 }}><AiOutlineBars/> Behavior</h5>
+              <h5 style={{ marginBottom: 20 }}>
+                <AiOutlineBars /> Behavior
+              </h5>
               <FunctionalAddOn card={card} ws_id={ws_id} />
             </div>
           </Col>
@@ -71,8 +93,15 @@ const WorkListCardModal = (props) => {
       </ModalBody>
 
       <ModalFooter>
-        <Button variant='danger' onClick={}>Card Delete</Button>
-        <Button variant='secondary' onClick={()=>dispatch(disappearModal())}>Close</Button>
+        <Button
+          variant="danger"
+          onClick={() => deleteCard(card.card_id)}
+        >
+          Card Delete
+        </Button>
+        <Button variant="secondary" onClick={() => dispatch(disappearModal())}>
+          Close
+        </Button>
       </ModalFooter>
     </Modal>
   );
