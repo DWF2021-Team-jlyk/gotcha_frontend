@@ -29,8 +29,6 @@ const INIT_WORKSPACE = 'workspace/INIT_WORKSPACE';
 
 export const deleteWorkspace =
   createAction(DELETE_WORKSPACE, ws_id => ws_id);
-export const changeWorkspaceFav =
-  createAction(CHANGE_WORKSPACE_FAV, ws_id => ws_id);
 
 export const postWorkspaces = createRequest(POST_WORKSPACES, api.postGetWorkspaces);
 export const addWorkspaces = createRequest(ADD_WORKSPACE, api.postAddWorkspace);
@@ -55,6 +53,7 @@ const workspace = handleActions(
           else return -1;
         })
       }),
+
     [CHANGE_WORKSPACE_FAV]: (state, { payload: ws_id }) =>
       produce(state, draft => {
         const workspace = draft.workspaces.find(ws => ws.ws_id === ws_id);
@@ -66,7 +65,7 @@ const workspace = handleActions(
         const index = draft.workspaces.findIndex(ws => ws.ws_id === ws_id);
         draft.workspaces.splice(index, 1);
       }),
-      
+
     [POST_WORKSPACES_SUCCESS]: (state, action) =>
       produce(state, draft => {
         draft.workspaces = action.payload;
@@ -76,26 +75,26 @@ const workspace = handleActions(
           else return -1;
         })
       }),
+
     [UPDATE_WORKSPACE_SUCCESS]: (state, action) =>
       produce(state, draft => {
         const index = draft.workspaces
           .findIndex(ws => ws.ws_id === action.payload.ws_id);
         draft.workspaces.splice(index, 1, action.payload);
       }),
-    [INIT_WORKSPACE]: (state, action) =>
-      produce(state, draft => {
-        draft.workspaces = [];
-      }),
+
     [UPDATE_WORKSPACE_NAME_SUCCESS]: (state, action) =>
       produce(state, draft => {
         const index = draft.workspaces
         .findIndex(ws => ws.ws_id === action.payload.ws_id);
         draft.workspaces.splice(index, 1, action.payload)
       }),
+
     [GET_WORKSPACE_FILE_NAME_SUCCESS]: (state, action) =>
       produce(state, draft => {
         draft.workspaces.push(action.payload);
       }),
+
     [INVITE_MEMBER_SUCCESS]: (state, action) =>
         produce(state, draft => {
 

@@ -97,7 +97,7 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
       alert("workspaceName required");
     }else {
       dispatch(updateWorkspaceName({
-        ws_id:workspace.ws_id,
+        ...workspace,
         ws_name:workspaceName,
       }))
       setWorkspaceName(workspaceName);

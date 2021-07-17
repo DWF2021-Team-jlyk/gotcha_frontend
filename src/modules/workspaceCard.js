@@ -5,21 +5,19 @@ import produce from 'immer';
 
 const POST_CARD = 'workspace/POST_CARD';
 const POST_CARD_SUCCESS = 'workspace/POST_CARD_SUCCESS';
-const POST_CARD_FAILURE = 'workspace/POST_CARD_FAILURE';
 
 const CARD_ADD = 'workspace/CARD_ADD';
 const CARD_ADD_SUCCESS = 'workspace/CARD_ADD_SUCCESS';
-const CARD_ADD_FAILURE = 'workspace/CARD_ADD_FAILURE';
 
 const CARD_UPDATE = 'workspace/CARD_UPDATE';
 const CARD_UPDATE_SUCCESS = 'workspace/CARD_UPDATE_SUCCESS';
-const CARD_UPDATE_FAILURE = 'workspace/CARD_UPDATE_FAILURE';
 
 const CARD_DELETE = 'workspace/CARD_DELETE';
 const CARD_DELETE_SUCCESS = 'workspace/CARD_DELETE_SUCCESS';
-const CARD_DELETE_FAILURE = 'workspace/CARD_DELETE_FAILURE';
 
-const CARD_UNMOUNT = "workspace/CARD_UNMOUNT";
+const CARD_UNMOUNT = 'workspace/CARD_UNMOUNT';
+const LIST_CARD_DELETE = 'workspace/LIST_CARD_DELETE';
+
 //card move
 const UPDATE_CARD_MOVE = 'cardAction/UPDATE_CARD_MOVE';
 const UPDATE_CARD_MOVE_SUCCESS = 'cardAction/UPDATE_CARD_MOVE_SUCCESS';
@@ -35,6 +33,10 @@ export const cardAdd = createRequest(CARD_ADD, api.addCard);
 export const cardUpdate = createRequest(CARD_UPDATE, api.updateCard);
 export const cardDelete = createRequest(CARD_DELETE, api.deleteCard);
 export const cardUnmount = createAction(CARD_UNMOUNT);
+export const listCardDelete = createAction(
+  LIST_CARD_DELETE,
+  list_id => list_id,
+);
 
 export const updateCardMove = createRequest(
   UPDATE_CARD_MOVE,
@@ -75,10 +77,10 @@ const workspaceCard = handleActions(
         );
         draft.cards.splice(index, 1, action.payload);
         draft.cards.sort((card1, card2) => {
-          if(card1.position > card2.position)
+          if (card1.position > card2.position)
             return 1;
           else return -1;
-        })
+        });
       }),
 
     [CARD_DELETE_SUCCESS]: (state, action) =>
@@ -98,7 +100,7 @@ const workspaceCard = handleActions(
         );
         const originListId = card.list_id;
         const originPosition = card.position;
-        console.log('originListId' , originListId)
+        console.log('originListId', originListId);
         // draft.cards.splice(index, 1, action.payload);
         const cards = draft.cards.map((card) => {
           if (
@@ -127,8 +129,8 @@ const workspaceCard = handleActions(
         });
         draft.cards = cards;
       }),
-    [CARD_UNMOUNT]:(state, action)=>
-      produce(state, draft=>{
+    [CARD_UNMOUNT]: (state, action) =>
+      produce(state, draft => {
         draft.cards = [];
       }),
 
@@ -140,7 +142,7 @@ const workspaceCard = handleActions(
           //변하기 전 상태
         );
         const originListId = card.list_id;
-        console.log('originListId' , originListId)
+        console.log('originListId', originListId);
         const originPosition = card.position;
 
         const cards = draft.cards.map((card) => {
@@ -156,14 +158,20 @@ const workspaceCard = handleActions(
           );
 
           draft.cards.splice(index, 1);
-        
+
           return card;
         });
         draft.cards = cards;
       }),
 
     [UPDATE_NOW_POSITION_SUCCESS]: (state, action) =>
-      produce(state, (draft) => {}),
+      produce(state, (draft) => {
+      }),
+
+    [LIST_CARD_DELETE]: (state, action) =>
+      produce(state, draft => {
+        draft.cards = draft.cards.filter(card => card.list_id !== action.payload.list_id);
+      }),
   },
   initialState,
 );

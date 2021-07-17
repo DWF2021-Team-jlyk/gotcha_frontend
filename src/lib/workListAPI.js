@@ -16,10 +16,8 @@ export const addList = ({ list_name, ws_id, position }) =>
 export const updateList = (data) =>
   apiAxios('/main/wsList/list/update', data);
 
-export const deleteList = ({ list_id }) =>
-  apiAxios('/main/wsList/list/delete', {
-    list_id: list_id,
-  });
+export const deleteList = (data) =>
+  apiAxios('/main/wsList/list/delete', data);
 
 //
 export const postCard = ({ ws_id }) =>

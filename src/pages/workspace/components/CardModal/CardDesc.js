@@ -12,20 +12,21 @@ const CardDesc = (props) => {
 
   const dispatch = useDispatch();
 
-  const updateDesc = useCallback(changeDesc =>
-      dispatch(cardUpdate({ ...card, card_desc: changeDesc })),
-    [dispatch],
-  );
+  const updateDesc = changeDesc => {
+    setDesc(!desc);
+    dispatch(cardUpdate({ ...card, card_desc: changeDesc }));
+    dispatch(updateCard({ ...card, card_desc: changeDesc }));
+  };
+
+  const saveDesc = useCallback(() => {
+    // setDesc(!desc);
+    dispatch(cardUpdate({ ...card, card_desc: changeDesc }));
+    dispatch(updateCard({ ...card, card_desc: changeDesc }));
+  }, [card]);
 
   useEffect(() => {
     setChangeDesc(card?.card_desc);
   }, [card]);
-
-  const saveDesc = useCallback(()=>{
-    setDesc(!desc);
-    dispatch(cardUpdate({...card,card_desc:changeDesc}));
-    dispatch(updateCard({...card,card_desc:changeDesc}));
-  },[card]);
 
   return (
     <>
@@ -55,13 +56,17 @@ const CardDesc = (props) => {
             <Form.Control
               as='textarea'
               style={{ height: '180px' }}
-              onChange={(e) => setChangeDesc(e.target.value)}
+              onChange={e => setChangeDesc(e.target.value)}
             >
               {changeDesc}
             </Form.Control>
             <div style={{ marginTop: 5, float: 'right' }}>
               <Button
-                onClick={saveDesc}
+                onClick={e=>{
+                  setDesc(!desc);
+                  dispatch(cardUpdate({ ...card, card_desc: changeDesc }));
+                  dispatch(updateCard({ ...card, card_desc: changeDesc }));
+                }}
                 style={{
                   backgroundColor: '#7986CB',
                   border: '1px solid #7986CB',

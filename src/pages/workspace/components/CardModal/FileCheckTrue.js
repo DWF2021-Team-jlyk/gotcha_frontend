@@ -84,7 +84,7 @@ const FileCheckTrue = (props) => {
         type='checkbox'
         id='autoSizingCheck'
         className='mb-2'
-        checked={fileButtons}
+        defaultChecked={fileButtons}
         onClick={() => {
           setFileButtons(!fileButtons);
         }}

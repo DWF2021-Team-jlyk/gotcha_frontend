@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 // import uploadImg from '../../../upload/workspaces';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
-import { changeWorkspaceFav, updateWorkspace, postWorkspaces } from '../../../modules/workspace';
+import { updateWorkspace } from '../../../modules/workspace';
 import { useDispatch } from 'react-redux';
 import HomeStyles from '../HomeStyles';
 
@@ -14,15 +14,15 @@ const WorkSpaceCard = ({ workspace }) => {
   const dispatch = useDispatch();
   const [ws, setWs] = useState({ ...workspace });
   const onToggle = useCallback(() =>
-      dispatch(updateWorkspace({ ...workspace, is_fav: (workspace.is_fav ? '0' : '1') })),
-    [],
+      dispatch(updateWorkspace({ ...workspace, is_fav: (workspace.is_fav ? 0 : 1) })),
+    [workspace.is_fav],
   );
 
   useEffect(() => {
     setWs({ ...workspace });
   }, [workspace]);
 
-  const imgSrc = `upload/workspaces/${ws.ws_id}/bg/${ws.ws_isImage}`;
+  const imgSrc = `/image/bg/${ws.ws_id}/${ws.ws_isImage}`;
   const noImg = 'gotcha.png';
 
   return (

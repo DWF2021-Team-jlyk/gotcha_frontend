@@ -6,21 +6,23 @@ import DatePicker from 'react-datepicker';
 import { Form } from 'react-bootstrap';
 import { cardUpdate } from '../../../../modules/workspaceCard';
 import { insertCardAct } from '../../../../modules/cardAct';
+import { updateCard } from '../../../../modules/cardModal';
 
 const CardDate = ({ card }) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userInfo.userId);
-  
+
   const dateCut = (dates) => {
     const str = dates.split('T');
-    const date = str[0] + ' ' +  str[1].substr(0,8)
+    const date = str[0] + ' ' + str[1].substr(0, 8);
 
     return date;
-  }
+  };
 
   const updatecheck = useCallback(
     (done) => {
       dispatch(cardUpdate({ ...card, card_isdone: done }));
+      dispatch(updateCard({ ...card, card_isdone: done }));
     },
     [dispatch],
   );
@@ -49,44 +51,50 @@ const CardDate = ({ card }) => {
         <div style={{ marginLeft: 10 }}>
           {card.card_isdone === '1' ? (
             <Form.Check
-              type="checkbox"
-              id="auto"
-              className="mb-2"
-              checked="checked"
+              type='checkbox'
+              id='auto'
+              className='mb-2'
+              checked='checked'
               onClick={(e) => {
                 updatecheck('0');
-                const desc= userId + '(이)가 Date is done을 체크해제하였습니다.' 
-                insertLog(card.card_id,userId,'1',desc)
+                const desc = userId + '(이)가 Date is done을 체크해제하였습니다.';
+                insertLog(card.card_id, userId, '1', desc);
               }}
             />
           ) : (
             <Form.Check
-              type="checkbox"
-              id="autoSizingCheck"
-              className="mb-2"
+              type='checkbox'
+              id='autoSizingCheck'
+              className='mb-2'
               onClick={(e) => {
                 updatecheck('1');
-                const desc= userId + '(이)가 Date is done을 체크하였습니다.' 
-                insertLog(card.card_id,userId,'1',desc)
-                insertLog()
+                const desc = userId + '(이)가 Date is done을 체크하였습니다.';
+                insertLog(card.card_id, userId, '1', desc);
+                insertLog();
               }}
             />
           )}
         </div>
       </div>
       <span>시작 날짜 : </span>
-      <DatePicker
-        selected={new Date(card?.card_start_date)}
-        dateFormat="yyyy/MM/dd hh:mm aa"
-        disabled
-      />
-      <br/>
+      {
+        card?.card_start_date !== null &&
+        card?.card_start_date !== "" &&
+        <DatePicker
+          selected={new Date(card?.card_start_date)}
+          dateFormat='yyyy/MM/dd hh:mm aa'
+          disabled
+        />}
+      <br />
       <span>종료 날짜 : </span>
-      <DatePicker
-        selected={new Date(card?.card_end_date)}
-        dateFormat="yyyy/MM/dd hh:mm aa"
-        disabled
-      />
+      {
+        card?.card_end_date !== null &&
+        card?.card_end_date !== "" &&
+        <DatePicker
+          selected={new Date(card?.card_end_date)}
+          dateFormat='yyyy/MM/dd hh:mm aa'
+          disabled
+        />}
     </div>
   );
 };

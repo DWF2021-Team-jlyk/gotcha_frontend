@@ -25,11 +25,10 @@ const WorkListCardModal = (props) => {
   const {ws_id} = useParams();
   const dispatch = useDispatch();
 
-  const cardDelete = useCallback(()=>{
-    dispatch(
-      cardDelete({card_id:card.card_id})
-    )
-  },[]);
+  const cardDel = useCallback(()=>{
+    dispatch(cardDelete({card_id:card.card_id}));
+    dispatch(disappearModal());
+  },[dispatch]);
   const unMountFunc = useCallback(()=>{
     dispatch(unmountCardMember());
     dispatch(unmountCardAct());
@@ -56,7 +55,10 @@ const WorkListCardModal = (props) => {
           <Col sm={9}>
             <CardMember/>
             <CardDesc card={card} />
-            {card?.card_start_date !== null && <CardDate card={card} />}
+            {card?.card_start_date !== null &&
+            card?.card_start_date !== undefined &&
+              card?.card_start_date !== "" &&
+            <CardDate card={card} />}
             <CardFile cardId={card?.card_id} />
             <CardTodo cardId={card?.card_id} />
             <CardAct card={card} />
@@ -71,7 +73,7 @@ const WorkListCardModal = (props) => {
       </ModalBody>
 
       <ModalFooter>
-        <Button variant='danger' onClick={}>Card Delete</Button>
+        <Button variant='danger' onClick={cardDel}>Card Delete</Button>
         <Button variant='secondary' onClick={()=>dispatch(disappearModal())}>Close</Button>
       </ModalFooter>
     </Modal>

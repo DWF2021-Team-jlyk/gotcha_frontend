@@ -1,6 +1,6 @@
 import React, { useRef, useCallback, useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteCardAct, updateCardAct } from '../../../../modules/cardAct';
 import TextField from '@material-ui/core/TextField';
 

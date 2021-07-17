@@ -9,14 +9,9 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import WorkListCard from './WorkListCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { listDelete, listUpdate } from '../../../../modules/workspaceList';
+import { deleteList, listDelete, listUpdate } from '../../../../modules/workspaceList';
 import { cardAdd } from '../../../../modules/workspaceCard';
-import { AiFillEdit, GiConsoleController } from 'react-icons/all';
-import { postCard } from '../../../../modules/workspaceCard';
-import { insertCardAct } from '../../../../modules/cardAct';
-import axios from 'axios';
-import Badge from '@material-ui/core/Badge';
-import {AiOutlineCheck} from "react-icons/ai"
+import { AiFillEdit } from 'react-icons/all';
 
 
 const PlusIcon = {
@@ -47,7 +42,7 @@ const WorkListCardList = (props) => {
 
   const onListNameChange = useCallback((e) => {
     setListName(e.target.value);
-  }, []);
+  }, [listName]);
 
   const handleClick = useCallback ((event) => {
     setAnchorEl(event.currentTarget);
@@ -57,9 +52,10 @@ const WorkListCardList = (props) => {
     setAnchorEl(null);
   }, []);
 
-  const onListRemove = useCallback(() => {
-    dispatch(listDelete({ list_id: listId }));
-  },[]);
+  const onListRemove = () => {
+    // dispatch(listDelete({ list_id: listId }));
+    dispatch(deleteList(list));
+  }
 
   // const onCardAdd = useCallback(() => {
   //   dispatch(cardAdd({

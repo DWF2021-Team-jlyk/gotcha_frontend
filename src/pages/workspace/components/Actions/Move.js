@@ -9,8 +9,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import { useDispatch, useSelector } from 'react-redux';
 import { postWorkspaces } from '../../../../modules/workspace';
-import { updateCardWsMove,updateCardMove, updateNowPosition} from '../../../../modules/workspaceCard';
-import {insertCardAct } from '../../../../modules/cardAct';
+import { updateCardWsMove, updateCardMove, updateNowPosition } from '../../../../modules/workspaceCard';
+import { insertCardAct } from '../../../../modules/cardAct';
 import axios from 'axios';
 
 const buttonStyle = {
@@ -35,7 +35,7 @@ export default function CardMove({ card, ws_id }) {
   const workspaces = useSelector((state) => state.workspace.workspaces);
 
   //log에 필요한 userid
-  const userId = useSelector(state=>state.userInfo.userId);
+  const userId = useSelector(state => state.userInfo.userId);
 
   const dispatch = useDispatch();
 
@@ -74,6 +74,7 @@ export default function CardMove({ card, ws_id }) {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
+        'Authorization': sessionStorage.getItem('accessToken'),
       },
       data: {
         ws_id: selectWsId,
@@ -83,7 +84,6 @@ export default function CardMove({ card, ws_id }) {
 
     axios(options).then((res) => {
       setLists(res.data);
-   
     });
 
   }, [selectWsId]);
@@ -100,6 +100,7 @@ export default function CardMove({ card, ws_id }) {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
+        "Authorization":sessionStorage.getItem("accessToken"),
       },
       data: {
         ws_id: selectWsId,
@@ -180,12 +181,12 @@ export default function CardMove({ card, ws_id }) {
       <Overlay
         show={show}
         target={target}
-        placement="right"
+        placement='right'
         container={ref.current}
         containerPadding={40}
       >
-        <Popover id="popover-contained">
-          <Popover.Title as="h3">
+        <Popover id='popover-contained'>
+          <Popover.Title as='h3'>
             {' '}
             <b>Move Card</b>{' '}
           </Popover.Title>
@@ -194,24 +195,24 @@ export default function CardMove({ card, ws_id }) {
             <div style={{ marginTop: 10 }}>
               <div>
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="age-native-simple">
+                  <InputLabel htmlFor='age-native-simple'>
                     Workspace 선택
                   </InputLabel>
 
                   <Select
                     native
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
+                    labelId='demo-simple-select-label'
+                    id='demo-simple-select'
                     value={selectWsId}
                     onChange={wsIdChange}
                   >
-                    <option aria-label="None" value={ws_id}>
+                    <option aria-label='None' value={ws_id}>
                       현재 workspace
                     </option>
 
                     {workspaces.map((value, key) => {
                       return (
-                        <option value={value.ws_id}>{value.ws_name}</option>
+                        <option key={value.list_id} value={value.ws_id}>{value.ws_name}</option>
                       );
                     })}
                   </Select>
@@ -219,20 +220,20 @@ export default function CardMove({ card, ws_id }) {
               </div>
               <div>
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="age-native-simple">List 선택</InputLabel>
+                  <InputLabel htmlFor='age-native-simple'>List 선택</InputLabel>
 
                   <Select
                     native
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
+                    labelId='demo-simple-select-label'
+                    id='demo-simple-select'
                     value={selectListId}
                     onChange={listIdChange}
                   >
-                    <option aria-label="None" value="" />
+                    <option aria-label='None' value='' />
 
                     {lists?.map((value, key) => {
                       return (
-                        <option value={value.list_id}>{value.list_name}</option>
+                        <option key={value.list_id} value={value.list_id}>{value.list_name}</option>
                       );
                     })
 
@@ -243,23 +244,23 @@ export default function CardMove({ card, ws_id }) {
 
               <div>
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="age-native-simple">
+                  <InputLabel htmlFor='age-native-simple'>
                     Position 선택
                   </InputLabel>
 
                   <Select
                     native
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
+                    labelId='demo-simple-select-label'
+                    id='demo-simple-select'
                     value={selectPosition}
                     onChange={positionChange}
                   >
-                    <option aria-label="None" value="" />
+                    <option aria-label='None' value='' />
 
                     {[...Array(position)].map((n, index) => {
                       console.log({ Array });
                       return (
-                        <option aria-label="None" value={index}>
+                        <option aria-label='None' key={index} value={index}>
                           {index}
                         </option>
                       );
@@ -283,11 +284,10 @@ export default function CardMove({ card, ws_id }) {
                     card.card_id,
                     card.list_id,
                     card.position,
-                  );    
-                  const result = lists.filter((list) => list.list_id == selectListId)
-                  console.log('rrrrrrrrrrrrrrrrrr' , result)
-                  const desc = userId +'(이)가 card를' + result[0].list_name +'(으)로 이동하였습니다.';
-                  insertLog(card.card_id, userId, '1', desc)
+                  );
+                  const result = lists.filter((list) => list.list_id == selectListId);
+                  const desc = userId + '(이)가 card를' + result[0].list_name + '(으)로 이동하였습니다.';
+                  insertLog(card.card_id, userId, '1', desc);
                 }}
               >
                 {' '}

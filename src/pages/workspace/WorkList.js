@@ -16,15 +16,15 @@ const WorkList = (props) => {
 
   const dispatch = useDispatch();
 
-  const onListAdd = useCallback(() => {
+  const onListAdd = useCallback((list_name, position) => {
     dispatch(
       listAdd({
-        list_name: listName,
+        list_name: list_name,
         ws_id: ws_id,
-        position: nextPosition,
+        position: position,
       }),
     );
-  }, []);
+  }, [lists]);
 
   const closeModal = useCallback(() => {
     dispatch(disappearModal());
@@ -41,7 +41,7 @@ const WorkList = (props) => {
         variant='contained'
         color='primary'
         onClick={(e) => {
-          onListAdd();
+          onListAdd(listName, nextPosition);
           listEL.current.value = '';
         }}
       >

@@ -20,8 +20,29 @@ const LIST_UNMOUNT = 'workspaceList/LIST_UNMOUNT';
 export const postList = createRequest(POST_LIST, api.postList);
 export const listAdd = createRequest(LIST_ADD, api.addList);
 export const listUpdate = createRequest(LIST_UPDATE, api.updateList);
-export const listDelete = createRequest(LIST_DELETE, api.deleteList);
 export const listUnmount = createAction(LIST_UNMOUNT);
+export const listDelete = createRequest(LIST_DELETE, api.deleteList);
+export const deleteList = (list) => async dispatch => {
+  dispatch({type:LIST_DELETE});
+  try{
+    const response = await api.deleteList(list);
+    dispatch({
+      type: 'workspace/LIST_CARD_DELETE',
+      payload:response.data
+    })
+    dispatch({
+      type: LIST_DELETE_SUCCESS,
+      payload:response.data
+    })
+  }catch (e) {
+    dispatch({
+      type: 'workspace/LIST_DELETE_FAILURE',
+      payload: e,
+      error:true
+    });
+    throw e;
+  }
+}
 
 
 const initialState = {
