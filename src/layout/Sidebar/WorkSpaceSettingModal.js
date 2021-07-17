@@ -44,7 +44,7 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
   const [userList, setUserLists] = useState([]);
   const [emailList, setEmailList] = useState([]);
   const [image, setImage] = useState();
-  const [fileName, setFileName] = useState(workspace.ws_isImage)
+  const [fileName, setFileName] = useState("");
   const [previewImg, setPreviewImg] = useState();
   const [isActiveName, setIsActiveName] = useState(true);
   const [isActiveImg, setIsActiveImg] = useState(true);
@@ -77,7 +77,7 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
   }, [emailList]);
 
   useEffect(() => {
-    dispatch(getFileName(workspace.ws_id));
+    setFileName(workspace.ws_isImage);
   },[workspace]);
   console.log('imageName ', workspace.ws_isImage);
   console.log('userList : ',userList);
@@ -152,7 +152,6 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
     setIsActiveName(true);
     setIsActiveImg(true);
     handleClose();
-    dispatch(postWorkspaces());
   }
 
   console.log('imageName ', workspace.user_id);

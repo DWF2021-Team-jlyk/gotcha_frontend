@@ -124,21 +124,14 @@ export default function AddMember(props) {
                     {wsMembers
                       .filter((ws) => ws.indexOf(search) >= 0)
                       .map((value, key) => {
-                        if (
-                          cardMember?.map((mem) => mem.user_id).includes(value)
-                        ) {
+                        if (cardMember?.map((mem) => mem.user_id).includes(value)) {
                           return (
                             <div key={key}>
                               <Button
                                 style={memberButton}
                                 variant="contained"
                                 onClick={() => {
-                                  const desc =
-                                    userId +
-                                    '(이)가 ' +
-                                    value +
-                                    '(을)를 Card Member에서 제외했습니다.';
-
+                                  const desc = userId + '(이)가 ' + value + '(을)를 Card Member에서 제외했습니다.';
                                   dispatch(
                                     deleteCardMember({
                                       user_id: value,
@@ -164,11 +157,7 @@ export default function AddMember(props) {
                               style={memberButton}
                               variant="contained"
                               onClick={() => {
-                                const desc =
-                                  userId +
-                                  '(이)가 ' +
-                                  value +
-                                  '(을)를 Card Member로 추가했습니다.';
+                                const desc = userId + '(이)가 ' + value + '(을)를 Card Member로 추가했습니다.';
                                 dispatch(
                                   insertCardMember({
                                     user_id: value,

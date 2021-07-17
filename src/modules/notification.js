@@ -43,14 +43,18 @@ const notification = handleActions(
     [DELETE_NOTI_SUCCESS]:(state, action)=>
       produce(state, draft=>{
         const index = draft.noti.findIndex(value=>
-          value.noti_id === action.payload.noti_id);
+          value.NOTI_ID === action.payload.noti_id);
         draft.noti.splice(index, 1);
       }),
     [CHANGE_NOTI_CHECK_SUCCESS]:(state, action)=>
       produce(state, draft=>{
+        console.log("notiRedux",state);
+        console.log(action.payload);
         const noti = draft.noti.find(value=>
-          value.noti_id === action.payload.noti_id);
-        noti.noti_check = action.payload.noti_check;
+          value.NOTI_ID === parseInt(action.payload.NOTI_ID));
+        if(noti.NOTI_CHECKED === "0")
+          noti.NOTI_CHECKED = "1";
+        else noti.NOTI_CHECKED = "0";
       })
   },
   initialState,

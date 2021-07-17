@@ -3,12 +3,20 @@ import { Card } from 'react-bootstrap';
 import './Cards.css';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import NotiCard from './components/NotiCard';
 import {BsBellFill} from 'react-icons/bs';
+import { useHistory } from 'react-router-dom';
+import { postNoti } from '../../modules/notification';
 
 export default function Notification() {
   const notification = useSelector(state => state.notification.noti);
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(postNoti());
+  }, [history]);
 
   return (
     <div>
@@ -22,7 +30,7 @@ export default function Notification() {
               {notification
                 .map(noti => {
                   return (
-                    <NotiCard key={noti.noti_id} noti={noti}/>
+                    <NotiCard key={noti.NOTI_ID} noti={noti}/>
                   );
                 })}
             </Card.Body>
@@ -35,10 +43,10 @@ export default function Notification() {
             </Card.Header>
             <Card.Body className='notification'>
               {notification
-                .filter(noti=>noti.noti_checked !== "1")
+                .filter(noti=>noti.NOTI_CHECKED !== "1")
                 .map(noti => {
                   return (
-                    <NotiCard key={noti.noti_id} noti={noti}/>
+                    <NotiCard key={noti.NOTI_ID} noti={noti}/>
                   );
                 })}
             </Card.Body>
@@ -52,10 +60,10 @@ export default function Notification() {
             </Card.Header>
             <Card.Body className='notification'>
               {notification
-                .filter(noti=>noti.noti_checked === "1")
+                .filter(noti=>noti.NOTI_CHECKED === "1")
                 .map(noti => {
                   return (
-                    <NotiCard key={noti.noti_id} noti={noti}/>
+                    <NotiCard key={noti.NOTI_ID} noti={noti}/>
                   );
                 })}
             </Card.Body>
