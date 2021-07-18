@@ -48,7 +48,7 @@ const Workspace = () => {
         }}
       >
         <Tabs
-          defaultActiveKey="WorkList"
+          defaultActiveKey={"WorkList"}
           style={{
             background: '#F7F7F7',
             marginBottom: 10,

@@ -3,8 +3,8 @@ import Form from 'react-bootstrap/Form';
 import { Button, FormControl, Overlay, Popover } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import {FaSearch} from 'react-icons/fa'
-import {GrFormNextLink} from 'react-icons/gr'
+import { FaSearch } from 'react-icons/fa';
+import { GrFormNextLink } from 'react-icons/gr';
 
 const SearchWorkspace = () => {
   const ref = useRef(null);
@@ -25,7 +25,7 @@ const SearchWorkspace = () => {
   return (
     <Form className='d-flex'>
       <div ref={ref}></div>
-      <FaSearch size='24' color='white' style={{marginTop:7, marginRight:9}}/>
+      <FaSearch size='24' color='white' style={{ marginTop: 7, marginRight: 9 }} />
       <FormControl
         type='search'
         placeholder='Search'
@@ -47,22 +47,23 @@ const SearchWorkspace = () => {
       >
         {(props) => (
           <Popover id='search-container' {...props}>
-            <Popover.Content as={'div'} style={{maxHeight:500, overflowY:"scroll"}}>
+            <Popover.Content as={'div'} style={{ maxHeight: 500, overflowY: 'scroll' }}>
               {workspaces
-                .filter(ws=>ws.ws_name.indexOf(search) >= 0)
+                .filter(ws => ws.ws_name.indexOf(search) >= 0)
                 .map(ws =>
-                <div
-                  key={ws.ws_id}
-                >
-                  <Link
+                  <div
                     key={ws.ws_id}
-                    to={`/workspace/${ws.ws_id}`}
-                    style={{fontSize:18,color:'black', textDecoration:'none', }}
                   >
-                   <b>{ws.ws_name}</b>
-                  </Link>
-                </div>,
-              )}
+                    <Link
+                      key={ws.ws_id}
+                      to={`/workspace/${ws.ws_id}`}
+                      style={{ fontSize: 18, color: 'black', textDecoration: 'none' }}
+                    >
+                      <b>{ws.ws_name}</b>
+                    </Link>
+                    <hr/>
+                  </div>,
+                )}
             </Popover.Content>
           </Popover>
         )}

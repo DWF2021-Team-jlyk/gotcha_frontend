@@ -23,7 +23,7 @@ const WorkSpaceCard = ({ workspace }) => {
   }, [workspace]);
 
   const imgSrc = `/image/bg/${ws.ws_id}/${ws.ws_isImage}`;
-  const noImg = 'gotcha.png';
+  const noImg = 'GotChaNoImg.png';
 
   return (
     <Card style={HomeStyles.cardStyle}>

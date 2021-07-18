@@ -36,12 +36,12 @@ const QuillWrapper = styled.div`
   }
 `;
 
-const TitleStyle = styled.div`
-  position: 'absolute';
-  top: '23%';
-  left: '50%';
-  transform: 'tranlateX(-50%)';
-`;
+// const TitleStyle = styled.div`
+//   position: 'absolute';
+//   top: '23%';
+//   left: '50%';
+//   transform: 'tranlateX(-50%)';
+// `;
 
 const Editor = ({ changeTitle, userId, setContent, board, ref }) => {
   const quillElement = useRef(null);

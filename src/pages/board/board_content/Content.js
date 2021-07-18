@@ -65,6 +65,10 @@ const Content = () => {
     history.push(`/workspace/${ws_id}`);
   };
 
+  const onCancel = () => {
+    history.push(`/workspace/${ws_id}`);
+  }
+
   return (
     <Responsive>
       <Editor
@@ -78,6 +82,7 @@ const Content = () => {
       <WriteActionButtons
         content={content}
         onBoardAdd={onBoardAdd}
+        onCancel={onCancel}
         onBoardUpdate={onBoardUpdate}
         board={board}
         title={title}

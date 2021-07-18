@@ -137,22 +137,7 @@ const WorkListCardList = (props) => {
           })
           .map((card, index) => {
             return (
-              <>
-                <div style={{ display: 'flex', padding: 5, float: 'left' }}>
-                    <Form.Check
-                      type="checkbox"
-                      id={card.card_isdone === '1' ? "auto" : "autoSizingCheck"}
-                      className="mb-2"
-                      checked={card.card_isdone === "1" ? "true" : "false"}
-                      onClick={(e) => {
-                        if(card.card_isdone === '1')
-                          dispatch(cardUpdate({ ...card, card_isdone: '0' }));
-                        else dispatch(cardUpdate({ ...card, card_isdone: '1' }));
-                      }}
-                    />
-                </div>
-                <WorkListCard key={index} ws_id={ws_id} card={card} />
-              </>
+              <WorkListCard key={card.card_id} ws_id={ws_id} card={card} />
             );
           })}
 

@@ -64,6 +64,19 @@ const WorkListCard = (props) => {
 
   return (
     <>
+      <div style={{ display: 'flex', padding: 5, float: 'left' }}>
+        <Form.Check
+          type="checkbox"
+          id={card.card_isdone === '1' ? "auto" : "autoSizingCheck"}
+          className="mb-2"
+          defaultChecked={card.card_isdone === "1" ? true : false}
+          onClick={(e) => {
+            if(card.card_isdone === '1')
+              dispatch(cardUpdate({ ...card, card_isdone: '0' }));
+            else dispatch(cardUpdate({ ...card, card_isdone: '1' }));
+          }}
+        />
+      </div>
       <div
         onMouseOver={showEditButton}
         onMouseOut={noShowEditButton}
