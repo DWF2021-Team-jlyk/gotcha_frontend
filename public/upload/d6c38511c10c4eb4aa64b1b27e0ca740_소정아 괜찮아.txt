@@ -1,0 +1,20 @@
+    @PostMapping("/getAllUsers")
+    public @ResponseBody List<String> selectUserList(@RequestBody InviteMemberVO inviteMemberVO,
+    		@AuthenticationPrincipal PrincipalDetails principalDetails){
+    	userId = getLoginUser(principalDetails);
+    	log.info("[MEMBER LIST] " + inviteMemberVO);
+    	inviteMemberVO.setUser_id(userId);
+        return homeService.getAllUserId(inviteMemberVO);
+    }
+    
+    // get login id
+    public String getLoginUser(PrincipalDetails principalDetails) {
+    	String userId="";
+    	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof PrincipalDetails) {
+			userId = ((PrincipalDetails) principal).getUsername();
+		} else {
+			userId = principal.toString();
+		}
+		return userId;
+    }

@@ -9,6 +9,7 @@ import { listUnmount, listUpdate, postList } from '../../modules/workspaceList';
 import { cardUnmount, postCard } from '../../modules/workspaceCard';
 import { postWorkspaceMember, wsMemberUnmount } from '../../modules/workspaceMember';
 import { MyTable } from '../board/index';
+import PostListPage from'../board/index';
 
 const WorkList = loadable(() => import('./WorkList'));
 const Calendar = loadable(() => import('../calendar'));
@@ -79,7 +80,7 @@ const Workspace = () => {
               margin: 5,
             }}
           >
-            <MyTable ws_id = {ws_id}/>
+            <PostListPage ws_id = {ws_id}/>
           </Tab>
         </Tabs>
       </div>

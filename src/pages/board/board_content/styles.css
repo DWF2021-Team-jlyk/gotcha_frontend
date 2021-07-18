@@ -5,4 +5,15 @@
   .ql-editor {
     min-height: 100px;
   }
+
+@font-face {
+  font-family: 'DoHyeon-Regular';
+  src: url('../../../layout/fonts/DoHyeon-Regular.ttf');
+  font-style: normal;
+  font-weight: bold;
+}
+
+.boardTitle{
+  font-family: 'DoHyeon-Regular';
+}
   

@@ -30,6 +30,10 @@ export default function AddDate(props) {
     setTarget(event.target);
   };
 
+  // const handleModalOff = (e) =>{
+  //   const clicked = e.target.closest()
+  // }
+
   const onUpdateDate = useCallback(
     (startDate, endDate) => {
       dispatch(

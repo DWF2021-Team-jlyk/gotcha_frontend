@@ -6,6 +6,7 @@ import { Button } from 'react-bootstrap';
 import { cardUpdate } from '../../../../modules/workspaceCard';
 import { registerCard, showModal } from '../../../../modules/cardModal';
 import { Badge } from '@material-ui/core';
+import { Form } from 'react-bootstrap';
 import "../../css/WorkListCard.css"
 import {BiCheck} from 'react-icons/bi'
 
@@ -68,7 +69,9 @@ const WorkListCard = (props) => {
         onMouseOut={noShowEditButton}
         onBlur={handleDisEditable}
       >
+        
         <div className='cardInfoDiv'>
+         
           <div
             className='cardInputDiv'
             onClick={e=>onActiveInputClick(card)}
@@ -123,6 +126,7 @@ const WorkListCard = (props) => {
               opacity={!editbutton ? 0 : '0.5'}
               size='20'
             />
+             
           </div>
 
         </div>

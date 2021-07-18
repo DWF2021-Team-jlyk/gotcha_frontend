@@ -9,10 +9,14 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import WorkListCard from './WorkListCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteList, listDelete, listUpdate } from '../../../../modules/workspaceList';
-import { cardAdd } from '../../../../modules/workspaceCard';
+import {
+  deleteList,
+  listDelete,
+  listUpdate,
+} from '../../../../modules/workspaceList';
+import { cardAdd, cardUpdate } from '../../../../modules/workspaceCard';
 import { AiFillEdit } from 'react-icons/all';
-
+import { Form } from 'react-bootstrap';
 
 const PlusIcon = {
   fontSize: '1.5rem',
@@ -40,57 +44,43 @@ const WorkListCardList = (props) => {
     setCardTitle(e.target.value);
   };
 
-  const onListNameChange = useCallback((e) => {
-    setListName(e.target.value);
-  }, [listName]);
+  const onListNameChange = useCallback(
+    (e) => {
+      setListName(e.target.value);
+    },
+    [listName],
+  );
 
-  const handleClick = useCallback ((event) => {
+  const handleClick = useCallback((event) => {
     setAnchorEl(event.currentTarget);
-  },[]);
+  }, []);
 
   const handleClose = useCallback(() => {
     setAnchorEl(null);
   }, []);
 
   const onListRemove = () => {
-    // dispatch(listDelete({ list_id: listId }));
     dispatch(deleteList(list));
-  }
-
-  // const onCardAdd = useCallback(() => {
-  //   dispatch(cardAdd({
-  //     list_id: list.list_id,
-  //     ws_id: ws_id,
-  //     card_name: cardTitle,
-  //     card_desc: '',
-  //     card_isdone:'0',
-  //     card_start_date: '',
-  //     card_end_date: '',
-  //     position: position,
-  //     user_id: userId
-  //   }));
-  // },[list, cards]);
+  };
 
   const onCardAdd = () => {
-    dispatch(cardAdd({
-      list_id: list.list_id,
-      ws_id: ws_id,
-      card_name: cardTitle,
-      card_desc: '',
-      card_isdone:'0',
-      card_start_date: '',
-      card_end_date: '',
-      position: position,
-      user_id: userId
-    }));
+    dispatch(
+      cardAdd({
+        list_id: list.list_id,
+        ws_id: ws_id,
+        card_name: cardTitle,
+        card_desc: '',
+        card_isdone: '0',
+        card_start_date: '',
+        card_end_date: '',
+        position: position,
+        user_id: userId,
+      }),
+    );
   };
 
   useEffect(() => {
-    setPosition(
-      cards.filter(
-        card => card.list_id === listId,
-      ).length,
-    );
+    setPosition(cards.filter((card) => card.list_id === listId).length);
   }, [cards, list]);
 
   useEffect(() => {
@@ -146,7 +136,24 @@ const WorkListCardList = (props) => {
             return card.list_id === listId;
           })
           .map((card, index) => {
-            return <WorkListCard key={card.card_id} ws_id={ws_id} card={card} />;
+            return (
+              <>
+                <div style={{ display: 'flex', padding: 5, float: 'left' }}>
+                    <Form.Check
+                      type="checkbox"
+                      id={card.card_isdone === '1' ? "auto" : "autoSizingCheck"}
+                      className="mb-2"
+                      checked={card.card_isdone === "1" ? "true" : "false"}
+                      onClick={(e) => {
+                        if(card.card_isdone === '1')
+                          dispatch(cardUpdate({ ...card, card_isdone: '0' }));
+                        else dispatch(cardUpdate({ ...card, card_isdone: '1' }));
+                      }}
+                    />
+                </div>
+                <WorkListCard key={index} ws_id={ws_id} card={card} />
+              </>
+            );
           })}
 
         {showCardInput && (
@@ -162,7 +169,7 @@ const WorkListCardList = (props) => {
               onKeyPress={(e) => {
                 if (e.key === 'Enter') {
                   if (e.target.value !== '') {
-                    console.log('TTTTTTTTTTTTTTTT',cardTitle)
+                    console.log('TTTTTTTTTTTTTTTT', cardTitle);
                     onCardAdd();
                     e.target.value = '';
                     setCardTitle('');

@@ -1,5 +1,5 @@
 import createRequest from '../lib/createRequest';
-import { postBoard ,updateBoard, deleteBoard, addBoard } from '../lib/boardAPI';
+import { postBoard ,updateBoard, deleteBoard, addBoard, showBoardPost } from '../lib/boardAPI';
 import { handleActions } from 'redux-actions';
 import produce from 'immer';
 
@@ -15,10 +15,12 @@ const BOARD_DELETE_SUCCESS = 'workspaceBoard/BOARD_DELETE_SUCCESS';
 const BOARD_ADD = 'workspaceBoard/BOARD_ADD';
 const BOARD_ADD_SUCCESS = 'workspaceBoard/BOARD_ADD_SUCCESS';
 
+
 export const postboard = createRequest(POST_BOARD, postBoard);
 export const updateboard = createRequest(BOARD_UPDATE,updateBoard);
 export const deleteboard = createRequest(BOARD_DELETE,deleteBoard);
 export const addboard = createRequest(BOARD_ADD, addBoard);
+
 
 const initialState = {
   loading:{
@@ -47,23 +49,23 @@ const workspaceBoard = handleActions(
         .findIndex(board => board.id === action.payload.id);
         draft.boards.splice(index,1,action.payload);
       }),
-    [BOARD_DELETE_SUCCESS]:(state,action)=>
-      produce(state, draft =>{
+    [BOARD_DELETE_SUCCESS]:(state, action)=>
+      produce(state, draft=>{
         draft.loading.POST_BOARD=false;
         const index = draft.boards
-        .findIndex(board=> board.id === action.payload.id);
+        .findIndex(board => board.id === action.payload.id);
         draft.boards.splice(index,1);
       }),
       [BOARD_ADD_SUCCESS]:(state, action)=>
       produce(state, draft=>{
         draft.boards.push(action.payload);
-        // draft.boards.sort((board1, board2) => {
-        //   if(board1.board_id > board2.board_id){
-        //     return 1;
-        //   }
-        //   else return -1;
-        // });
       }),
+
+      // [POST_BOARD_SUCCESS]:(state, action) =>
+      // produce(state, draft=>{
+      //   draft.loading.POST_BOARD = false;
+      //   draft.boards = action.payload;
+      //}),
     },
   initialState,
 );
