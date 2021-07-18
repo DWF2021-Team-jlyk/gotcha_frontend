@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { listUnmount, listUpdate, postList } from '../../modules/workspaceList';
 import { cardUnmount, postCard } from '../../modules/workspaceCard';
-import { postWorkspaceMember } from '../../modules/workspaceMember';
+import { postWorkspaceMember, wsMemberUnmount } from '../../modules/workspaceMember';
 import { MyTable } from '../board/index';
 
 const WorkList = loadable(() => import('./WorkList'));
@@ -27,6 +27,11 @@ const Workspace = () => {
     dispatch(postList({ ws_id: ws_id }));
     dispatch(postCard({ ws_id: ws_id }));
     dispatch(postWorkspaceMember(ws_id));
+    return () => {
+      dispatch(cardUnmount());
+      dispatch(listUnmount());
+      dispatch(wsMemberUnmount());
+    }
   }, [ws_id]);
 
   return (
