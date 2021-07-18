@@ -16,6 +16,7 @@ const Pwdfind = loadable(() => import('./pages/user/pwdfind/Pwdfind'));
 const Sidebar = loadable(()=>import('./layout/Sidebar'));
 const Header = loadable(()=>import('./layout/Header'));
 const Content = loadable(()=>import('./pages/board/board_content/Content'));
+const PostPage = loadable(()=>import('./pages/board/PostPage'));
 
 const style = {
   display: 'flex',
@@ -54,7 +55,9 @@ const App = () => {
             <PrivateRoute component={Home} exact path='/' />
             <PrivateRoute component={Workspace} exact path='/workspace/:ws_id' />
             <PrivateRoute component={Mypage} exact path='/Mypage' />
-            <PrivateRoute component={Content} exact path='/board_content'/>
+            <PrivateRoute component={Content} exact path='/workspace/:ws_id/board_content'/>
+            <PrivateRoute component={Content} exact path='/workspace/:ws_id/:id/update'/>
+            <PrivateRoute component={PostPage} exact path='/workspace/:ws_id/:id'/>
           </div>
         </div>
       </div>

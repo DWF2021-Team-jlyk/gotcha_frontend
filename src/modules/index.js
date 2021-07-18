@@ -13,6 +13,8 @@ import cardAct from './cardAct';
 import cardFile from './cardFile';
 import cardForModal from './cardForModal';
 import userInfo from './userInfo';
+import workspaceBoard from './board';
+import boardId from './boardId';
 
 const rootReducer = combineReducers({
   workspace,
@@ -28,6 +30,8 @@ const rootReducer = combineReducers({
   insertCardMember,
   cardForModal,
   userInfo,
+  workspaceBoard,
+  boardId,
 });
 
 export default rootReducer;

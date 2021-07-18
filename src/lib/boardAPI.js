@@ -16,3 +16,8 @@ export const deleteBoard = (id) =>
   apiAxios('/board/delete', {
     id: id,
   });
+
+export const showBoardPost = (id) =>
+  apiAxios('/board/showPost',{
+    id:id,
+  })

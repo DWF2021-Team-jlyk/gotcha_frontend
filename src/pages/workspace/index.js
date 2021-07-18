@@ -7,7 +7,8 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { listUnmount, listUpdate, postList } from '../../modules/workspaceList';
 import { cardUnmount, postCard } from '../../modules/workspaceCard';
-import { MyTable } from '../board/index';
+//import { MyTable } from '../board/index';
+import PostListPage from'../board/index';
 
 const WorkList = loadable(() => import('./WorkList'));
 const Calendar = loadable(() => import('../calendar'));
@@ -71,7 +72,7 @@ const Workspace = () => {
               margin: 5,
             }}
           >
-            <MyTable ws_id = {ws_id}/>
+            <PostListPage ws_id = {ws_id}/>
           </Tab>
         </Tabs>
       </div>
