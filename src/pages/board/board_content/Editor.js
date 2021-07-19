@@ -8,10 +8,13 @@ import { useDispatch } from 'react-redux';
 import { boardUnmout } from '../../../modules/boardId';
 import { sanitizeOption } from './sanitizeHtml';
 import sanitizeHtml from 'sanitize-html';
+import TextField from '@material-ui/core/TextField';
 
 const EditorBlock = styled(Responsive)`
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  box-shadow: 2px 4px 5px 2px lightgray;
+  border-radius: 30px;
 `;
 
 const TitleInput = styled.input`
@@ -43,79 +46,101 @@ const TitleStyle = styled.div`
   transform: 'tranlateX(-50%)';
 `;
 
-const Editor = ({ changeTitle, userId, setContent, board, ref }) => {
+const Editor = ({
+  changeTitle,
+  userId,
+  setContent,
+  board,
+  ref,
+  boardInputEl,
+}) => {
   const quillElement = useRef(null);
   const quillInstance = useRef(null);
 
   const dispatch = useDispatch();
 
-  const contentFilter = sanitizeHtml(board?.board_content, sanitizeOption);
-  useEffect(() => {
-    quillInstance.current = new Quill(quillElement.current, {
-      theme: 'bubble',
-      placeholder: '내용을 작성하세요…',
-      modules: {
-        toolbar: [
-          [{ header: '1' }, { header: '2' }],
-          ['bold', 'italic', 'underline', 'strike'],
-          [{ list: 'ordered' }, { list: 'bullet' }],
-          ['blockquote', 'code-block', 'link', 'image'],
-        ],
-      },
-    });
+  // const contentFilter = sanitizeHtml(board?.board_content, sanitizeOption);
+  // useEffect(() => {
+  //   quillInstance.current = new Quill(quillElement.current, {
+  //     theme: 'bubble',
+  //     placeholder: '내용을 작성하세요…',
+  //     modules: {
+  //       toolbar: [
+  //         [{ header: '1' }, { header: '2' }],
+  //         ['bold', 'italic', 'underline', 'strike'],
+  //         [{ list: 'ordered' }, { list: 'bullet' }],
+  //         ['blockquote', 'code-block', 'link', 'image'],
+  //       ],
+  //     },
+  //   });
 
-    if (board !== null) quillInstance.current.setText(contentFilter);
-    const quill = quillInstance.current;
-    quill.on('text-change', (delta, oldDelta, source) => {
-      if (source === 'user') {
-        setContent(quill.root.innerHTML);
-      }
-    });
-    return () => {
-      dispatch(boardUnmout());
-    };
-  }, []);
+  //   if (board !== null) quillInstance.current.setText(board?.board_content);
+  //   const quill = quillInstance.current;
+  //   quill.on('text-change', (delta, oldDelta, source) => {
+  //     if (source === 'user') {
+  //       setContent(quill.root.innerHTML);
+  //     }
+  //   });
+  //   return () => {
+  //     dispatch(boardUnmout());
+  //   };
+  // }, []);
 
   return (
     <>
-      <div
-        style={{
-          position: 'absolute',
-          top: '23%',
-          left: '50%',
-          transform: 'translateX(-50%)',
-        }}
-      >
-        <h1>공지사항</h1>
-      </div>
-      <div
-        style={{
-          marginTop: 100,
-          position: 'relative',
-          top: '23%',
-          marginLeft: '50%',
-          transform: 'translateX(-50%)',
-        }}
-      >
-        <EditorBlock>
+      <EditorBlock>
+        <div>
           <TitleInput
             placeholder="제목을 입력하세요"
             onChange={changeTitle}
             defaultValue={board?.board_title ? board.board_title : ''}
             ref={ref}
           />
-          {board?.board_reg_time ? (
-            <div style={{ float: 'right' }}>
-              작성자 : {userId} | 작성일 : {board?.board_reg_time}
-            </div>
-          ) : null}
-          <div>
-            <QuillWrapper>
-              <div ref={quillElement} />
-            </QuillWrapper>
+
+          <div
+            style={{ textAlign: 'right', marginBottom: 20, color: '#868e96' }}
+          >
+            {board?.board_reg_time ? (
+              <div>
+                <b> 작성자</b> : {userId} | <b>작성일</b> :{' '}
+                {board?.board_reg_time}
+              </div>
+            ) : null}
           </div>
-        </EditorBlock>
-      </div>
+
+          <div style={{ maxHeight: 500, overflowY: 'scroll' }}>
+            {/* <QuillWrapper>
+              <div ref={quillElement} />
+            </QuillWrapper> */}
+
+            {/* <input
+            defaultValue={board?.board_content? board.board_content : ''}
+            onChange={(e)=>{
+              setContent(e.target.value)
+            }}>
+            
+            </input> */}
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              multiline
+              as="textarea"
+              style={{
+                // border: '1px solid #ced4da',
+                fontSize: '.95rem',
+                padding: 5,
+                borderRadius: 4,
+                width: '100%',
+              }}
+              defaultValue={board?.board_content ? board.board_content : ''}
+              onChange={(e) => {
+                setContent(e.target.value);
+              }}
+              ref={boardInputEl}
+            ></TextField>
+          </div>
+        </div>
+      </EditorBlock>
     </>
   );
 };

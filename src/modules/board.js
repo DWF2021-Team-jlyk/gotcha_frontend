@@ -58,7 +58,7 @@ const workspaceBoard = handleActions(
       }),
       [BOARD_ADD_SUCCESS]:(state, action)=>
       produce(state, draft=>{
-        draft.boards.push(action.payload);
+        draft.boards.unshift(action.payload);
       }),
 
       // [POST_BOARD_SUCCESS]:(state, action) =>

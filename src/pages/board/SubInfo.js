@@ -15,7 +15,7 @@ const SubInfoBlock = styled.div`
     color: ${palette.gray[4]};
     padding-left: 0.25rem;
     padding-right: 0.25rem;
-    content: '\\B7';
+   
   }
 `;
 
@@ -27,6 +27,7 @@ const SubInfo = ({ username, publishedDate, hasMarginTop }) => {
           <span>{username}</span>
         </b>
       </span>
+      &nbsp;|&nbsp;
       <span>{new Date(publishedDate).toLocaleDateString()}</span>
     </SubInfoBlock>
   );

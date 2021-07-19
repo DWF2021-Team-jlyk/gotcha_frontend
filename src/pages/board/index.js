@@ -4,7 +4,7 @@ import PostList from './PostList';
 const PostListPage = ({ ws_id }) => {
   return (
     <>
-      <PostList ws_id={ws_id} />;
+      <PostList ws_id={ws_id} />
     </>
   );
 };
