@@ -50,7 +50,7 @@ const UserAvatar = (props) => {
                         deleteMember(user_id);
                       }}
                     >
-                      추방하기
+                      내보내기
                     </Button>
                     :
                     <Button
@@ -61,7 +61,7 @@ const UserAvatar = (props) => {
                       }}
                       disabled
                     >
-                      추방하기
+                      내보내기(Admin)
                     </Button>
                     )
                    :

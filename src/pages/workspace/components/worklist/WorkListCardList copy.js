@@ -129,6 +129,7 @@ const WorkListCardList = (props) => {
       </Menu>
 
       <Card.Body className='ListBodyStyle'>
+        press
         {cards
           .filter((card) => {
             return card.list_id === listId;
@@ -142,12 +143,14 @@ const WorkListCardList = (props) => {
     }
           
         {showCardInput && (
+  
           <div
             onBlur={(e) => {
               e.target.value = '';
               setShowCardInput(false);
             }}
           >
+            
             <input
               onChange={(e) => setCardTitle(e.target.value)}
               ref={cardInputEl}
@@ -163,19 +166,9 @@ const WorkListCardList = (props) => {
                 }
               }}
             />
-            {/*<Button*/}
-            {/*  onClick={(e) => {*/}
-            {/*    if (cardInputEl.current.value !== '') {*/}
-            {/*      onCardAdd();*/}
-            {/*      cardInputEl.current.value = '';*/}
-            {/*      setCardTitle('');*/}
-            {/*    }*/}
-            {/*    setShowCardInput(!showCardInput);*/}
-            {/*  }}*/}
-            {/*>*/}
-            {/*  save*/}
-            {/*</Button>*/}
+          
           </div>
+     
         )}
       </Card.Body>
 

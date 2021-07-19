@@ -131,6 +131,7 @@ const WorkListCardList = (props) => {
       </Menu>
 
       <Card.Body className="ListBodyStyle">
+        <div style={{marginLeft:63, marginBottom:10, fontSize:'.9rem', color:'#7092be'}}>Press Enter to Add</div>
         {cards
           .filter((card) => {
             return card.list_id === listId;

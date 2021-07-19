@@ -9,7 +9,6 @@ import TodoDate from './TodoDate';
 const listButton = {
   backgroundColor: '#7986CB',
   border: '1px solid #7986CB',
-  marginLeft: 10,
   fontSize: 13,
   height: 30,
 };

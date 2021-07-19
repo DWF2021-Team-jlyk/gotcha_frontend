@@ -4,19 +4,16 @@ import DatePicker from 'react-datepicker';
 const TodoDate = ({startDate, endDate}) =>{
   console.log(startDate);
   console.log(endDate);
+
+  const strCut = (date) => {
+    const dateStr = date.substring(0,10)
+    return dateStr;
+  }
   return (
     <>
-      <DatePicker
-        selected={new Date(startDate)}
-        dateFormat='yyyy/MM/dd'
-        disabled
-      />
-      ~
-      <DatePicker
-        selected={new Date(endDate)}
-        dateFormat='yyyy/MM/dd'
-        disabled
-      />
+    <div style={{marginLeft:10, marginTop:2}}>
+      {strCut(startDate)}~{strCut(endDate)}
+    </div>
     </>
   )
 }
