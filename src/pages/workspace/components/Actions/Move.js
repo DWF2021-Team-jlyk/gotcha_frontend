@@ -103,6 +103,7 @@ export default function CardMove({ card, ws_id }) {
         "Authorization":sessionStorage.getItem("accessToken"),
       },
       data: {
+        ...card,
         ws_id: selectWsId,
         list_id: selectListId,
       },

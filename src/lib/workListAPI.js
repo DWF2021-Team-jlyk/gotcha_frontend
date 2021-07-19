@@ -47,10 +47,8 @@ export const addCard = ({
 export const updateCard = (data) =>
   apiAxios('/main/wsList/list/card/update', data);
 
-export const deleteCard = ({ card_id }) =>
-  apiAxios('/main/wsList/list/card/delete', {
-    card_id: card_id,
-  });
+export const deleteCard = (data) =>
+  apiAxios('/main/wsList/list/card/delete', data);
 
   
 export const modifyCardMove = ({

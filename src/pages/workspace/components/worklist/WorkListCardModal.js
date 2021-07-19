@@ -34,8 +34,8 @@ const WorkListCardModal = (props) => {
   const { ws_id } = useParams();
   const dispatch = useDispatch();
 
-  const deleteCard = (card_id) => {
-    dispatch(cardDelete({ card_id: card_id }))
+  const deleteCard = () => {
+    dispatch(cardDelete(card))
     dispatch(disappearModal())
   }
 

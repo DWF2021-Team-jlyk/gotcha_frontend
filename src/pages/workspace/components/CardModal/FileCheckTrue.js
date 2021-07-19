@@ -64,19 +64,19 @@ const FileCheckTrue = (props) => {
       });
   }, []);
 
-  const download = () =>{
+  const download = () => {
     fetch(`/cardDetail/file/download/${file.file_id}`,
-      {headers:{"Authorization": sessionStorage.getItem('accessToken')}}
+      { headers: { 'Authorization': sessionStorage.getItem('accessToken') } },
     )
-      .then(response=>response.blob())
-      .then(blob=>{
+      .then(response => response.blob())
+      .then(blob => {
         const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
+        const a = document.createElement('a');
         a.href = url;
         a.download = file.file_name;
         a.click();
-      })
-  }
+      });
+  };
 
   return (
     <div style={{ display: 'flex' }}>
@@ -90,66 +90,68 @@ const FileCheckTrue = (props) => {
         }}
       />
       <div style={{ marginLeft: 5, width: '100%', minWidth: 100 }}>
-      {/* <div style={{ marginLeft: 5, width:'100px'}}> */}
+        {/* <div style={{ marginLeft: 5, width:'100px'}}> */}
         {file.file_name}&ensp;
       </div>
 
       {/* <button>download</button>  */}
-      <Button
-         style={{
-          backgroundColor: '#7986CB',
-          border: '1px solid #7986CB',
-          color:'white',
-          height:35
-        }}
-        block
-        variant="outline"
-        name={file.file_id}
-        //key={key}
-        onClick={(e) => {
-          //if (!updateCheck) {
-          //console.log(item);
-          // Helpers.httpRequest(`http://localhost/:3000${file.file_path}`, 'get')
-          //   .then((response) => response.blob())
-          //   .then((blob) => {
-          //     // create blob link
-          //     const url = window.URL.createObjectURL(new Blob([blob]));
-          //     const link = document.createElement('a');
-          //     link.href = url;
-          //     link.setAttribute('download', `${file.file_name}`);
+      {fileButtons&&<>
+        <Button
+          style={{
+            backgroundColor: '#7986CB',
+            border: '1px solid #7986CB',
+            color: 'white',
+            height: 35,
+          }}
+          block
+          variant='outline'
+          name={file.file_id}
+          //key={key}
+          onClick={(e) => {
+            //if (!updateCheck) {
+            //console.log(item);
+            // Helpers.httpRequest(`http://localhost/:3000${file.file_path}`, 'get')
+            //   .then((response) => response.blob())
+            //   .then((blob) => {
+            //     // create blob link
+            //     const url = window.URL.createObjectURL(new Blob([blob]));
+            //     const link = document.createElement('a');
+            //     link.href = url;
+            //     link.setAttribute('download', `${file.file_name}`);
 
-          //     // append to html
-          //     document.body.appendChild(link);
+            //     // append to html
+            //     document.body.appendChild(link);
 
-          //     // download
-          //     link.click();
+            //     // download
+            //     link.click();
 
-          //     // remove
-          //     link.parentNode.removeChild(link);
-          //   });
-          // .catch((error) => {
-          //   error.json().then((json) => {});
-          // });
-          //}
-          download();
-        }}
-      >
-    
-        download
-      </Button>
+            //     // remove
+            //     link.parentNode.removeChild(link);
+            //   });
+            // .catch((error) => {
+            //   error.json().then((json) => {});
+            // });
+            //}
+            download();
+          }}
+        >
 
-      &nbsp;
+          download
+        </Button>
 
-      <Button
-        variant="danger"
-        style={{height:35}}
-        onClick={() => {
-          deleteCardFiles(file.file_id);
-        }}
-      >
-        delete
-      </Button>
-   
+        &nbsp;
+
+        <Button
+          variant='danger'
+          style={{ height: 35 }}
+          onClick={() => {
+            deleteCardFiles(file.file_id);
+          }}
+        >
+          delete
+        </Button>
+      </>
+      }
     </div>
   );
 };

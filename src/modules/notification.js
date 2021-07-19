@@ -35,6 +35,12 @@ const notification = handleActions(
     [POST_NOTI_SUCCESS]: (state, action) =>
       produce(state, draft => {
         draft.noti = action.payload;
+        draft.noti.sort((noti1, noti2)=>{
+          if(noti1.NOTI_ID < noti2.NOTI_ID){
+            return 1;
+          }
+          else return -1;
+        })
       }),
     [ADD_NOTI_SUCCESS] : (state, action) =>
       produce(state, draft => {

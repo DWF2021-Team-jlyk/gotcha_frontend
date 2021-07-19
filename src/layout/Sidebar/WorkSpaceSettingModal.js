@@ -141,6 +141,7 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
       url,
     };
     axios(options);
+    dispatch(postWorkspaces());
   } 
 
   const handleCloseHandler = () => {

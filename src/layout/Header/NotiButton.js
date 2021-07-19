@@ -4,7 +4,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { IoIosNotificationsOutline } from 'react-icons/all';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { changeNotiCheck, postNoti } from '../../modules/notification';
 import { ListItem } from '@material-ui/core';
 
@@ -42,16 +42,18 @@ const StyledMenuItem = withStyles((theme) => ({
 const NotiButton = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const changeRead = useCallback(
-    noti_id=>dispatch(changeNotiCheck(noti_id)),
-    []
-  )
-  const onClick = noti => {
-    history.push(`/workspace/${noti.ws_id}`);
-    changeRead(noti.noti_id);
-  }
   const [anchorEl, setAnchorEl] = React.useState(null);
   const notification = useSelector(state => state.notification.noti);
+
+  const changeRead = useCallback(
+    noti=>dispatch(changeNotiCheck(noti)),
+    [notification]
+  )
+
+  const onClick = noti => {
+    history.push(`/workspace/${noti.WS_ID}`);
+    changeRead(noti);
+  }
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -82,17 +84,17 @@ const NotiButton = () => {
       >
         {
           notification
-            .filter(noti => noti.noti_checked !== "1")
+            .filter(noti => noti.NOTI_CHECKED !== "1")
             .map((noti) => {
-              return <StyledMenuItem key={noti.noti_id}>
+              return <StyledMenuItem key={noti.NOTI_ID}>
                 <ListItem
-                  key={noti.noti_id}
+                  key={noti.NOTI_ID}
                   onClick={e=>{
                     onClick(noti);
                     handleClose();
                   }}
                 >
-                  {`notiSpace: ${noti.workspaceName} notiType: ${noti.type}`}
+                  {`notiSpace: ${noti.WS_NAME} notiType: ${noti.NOTI_TYPE}`}
                 </ListItem>
               </StyledMenuItem>;
             })
