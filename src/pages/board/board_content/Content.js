@@ -25,6 +25,14 @@ const Content = () => {
 
   const board = useSelector((state) => state.boardId.board);
 
+  const contentDiv = {
+    marginTop: 16.2,
+    marginLeft: '31%',
+
+    // paddingLeft:'1rem',
+    // paddingRight:'1rem',
+  };
+
   useEffect(() => {
     dispatch(showboardPost(id));
     setTitle(board?.board_title);
@@ -39,17 +47,24 @@ const Content = () => {
   );
 
   const onBoardAdd = () => {
+    // let output ='';
+    // for (output in content){
+    //   console.log("노드 값: "+JSON.stringify(output))
+    // }
+
     dispatch(
       addboard({
         ws_id: ws_id,
         user_id: userId,
         board_title: title,
-        board_content: content,
+        board_content:content,
         board_reg_time: new Date().toLocaleDateString(),
       }),
     );
     history.push(`/workspace/${ws_id}`);
   };
+
+  console.log('CONTENT', content)
 
   const onBoardUpdate = async () => {
     dispatch(
@@ -70,26 +85,27 @@ const Content = () => {
   }
 
   return (
-    <Responsive>
+    <div style={contentDiv}>
       <Editor
         changeTitle={changeTitle}
         userId={userId}
         setContent={setContent}
         board={board}
-        ref={boardInputEl}
-      />
-      <TagBox />
-      <WriteActionButtons
-        content={content}
-        onBoardAdd={onBoardAdd}
-        onCancel={onCancel}
-        onBoardUpdate={onBoardUpdate}
-        board={board}
-        title={title}
-        content={content}
         boardInputEl={boardInputEl}
       />
-    </Responsive>
+      <div style={{ marginLeft:420 }}>
+        <WriteActionButtons
+          content={content}
+          onBoardAdd={onBoardAdd}
+          onBoardUpdate={onBoardUpdate}
+          onCancel={onCancel}
+          board={board}
+          title={title}
+          content={content}
+          boardInputEl={boardInputEl}
+        />
+      </div>
+    </div>
   );
 };
 
