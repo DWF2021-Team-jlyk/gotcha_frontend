@@ -23,6 +23,8 @@ import SearchMember from '../../components/SearchMember';
 import { useDispatch } from 'react-redux';
 import { postWorkspaces } from '../../modules/workspace';
 import { fileAxios } from '../../lib/apiAxios';
+import CloseIcon from '@material-ui/icons/Close';
+import {MdLibraryAdd} from 'react-icons/md'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -125,6 +127,10 @@ function onFileChange(e) {
   
 }
 
+const closeHandler = () => {
+  props.handleClose()
+}
+
   return (
     <Modal
       size={'lg'}
@@ -132,13 +138,14 @@ function onFileChange(e) {
       onHide={props.handleClose}
       style={{ marginTop: '100px' }}
     >
-      <ModalHeader closeButton>
-        <ModalTitle>WorkSpace 추가하기</ModalTitle>
+      <ModalHeader style={{backgroundColor:'#3f51b5', color:'white'}}>
+        <ModalTitle><MdLibraryAdd style={{marginRight:10}}/>WorkSpace 추가하기</ModalTitle>
+        <CloseIcon onClick={closeHandler}/>
       </ModalHeader>
       <ModalBody>
         <Form>
           <Form.Group>
-            <Form.Label>WorkSpace Name</Form.Label>
+            <Form.Label><b>WorkSpace Name</b></Form.Label>
             <Row>
               <Col sm={8}>
                 <Form.Control
@@ -151,32 +158,36 @@ function onFileChange(e) {
           </Form.Group>
           <br />
           <Form.Group>
-            <Form.Label>WorkSpace Thumbnail 사진</Form.Label>
-            <Row>
-            <Col sm={8}>
-                <Form.Control
-                  type="text"
-                  value={imageName}
-                  disabled
-                />
-              </Col>
-              <Col sm={4}>
-                <input accept="image/png,image/jpeg,image/gif" className={classes.input} id="icon-button-file" type="file" onChange={onFileChange} />
-                <label htmlFor="icon-button-file">
-                  <IconButton color="primary" aria-label="upload picture" component="span">
-                    <PhotoCamera />
-                  </IconButton>
-                </label>
-              </Col>
-              {
-                previewImg === '' || previewImg === undefined ? null : <img src={previewImg} alt='img' height={'200px'} />
-              }
-            </Row>
+            <Form.Label><b>WorkSpace Thumbnail 사진</b></Form.Label>
+                <div style={{display:'flex'}}>
+                  <div style={{marginRight:10, marginTop:6}}>
+                    <Form.Control
+                      type="text"
+                      value={imageName}
+                      disabled
+                      style={{width:500}}
+                    />
+                  </div>
+                  <div>
+                    <input accept="image/png,image/jpeg,image/gif" className={classes.input} id="icon-button-file" type="file" onChange={onFileChange} />
+                    <label htmlFor="icon-button-file">
+                      <IconButton color="primary" aria-label="upload picture" component="span">
+                        <PhotoCamera />
+                      </IconButton>
+                    </label>
+                  </div>
+                </div>
+                  <div style={{textAlign:'center', marginTop:10}}>
+                    {
+                      previewImg === '' || previewImg === undefined ? null : <img src={previewImg} alt='img' height={'200px'} />
+                    }
+                  </div>
           </Form.Group>
           <br />
+          <Form.Label><b>Member Invite</b></Form.Label>
           <SearchMember emailList={emailList} setEmailList={setEmailList} />
         </Form>
-        <Row>
+        <Row style={{maxHeight:200, overflowY:"scroll"}}>
           {emailList.map((email, index) => {
             return (
               <UserAvatar
@@ -191,10 +202,10 @@ function onFileChange(e) {
       </ModalBody>
       <ModalFooter>
         <Button variant='danger' onClick={props.handleClose}>
-          취소하기
+          Cancel
         </Button>
         <Button variant='primary' onClick={addWorkspaceClick}>
-          추가하기
+          Add
         </Button>
       </ModalFooter>
     </Modal>

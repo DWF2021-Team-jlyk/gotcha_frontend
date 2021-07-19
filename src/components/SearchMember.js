@@ -70,6 +70,7 @@ const SearchMember = ({member, ws_id, emailList, setEmailList, invite }) => {
               onBlur={handleBlur}
               onChange={onChange}
               ref={emailEl}
+              placeholder='Select the member you want to invite'
             />
             <Overlay
               container={ref.current}

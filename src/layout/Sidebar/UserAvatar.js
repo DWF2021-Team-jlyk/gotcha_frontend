@@ -8,12 +8,12 @@ import axios from 'axios';
 import apiAxios from '../../lib/apiAxios';
 
 const onClick = (list, setList, userId) => {
-  const changeList = list.filter(list=>list!==userId);
+  const changeList = list.filter(list => list !== userId);
   setList(changeList);
 }
 
 const UserAvatar = (props) => {
-  const {list , setList, user_id, admin, invite, ws_id, member} = props;
+  const { list, setList, user_id, admin, invite, ws_id, role } = props;
   const deleteMember = (user_id) => {
     apiAxios('/home/deleteMember', {
       ws_id,
@@ -23,63 +23,79 @@ const UserAvatar = (props) => {
   return (
     <Col md={4} style={{ marginTop: 10 }}>
       <div className='avatorBorder'>
-        <div style={{ float: 'left' }}>
+          {role == 'ADMIN' ?
+            <>
+              <div style={{ float: 'left' }}>
           <Avatar
             style={{ margin: '10px 10px 0px 5px', fontSize: '13px' }}
           >
             {AvatarIcon(user_id)}
           </Avatar>
         </div>
-        <div>
-          <div>
-            {user_id}
-          </div>
-          <div style={{ display: 'flex', marginTop: 5 }}>
-            <div>
-              {
-                invite ?
+        <div style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              <div style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {user_id}
+              </div>
+
+              <div style={{ marginTop: 5 }}>
+                {
+                  
+                   invite ?
                     (user_id !== admin ?
-                    <Button
-                    variant='danger'
-                    style={{ fontSize: '.8rem' }}
-                    onClick={e=>{
-                      setList(list.filter(list=>list!==user_id))
-                      deleteMember(user_id);
-                    }}
+                      <Button
+                      variant='danger'
+                      style={{ fontSize: '.8rem' }}
+                      onClick={e => {
+                        setList(list.filter(list => list !== user_id))
+                        deleteMember(user_id);
+                      }}
                     >
-                    추방하기
+                      추방하기
                     </Button>
-                  :
+                    :
                     <Button
-                    variant='danger'
-                    style={{ fontSize: '.8rem' }}
-                    onClick={e=>{
-                      setList(list.filter(list=>list!==user_id))
-                    }}
-                    disabled
+                      variant='danger'
+                      style={{ fontSize: '.8rem' }}
+                      onClick={e => {
+                        setList(list.filter(list => list !== user_id))
+                      }}
+                      disabled
                     >
-                    추방하기
-                    </Button>)
-                :
-                <Button
-                variant='danger'
-                style={{ fontSize: '.8rem' }}
-                onClick={e=>{
-                  setList(list.filter(list=>list!==user_id))
-                }}
-                >
-                내보내기
-                </Button>
-              }
-              
+                      추방하기
+                    </Button>
+                    )
+                   :
+                   <Button
+                   variant='danger'
+                   style={{ fontSize: '.8rem' }}
+                   onClick={e => {
+                     setList(list.filter(list => list !== user_id))
+                   }}
+                 >
+                   내보내기
+                 </Button>                   
+                }
+              </div>
+              </div>
+            </>
+            :
+            <>
+            <div style={{ float: 'left' }}>
+              <Avatar
+                style={{ margin: '0px 10px 0px 5px', fontSize: '13px' }}
+              >
+                {AvatarIcon(user_id)}
+              </Avatar>
             </div>
-          </div>
+            <div style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            <div style={{ marginTop:7, overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {user_id}
+            </div>
+            </div>
+            </>
+            }
         </div>
-
-      </div>
-    </Col>
-
-
+    </Col >
   );
 };
 

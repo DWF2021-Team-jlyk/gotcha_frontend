@@ -31,7 +31,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(2),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -48,11 +48,22 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3, 0, 2),
     },
     style: {
+        // position: "absolute",
+        // top: "23%",
+        // left: "50%",
+        // transform: "translateX(-50%)",
+    },
+    formDiv: {
+        width: 800,
+        height: 480,
+        backgroundColor: 'white',
+        border: '1px solid white',
         position: "absolute",
-        top: "23%",
+        top: "26%",
         left: "50%",
         transform: "translateX(-50%)",
-    },
+        boxShadow:'2px 4px 5px 2px lightgray',
+      }
 }));
 
 function Join() {
@@ -99,8 +110,11 @@ function Join() {
     //const { email, username, password } = inputs;
 
     return (
+        <>
+        <div className="title" style={{marginTop: '150px',marginBottom: '50px'}}>GotCha</div>  
+        <div className={classes.formDiv}>
         <Container className={classes.style} component="main" maxWidth="xs">
-            <div className="title">GotCha</div>
+            
             <CssBaseline/>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
@@ -186,10 +200,12 @@ function Join() {
                     </Grid>
                 </form>
             </div>
-            <Box mt={5}>
+            <Box mt={11}>
                 <Copyright/>
             </Box>
         </Container>
+        </div>
+        </>
     );
 
     // function onChange(e) {

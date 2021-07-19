@@ -14,9 +14,7 @@ const WorkSpaceCard = ({ workspace }) => {
   const dispatch = useDispatch();
   const [ws, setWs] = useState({ ...workspace });
   const onToggle = useCallback(() =>
-      dispatch(updateWorkspace({ ...workspace, is_fav: (workspace.is_fav ? '0' : '1') })),
-    [dispatch],
-  );
+      dispatch(updateWorkspace({ ...workspace, is_fav: (workspace.is_fav? 0 : 1) })),[workspace.is_fav]);
 
   useEffect(() => {
     setWs({ ...workspace });
