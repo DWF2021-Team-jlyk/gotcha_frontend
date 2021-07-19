@@ -29,7 +29,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(5),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -46,11 +46,22 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
   style: {
-    position: 'absolute',
-    top: '23%',
-    left: '50%',
-    transform: 'translateX(-50%)',
+    // position: 'absolute',
+    // top: '23%',
+    // left: '50%',
+    // transform: 'translateX(-50%)',
   },
+  formDiv: {
+    width: 800,
+    height: 350,
+    backgroundColor: 'white',
+    border: '1px solid white',
+    position: "absolute",
+    top: "32%",
+    left: "50%",
+    transform: "translateX(-50%)",
+    boxShadow:'2px 4px 5px 2px lightgray',
+  }
 }));
 
 export default function Code() {
@@ -88,9 +99,10 @@ export default function Code() {
   };
 
   return (
-
+    <>
+    <div className="title" style={{marginTop: '190px',marginBottom: '50px'}}>GotCha</div>  
+    <div className={classes.formDiv}>
     <Container className={classes.style} component='main' maxWidth='xs'>
-      <div className='title'>GotCha</div>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -106,12 +118,10 @@ export default function Code() {
             required
             fullWidth
             id='code'
-            label='Code'
+            label='Code(6자리)'
             name='code'
             autoComplete='code'
             autoFocus
-            //   value={code}
-            //   onChange={onChange}
             inputProps={{
               maxLength: 6,
             }}
@@ -133,11 +143,12 @@ export default function Code() {
           </Button>
         </form>
       </div>
-      <Box mt={8}>
+      <Box mt={13}>
         <Copyright />
       </Box>
     </Container>
-
+    </div>
+    </>
   );
 
 }

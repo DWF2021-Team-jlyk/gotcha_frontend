@@ -19,7 +19,8 @@ import SearchMember from '../../components/SearchMember';
 import LeaveModal from './LeaveModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { postWorkspaces, updateWorkspaceName, getFileName } from '../../modules/workspace';
-
+import CloseIcon from '@material-ui/icons/Close';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -161,26 +162,42 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
     leaveModalShow()
   }
 
+  const closeHandle = () => {
+    setWorkspaceName(null);
+    setEmailList([]);
+    setImage('');
+    setFileName([]);
+    setPreviewImg('');
+    setIsActiveName(true);
+    setIsActiveImg(true);
+    handleClose();
+  }
+
   return (
     <Modal
       size={'lg'}
       show={clicked}
       onHide={handleClose}
-      style={{ marginTop: '50'}}
-      className=""
+      style={{ marginTop: 0}}
+      // className=""
     >
-      <ModalHeader style={{backgroundColor:"#F7F7F7"}}>
+      <ModalHeader style={{backgroundColor:"#3f51b5 "}}>
         <ModalTitle>
-          <span style={{ fontSize: '1.2rem' }}> {workspace.WS_NAME}</span>{' '}
-          환경설정
+          <div style={{color:'white'}}>
+          <SettingsIcon style={{marginRight:10, marginBottom:5}}/>
+            환경설정
+          <CloseIcon onClick={closeHandle}  style={{marginLeft:600, marginBottom:5}}/>
+          </div>
+     
         </ModalTitle>
+      
       </ModalHeader>
 
       <ModalBody>
         <Form>
           <Form.Group>
-            <Form.Label>WorkSpace Name</Form.Label>
-
+            <Form.Label><b>WorkSpace Name</b></Form.Label>
+            <div style={{marginTop:5}}>
             <Row>
               <Col sm={8}>
                 <Form.Control
@@ -196,40 +213,44 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
                 </div>
               </Col>
             </Row>
+            </div>
           </Form.Group>
           <br /> 
           {role === 'ADMIN' ?
             <>
               <Form.Group>
-              <Form.Label>WorkSpace Thumbnail 사진</Form.Label>
-                <Row>
-                  <Col sm={8}>
+              <Form.Label><b>WorkSpace Thumbnail</b></Form.Label>
+              <div style={{display:'flex'}}>
+                  <div style={{marginRight:10, marginTop:6}}>
                     <Form.Control
                       type="text"
                       value= {
                         fileName === null ? workspace.ws_isImage : fileName
                       }
                       disabled
+                      style={{width:500}}
                     />
-                  </Col>
-                  <Col sm={4}>
+                  </div>
+                  <div>
                     <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={onFileChange} />
                     <label htmlFor="icon-button-file">
-                      <IconButton color="primary" aria-label="upload picture" component="span">
+                      <IconButton color="primary" aria-label="upload picture" component="span" >
                         <PhotoCamera />
                       </IconButton>
                     </label>
                     <Button disabled={isActiveImg} onClick={FileSaveBtn}>저장</Button>
-                  </Col>
-                  {
+                    </div>
+               </div>
+               <div style={{textAlign:'center', marginTop:10}}>
+               {
                     previewImg === '' || previewImg === undefined ? null : <img src={previewImg} alt='img' height={'200px'} />
                   }
-                </Row>
+                  </div>
               </Form.Group>
               <Form.Group>
                 <br/>
-                <Form.Label>WorkSpace Members</Form.Label>
-                <Row style={{height: 260, overflowY:"scroll" }}>
+                <Form.Label><b>WorkSpace Members</b></Form.Label>
+                <Row style={{maxHeight: 200, overflowY:"scroll" }}>
                   {userList?.map((value, index)=>{
                     return <UserAvatar
                       invite={true}
@@ -238,7 +259,8 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
                       user_id={value}
                       admin={workspace.user_id}
                       ws_id={workspace.ws_id}
-                      key={index}/>
+                      key={index}
+                      role={role}/>
                   })}
                 </Row>
                 <br/>
@@ -255,21 +277,22 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
                   </Col>
                 </Row>
               </Form.Group>
-              <Row style={{ marginTop: 20, height:300, overflowY:"scroll" }}>
+              <Row style={{ marginTop: 20, maxHeight: 200, overflowY:"scroll" }}>
                 {emailList?.map((value, index) => {
                   return <UserAvatar 
                     invite={false}
                     list={emailList}
                     setList={setEmailList}
                     user_id={value} 
-                    key={index} />
+                    key={index}
+                    role={role} />
                 })}
               </Row>
             </>
             : 
               <Form.Group>
-                <Form.Label>WorkSpace Members</Form.Label>
-                <Row style={{height: 260, overflowY:"scroll" }}>
+                <Form.Label><b>WorkSpace Members</b></Form.Label>
+                <Row style={{maxHeight: 200, overflowY:"scroll" }}>
                   {userList?.map((value, index)=>{
                     return <UserAvatar
                       invite={true}
@@ -277,7 +300,8 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
                       setList={setUserLists}
                       user_id={value}
                       admin={workspace.user_id}
-                      key={index}/>
+                      key={index}
+                      role={role}/>
                   })}
                 </Row>
               </Form.Group>
@@ -291,7 +315,7 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
         <Button variant="danger" onClick={leaveHandler}>
           Leave Workspace
         </Button>
-       
+        
         <LeaveModal 
           leaveModal={leaveModal} 
           leaveModalClose={leaveModalClose} 
