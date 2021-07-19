@@ -4,7 +4,6 @@ import palette from './board_content/palette';
 import Responsive from './board_content/Responsive';
 import SubInfo from './SubInfo';
 import PostActionButtons from './PostActionButton';
-import TextField from '@material-ui/core/TextField';
 
 const PostViewerBlock = styled(Responsive)`
   margin-top: 96px;
@@ -24,18 +23,13 @@ const PostHead = styled.div`
   }
 `;
 
-const PostContent = styled.div`
-  font-size: 1.3125rem;
-  color: ${palette.gray[8]};
-`;
-
 const PostViewer = (props) => {
   const { board, ws_id } = props;
 
   return (
     <>
       <PostViewerBlock>
-        <div style={{ height: 720, padding:20}}>
+        <div style={{ height: 720, padding: 20 }}>
           <PostHead>
             <h1>{board.board_title}</h1>
 
@@ -45,10 +39,16 @@ const PostViewer = (props) => {
               hasMarginTop
             />
             <PostActionButtons id={board.id} ws_id={ws_id} />
-            {/* <Tags tags={tags}/> */}
           </PostHead>
 
-          <textarea disabled rows="20" cols="133" style={{border:'none', backgroundColor:'white'}}>{board.board_content}</textarea>
+          <textarea
+            disabled
+            rows="20"
+            cols="121"
+            style={{ border: 'none', backgroundColor: 'white' }}
+          >
+            {board.board_content}
+          </textarea>
         </div>
       </PostViewerBlock>
     </>

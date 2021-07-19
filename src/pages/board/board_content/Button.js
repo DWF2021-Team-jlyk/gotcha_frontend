@@ -13,6 +13,7 @@ const StyledButton = styled.button`
     cursor: pointer;
 
     background: ${palette.gray[8]};
+    
     &:hover{
         background: ${palette.gray[6]};
     }

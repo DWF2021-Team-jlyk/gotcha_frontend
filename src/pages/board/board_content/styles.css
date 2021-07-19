@@ -16,4 +16,18 @@
 .boardTitle{
   font-family: 'DoHyeon-Regular';
 }
+
+.postButton{
+  height: 2.125rem;
+  color:white;
+  background-color: #7986CB;
+  margin-left: 0.5rem;
+  border:1px solid #7986CB;
+  border-radius:4.5px;
+}
+  
+.postButton:hover{
+  background-color: #868e96;
+  border:1px solid #868e96;
+}
   
