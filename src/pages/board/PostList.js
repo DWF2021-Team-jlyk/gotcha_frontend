@@ -1,17 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Responsive from './board_content/Responsive';
 import Button from './board_content/Button';
 import palette from './board_content/palette';
 import SubInfo from './SubInfo';
-import Tags from './Tags';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { postboard, showboardPost } from '../../modules/board';
 import { boardUnmout } from '../../modules/boardId';
 import { removeHtml } from '../board/board_content/sanitizeHtml';
-import TextField from '@material-ui/core/TextField';
-
 
 const PostListBlock = styled(Responsive)`
   margin-top: 3rem;
@@ -62,9 +59,8 @@ const textCut = (txt, len, lastTxt) => {
 };
 
 const PostItem = (props) => {
-  const { contentFilter, board, ws_id } = props;
-  //const inputItemEl = useRef(null);
-  console.log('PostItem??????????',board.board_content)
+  const { board, ws_id } = props;
+  console.log('PostItem??????????', board.board_content);
   const id = board.id;
   return (
     <PostItemBlock>
@@ -77,24 +73,9 @@ const PostItem = (props) => {
         </Link>
       </h2>
       <SubInfo username={board.user_id} publishedDate={new Date()} />
-
-      {/* <p><pre>{textCut(contentFilter,150,"...")}</pre></p> */}
-      {/* <TextField
-        id="outlined-basic"
-        variant="outlined"
-        multiline
-        as="textarea"
-        style={{
-          // border: '1px solid #ced4da',
-          fontSize: '.95rem',
-          padding: 5,
-          borderRadius: 4,
-          width: '100%',
-        }}
-        defaultValue={board.board_content}
-        //ref = {inputItemEl}
-      ></TextField> */}
-      <div style={{marginTop:10}}>{textCut(board.board_content,100,"...")}</div>
+      <div style={{ marginTop: 10 }}>
+        {textCut(board.board_content, 100, '...')}
+      </div>
     </PostItemBlock>
   );
 };
@@ -103,17 +84,13 @@ const PostList = ({ ws_id }) => {
   const boards = useSelector((state) => state.workspaceBoard.boards);
   const dispatch = useDispatch();
 
-  console.log('postList ws_id',ws_id);
-
   useEffect(() => {
     dispatch(postboard(ws_id));
     dispatch(boardUnmout());
   }, [ws_id]);
 
   return (
-
     <PostListBlock>
-      
       <WritePostButtonWrapper>
         <Link to={`${ws_id}/board_content`}>
           <Button style={{ backgroundColor: '#7986CB' }}>
@@ -123,20 +100,10 @@ const PostList = ({ ws_id }) => {
       </WritePostButtonWrapper>
       <div style={{ maxHeight: 700, overflowY: 'scroll' }}>
         {boards.map((board) => {
-          let contentFilter = removeHtml(board.board_content);
-          return (
-            <PostItem
-              key={board.board_id}
-              contentFilter={contentFilter}
-              board={board}
-              ws_id={ws_id}
-            />
-          );
+          return <PostItem key={board.board_id} board={board} ws_id={ws_id} />;
         })}
       </div>
-
     </PostListBlock>
-
   );
 };
 

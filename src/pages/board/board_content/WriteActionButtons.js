@@ -4,6 +4,7 @@ import Button from './Button';
 import { useDispatch } from 'react-redux';
 import { postboard } from '../../../modules/board';
 import { useParams } from 'react-router';
+import './styles.css'; 
 
 const WriteActionButtonsBlock = styled.div`
   margin-top: 1rem;
@@ -12,6 +13,7 @@ const WriteActionButtonsBlock = styled.div`
     margin-left: 0.5rem;
   }
 `;
+
 const StyledButton = styled(Button)`
   height: 2.125rem;
   color: white;
@@ -27,38 +29,42 @@ const WriteActionButtons = ({
   content,
   board,
   onBoardUpdate,
-  boardInputEl
+  boardInputEl,
+  isActive
 }) => {
   const dispatch = useDispatch();
   const {ws_id} = useParams();
+  console.log("isActive ",isActive)
   console.log('WriteActionButton ws_id', ws_id);
   if (board?.id === null || board?.id === undefined) {
     return (
       <WriteActionButtonsBlock>
-        <StyledButton
-          cyan
-          onClick={() => {
+        <button
+           className='postButton'
+            onClick={() => {
             onBoardAdd();
             //dispatch(postboard(ws_id));
           }}
+          disabled={isActive}
         >
-          포스트 등록
-        </StyledButton>
+          <b>포스트 등록</b>
+        </button>
         <StyledButton onClick={onCancel}>취소</StyledButton>
       </WriteActionButtonsBlock>
     );
   } else {
     return (
       <WriteActionButtonsBlock>
-        <StyledButton
-          cyan
+        <button
+          className='postButton'
           onClick={async () => {
             onBoardUpdate();
             boardInputEl.current.value='';
           }}
+          disabled={isActive}
         >
-          포스트 수정
-        </StyledButton>
+          <b>포스트 수정</b>
+        </button>
         <StyledButton onClick={onCancel}>취소</StyledButton>
       </WriteActionButtonsBlock>
     );

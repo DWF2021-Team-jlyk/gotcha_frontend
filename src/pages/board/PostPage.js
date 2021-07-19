@@ -11,7 +11,6 @@ const PostPage = () => {
   return (
     <>
       {boards.map((board) => {
-        console.log('board id ', board.id);
         if (useParam.id == board.id) {
           return (
             <PostViewer key={board.id} board={board} ws_id={useParam.ws_id} />
