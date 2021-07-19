@@ -48,7 +48,7 @@ const Pwdfind = () => {
   
       <div className={classes.paper}>
   
-          이메일을 입력하세요. 새로운 비밀번호를 발송합니다.
+          Insert your E-mail. We will send new password.
       
         <form className={classes.form} onSubmit={handleSubmit(onSubmit)} method="post">
           <TextField

@@ -68,7 +68,7 @@ export default function Login() {
                     component="h1"
                     variant="h5"
                 >
-                    로그인
+                    Login
                 </Typography>
                 <form className={classes.form} noValidate>
                     <TextField

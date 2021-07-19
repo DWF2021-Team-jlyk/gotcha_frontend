@@ -120,7 +120,7 @@ function Copyright() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            로그인
+            Login
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit(onSubmit)} noValidate>
             <TextField

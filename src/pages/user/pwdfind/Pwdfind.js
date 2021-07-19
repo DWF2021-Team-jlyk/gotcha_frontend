@@ -96,11 +96,10 @@ const Pwdfind = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          비밀번호 찾기
+          Find PassWord
         </Typography>
           <br/>
-          이메일을 입력하세요. 새로운 비밀번호를 발송합니다.
-      
+          Insert your Email. We will send new password.
         <form className={classes.form} onSubmit={handleSubmit(onSubmit)} method="post" noValidate>
           <TextField
             variant="outlined"

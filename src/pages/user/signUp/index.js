@@ -121,7 +121,7 @@ function Join() {
                     <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    회원가입
+                    Join
                 </Typography>
                 <form className={classes.form} onSubmit={handleSubmit(onSubmit)} method="post" noValidate>
                     <Grid container spacing={3}>

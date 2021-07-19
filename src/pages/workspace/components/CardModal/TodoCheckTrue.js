@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { updateCardTodo } from '../../../../modules/cardTodo';
 import { Button, Modal, Form } from 'react-bootstrap';
 import TodoPeriodModal from './TodoPeriodModal';
+import TodoDate from './TodoDate';
 
 const listButton = {
   backgroundColor: '#7986CB',
@@ -51,6 +52,10 @@ const TodoCheckTrue = (props) => {
       <Button onClick={handleShow} style={listButton}>
         기간 설정
       </Button>
+      {
+        todo.todo_start_date !== null && todo.todo_start_date !== "" &&
+        <TodoDate startDate={todo?.todo_start_date} endDate={todo?.todo_end_date}/>
+      }
       {<TodoPeriodModal
         todo={todo}
         show={listDateShow}

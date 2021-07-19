@@ -35,7 +35,14 @@ const WorkList = (props) => {
   }, [lists]);
   return (
     <>
-      <input placeholder='write listname' style={{marginLeft:11}} onChange={(e) => setListName(e.target.value)} ref={listEL} />
+      <input
+        placeholder='write listname'
+        style={{marginLeft:11}}
+        onChange={(e) =>
+          setListName(e.target.value)
+        }
+        ref={listEL}
+      />
       <Button
         style={{marginLeft:13}}
         variant='contained'
@@ -43,6 +50,7 @@ const WorkList = (props) => {
         onClick={(e) => {
           onListAdd(listName, nextPosition);
           listEL.current.value = '';
+          setListName("");
         }}
       >
         + Add Another List

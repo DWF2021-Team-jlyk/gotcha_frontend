@@ -60,7 +60,7 @@ const NotiCard = ({ noti }) => {
           }
           variant='outline-primary'
           style={{ marginLeft: 5 }}
-        >읽음 않읽음
+        >{noti.NOTI_CHECKED === "1"?  "안 읽음" : "읽음"}
         </Button>
       </div>
     </Alert>
