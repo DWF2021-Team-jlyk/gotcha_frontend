@@ -36,7 +36,7 @@ const Header = () => {
                 }}
             >
                 <img src={headerImg} alt={"gotcha"} width="50"/>
-                GotCha
+                <span>GotCha</span>
             </Navbar.Brand>
             <SearchWorkspace/>
             {/*<Form className="d-flex">*/}
