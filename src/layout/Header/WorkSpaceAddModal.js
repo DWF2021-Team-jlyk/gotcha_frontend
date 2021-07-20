@@ -7,8 +7,6 @@ import {
   ModalBody,
   ModalFooter,
   ModalTitle,
-  OverlayTrigger,
-  PopoverContent,
   Row,
 } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
@@ -195,6 +193,8 @@ const closeHandler = () => {
                 list={emailList}
                 setList={setEmailList}
                 user_id={email}
+                invite={false}
+                role='ADMIN'
               />
             );
           })}

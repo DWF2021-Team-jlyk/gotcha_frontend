@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { postboard, showboardPost } from '../../modules/board';
 import { boardUnmout } from '../../modules/boardId';
-import { removeHtml } from '../board/board_content/sanitizeHtml';
 
 const PostListBlock = styled(Responsive)`
   margin-top: 3rem;
@@ -60,7 +59,6 @@ const textCut = (txt, len, lastTxt) => {
 
 const PostItem = (props) => {
   const { board, ws_id } = props;
-  console.log('PostItem??????????', board.board_content);
   const id = board.id;
   return (
     <PostItemBlock>
@@ -81,6 +79,7 @@ const PostItem = (props) => {
 };
 
 const PostList = ({ ws_id }) => {
+
   const boards = useSelector((state) => state.workspaceBoard.boards);
   const dispatch = useDispatch();
 
@@ -93,16 +92,36 @@ const PostList = ({ ws_id }) => {
     <PostListBlock>
       <WritePostButtonWrapper>
         <Link to={`${ws_id}/board_content`}>
-          <Button style={{ backgroundColor: '#7986CB' }}>
-            공지사항 작성하기
-          </Button>
+          <Button style={{ backgroundColor: '#7986CB' }}>알림 작성하기</Button>
         </Link>
       </WritePostButtonWrapper>
-      <div style={{ maxHeight: 700, overflowY: 'scroll' }}>
-        {boards.map((board) => {
-          return <PostItem key={board.board_id} board={board} ws_id={ws_id} />;
-        })}
-      </div>
+      {boards.length < 1 ? (
+      
+          <div
+            style={{
+              position: 'absolute',
+              top: 370,
+              left: 580,
+              fontSize: '2.7rem',
+              color: '#3F51B5',
+              boxShadow: '2px 4px 5px 2px lightgray',
+              padding: '100px 200px 100px 200px',
+              borderRadius: 20,
+            }}
+          >
+            작성된 알림이 없습니다.
+          </div>
+          
+    
+      ) : (
+        <div style={{ maxHeight: 700, overflowY: 'scroll' }}>
+          {boards.map((board) => {
+            return (
+              <PostItem key={board.board_id} board={board} ws_id={ws_id} />
+            );
+          })}
+        </div>
+      )}
     </PostListBlock>
   );
 };

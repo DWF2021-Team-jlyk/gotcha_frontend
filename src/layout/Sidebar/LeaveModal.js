@@ -38,7 +38,7 @@ function RoleModal({ role, leaveModal, leaveModalClose, userList, ws_id, user_id
         onHide={leaveModalClose}
         style={{ marginTop: '120px' }}
       >
-        <Modal.Header style={{ backgroundColor: '#F7F7F7' }}>
+        <Modal.Header style={{ backgroundColor: '#3f51b5', color: 'white' }}>
           <Modal.Title>Admin 양도</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -69,11 +69,14 @@ function RoleModal({ role, leaveModal, leaveModalClose, userList, ws_id, user_id
         onHide={leaveModalClose}
         style={{ marginTop: '120px' }}
       >
-        <Modal.Header style={{ backgroundColor: '#F7F7F7' }}>
+        <Modal.Header style={{ backgroundColor: '#3f51b5', color: 'white' }}>
           <Modal.Title>Leave Workspace</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          workspace가 삭제 됩니다. 정말 workspace를 떠나시겠습니까?
+          workspace를 떠나십니까?
+          사유를 작성해주세요.
+       
+          <input style={{marginTop:10,width:450}}></input>
         </Modal.Body>
         <Modal.Footer>
           <Button variant='danger' onClick={deleteWorkspace}>
@@ -92,11 +95,13 @@ function RoleModal({ role, leaveModal, leaveModalClose, userList, ws_id, user_id
         onHide={leaveModalClose}
         style={{ marginTop: '120px' }}
       >
-        <Modal.Header style={{ backgroundColor: '#F7F7F7' }}>
+        <Modal.Header style={{ backgroundColor: '#3f51b5', color: 'white' }}>
           <Modal.Title>Leave Workspace</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          정말 workspace를 떠나시겠습니까?
+          workspace를 떠나십니까?
+          사유를 작성해주세요.
+          <input style={{marginTop:10, width:450}}></input>
         </Modal.Body>
         <Modal.Footer>
           <Button variant='danger' onClick={leaveHandler}>
