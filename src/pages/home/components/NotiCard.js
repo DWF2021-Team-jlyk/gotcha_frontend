@@ -51,7 +51,7 @@ const NotiCard = ({ noti }) => {
     <Alert variant={returnTypeColor(noti.NOTI_TYPE)}>
       <Alert.Link as={Link} to={`/workspace/${noti.WS_ID}`} style={{ textDecoration: 'none' }}>
         <div style={{ display: 'flex' }}>
-          <h4 style={{ marginBottom: 20 }}>{noti.WS_NAME}({returnType(noti.NOTI_TYPE)})</h4>
+          <h4 style={{ marginBottom: 20 }}>[{returnType(noti.NOTI_TYPE)}] {noti.WS_NAME}</h4>
         </div>
       </Alert.Link>
       {/*{noti.WS_NAME}*/}
@@ -66,9 +66,7 @@ const NotiCard = ({ noti }) => {
 
         <Button
           style={{ marginLeft: 60, backgroundColor: '#f47174', border: '1px solid #f47174' }}
-
           onClick={e => {
-            console.log(noti.NOTI_ID);
             onRemove(noti);
           }}
 

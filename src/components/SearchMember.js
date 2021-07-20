@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { postInviteMember } from '../modules/workspace';
 import apiAxios from '../lib/apiAxios';
 
-const SearchMember = ({member, ws_id, emailList, setEmailList, invite }) => {
+const SearchMember = ({member, ws_id, emailList, setEmailList, invite, click, setClick }) => {
   const dispatch = useDispatch();
   const [userEmail, setUserEmail] = useState('');
   const [show, setShow] = useState(false);
@@ -29,15 +29,16 @@ const SearchMember = ({member, ws_id, emailList, setEmailList, invite }) => {
     setUserEmail('');
     emailEl.current.value = '';
   }, [emailList]);
-  
+
   const inviteBtn = () => {
     // dispatch(postInviteMember(emailList));
     apiAxios('/home/inviteMember', {
       ws_id,
       emailList
-    }).then(
-      setEmailList([])
-    );
+    }).then(response=>{
+      setEmailList([]);
+      setClick(!click);
+    });
   }
 
   useEffect(() => {
@@ -116,7 +117,7 @@ const SearchMember = ({member, ws_id, emailList, setEmailList, invite }) => {
             <Button
               onClick={inviteBtn}
               disabled={
-                emailList.length === 0 ? 
+                emailList.length === 0 ?
                 true : false
               }>멤버 초대하기</Button>
           </Col>

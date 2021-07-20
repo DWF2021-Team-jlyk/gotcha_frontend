@@ -39,6 +39,21 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
+const returnType = (type) => {
+  switch (type) {
+    case 'c':
+      return '카드'; //card
+    case 'b':
+      return '보드'; //board
+    case 'i':
+      return '초대'; //invite
+    case 'o':
+      return '퇴장'
+    default:
+      return '할일'; //todo
+  }
+};
+
 const NotiButton = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -104,7 +119,7 @@ const NotiButton = () => {
                     handleClose();
                   }}
                 >
-                  {`notiSpace: ${noti.WS_NAME} notiType: ${noti.NOTI_TYPE}`}
+                  {`notiSpace: ${noti.WS_NAME} ${returnType(noti.NOTI_TYPE)}`}
                 </ListItem>
               </StyledMenuItem>;
             })

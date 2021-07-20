@@ -12,6 +12,11 @@ export default (event, start, end, isSelected) => {
       style: { backgroundColor: '#bed8f3' }, 
     }
   }
+  else if(isDone === "" && new Date(end).getTime() > new Date().getTime()){
+    return {
+      style: { backgroundColor: '#bed8f3' },
+    }
+  }
   else{
     return {
       style: {backgroundColor: '#f47174'},

@@ -7,6 +7,8 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import axios from 'axios';
 import apiAxios from '../../lib/apiAxios';
 import Modal from 'react-bootstrap/Modal';
+import { useDispatch } from 'react-redux';
+import { postNoti } from '../../modules/notification';
 
 const onClick = (list, setList, userId) => {
   const changeList = list.filter((list) => list !== userId);
@@ -18,6 +20,7 @@ const UserAvatar = (props) => {
   const [reason, setReason] = useState("");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const dispatch = useDispatch();
 
   const { list, setList, user_id, admin, invite, ws_id, role, add} = props;
   const deleteMember = (user_id, reason) => {
@@ -26,6 +29,7 @@ const UserAvatar = (props) => {
       user_id,
       reason,
     });
+    dispatch(postNoti());
   };
   console.log('invite ', invite);
 

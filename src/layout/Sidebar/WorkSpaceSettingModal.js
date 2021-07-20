@@ -52,9 +52,11 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
   
   const leaveModalClose = () => setLeaveModal(false);
   const leaveModalShow = () => setLeaveModal(true);
+  const [click, setClick] = useState(false);
 
   useEffect(() => {
     const url = '/home/wsUserList';
+
 
     const options = {
       method: 'POST',
@@ -75,7 +77,7 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
       .catch((error) => {
         console.log(error);
       });
-  }, [emailList]);
+  }, [emailList,click]);
 
   useEffect(() => {
     setFileName(workspace.ws_isImage);
@@ -141,8 +143,7 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
       data: formData,
       url,
     };
-    axios(options);
-    dispatch(postWorkspaces());
+    axios(options).then(response=>{dispatch(postWorkspaces());});
   } 
 
   const handleCloseHandler = () => {
@@ -273,6 +274,8 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
                     setEmailList={setEmailList} 
                     invite={true} 
                     disabled={role !== 'ADMIN'}
+                    click={click}
+                    setClick={setClick}
                     />
                   </Col>
                 </Row>
