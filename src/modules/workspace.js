@@ -99,6 +99,10 @@ const workspace = handleActions(
         produce(state, draft => {
 
       }),
+    [INIT_WORKSPACE]:(state, action)=>
+        produce(state, draft=>{
+          draft.workspaces = [];
+        })
   },
 
   initialState,

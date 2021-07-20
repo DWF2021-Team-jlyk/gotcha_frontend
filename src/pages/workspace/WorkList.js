@@ -5,7 +5,7 @@ import { listAdd } from '../../modules/workspaceList';
 import WorkListCardList from './components/worklist/WorkListCardList';
 import WorkListCardModal from './components/worklist/WorkListCardModal';
 import { disappearModal } from '../../modules/cardModal';
-import "./css/WorkList.css"
+import './css/WorkList.css';
 
 const WorkList = (props) => {
   const { lists, ws_id } = props;
@@ -37,26 +37,27 @@ const WorkList = (props) => {
     <>
       <input
         placeholder='write listname'
-        style={{marginLeft:11}}
+        style={{ marginLeft: 11 }}
         onChange={(e) =>
           setListName(e.target.value)
         }
         ref={listEL}
       />
       <Button
-        style={{marginLeft:13}}
+        style={{ marginLeft: 13 }}
         variant='contained'
         color='primary'
+        aria-disabled={listName === ''}
         onClick={(e) => {
           onListAdd(listName, nextPosition);
           listEL.current.value = '';
-          setListName("");
+          setListName('');
         }}
       >
         + Add Another List
       </Button>
 
-      <div className="listStyle">
+      <div className='listStyle'>
         {lists.map((list, index) => {
           return (
             <div key={list.list_id}>

@@ -36,7 +36,7 @@ const MyCalendar = () => {
           return {
             card_id: card.card_id,
             title: card.card_name,
-            allDay: false,
+            // allDay: false,
             start: new Date(card.card_start_date),
             end: new Date(card.card_end_date),
             card:card

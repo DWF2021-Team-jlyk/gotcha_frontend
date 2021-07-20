@@ -15,6 +15,8 @@ const DELETE_NOTI_SUCCESS = 'notification/DELETE_NOTI_SUCCESS';
 const CHANGE_NOTI_CHECK = 'notification/CHANGE_NOTI_CHECK';
 const CHANGE_NOTI_CHECK_SUCCESS = 'notification/CHANGE_NOTI_CHECK_SUCCESS';
 
+const INIT_NOTI = 'notification/INIT_NOTI';
+
 export const addNoti = noti => ({ type: ADD_NOTI, noti });
 
 export const postNoti = createRequest(POST_NOTI, api.postNoti);
@@ -49,7 +51,7 @@ const notification = handleActions(
     [DELETE_NOTI_SUCCESS]:(state, action)=>
       produce(state, draft=>{
         const index = draft.noti.findIndex(value=>
-          value.NOTI_ID === action.payload.noti_id);
+          value.NOTI_ID === action.payload);
         draft.noti.splice(index, 1);
       }),
     [CHANGE_NOTI_CHECK_SUCCESS]:(state, action)=>
@@ -61,7 +63,11 @@ const notification = handleActions(
         if(noti.NOTI_CHECKED === "0")
           noti.NOTI_CHECKED = "1";
         else noti.NOTI_CHECKED = "0";
-      })
+      }),
+    [INIT_NOTI]:(state, action) =>
+      produce(state, draft=>{
+        draft.noti = [];
+      }),
   },
   initialState,
 );
