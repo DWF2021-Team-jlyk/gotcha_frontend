@@ -34,7 +34,7 @@ const CardTodo = (props) => {
       <div>
         {todos?.map((todo) => {
           return (
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex' }} key={todo.todo_id}>
               <div style={{ padding: 5 }}>
                 {todo.todo_isdone === '1' ? (
                   //1이면 check됨

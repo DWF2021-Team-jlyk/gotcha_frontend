@@ -106,6 +106,7 @@ const NotiButton = () => {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        style={{maxHeight:400}}
       >
         {
           notification
@@ -119,7 +120,7 @@ const NotiButton = () => {
                     handleClose();
                   }}
                 >
-                  {`notiSpace: ${noti.WS_NAME} ${returnType(noti.NOTI_TYPE)}`}
+                  {`${noti.WS_NAME} ${returnType(noti.NOTI_TYPE)}`}
                 </ListItem>
               </StyledMenuItem>;
             })

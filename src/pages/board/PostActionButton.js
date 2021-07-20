@@ -37,6 +37,7 @@ const PostActionButtons = ({ id, ws_id }) => {
 
   const history = useHistory();
 
+
   useEffect(() => {
     dispatch(showboardPost(id));
   }, [id]);

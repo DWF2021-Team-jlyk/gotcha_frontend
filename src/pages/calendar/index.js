@@ -10,7 +10,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import Form from 'react-bootstrap/Form';
 import { InputGroup } from 'react-bootstrap';
-import { registerCard } from '../../modules/cardModal';
+import { disappearModal, registerCard } from '../../modules/cardModal';
 import ListSelector from './ListSelector';
 import EventProps from './EventProps';
 
@@ -39,7 +39,7 @@ const MyCalendar = () => {
             // allDay: false,
             start: new Date(card.card_start_date),
             end: new Date(card.card_end_date),
-            card:card
+            card: card,
           };
         }),
     );
@@ -48,35 +48,42 @@ const MyCalendar = () => {
   const [loadModal, setLoadModal] = useState(false);
   const [cardId, setCardId] = useState(0);
 
-  const handleModal = useCallback(() => {
+  const handleModal = () => {
     setLoadModal(false);
-  },[]);
+    dispatch(disappearModal());
+  };
+  
 
 
   return (
-    <div style={{ height: 800 }}>
-      <ListSelector listId={listId} setListId={setListId} lists={lists}/>
-      <BigCalendar
-        events={events}
-        step={60}
-        views={BigCalendar.Views.values}
-        defaultDate={new Date()}
-        selectable
-        onSelectSlot={(slotInfo) => console.log(slotInfo)}
-        onSelectEvent={(event, e) => {
-          setLoadModal(!loadModal);
-          setCardId(event.card_id);
-          dispatch(registerCard(event.card));
-        }}
-        eventPropGetter={(EventProps)}
-      />
-      {loadModal&&
+    <>
+      <div style={{ height: 800 }}>
+        <ListSelector listId={listId} setListId={setListId} lists={lists} />
+        <BigCalendar
+          events={events}
+          step={60}
+          views={BigCalendar.Views.values}
+          defaultDate={new Date()}
+          selectable
+          onSelectSlot={(slotInfo) => console.log(slotInfo)}
+          onSelectEvent={(event, e) => {
+            setLoadModal(true);
+            setCardId(event.card_id);
+            dispatch(registerCard(event.card));
+          }}
+          eventPropGetter={(EventProps)}
+        />
+
+      </div>
+      {loadModal &&
       <WorkListCardModal
         show={loadModal}
         handle={handleModal}
-      />}
-    </div>
+      />
+      }
+    </>
   );
-};
+}
+;
 
 export default MyCalendar;

@@ -83,6 +83,7 @@ const PostList = ({ ws_id }) => {
   const boards = useSelector((state) => state.workspaceBoard.boards);
   const dispatch = useDispatch();
 
+
   useEffect(() => {
     dispatch(postboard(ws_id));
     dispatch(boardUnmout());

@@ -20,8 +20,8 @@ const WorkSpaceArea = ({ areaType }) => {
 
   const getAreaTitle = (areaType) => {
     return areaType === 1 ?
-      <div><FaUserCog size='25' style={{ marginRight: 20 }} /> 내가 개설한 Workspace</div> :
-      <div><FaUsers size='25' style={{ marginRight: 20 }} />참여 중인 Workspace</div>;
+      <div style={{display:'flex'}}><div style={{marginLeft:330}}><FaUserCog size='25' style={{ marginRight: 20 }} /></div><div style={{marginTop:3}}>개설한 WORKSPACE</div></div> :
+      <div style={{display:'flex'}}><div style={{marginLeft:330}}><FaUsers size='25' style={{marginRight: 20 }} /></div><div style={{marginTop:3}}>참여 중인 WORKSPACE</div></div>;
   };
   return (
     <Card style={workspaceStyle.style}>

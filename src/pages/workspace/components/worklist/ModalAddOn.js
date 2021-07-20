@@ -14,7 +14,7 @@ export const FunctionalAddOn = ({ws_id, card}) => {
       <AddMember cardId ={card?.card_id} ws_id={ws_id}/>
       <AddDate card = {card}/>
       <AddTodo cardId = {card?.card_id}/>
-      <CardMove card = {card} ws_id={ws_id}/>
+      {/*<CardMove card = {card} ws_id={ws_id}/>*/}
     </>
   );
 };

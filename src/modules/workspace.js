@@ -2,10 +2,13 @@ import createRequest from '../lib/createRequest';
 import * as api from '../lib/workspaceAPI';
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
+import { startLoading } from './loading';
+import axios from 'axios';
 
 const ADD_WORKSPACE = 'workspace/ADD_WORKSPACE';
 const ADD_WORKSPACE_SUCCESS = 'workspace/ADD_WORKSPACE_SUCCESS';
 const DELETE_WORKSPACE = 'workspace/DELETE_WORKSPACE';
+const DELETE_WORKSPACE_SUCCESS = 'workspace/DELETE_WORKSPACE_SUCCESS'
 // const CHANGE_WORKSPACE_NAME = 'workspace/CHANGE_WORKSPACE_NAME';
 const CHANGE_WORKSPACE_FAV = 'workspace/CHANGE_WORKSPACE_FAV';
 
@@ -27,8 +30,34 @@ const INVITE_MEMBER_SUCCESS = 'workspace/POST_INVITE_MEMBER_SUCCESS';
 
 const INIT_WORKSPACE = 'workspace/INIT_WORKSPACE';
 
-export const deleteWorkspace =
-  createAction(DELETE_WORKSPACE, ws_id => ws_id);
+
+
+export const deleteWorkspace = (ws_id, user_id) => async dispatch => {
+  dispatch(startLoading(DELETE_WORKSPACE));
+  try{
+    const response =await axios({
+      url:"/home/deleteMember",
+      method:'post',
+      headers:{
+        "Authorization":sessionStorage.getItem("accessToken"),
+      },
+      data :{
+        ws_id:ws_id,
+        user_id:user_id,
+      }
+    });
+    if(response !== null){
+      dispatch({type:DELETE_WORKSPACE_SUCCESS, payload:ws_id});
+    }
+    else{
+      throw 'response undefined error';
+    }
+  }
+  catch (e){
+    dispatch(startLoading(DELETE_WORKSPACE));
+    throw e;
+  };
+};
 
 export const postWorkspaces = createRequest(POST_WORKSPACES, api.postGetWorkspaces);
 export const addWorkspaces = createRequest(ADD_WORKSPACE, api.postAddWorkspace);
@@ -60,7 +89,7 @@ const workspace = handleActions(
         workspace.is_fav = !workspace.is_fav;
       }),
 
-    [DELETE_WORKSPACE]: (state, { payload: ws_id }) =>
+    [DELETE_WORKSPACE_SUCCESS]: (state, { payload: ws_id }) =>
       produce(state, draft => {
         const index = draft.workspaces.findIndex(ws => ws.ws_id === ws_id);
         draft.workspaces.splice(index, 1);

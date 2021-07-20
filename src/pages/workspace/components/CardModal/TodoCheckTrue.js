@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import { useDispatch } from 'react-redux';
-import { updateCardTodo } from '../../../../modules/cardTodo';
+import { deleteCardTodo, updateCardTodo } from '../../../../modules/cardTodo';
 import { Button, Modal, Form } from 'react-bootstrap';
 import TodoPeriodModal from './TodoPeriodModal';
 import TodoDate from './TodoDate';
+import { AiOutlineCalendar, AiOutlineDelete } from 'react-icons/ai';
+import { HiOutlineSave } from 'react-icons/all';
 
 const listButton = {
   backgroundColor: '#7986CB',
@@ -16,11 +18,15 @@ const listButton = {
 const TodoCheckTrue = (props) => {
   const { todo } = props;
   const [listDateShow, setListDateShow] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
 
   const dispatch = useDispatch();
 
   const handleShow = () => setListDateShow(true);
   const handleClose = () => setListDateShow(false);
+  const onFocusState = () => setIsFocus(true);
+  const outFocusState = () => setIsFocus(false);
+  const handleMouseDown = (e) => e.preventDefault();
 
   const updateTodoIsdone = useCallback((todoIsdone) => {
     dispatch(
@@ -30,6 +36,24 @@ const TodoCheckTrue = (props) => {
       }),
     );
   }, []);
+
+  const updateTodoName = useCallback((todoName) => {
+    dispatch(
+      updateCardTodo({
+        ...todo,
+        todo_name: todoName,
+      }),
+    );
+  }, []);
+
+  const deleteTodos = useCallback(
+    (todo_id) =>
+      dispatch(
+        deleteCardTodo({
+          todo_id: todo_id,
+        }),
+      ),
+    []);
 
   return (
     <div style={{ display: 'flex' }}>
@@ -42,15 +66,42 @@ const TodoCheckTrue = (props) => {
       />
 
       <div
-        style={{ marginLeft: 5, width: '100%', minWidth: 200 }}
+        style={{ marginLeft: 5, width: 209, minWidth: 200 }}
         contentEditable
+        onFocus={onFocusState}
+        onBlur={outFocusState}
       >
         <del>{todo.todo_name}</del>
       </div>
 
       <Button onClick={handleShow} style={listButton}>
-        기간 설정
+        <AiOutlineCalendar
+          size={15}
+        />
       </Button>
+
+      {isFocus ? (
+        <>
+          <span
+            onMouseDown={handleMouseDown}
+            onClick={() => {
+              updateTodoName();
+            }}
+          >
+            <HiOutlineSave size={25}/>
+          </span>{' '}
+          &nbsp;
+          <span
+            onClick={() => {
+              deleteTodos(todo.todo_id);
+            }}
+            onMouseDown={handleMouseDown}
+          >
+            <AiOutlineDelete size={25}/>
+          </span>
+        </>
+      ) : null}
+
       {
         todo.todo_start_date !== null && todo.todo_start_date !== "" &&
         <TodoDate startDate={todo?.todo_start_date} endDate={todo?.todo_end_date}/>
