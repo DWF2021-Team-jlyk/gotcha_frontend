@@ -39,7 +39,7 @@ export default function Notification() {
         <Tab eventKey='NoReadNoti' title='읽지 않은 알림'>
           <Card>
             <Card.Header style={{ textAlign: 'center' }}>
-              <h3>Notification</h3>
+              <h3> <BsBellFill size='25'/> Notification</h3>
             </Card.Header>
             <Card.Body className='notification'>
               {notification
@@ -56,7 +56,7 @@ export default function Notification() {
         <Tab eventKey='ReadNoti' title="읽은 알림">
           <Card>
             <Card.Header style={{ textAlign: 'center' }}>
-              <h3>Notification</h3>
+              <h3> <BsBellFill size='25'/> Notification</h3>
             </Card.Header>
             <Card.Body className='notification'>
               {notification

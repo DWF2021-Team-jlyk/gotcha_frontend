@@ -36,8 +36,8 @@ const WorkList = (props) => {
   return (
     <>
       <input
-        placeholder='write listname'
-        style={{ marginLeft: 11 }}
+        placeholder='Enter Listname'
+        style={{marginLeft:11}}
         onChange={(e) =>
           setListName(e.target.value)
         }

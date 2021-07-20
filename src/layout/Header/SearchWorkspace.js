@@ -59,7 +59,7 @@ const SearchWorkspace = () => {
                       to={`/workspace/${ws.ws_id}`}
                       style={{ fontSize: 18, color: 'black', textDecoration: 'none' }}
                     >
-                      <b>{ws.ws_name}</b>
+                      <span style={{fontSize:'.9rem', padding:2}}>- {ws.ws_name}</span>
                     </Link>
                     <hr/>
                   </div>,

@@ -30,6 +30,7 @@ const Header = () => {
                 GotCha
             </Navbar.Brand>
             <SearchWorkspace/>
+           
             <div
                 style={{
                     marginRight: 20,

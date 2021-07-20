@@ -185,8 +185,8 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
         <ModalTitle>
           <div style={{color:'white'}}>
           <SettingsIcon style={{marginRight:10, marginBottom:5}}/>
-            환경설정
-          <CloseIcon onClick={closeHandle}  style={{marginLeft:600, marginBottom:5}}/>
+            Workspace Setting
+          <CloseIcon onClick={closeHandle}  style={{marginLeft:490, marginBottom:5}}/>
           </div>
      
         </ModalTitle>
