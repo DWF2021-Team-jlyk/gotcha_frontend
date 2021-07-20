@@ -115,7 +115,7 @@ const UserAvatar = (props) => {
           사유 작성 :
           <input
             style={{width:380}}
-            onChange={e=>{setReason(e.target.value); console.log(e.target.value)}}
+            onChange={e=>{setReason(e.target.value)}}
           />
         </Modal.Body>
         <Modal.Footer>

@@ -9,6 +9,7 @@ import headerImg from "../../image/gc_header.png";
 import { useDispatch } from "react-redux";
 import { initWorkspace } from "../../modules/workspace";
 import { initNoti } from '../../modules/notification';
+import Help from './Help'
 const Header = () => {
     const dispatch = useDispatch();
 
@@ -38,12 +39,28 @@ const Header = () => {
                 GotCha
             </Navbar.Brand>
             <SearchWorkspace/>
-           
+            {/*<Form className="d-flex">*/}
+            {/*    <FormControl*/}
+            {/*        type="search"*/}
+            {/*        placeholder="Search"*/}
+            {/*        className="mr-2"*/}
+            {/*        aria-label="Search"*/}
+            {/*        style={{*/}
+            {/*            marginRight: 10,*/}
+            {/*            width: 300,*/}
+            {/*        }}*/}
+            {/*    />*/}
+            {/*    <Button variant="light" style={{color: "#3f51b5"}}>*/}
+            {/*        Search*/}
+            {/*    </Button>*/}
+            {/*</Form>*/}
             <div
                 style={{
                     marginRight: 20,
                 }}
             >
+                <Help/>
+                &ensp;
                 <WorkSpaceAddButton/>
                 &ensp;
                 <NotiButton/>
