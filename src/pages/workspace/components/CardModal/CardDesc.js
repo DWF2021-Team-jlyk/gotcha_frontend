@@ -45,7 +45,7 @@ const CardDesc = (props) => {
             as='textarea'
             // defalueValue={card?.card_desc}
             value={changeDesc}
-            style={{ height: '100px', resize: 'none' }}
+            style={{ height: '150px', resize: 'none' }}
             disabled
           />
         </div>

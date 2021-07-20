@@ -83,7 +83,7 @@ const ActDesc = ({ cardAct, cardId, acts }) => {
         )}
       </div>
 
-      {(cardAct.islog === '0' || userInfo.userId === cardAct.user_id) && (
+      {(cardAct.islog === '0' && userInfo.userId === cardAct.user_id) && (
         <div
           style={{
             display: 'flex',

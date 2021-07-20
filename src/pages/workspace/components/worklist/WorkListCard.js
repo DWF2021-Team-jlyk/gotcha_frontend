@@ -36,7 +36,7 @@ const WorkListCard = (props) => {
     }
   },[]);
 
-  const onSaveCard =useCallback( cardName=> {
+  const onSaveCard =useCallback( (cardName, card)=> {
     dispatch(cardUpdate({...card, card_name:cardName}));
   }, []);
 
@@ -107,7 +107,7 @@ const WorkListCard = (props) => {
               }}
               onKeyPress={e=>{
                 if(e.key === "Enter"){
-                  onSaveCard(cardName);
+                  onSaveCard(cardName, card);
                   handleDisEditable(e);
                 }
               }}
