@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from 'react';
 import {Navbar} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import NotiButton from "./NotiButton";
@@ -8,8 +8,16 @@ import SearchWorkspace from './SearchWorkspace';
 import headerImg from "../../image/gc_header.png";
 import { useDispatch } from "react-redux";
 import { initWorkspace } from "../../modules/workspace";
+import { initNoti } from '../../modules/notification';
 const Header = () => {
     const dispatch = useDispatch();
+
+    useEffect(()=>{
+        // return ()=>{
+        //     dispatch(initNoti());
+        // }
+    })
+
     return (
         <Navbar
             variant="dark"
@@ -58,7 +66,6 @@ const Header = () => {
         </Navbar>
     );
     function onClick() {
-        dispatch(initWorkspace());
         const accessToken = sessionStorage.getItem("accessToken")
         if(accessToken !== null || accessToken !== '') {
             sessionStorage.removeItem("accessToken")

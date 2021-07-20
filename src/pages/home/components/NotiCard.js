@@ -15,11 +15,11 @@ const NotiCard = ({ noti }) => {
     noti_id => dispatch(changeNotiCheck(noti_id)),
     [],
   );
-  
+
   const strCut = (date) => {
-    const dateStr = date.substring(0,10)
+    const dateStr = date.substring(0, 10);
     return dateStr;
-  }
+  };
 
   const returnTypeColor = (type) => {
     switch (type) {
@@ -30,41 +30,57 @@ const NotiCard = ({ noti }) => {
       case 'i':
         return 'success'; //invite
       default:
-        return 'secondary'; //todo
+        return 'secondary'; //todo, out
+    }
+  };
+  const returnType = (type) => {
+    switch (type) {
+      case 'c':
+        return '카드'; //card
+      case 'b':
+        return '보드'; //board
+      case 'i':
+        return '초대'; //invite
+      case 'o':
+        return '퇴장'
+      default:
+        return '할일'; //todo
     }
   };
   return (
     <Alert variant={returnTypeColor(noti.NOTI_TYPE)}>
       <Alert.Link as={Link} to={`/workspace/${noti.WS_ID}`} style={{ textDecoration: 'none' }}>
-        <h4 style={{ marginBottom: 20 }}>{noti.WS_NAME}</h4>
+        <div style={{ display: 'flex' }}>
+          <h4 style={{ marginBottom: 20 }}>{noti.WS_NAME}({returnType(noti.NOTI_TYPE)})</h4>
+        </div>
       </Alert.Link>
       {/*{noti.WS_NAME}*/}
       <hr />
-      <pre style={{fontSize:15}}>
+      <pre style={{ fontSize: 15, fontWeight:"bold"}}>
         {noti.NOTI_DESC}
       </pre>
-     
+
       <hr />
       <div>
         알림 시간 : {noti.NOTI_TIME}
 
         <Button
-          style={{ marginLeft: 60, backgroundColor:'#f47174',border:'1px solid #f47174' }}
-          
+          style={{ marginLeft: 60, backgroundColor: '#f47174', border: '1px solid #f47174' }}
+
           onClick={e => {
             console.log(noti.NOTI_ID);
             onRemove(noti);
           }}
-    
-          >삭제
-         
+
+        >삭제
+
         </Button>
         <Button
           onClick={e =>
             onToggle(noti)
           }
-          style={{ marginLeft: 5 , backgroundColor:'#6797fa',border:'1px solid #6797fa'}}
-        >{noti.NOTI_CHECKED === "1"?  "안 읽음" : "읽음"}
+          style={{ marginLeft: 5, backgroundColor: '#6797fa', border: '1px solid #6797fa' }}
+        >{noti.NOTI_CHECKED === '1' ? '안 읽음' : '읽음'}
         </Button>
       </div>
     </Alert>

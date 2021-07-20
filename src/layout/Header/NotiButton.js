@@ -6,7 +6,7 @@ import { IoIosNotificationsOutline } from 'react-icons/all';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { changeNotiCheck, postNoti } from '../../modules/notification';
-import { ListItem } from '@material-ui/core';
+import { Badge, ListItem } from '@material-ui/core';
 
 const StyledMenu = withStyles({
   paper: {
@@ -46,14 +46,14 @@ const NotiButton = () => {
   const notification = useSelector(state => state.notification.noti);
 
   const changeRead = useCallback(
-    noti=>dispatch(changeNotiCheck(noti)),
-    [notification]
-  )
+    noti => dispatch(changeNotiCheck(noti)),
+    [notification],
+  );
 
   const onClick = noti => {
     history.push(`/workspace/${noti.WS_ID}`);
     changeRead(noti);
-  }
+  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -63,17 +63,27 @@ const NotiButton = () => {
     setAnchorEl(null);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(postNoti());
   }, []);
 
   return (
     <>
-      <IoIosNotificationsOutline
-        color='#FFFFFF'
-        size='30'
-        onClick={handleClick}
-      />
+      <Badge
+        badgeContent={
+          notification
+            .filter(noti => noti.NOTI_CHECKED === '0')
+            .length
+        }
+        color="secondary"
+        max="999"
+      >
+        <IoIosNotificationsOutline
+          color='#FFFFFF'
+          size='30'
+          onClick={handleClick}
+        />
+      </Badge>
 
       <StyledMenu
         id='customized-menu'
@@ -84,12 +94,12 @@ const NotiButton = () => {
       >
         {
           notification
-            .filter(noti => noti.NOTI_CHECKED !== "1")
+            .filter(noti => noti.NOTI_CHECKED !== '1')
             .map((noti) => {
               return <StyledMenuItem key={noti.NOTI_ID}>
                 <ListItem
                   key={noti.NOTI_ID}
-                  onClick={e=>{
+                  onClick={e => {
                     onClick(noti);
                     handleClose();
                   }}

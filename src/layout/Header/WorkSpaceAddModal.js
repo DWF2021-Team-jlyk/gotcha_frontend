@@ -88,7 +88,7 @@ const WorkSpaceAddModal = (props) => {
 
     const options = {
       method: 'POST',
-      headers: { 
+      headers: {
         "Authorization": token,
       },
       data: formData,
@@ -106,30 +106,30 @@ const WorkSpaceAddModal = (props) => {
   }
 
   // 파일 추가 버튼
-function onFileChange(e) {
-  let file = e.target.files[0]
-  const reg = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/i;
-  if(reg.test(file.name)) {
-    let reader = new FileReader();
-    reader.onloadend = () => {
-    const prev = reader.result;
-    if (prev)
-      setPreviewImg(prev.toString());
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-      setImage(file);
-      setImageName(file.name);
+  function onFileChange(e) {
+    let file = e.target.files[0]
+    const reg = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/i;
+    if(reg.test(file.name)) {
+      let reader = new FileReader();
+      reader.onloadend = () => {
+        const prev = reader.result;
+        if (prev)
+          setPreviewImg(prev.toString());
+      };
+      if (file) {
+        reader.readAsDataURL(file);
+        setImage(file);
+        setImageName(file.name);
+      }
+    }else {
+      alert('이미지 파일만 선택 가능합니다.');
     }
-  }else {
-    alert('이미지 파일만 선택 가능합니다.');
-  }
-  
-}
 
-const closeHandler = () => {
-  props.handleClose()
-}
+  }
+
+  const closeHandler = () => {
+    props.handleClose()
+  }
 
   return (
     <Modal
@@ -159,29 +159,29 @@ const closeHandler = () => {
           <br />
           <Form.Group>
             <Form.Label><b>WorkSpace Thumbnail 사진</b></Form.Label>
-                <div style={{display:'flex'}}>
-                  <div style={{marginRight:10, marginTop:6}}>
-                    <Form.Control
-                      type="text"
-                      value={imageName}
-                      disabled
-                      style={{width:500}}
-                    />
-                  </div>
-                  <div>
-                    <input accept="image/png,image/jpeg,image/gif" className={classes.input} id="icon-button-file" type="file" onChange={onFileChange} />
-                    <label htmlFor="icon-button-file">
-                      <IconButton color="primary" aria-label="upload picture" component="span">
-                        <PhotoCamera />
-                      </IconButton>
-                    </label>
-                  </div>
-                </div>
-                  <div style={{textAlign:'center', marginTop:10}}>
-                    {
-                      previewImg === '' || previewImg === undefined ? null : <img src={previewImg} alt='img' height={'200px'} />
-                    }
-                  </div>
+            <div style={{display:'flex'}}>
+              <div style={{marginRight:10, marginTop:6}}>
+                <Form.Control
+                  type="text"
+                  value={imageName}
+                  disabled
+                  style={{width:500}}
+                />
+              </div>
+              <div>
+                <input accept="image/png,image/jpeg,image/gif" className={classes.input} id="icon-button-file" type="file" onChange={onFileChange} />
+                <label htmlFor="icon-button-file">
+                  <IconButton color="primary" aria-label="upload picture" component="span">
+                    <PhotoCamera />
+                  </IconButton>
+                </label>
+              </div>
+            </div>
+            <div style={{textAlign:'center', marginTop:10}}>
+              {
+                previewImg === '' || previewImg === undefined ? null : <img src={previewImg} alt='img' height={'200px'} />
+              }
+            </div>
           </Form.Group>
           <br />
           <Form.Label><b>Member Invite</b></Form.Label>
@@ -195,6 +195,8 @@ const closeHandler = () => {
                 list={emailList}
                 setList={setEmailList}
                 user_id={email}
+                invite={false}
+                role='ADMIN'
               />
             );
           })}

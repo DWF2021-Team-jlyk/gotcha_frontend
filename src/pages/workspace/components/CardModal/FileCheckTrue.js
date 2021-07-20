@@ -7,6 +7,8 @@ import {
   postCardFile,
 } from '../../../../modules/cardFile';
 import Helpers from './Helpers';
+import { AiOutlineDownload, BsCardImage } from 'react-icons/all';
+import { AiOutlineDelete } from 'react-icons/ai';
 
 const FileCheckTrue = (props) => {
   const { file, cardId } = props;
@@ -17,6 +19,20 @@ const FileCheckTrue = (props) => {
   // const postFile = useEffect(()=>{
   //   dispatch(postCardFile(cardId));
   // },[file.file_id]);
+
+  const isImage = useCallback((fileName) => {
+    const index = fileName.lastIndexOf('.');
+    const ext = fileName.substr(index+1).toLowerCase();
+    console.log(index);
+    switch(ext){
+      case 'jpg':
+      case 'png':
+      case 'webp':
+        return true;
+      default:
+        return false;
+    }
+  },[]);
 
   const updateFileIschecked = useCallback(
     (fileIsChecked) => {
@@ -89,7 +105,7 @@ const FileCheckTrue = (props) => {
           setFileButtons(!fileButtons);
         }}
       />
-      <div style={{ marginLeft: 5, width: '100%', minWidth: 100 }}>
+      <div style={{ marginLeft: 5, width: '100%', minWidth: 100, height:35}}>
         {/* <div style={{ marginLeft: 5, width:'100px'}}> */}
         {file.file_name}&ensp;
       </div>
@@ -108,35 +124,10 @@ const FileCheckTrue = (props) => {
           name={file.file_id}
           //key={key}
           onClick={(e) => {
-            //if (!updateCheck) {
-            //console.log(item);
-            // Helpers.httpRequest(`http://localhost/:3000${file.file_path}`, 'get')
-            //   .then((response) => response.blob())
-            //   .then((blob) => {
-            //     // create blob link
-            //     const url = window.URL.createObjectURL(new Blob([blob]));
-            //     const link = document.createElement('a');
-            //     link.href = url;
-            //     link.setAttribute('download', `${file.file_name}`);
-
-            //     // append to html
-            //     document.body.appendChild(link);
-
-            //     // download
-            //     link.click();
-
-            //     // remove
-            //     link.parentNode.removeChild(link);
-            //   });
-            // .catch((error) => {
-            //   error.json().then((json) => {});
-            // });
-            //}
             download();
           }}
         >
-
-          download
+          <AiOutlineDownload/>
         </Button>
 
         &nbsp;
@@ -148,8 +139,22 @@ const FileCheckTrue = (props) => {
             deleteCardFiles(file.file_id);
           }}
         >
-          delete
+          <AiOutlineDelete/>
         </Button>
+
+        &nbsp;
+
+        {isImage(file.file_name)&&
+          <Button
+            variant="secondary"
+            style={{height:35}}
+            onClick={()=>{
+            }}
+          >
+            <BsCardImage/>
+          </Button>
+        }
+
       </>
       }
     </div>

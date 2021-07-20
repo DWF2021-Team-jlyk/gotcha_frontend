@@ -389,47 +389,47 @@ const Mypage = () => {
     </div>
   );
 
-  const leaveBody = (
-    <div className={classes.paper}>
-      <div className="modaltitle" id="simple-modal-title">
-        회원탈퇴
-      </div>
-
-      <table id="simple-modal-description" className={classes.tableStyle}>
-        <tr>
-          <td>비밀번호를 입력해주세요</td>
-          <td>
-            <TextField
-              required
-              id="outlined-required"
-              type="password"
-              placeholder="비밀번호 입력"
-              variant="outlined"
-              size="small"
-              onChange={leavePwdInput}
-            />
-          </td>
-          <td>
-            <Button variant="contained" color="primary" disabled={isActive} onClick={leaveBtn}>
-              탈퇴하기
-            </Button>
-          </td>
-        </tr>
-        {   
-              isResult ? 
-              null
-              : 
-              <tr>
-                <td></td> 
-                <td className={classes.pwdFalseFont}>
-                  비밀번호가 일치하지 않습니다.
-                </td>
-                <td></td>
-              </tr>
-        }
-      </table>
-    </div>
-  );
+  // const leaveBody = (
+  //   <div className={classes.paper}>
+  //     <div className="modaltitle" id="simple-modal-title">
+  //       회원탈퇴
+  //     </div>
+  //
+  //     <table id="simple-modal-description" className={classes.tableStyle}>
+  //       <tr>
+  //         <td>비밀번호를 입력해주세요</td>
+  //         <td>
+  //           <TextField
+  //             required
+  //             id="outlined-required"
+  //             type="password"
+  //             placeholder="비밀번호 입력"
+  //             variant="outlined"
+  //             size="small"
+  //             onChange={leavePwdInput}
+  //           />
+  //         </td>
+  //         <td>
+  //           <Button variant="contained" color="primary" disabled={isActive} onClick={leaveBtn}>
+  //             탈퇴하기
+  //           </Button>
+  //         </td>
+  //       </tr>
+  //       {
+  //             isResult ?
+  //             null
+  //             :
+  //             <tr>
+  //               <td></td>
+  //               <td className={classes.pwdFalseFont}>
+  //                 비밀번호가 일치하지 않습니다.
+  //               </td>
+  //               <td></td>
+  //             </tr>
+  //       }
+  //     </table>
+  //   </div>
+  // );
 
   return (
     <div className={classes.mypagePosition}>
@@ -511,36 +511,36 @@ const Mypage = () => {
             </td>
           </tr>
 
-          <tr>
-            <td>
-              <Chip
-                label="&emsp;&nbsp;leave&emsp;&nbsp;"
-                variant="outlined"
-                color="primary"
-                style={{ fontSize: 18 }}
-              />{" "}
-            </td>
+          {/*<tr>*/}
+          {/*  <td>*/}
+          {/*    <Chip*/}
+          {/*      label="&emsp;&nbsp;leave&emsp;&nbsp;"*/}
+          {/*      variant="outlined"*/}
+          {/*      color="primary"*/}
+          {/*      style={{ fontSize: 18 }}*/}
+          {/*    />{" "}*/}
+          {/*  </td>*/}
 
-            <td>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={leavehandleOpen}
-              >
-                &emsp;&emsp;회원탈퇴&emsp;&emsp;
-              </Button>
+          {/*  <td>*/}
+          {/*    <Button*/}
+          {/*      variant="contained"*/}
+          {/*      color="primary"*/}
+          {/*      onClick={leavehandleOpen}*/}
+          {/*    >*/}
+          {/*      &emsp;&emsp;회원탈퇴&emsp;&emsp;*/}
+          {/*    </Button>*/}
 
-              <Modal
-                open={leaveopen}
-                className={classes.modal}
-                onClose={leavehandleClose}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-              >
-                {leaveBody}
-              </Modal>
-            </td>
-          </tr>
+          {/*    <Modal*/}
+          {/*      open={leaveopen}*/}
+          {/*      className={classes.modal}*/}
+          {/*      onClose={leavehandleClose}*/}
+          {/*      aria-labelledby="simple-modal-title"*/}
+          {/*      aria-describedby="simple-modal-description"*/}
+          {/*    >*/}
+          {/*      {leaveBody}*/}
+          {/*    </Modal>*/}
+          {/*  </td>*/}
+          {/*</tr>*/}
         </table>
       </div>
     </div>

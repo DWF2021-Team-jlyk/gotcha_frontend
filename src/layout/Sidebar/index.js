@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import MainList from './MainList';
 import './sidebar.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { postWorkspaces } from '../../modules/workspace';
+import { initWorkspace, postWorkspaces } from '../../modules/workspace';
 
 const useStyles = makeStyles((theme) => ({
   navName: {
@@ -26,6 +26,9 @@ const Sidebar = () => {
 
   useEffect(() => {
     dispatch(postWorkspaces());
+    return ()=>{
+      dispatch(initWorkspace());
+    }
   }, []);
 
   return (

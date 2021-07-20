@@ -1,6 +1,6 @@
 import createRequest from '../lib/createRequest';
 import * as api from '../lib/notiAPI';
-import { handleActions } from 'redux-actions';
+import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 
 const ADD_NOTI = 'notification/ADD_NOTI';
@@ -22,6 +22,9 @@ export const addNoti = noti => ({ type: ADD_NOTI, noti });
 export const postNoti = createRequest(POST_NOTI, api.postNoti);
 export const deleteNoti = createRequest(DELETE_NOTI, api.deleteNoti);
 export const changeNotiCheck = createRequest(CHANGE_NOTI_CHECK, api.changeNotiCheck);
+
+export const initNoti = createAction(INIT_NOTI);
+
 //
 // const initialState = [
 //

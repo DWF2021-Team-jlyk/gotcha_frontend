@@ -1,12 +1,12 @@
 import { Card, Row } from 'react-bootstrap';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
-// import uploadImg from '../../../upload/workspaces';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { updateWorkspace } from '../../../modules/workspace';
 import { useDispatch } from 'react-redux';
 import HomeStyles from '../HomeStyles';
+import "antd/dist/antd.css"
+import { Image } from 'antd';
 
 
 const WorkSpaceCard = ({ workspace }) => {
@@ -27,9 +27,9 @@ const WorkSpaceCard = ({ workspace }) => {
 
   return (
     <Card style={HomeStyles.cardStyle}>
-      <div style={{ textAlign: 'center' }}>
-        <Card.Img variant='top' style={{ width:'100%', height: 150}} src={ws.ws_isImage === null ? noImg : imgSrc} />
-      </div>
+      <Image.PreviewGroup>
+        <Image variant='top' style={{ width:'100%', height: 150}} src={ws.ws_isImage === null ? noImg : imgSrc} />
+      </Image.PreviewGroup>
 
       <Card.Body style={{ backgroundColor: '#f7f7f7' }}>
         <Row>

@@ -17,6 +17,8 @@ import {
 import { cardAdd, cardUpdate } from '../../../../modules/workspaceCard';
 import { AiFillEdit } from 'react-icons/all';
 import { Form } from 'react-bootstrap';
+import 'antd/dist/antd.css';
+import { Tooltip } from 'antd';
 
 const PlusIcon = {
   fontSize: '1.5rem',
@@ -69,10 +71,10 @@ const WorkListCardList = (props) => {
         list_id: list.list_id,
         ws_id: ws_id,
         card_name: cardTitle,
-        card_desc: '',
+        card_desc: null,
         card_isdone: '0',
-        card_start_date: '',
-        card_end_date: '',
+        card_start_date: null,
+        card_end_date: null,
         position: position,
         user_id: userId,
       }),
@@ -88,10 +90,22 @@ const WorkListCardList = (props) => {
   }, [list]);
 
   return (
-    <Card className="ListStyle">
-      <Card.Header className="CardHeaderStyle">
+    <Card className='ListStyle'>
+      <Card.Header className='CardHeaderStyle'>
         <input defaultValue={listName} onChange={onListNameChange} />
-        <AiOutlinePlusCircle style={PlusIcon} onClick={handleClick} />
+        {/*<AiOutlinePlusCircle style={PlusIcon} onClick={handleClick} />*/}
+
+        <Tooltip title='누르면 리스트가 삭제 됩니다.'>
+          <AiFillDelete
+            style={{
+              float: 'right',
+              fontSize: '1.5rem',
+            }}
+            onClick={(e) => {
+              dispatch(listDelete(list));
+            }}
+          />
+        </Tooltip>
 
         <AiFillEdit
           style={{
@@ -104,34 +118,26 @@ const WorkListCardList = (props) => {
         />
       </Card.Header>
 
-      <Menu
-        id="simple-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-        <MenuItem
-          onClick={(e) => {
-            onListRemove();
-            handleClose();
-          }}
-        >
-          <AiFillDelete style={IconMargin} />
-          List Delete
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <AiFillCopy style={IconMargin} />
-          List Copy
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <AiOutlineDelete style={IconMargin} />
-          Delete All Cards
-        </MenuItem>
-      </Menu>
+      {/*<Menu*/}
+      {/*  id="simple-menu"*/}
+      {/*  anchorEl={anchorEl}*/}
+      {/*  keepMounted*/}
+      {/*  open={Boolean(anchorEl)}*/}
+      {/*  onClose={handleClose}*/}
+      {/*>*/}
+      {/*  <MenuItem*/}
+      {/*    onClick={(e) => {*/}
+      {/*      onListRemove();*/}
+      {/*      handleClose();*/}
+      {/*    }}*/}
+      {/*  >*/}
+      {/*    <AiFillDelete style={IconMargin} />*/}
+      {/*    List Delete*/}
+      {/*  </MenuItem>*/}
+      {/*</Menu>*/}
 
-      <Card.Body className="ListBodyStyle">
-        <div style={{marginLeft:63, marginBottom:10, fontSize:'.9rem', color:'#7092be'}}>Press Enter to Add</div>
+      <Card.Body className='ListBodyStyle'>
+        <div style={{ marginLeft: 63, marginBottom: 10, fontSize: '.9rem', color: '#7092be' }}>Press Enter to Add</div>
         {cards
           .filter((card) => {
             return card.list_id === listId;
@@ -182,8 +188,8 @@ const WorkListCardList = (props) => {
 
       <Card.Footer>
         <Button
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
           onClick={async (e) => {
             await setShowCardInput(true);
             cardInputEl.current.focus();
