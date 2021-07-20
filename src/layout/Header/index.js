@@ -60,7 +60,6 @@ const Header = () => {
                 }}
             >
                 <Help/>
-                &ensp;
                 <WorkSpaceAddButton/>
                 &ensp;
                 <NotiButton/>
