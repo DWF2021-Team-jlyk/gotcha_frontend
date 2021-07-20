@@ -42,7 +42,7 @@ const TodoCheckTrue = (props) => {
       />
 
       <div
-        style={{ marginLeft: 5, width: '100%', minWidth: 200 }}
+        style={{ marginLeft: 5, width: 209, minWidth: 200 }}
         contentEditable
       >
         <del>{todo.todo_name}</del>

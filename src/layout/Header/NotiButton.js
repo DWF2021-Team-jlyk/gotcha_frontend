@@ -106,6 +106,7 @@ const NotiButton = () => {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        style={{maxHeight:400}}
       >
         {
           notification

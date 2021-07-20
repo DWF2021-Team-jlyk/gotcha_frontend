@@ -2,6 +2,7 @@ import {
   Button,
   Modal,
   Row,
+  Col
 } from 'react-bootstrap';
 import React, { useState } from 'react';
 import AdminUserAvatar from './AdminUserAvatar';
@@ -44,12 +45,13 @@ function RoleModal({ role, leaveModal, leaveModalClose, userList, ws_id, user_id
         <Modal.Header style={{ backgroundColor: '#3f51b5', color: 'white' }}>
           <Modal.Title>Admin 양도</Modal.Title>
         </Modal.Header>
+
         <Modal.Body>
           <div>Member 선택</div>
-          <Row lg={2} style={{ marginTop: 20 }}>
+          <Row style={{ marginTop: 20 }}>
             {userList.map((value, index) => {
               return value === user_id ? null :
-                <AdminUserAvatar user_id={value} key={index} ws_id={ws_id} />
+               <Col><AdminUserAvatar user_id={value} key={index} ws_id={ws_id} /></Col> 
             })}
 
           </Row>
