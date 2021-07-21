@@ -9,10 +9,8 @@ import { updateCardTodo } from '../../../../modules/cardTodo';
 
 const CardTodo = (props) => {
   const{cardId} = props;
-  console.log('cardTodo cardId',cardId);
 
   const todos = useSelector(state => state.cardTodo.todos);
-  console.log('cardTodo todos',todos);
   const dispatch = useDispatch();
 
   useEffect(()=>{

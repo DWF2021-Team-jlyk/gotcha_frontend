@@ -5,7 +5,6 @@ import produce from 'immer';
 
 const POST_WS_MEMBER = 'home/POST_WS_MEMBER';
 const POST_WS_MEMBER_SUCCESS = 'home/POST_WS_MEMBER_SUCCESS';
-// const POST_WS_MEMBER_FAILURE = 'home/POST_WS_MEMBER_FAILURE';
 const WS_MEMBER_UNMOUNT = 'home/WS_MEMBER_UNMOUNT';
 
 

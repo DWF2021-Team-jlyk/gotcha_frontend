@@ -10,8 +10,6 @@ import { applyMiddleware, createStore } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import { createLogger } from 'redux-logger/src';
 
-
-// const store = createStore(rootReducer, composeWithDevTools());
 const logger = createLogger();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(logger, ReduxThunk)));
 

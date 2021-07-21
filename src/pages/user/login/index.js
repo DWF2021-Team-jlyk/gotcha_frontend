@@ -21,9 +21,6 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            {/* <Link color="inherit" href="https://material-ui.com/">
-        GotCha
-        </Link>{' '} */}
             GotCha
             &nbsp;{new Date().getFullYear()}
             {'.'}
@@ -93,10 +90,7 @@ export default function Login() {
                         id="password"
                         autoComplete="current-password"
                     />
-                    {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
+
                     <Button
                         type="submit"
                         fullWidth

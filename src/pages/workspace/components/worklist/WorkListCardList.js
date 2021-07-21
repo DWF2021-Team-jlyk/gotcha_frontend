@@ -93,7 +93,6 @@ const WorkListCardList = (props) => {
     <Card className='ListStyle'>
       <Card.Header className='CardHeaderStyle'>
         <input defaultValue={listName} onChange={onListNameChange} />
-        {/*<AiOutlinePlusCircle style={PlusIcon} onClick={handleClick} />*/}
 
         <Tooltip title='누르면 리스트가 삭제 됩니다.'>
           <AiFillDelete
@@ -117,24 +116,6 @@ const WorkListCardList = (props) => {
           }}
         />
       </Card.Header>
-
-      {/*<Menu*/}
-      {/*  id="simple-menu"*/}
-      {/*  anchorEl={anchorEl}*/}
-      {/*  keepMounted*/}
-      {/*  open={Boolean(anchorEl)}*/}
-      {/*  onClose={handleClose}*/}
-      {/*>*/}
-      {/*  <MenuItem*/}
-      {/*    onClick={(e) => {*/}
-      {/*      onListRemove();*/}
-      {/*      handleClose();*/}
-      {/*    }}*/}
-      {/*  >*/}
-      {/*    <AiFillDelete style={IconMargin} />*/}
-      {/*    List Delete*/}
-      {/*  </MenuItem>*/}
-      {/*</Menu>*/}
 
       <Card.Body className='ListBodyStyle'>
         <div style={{ marginLeft: 63, marginBottom: 10, fontSize: '.9rem', color: '#7092be' }}>Press Enter to Add</div>
@@ -161,7 +142,6 @@ const WorkListCardList = (props) => {
               onKeyPress={(e) => {
                 if (e.key === 'Enter') {
                   if (e.target.value !== '') {
-                    console.log('TTTTTTTTTTTTTTTT', cardTitle);
                     onCardAdd();
                     e.target.value = '';
                     setCardTitle('');

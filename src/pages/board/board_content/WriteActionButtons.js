@@ -34,8 +34,6 @@ const WriteActionButtons = ({
 }) => {
   const dispatch = useDispatch();
   const {ws_id} = useParams();
-  console.log("isActive ",isActive)
-  console.log('WriteActionButton ws_id', ws_id);
   if (board?.id === null || board?.id === undefined) {
     return (
       <WriteActionButtonsBlock>

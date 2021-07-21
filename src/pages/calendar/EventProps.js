@@ -1,7 +1,5 @@
 export default (event, start, end, isSelected) => {
   const isDone = event.card.card_isdone;
-  console.log(event);
-  console.log(new Date(end));
   if (isDone === '1') {
     return {
       style: { backgroundColor: '#b4e6b3' },

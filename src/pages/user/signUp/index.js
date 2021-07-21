@@ -19,9 +19,6 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright ©'}
-            {/* <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '} */}
             &nbsp;GotCha
             &nbsp;{new Date().getFullYear()}
             {'.'}
@@ -46,12 +43,6 @@ const useStyles = makeStyles((theme) => ({
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
-    },
-    style: {
-        // position: "absolute",
-        // top: "23%",
-        // left: "50%",
-        // transform: "translateX(-50%)",
     },
     formDiv: {
         width: 800,
@@ -100,14 +91,6 @@ function Join() {
             }
         }, []);
     }
-
-    // const [inputs, setInputs] = useState({
-    //   email:'',
-    //   username:'',
-    //   password:'',
-    // });
-
-    //const { email, username, password } = inputs;
 
     return (
         <>
@@ -207,15 +190,6 @@ function Join() {
         </div>
         </>
     );
-
-    // function onChange(e) {
-    //   const {value, name} = e.target;
-
-    //   setInputs({
-    //     ...inputs,
-    //     [name]: value
-    //   })
-    // }
 }
 
 

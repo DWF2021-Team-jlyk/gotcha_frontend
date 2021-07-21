@@ -17,9 +17,6 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      {/* <Link color="inherit" href="https://material-ui.com/">
-      GotCha
-      </Link>{' '} */}
       &nbsp;GotCha 
       &nbsp;{new Date().getFullYear()}
       {'.'}
@@ -45,14 +42,6 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-
-  style: {
-    // display: "flex",
-    // position: "absolute",
-    // top: "23%",
-    // left: "50%",
-    // transform: "translateX(-50%)",
-  },
   formDiv: {
     width: 800,
     height: 400,
@@ -77,7 +66,6 @@ const Pwdfind = () => {
     axios.post('/user/pwdFind',{
       "user_id": data.email,
     }).then(res => {
-      console.log(res)
       if(res.data === true) {
         alert("이메일을 확인해 주시기 바랍니다.")
         history.push('/Login')
@@ -122,11 +110,7 @@ const Pwdfind = () => {
         />
           {errors.email?.type === 'required' && "email is required"
           || errors.email?.type === 'pattern' && "사용할 수 없는 이메일입니다."}
-        
-          {/* <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          /> */}
+
           <Button
             type="submit"
             fullWidth

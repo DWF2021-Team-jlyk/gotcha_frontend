@@ -100,8 +100,6 @@ const workspaceCard = handleActions(
         );
         const originListId = card.list_id;
         const originPosition = card.position;
-        console.log('originListId', originListId);
-        // draft.cards.splice(index, 1, action.payload);
         const cards = draft.cards.map((card) => {
           if (
             card.list_id === action.list_id &&
@@ -116,9 +114,6 @@ const workspaceCard = handleActions(
           ) {
             card.position = card.position - 1;
           }
-
-          // if(card.card_id === action.payload.card_id)
-          //   card = action.payload;
           if (card.card_id === action.payload.card_id) {
             card.card_id = action.payload.card_id;
             card.list_id = action.payload.list_id;
@@ -142,7 +137,6 @@ const workspaceCard = handleActions(
           //변하기 전 상태
         );
         const originListId = card.list_id;
-        console.log('originListId', originListId);
         const originPosition = card.position;
 
         const cards = draft.cards.map((card) => {

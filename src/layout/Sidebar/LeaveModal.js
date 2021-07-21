@@ -12,9 +12,6 @@ import { useDispatch } from 'react-redux';
 import { postWorkspaces } from '../../modules/workspace';
 
 function RoleModal({ role, leaveModal, leaveModalClose, userList, ws_id, user_id }) {
-  console.log('length ',userList.length)
-  console.log('role ',role)
-
   const [reason, setReason] = useState("");
 
   const dispatch = useDispatch();

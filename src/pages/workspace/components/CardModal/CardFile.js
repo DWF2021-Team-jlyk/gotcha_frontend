@@ -7,17 +7,15 @@ import CardFileForm from '../CardModal/CardFileForm';
 import { useSelector, useDispatch } from 'react-redux';
 import { postCardFile } from '../../../../modules/cardFile';
 import FileCheckTrue from './FileCheckTrue';
-import FileCheckFalse from './FileCheckFalse';
 import { insertCardAct } from '../../../../modules/cardAct';
 
 const CardFile = (props) => {
   const { cardId } = props;
-  console.log('CardFile cardId', cardId);
+
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
   const files = useSelector((state) => state.cardFile.files);
-  console.log('CardFile files', files);
   const dispatch = useDispatch();
 
   useEffect(() => {

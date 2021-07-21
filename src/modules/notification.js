@@ -25,12 +25,6 @@ export const changeNotiCheck = createRequest(CHANGE_NOTI_CHECK, api.changeNotiCh
 
 export const initNoti = createAction(INIT_NOTI);
 
-//
-// const initialState = [
-//
-//   ...AppInitData.notifications
-// ]
-
 const initialState = {
   noti: [],
 };
@@ -59,8 +53,6 @@ const notification = handleActions(
       }),
     [CHANGE_NOTI_CHECK_SUCCESS]:(state, action)=>
       produce(state, draft=>{
-        console.log("notiRedux",state);
-        console.log(action.payload);
         const noti = draft.noti.find(value=>
           value.NOTI_ID === parseInt(action.payload.NOTI_ID));
         if(noti.NOTI_CHECKED === "0")

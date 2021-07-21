@@ -40,7 +40,6 @@ const Pwdfind = () => {
 
   const onSubmit = (data,e) => {
     e.preventDefault();
-    console.log(data);
   }
 
   return (
@@ -72,11 +71,7 @@ const Pwdfind = () => {
         />
           {errors.email?.type === 'required' && "email is required"
           || errors.email?.type === 'pattern' && "사용할 수 없는 이메일입니다."}
-        
-          {/* <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          /> */}
+
           <Button
             type="submit"
             fullWidth

@@ -43,7 +43,6 @@ export default function AddDate(props) {
     }, [card],
   );
 
-  console.log('Date ...card', { ...card });
 
   return (
     <div ref={ref}>

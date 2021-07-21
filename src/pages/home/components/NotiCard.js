@@ -54,7 +54,6 @@ const NotiCard = ({ noti }) => {
           <h4 style={{ marginBottom: 20 }}>[{returnType(noti.NOTI_TYPE)}] {noti.WS_NAME}</h4>
         </div>
       </Alert.Link>
-      {/*{noti.WS_NAME}*/}
       <hr />
       <pre style={{ fontSize: 15, fontWeight:"bold"}}>
         {noti.NOTI_DESC}

@@ -31,7 +31,6 @@ const UserAvatar = (props) => {
     });
     dispatch(postNoti());
   };
-  console.log('invite ', invite);
 
   useEffect(()=>{
     setReason("");

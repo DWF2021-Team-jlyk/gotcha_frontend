@@ -64,20 +64,6 @@ export const modifyCardMove = ({
         card_id: card_id
     });
 
-
-// export const updateDestPosition = ({
-//                                     ws_id: ws_id,
-//                                     list_id: list_id,
-//                                     position: position,
-//                                     card_id: card_id
-//                                   }) => 
-//     apiAxios('/cardDetail/Action/updateNowPosition',{
-//         ws_id: ws_id,
-//         list_id: list_id,
-//         position: position,
-//         card_id: card_id
-//     });
-    
 export const modifyNowPosition = ({list_id: list_id, position:position}) =>
     apiAxios('/cardDetail/Action/updateNowPosition', {
       list_id: list_id, 

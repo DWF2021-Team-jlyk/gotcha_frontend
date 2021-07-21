@@ -17,9 +17,6 @@ function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
-      {/* <Link color="inherit" href="https://material-ui.com/">
-        GotCha
-        </Link>{' '} */}
       &nbsp;GotCha
       &nbsp;{new Date().getFullYear()}
       {'.'}
@@ -44,12 +41,6 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-  },
-  style: {
-    // position: 'absolute',
-    // top: '23%',
-    // left: '50%',
-    // transform: 'translateX(-50%)',
   },
   formDiv: {
     width: 800,

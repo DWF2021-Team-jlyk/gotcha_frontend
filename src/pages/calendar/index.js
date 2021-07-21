@@ -17,10 +17,6 @@ import EventProps from './EventProps';
 moment.locale('ko');
 BigCalendar.momentLocalizer(moment);
 
-// const allViews = Object
-//   .keys(BigCalendar.Views)
-//   .map(k => BigCalendar.Views[k]);
-
 const MyCalendar = () => {
   const lists = useSelector(state => state.workspaceList.lists);
   const cards = useSelector(state => state.workspaceCard.cards);
@@ -65,7 +61,6 @@ const MyCalendar = () => {
           views={BigCalendar.Views.values}
           defaultDate={new Date()}
           selectable
-          onSelectSlot={(slotInfo) => console.log(slotInfo)}
           onSelectEvent={(event, e) => {
             setLoadModal(true);
             setCardId(event.card_id);

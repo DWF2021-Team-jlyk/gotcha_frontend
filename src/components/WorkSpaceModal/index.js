@@ -42,9 +42,6 @@ const WorkSpaceModal = (props) => {
               <Col sm={8}>
                 <input type='image' />
               </Col>
-              {/*<Col sm={4}>*/}
-              {/*  <Button>사진 추가하기</Button>*/}
-              {/*</Col>*/}
             </Row>
           </Form.Group>
           <br />

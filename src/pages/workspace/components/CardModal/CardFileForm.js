@@ -40,7 +40,6 @@ export default function CardFileForm(props) {
       }
     };
     if (e.target.files[0]) {
-      console.log('fileInfo ', e.target.files[0])
       reader.readAsDataURL(e.target.files[0]);
       setFile(e.target.files[0]);
 
@@ -57,35 +56,9 @@ export default function CardFileForm(props) {
     const formData = new FormData();
     formData.append('card_id', cardId);
     formData.append('file', file);
-    //formData.append('file_ischecked','0');
-
-    //await fileAxios('/cardDetail/file/upload',file);
-    // const url = '/cardDetail/file/upload';
-
-    // const options = {
-    //   method: 'POST',
-    //   headers: {
-    //    "Authorization": sessionStorage.getItem('accessToken'),
-    //   },
-    //   data:
-    //     formData,
-    //   url,
-    // };
-
-    // const response = await axios(options);
-    // console.log(response);
-    console.log('formData : ' + formData);
     dispatch(addCardFile(formData));
   };
 
-  const saveFiles = () => {};
-
-  // const addCardFiles = useCallback((card_id, file_name)=>{
-  //   dispatch (addCardFile({
-  //     card_id: card_id,
-  //     file_name:file_name,
-  //   }))
-  // },[])
 
   return (
     <Form>

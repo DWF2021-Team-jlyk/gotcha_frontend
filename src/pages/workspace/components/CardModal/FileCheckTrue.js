@@ -16,14 +16,9 @@ const FileCheckTrue = (props) => {
 
   const dispatch = useDispatch();
 
-  // const postFile = useEffect(()=>{
-  //   dispatch(postCardFile(cardId));
-  // },[file.file_id]);
-
   const isImage = useCallback((fileName) => {
     const index = fileName.lastIndexOf('.');
     const ext = fileName.substr(index+1).toLowerCase();
-    console.log(index);
     switch(ext){
       case 'jpg':
       case 'png':
@@ -110,7 +105,6 @@ const FileCheckTrue = (props) => {
         {file.file_name}&ensp;
       </div>
 
-      {/* <button>download</button>  */}
       {fileButtons&&<>
         <Button
           style={{

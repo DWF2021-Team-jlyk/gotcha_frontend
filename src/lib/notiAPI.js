@@ -5,7 +5,6 @@ export const postNoti =
 
 export const deleteNoti =
   noti_id => {
-  console.log("deleteNoti : " + noti_id);
   return apiAxios('/noti/deleteNoti', noti_id)
 };
 

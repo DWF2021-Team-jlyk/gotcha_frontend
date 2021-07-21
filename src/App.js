@@ -33,10 +33,6 @@ const LoginStyle = {
 const side = {
   background: '#7986cb',
 };
-// const horizontal = {
-//   width: 1920,
-//   overflowX: 'scroll',
-// };
 
 const App = () => {
   return (

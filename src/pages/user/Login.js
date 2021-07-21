@@ -18,9 +18,6 @@ function Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
-        {/* <Link color="inherit" href="https://material-ui.com/">
-        GotCha
-        </Link>{' '} */}
         &nbsp;GotCha 
         &nbsp;{new Date().getFullYear()}
         {'.'}
@@ -46,12 +43,6 @@ function Copyright() {
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
-    style: {
-      // position: "absolute",
-      // top: "23%",
-      // left: "50%",
-      // transform: "translateX(-50%)",
-    },
     formDiv: {
       width: 800,
       height: 430,
@@ -72,9 +63,6 @@ function Copyright() {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const onSubmit = (data,e) => {
       e.preventDefault();
-      
-      // const url = '/login'
-      
       const datas = { 
         "user_id": data.email,
         "user_pwd": data.password
@@ -82,16 +70,7 @@ function Copyright() {
       const headers = {
         'content-type': 'application/json'
       }
-      // const options = {
-      //   method: 'POST',
-      //   headers: { 'content-type': 'application/json' },
-      //   data: JSON.stringify(datas),
-      //   url,
-      // };
       axios.post('/login',datas,headers).then(res => {
-        console.log('res',res);
-        // console.log(Object.keys(res.headers))
-        console.log(res.headers.authorization)
         sessionStorage.setItem("accessToken",res.headers.authorization)
         history.push({
           pathname: '/',
@@ -101,14 +80,7 @@ function Copyright() {
         alert("아이디나 비밀번호가 일치하지 않습니다.")
         console.log('err', error)
       });
-      // history.push("/home") 
     };
-
-    // const onSubmit1 = (e) => {
-      
-    //   alert("click");
-    //   history.push("/home")
-    // }
 
     return (
       <>

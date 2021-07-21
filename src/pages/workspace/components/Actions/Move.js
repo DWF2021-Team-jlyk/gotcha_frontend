@@ -259,7 +259,6 @@ export default function CardMove({ card, ws_id }) {
                     <option aria-label='None' value='' />
 
                     {Array(position).map((n, index) => {
-                      console.log({ Array });
                       return (
                         <option aria-label='None' key={index} value={index}>
                           {index}
