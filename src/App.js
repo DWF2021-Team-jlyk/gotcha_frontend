@@ -5,7 +5,7 @@ import PublicRoute from './lib/pulblicRoute';
 import PrivateRoute from './lib/privateRoute';
 import { Router, Route } from 'react-router';
 
-import './layout/css/font.css';
+// import './layout/css/font.css';
 
 const Home = loadable(()=>import('./pages/home'));
 const Workspace = loadable(() => import('./pages/workspace'));

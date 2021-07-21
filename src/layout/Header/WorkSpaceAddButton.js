@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import loadable from '@loadable/component';
-import Tooltip from '@material-ui/core/Tooltip';
+import 'antd/dist/antd.css';
+import { Tooltip } from 'antd';
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
 
