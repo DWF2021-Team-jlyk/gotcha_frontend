@@ -138,16 +138,16 @@ const FileCheckTrue = (props) => {
 
         &nbsp;
 
-        {isImage(file.file_name)&&
-          <Button
-            variant="secondary"
-            style={{height:35}}
-            onClick={()=>{
-            }}
-          >
-            <BsCardImage/>
-          </Button>
-        }
+        {/*{isImage(file.file_name)&&*/}
+        {/*  <Button*/}
+        {/*    variant="secondary"*/}
+        {/*    style={{height:35}}*/}
+        {/*    onClick={()=>{*/}
+        {/*    }}*/}
+        {/*  >*/}
+        {/*    <BsCardImage/>*/}
+        {/*  </Button>*/}
+        {/*}*/}
 
       </>
       }
