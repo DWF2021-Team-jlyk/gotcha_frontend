@@ -4,6 +4,8 @@ import { Button, Modal, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { updateCardTodo, deleteCardTodo } from '../../../../modules/cardTodo';
 import TodoDate from './TodoDate';
+import { AiOutlineCalendar, AiOutlineDelete } from 'react-icons/ai';
+import { HiOutlineSave } from 'react-icons/all';
 
 const listButton = {
   backgroundColor: '#7986CB',
@@ -68,7 +70,7 @@ const TodoCheckFalse = (props) => {
       />
       <span contentEditable style={{ width: 200 }}>
         <textarea
-          style={{ border: 'none', resize: 'none', height: 30 }}
+          style={{ border: 'none', resize: 'none', height: 30, width:200, margin:0 }}
           onFocus={onFocusState}
           onBlur={outFocusState}
           onChange={(e) => setTodoName(e.target.value)}
@@ -78,13 +80,13 @@ const TodoCheckFalse = (props) => {
       </span>{' '}
       &nbsp;
       <Button onClick={handleShow} style={listButton}>
-        기간 설정
+        <AiOutlineCalendar
+          size={15}
+        />
       </Button>{' '}
-      {
-        todo.todo_start_date !== null && todo.todo_start_date !== "" &&
-        <TodoDate startDate={todo?.todo_start_date} endDate={todo?.todo_end_date}/>
-      }
-      <br></br>
+
+      <br/>
+      &nbsp;
       {isFocus ? (
         <>
           <span
@@ -93,7 +95,7 @@ const TodoCheckFalse = (props) => {
                 updateTodoName(todoName);
             }}
           >
-            save
+            <HiOutlineSave size={25}/>
           </span>{' '}
           &nbsp;
           <span
@@ -102,10 +104,14 @@ const TodoCheckFalse = (props) => {
             }}
             onMouseDown={handleMouseDown}
           >
-            delete
+            <AiOutlineDelete size={25}/>
           </span>
         </>
       ) : null}
+      {
+        todo.todo_start_date !== null && todo.todo_start_date !== "" &&
+        <TodoDate startDate={todo?.todo_start_date} endDate={todo?.todo_end_date}/>
+      }
       {listDateShow && (
         <TodoPeriodModal
           todo={todo}

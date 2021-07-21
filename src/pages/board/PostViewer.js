@@ -4,6 +4,7 @@ import palette from './board_content/palette';
 import Responsive from './board_content/Responsive';
 import SubInfo from './SubInfo';
 import PostActionButtons from './PostActionButton';
+import { useSelector } from 'react-redux';
 
 const PostViewerBlock = styled(Responsive)`
   margin-top: 96px;
@@ -25,6 +26,7 @@ const PostHead = styled.div`
 
 const PostViewer = (props) => {
   const { board, ws_id } = props;
+  const userId = useSelector(state=>state.userInfo.userId);
 
   return (
     <>
@@ -38,7 +40,9 @@ const PostViewer = (props) => {
               publishedDate={board.board_reg_time}
               hasMarginTop
             />
-            <PostActionButtons id={board.id} ws_id={ws_id} />
+            {board.user_id === userId &&
+              <PostActionButtons id={board.id} ws_id={ws_id} />
+            }
           </PostHead>
 
           <textarea

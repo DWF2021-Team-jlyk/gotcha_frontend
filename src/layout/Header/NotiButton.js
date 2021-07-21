@@ -120,7 +120,7 @@ const NotiButton = () => {
                     handleClose();
                   }}
                 >
-                  {`notiSpace: ${noti.WS_NAME} ${returnType(noti.NOTI_TYPE)}`}
+                  {`${noti.WS_NAME} ${returnType(noti.NOTI_TYPE)}`}
                 </ListItem>
               </StyledMenuItem>;
             })

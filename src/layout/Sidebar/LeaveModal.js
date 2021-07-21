@@ -51,7 +51,7 @@ function RoleModal({ role, leaveModal, leaveModalClose, userList, ws_id, user_id
           <Row style={{ marginTop: 20 }}>
             {userList.map((value, index) => {
               return value === user_id ? null :
-               <Col><AdminUserAvatar user_id={value} key={index} ws_id={ws_id} /></Col> 
+                <Col><AdminUserAvatar user_id={value} key={index} ws_id={ws_id} /></Col>
             })}
 
           </Row>
