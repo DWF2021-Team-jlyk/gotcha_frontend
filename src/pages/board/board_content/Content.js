@@ -65,7 +65,6 @@ const Content = () => {
     history.push(`/workspace/${ws_id}`);
   };
 
-
   const onBoardUpdate = async () => {
     dispatch(
       updateboard({

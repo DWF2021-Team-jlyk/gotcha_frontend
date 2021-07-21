@@ -45,7 +45,7 @@ const CardDesc = (props) => {
             as='textarea'
             // defalueValue={card?.card_desc}
             value={changeDesc}
-            style={{ height: '150px', resize: 'none' }}
+            style={{ height: '200px', resize: 'none' }}
             disabled
           />
         </div>
@@ -55,7 +55,7 @@ const CardDesc = (props) => {
           <Form.Group className='mb-3' controlId='exampleForm.ControlTextarea1'>
             <Form.Control
               as='textarea'
-              style={{ height: '180px' }}
+              style={{ height: '200px' }}
               onChange={e => setChangeDesc(e.target.value)}
             >
               {changeDesc}

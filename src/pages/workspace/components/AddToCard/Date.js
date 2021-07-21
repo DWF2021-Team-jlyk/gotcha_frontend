@@ -43,7 +43,6 @@ export default function AddDate(props) {
     }, [card],
   );
 
-
   return (
     <div ref={ref}>
       <Button onClick={handleClick} style={buttonStyle}>

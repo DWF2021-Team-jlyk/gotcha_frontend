@@ -82,7 +82,9 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
     setFileName(workspace.ws_isImage);
   }, [workspace]);
 
+
   const onChangeName = (e) => {
+  
     setWorkspaceName(e.target.value);
     if ((workspaceName.length - 1) === 0) {
       setIsActiveName(true);

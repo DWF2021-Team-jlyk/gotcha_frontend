@@ -58,7 +58,11 @@ export default function TodoPeriodModal(props) {
           </Button>
           <Button
             variant="primary"
-            onClick={() => updateTodoDate(startDate, endDate)}
+            onClick={() => {
+              updateTodoDate(startDate, endDate);
+              handleClose();
+            }
+            }
           >
             Save
           </Button>

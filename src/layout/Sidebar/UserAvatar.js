@@ -117,7 +117,7 @@ const UserAvatar = (props) => {
         <Modal.Body>
           사유 작성 :
           <input
-            style={{width:380}}
+            style={{marginLeft:10, width:380}}
             onChange={e=>{setReason(e.target.value)}}
           />
         </Modal.Body>

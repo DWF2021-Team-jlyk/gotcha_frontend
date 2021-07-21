@@ -45,7 +45,7 @@ const WriteActionButtons = ({
           }}
           disabled={isActive}
         >
-          <b>포스트 등록</b>
+          <b>알림 등록</b>
         </button>
         <StyledButton onClick={onCancel}>취소</StyledButton>
       </WriteActionButtonsBlock>
@@ -61,7 +61,7 @@ const WriteActionButtons = ({
           }}
           disabled={isActive}
         >
-          <b>포스트 수정</b>
+          <b>알림 수정</b>
         </button>
         <StyledButton onClick={onCancel}>취소</StyledButton>
       </WriteActionButtonsBlock>
