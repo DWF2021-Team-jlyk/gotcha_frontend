@@ -49,9 +49,16 @@ const NotiCard = ({ noti }) => {
   };
   return (
     <Alert variant={returnTypeColor(noti.NOTI_TYPE)}>
-      <Alert.Link as={Link} to={`/workspace/${noti.WS_ID}`} style={{ textDecoration: 'none' }}>
+      <Alert.Link
+        as={Link}
+        to={`/workspace/${noti.WS_ID}`}
+        style={{ textDecoration: 'none' }}
+      >
         <div style={{ display: 'flex' }}>
-          <h4 style={{ marginBottom: 20 }}>[{returnType(noti.NOTI_TYPE)}] {noti.WS_NAME}</h4>
+          <h4
+            style={{ marginBottom: 20 }}
+            onClick={e=>onToggle(noti)}
+          >[{returnType(noti.NOTI_TYPE)}] {noti.WS_NAME}</h4>
         </div>
       </Alert.Link>
       <hr />
