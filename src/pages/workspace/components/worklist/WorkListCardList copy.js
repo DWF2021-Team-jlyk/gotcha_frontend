@@ -23,7 +23,7 @@ const IconMargin = {
 };
 
 const WorkListCardList = (props) => {
-  console.log(props);
+
   const { ws_id, list, listId } = props;
   const cardInputEl = useRef(null);
   const [listName, setListName] = useState('');
@@ -157,7 +157,7 @@ const WorkListCardList = (props) => {
               onKeyPress={e => {
                 if (e.key === 'Enter') {
                   if (e.target.value !== '') {
-                    console.log(cardTitle);
+                   
                     onCardAdd();
                     e.target.value = '';
                     setCardTitle('');

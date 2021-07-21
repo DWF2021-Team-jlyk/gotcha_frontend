@@ -7,6 +7,8 @@ import TodoPeriodModal from './TodoPeriodModal';
 import TodoDate from './TodoDate';
 import { AiOutlineCalendar, AiOutlineDelete } from 'react-icons/ai';
 import { HiOutlineSave } from 'react-icons/all';
+import 'antd/dist/antd.css';
+import { Tooltip } from 'antd';
 
 const listButton = {
   backgroundColor: '#7986CB',
@@ -28,23 +30,29 @@ const TodoCheckTrue = (props) => {
   const outFocusState = () => setIsFocus(false);
   const handleMouseDown = (e) => e.preventDefault();
 
-  const updateTodoIsdone = useCallback((todoIsdone) => {
-    dispatch(
-      updateCardTodo({
-        ...todo,
-        todo_isdone: todoIsdone,
-      }),
-    );
-  }, []);
+  const updateTodoIsdone = useCallback(
+    (todoIsdone) => {
+      dispatch(
+        updateCardTodo({
+          ...todo,
+          todo_isdone: todoIsdone,
+        }),
+      );
+    },
+    [todo],
+  );
 
-  const updateTodoName = useCallback((todoName) => {
-    dispatch(
-      updateCardTodo({
-        ...todo,
-        todo_name: todoName,
-      }),
-    );
-  }, []);
+  const updateTodoName = useCallback(
+    (todoName) => {
+      dispatch(
+        updateCardTodo({
+          ...todo,
+          todo_name: todoName,
+        }),
+      );
+    },
+    [todo],
+  );
 
   const deleteTodos = useCallback(
     (todo_id) =>
@@ -53,15 +61,16 @@ const TodoCheckTrue = (props) => {
           todo_id: todo_id,
         }),
       ),
-    []);
+    [],
+  );
 
   return (
     <div style={{ display: 'flex' }}>
       <Form.Check
-        type='checkbox'
-        id='autoSizingCheck'
-        className='mb-2'
-        checked='checked'
+        type="checkbox"
+        id="autoSizingCheck"
+        className="mb-2"
+        checked="checked"
         onClick={() => updateTodoIsdone('0')}
       />
 
@@ -75,20 +84,22 @@ const TodoCheckTrue = (props) => {
       </div>
 
       <Button onClick={handleShow} style={listButton}>
-        <AiOutlineCalendar
-          size={15}
-        />
+        <AiOutlineCalendar size={18} style={{ marginBottom: 5 }} />
       </Button>
 
       {isFocus ? (
         <>
+
+          &ensp;
           <span
             onMouseDown={handleMouseDown}
             onClick={() => {
               updateTodoName();
             }}
           >
-            <HiOutlineSave size={25}/>
+            <Tooltip title="save renamed">
+              <HiOutlineSave size={25} color='blue'/>
+            </Tooltip>
           </span>{' '}
           &nbsp;
           <span
@@ -97,19 +108,26 @@ const TodoCheckTrue = (props) => {
             }}
             onMouseDown={handleMouseDown}
           >
-            <AiOutlineDelete size={25}/>
+             <Tooltip title="delete todo">
+              <AiOutlineDelete size={25} color='red'/>
+            </Tooltip>
           </span>
         </>
       ) : null}
 
+      {todo.todo_start_date !== null && todo.todo_start_date !== '' && (
+        <TodoDate
+          startDate={todo?.todo_start_date}
+          endDate={todo?.todo_end_date}
+        />
+      )}
       {
-        todo.todo_start_date !== null && todo.todo_start_date !== "" &&
-        <TodoDate startDate={todo?.todo_start_date} endDate={todo?.todo_end_date}/>
+        <TodoPeriodModal
+          todo={todo}
+          show={listDateShow}
+          handleClose={handleClose}
+        />
       }
-      {<TodoPeriodModal
-        todo={todo}
-        show={listDateShow}
-        handleClose={handleClose} />}
     </div>
   );
 };

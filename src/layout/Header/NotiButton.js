@@ -42,15 +42,15 @@ const StyledMenuItem = withStyles((theme) => ({
 const returnType = (type) => {
   switch (type) {
     case 'c':
-      return '카드'; //card
+      return '[카드]'; //card
     case 'b':
-      return '보드'; //board
+      return '[보드]'; //board
     case 'i':
-      return '초대'; //invite
+      return '[초대]'; //invite
     case 'o':
-      return '퇴장'
+      return '[퇴장]'
     default:
-      return '할일'; //todo
+      return '[할일]'; //todo
   }
 };
 

@@ -34,18 +34,6 @@ const Helpers = {
   
         if (response.ok) {
           let data = response;
-          // console.log("안녕");
-  
-          // response.headers.append("Access-Control-Allow-Origin", "*");
-          // response.headers.append("Access-Control-Allow-Credentials", "true");
-  
-          // console.log(response.headers.get("Content-Type"));
-  
-          // if the type is json return, interpret it as json
-          // var myHeaders = new Headers();
-  
-          // myHeaders.append("Access-Control-Allow-Origin", "*");
-          // response.headers.set(myHeaders);
   
           if (
             response.headers.get("Content-Type").indexOf("application/json") > -1

@@ -28,8 +28,6 @@ const WorkListCard = (props) => {
 
   const onActiveInputClick = useCallback((card) => {
     if (editable === false) {
-      // console.log(card.cardId);
-      console.log(card.card_id);
       // setOpenModal(true);
       dispatch(showModal());
       dispatch(registerCard(card));
@@ -47,7 +45,6 @@ const WorkListCard = (props) => {
   },[]);
   const handleDisEditable = useCallback((e) => {
     setEditable(false);
-    console.log(e);
     if(e._reactName !== "onKeyPress")
       cardInputEL.current.value=card.card_name;
   },[]);
@@ -123,8 +120,9 @@ const WorkListCard = (props) => {
             className='cardButton'
           >
             <AiFillEdit
+              style={{marginLeft:10}}
               opacity={!editbutton ? 0 : '0.5'}
-              size='20'
+              size='24'
             />
              
           </div>

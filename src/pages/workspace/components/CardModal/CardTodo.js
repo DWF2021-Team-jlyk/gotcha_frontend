@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { BsCheckBox } from 'react-icons/bs';
-import { useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import 'react-datepicker/dist/react-datepicker.css';
 import TodoCheckTrue from './TodoCheckTrue';
 import TodoCheckFalse from './TodoCheckFalse';
@@ -8,22 +8,18 @@ import { postCardTodo } from '../../../../modules/cardTodo';
 import { updateCardTodo } from '../../../../modules/cardTodo';
 
 const CardTodo = (props) => {
-  const{cardId} = props;
-  console.log('cardTodo cardId',cardId);
+  const { cardId } = props;
 
-  const todos = useSelector(state => state.cardTodo.todos);
-  console.log('cardTodo todos',todos);
+  const todos = useSelector((state) => state.cardTodo.todos);
+
   const dispatch = useDispatch();
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(postCardTodo(cardId));
-  },[]);
-
-
+  }, []);
 
   return (
     <div>
-
       <div style={{ marginTop: 30, marginBottom: 20 }}>
         <h5>
           <BsCheckBox /> TodoList

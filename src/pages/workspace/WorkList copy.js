@@ -15,25 +15,7 @@ const listStyle = {
 
 const WorkList = (props) => {
     const {lists, cards, setLists, setCards} = props;
-    // const [lists, setLists] = useState(WorkSpaceData.lists);
-    // const url = '/workspace2'
-    // const datas = {
-    //     "list_id": 1
-    // };
-    // const options = {
-    //     method: 'POST',
-    //     headers: { 'content-type': 'application/json' },
-    //     data: JSON.stringify(datas),
-    //     url,
-    // };
-    //
-    // axios(options)
-    //     .then((res) => {
-    //         console.log(res)
-    //     }, [])
-    //     .catch(error => {
-    //         console.log(error)
-    //     });
+ 
     return (
         <>
             <Button

@@ -34,8 +34,7 @@ const WriteActionButtons = ({
 }) => {
   const dispatch = useDispatch();
   const {ws_id} = useParams();
-  console.log("isActive ",isActive)
-  console.log('WriteActionButton ws_id', ws_id);
+
   if (board?.id === null || board?.id === undefined) {
     return (
       <WriteActionButtonsBlock>
@@ -47,7 +46,7 @@ const WriteActionButtons = ({
           }}
           disabled={isActive}
         >
-          <b>포스트 등록</b>
+          <b>알림 등록</b>
         </button>
         <StyledButton onClick={onCancel}>취소</StyledButton>
       </WriteActionButtonsBlock>
@@ -63,7 +62,7 @@ const WriteActionButtons = ({
           }}
           disabled={isActive}
         >
-          <b>포스트 수정</b>
+          <b>알림 수정</b>
         </button>
         <StyledButton onClick={onCancel}>취소</StyledButton>
       </WriteActionButtonsBlock>

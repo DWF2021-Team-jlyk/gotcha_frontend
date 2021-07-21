@@ -47,10 +47,7 @@ const CardFile = (props) => {
             >
               <div style={{ padding: 5 }}>
                   <FileCheckTrue file={file} cardId={cardId} />
-                {/*{file.file_ischecked === '1' ? (*/}
-                {/*) : (*/}
-                {/*  <FileCheckFalse file={file} />*/}
-                {/*)}*/}
+               
               </div>
 
             </div>

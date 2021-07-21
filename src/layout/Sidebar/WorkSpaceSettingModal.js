@@ -38,7 +38,6 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
 
   const workspaces = useSelector(state => state.workspace.workspaces);
   const userId = useSelector(state=>state.userInfo.userId);
-  console.log('workspaces ==> ', workspaces);
   const classes = useStyles();
 
   const [leaveModal, setLeaveModal] = useState(false);
@@ -83,11 +82,10 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
   useEffect(() => {
     setFileName(workspace.ws_isImage);
   }, [workspace]);
-  console.log('imageName ', workspace.ws_isImage);
-  console.log('userList : ', userList);
+
 
   const onChangeName = (e) => {
-    console.log(workspaceName.length);
+  
     setWorkspaceName(e.target.value);
     if ((workspaceName.length - 1) === 0) {
       setIsActiveName(true);
@@ -115,7 +113,7 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
       const prev = reader.result;
       if (prev)
         setPreviewImg(prev.toString());
-      console.log('previewImg ', previewImg);
+     
     };
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0]);
@@ -133,7 +131,7 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
     formData.append('pre_ws_isImage', workspace.ws_isImage);
     formData.append('ws_isImage', image);
     const token = sessionStorage.getItem('accessToken');
-    console.log('token', token);
+    
     const url = '/home/updateImg';
 
     const options = {
@@ -160,10 +158,10 @@ const WorkSpaceSettingModal = ({ workspace, clicked, handleClose, role }) => {
     handleClose();
   };
 
-  console.log('imageName ', workspace.user_id);
+ 
 
   const leaveHandler = () => {
-    console.log('userList length' + userList.length);
+   
     if (userList.length == 1) {
       dispatch(deleteWorkspace(workspace.ws_id, userId));
     } else {

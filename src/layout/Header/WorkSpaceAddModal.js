@@ -59,6 +59,7 @@ const WorkSpaceAddModal = (props) => {
       setEmailList([]);
     }
   }, [props.clicked])
+
   useEffect(()=>{
     console.log('emailList',emailList)
   },[emailList])
@@ -73,9 +74,9 @@ const WorkSpaceAddModal = (props) => {
 
     const formData = new FormData();
     formData.append("ws_name",workspaceName)
-    console.log('ws_name : ',workspaceName);
+    
     formData.append("ws_isImage", image)
-    console.log('ws_isImage : ',image);
+    
     formData.append('member',emailList)
     for (let key of formData.keys())
       console.log('key', key);
@@ -83,7 +84,7 @@ const WorkSpaceAddModal = (props) => {
       console.log('value', value);
 
     const token = sessionStorage.getItem('accessToken')
-    console.log("token",token)
+    
     const url = "/home/addWorkspace";
 
     const options = {

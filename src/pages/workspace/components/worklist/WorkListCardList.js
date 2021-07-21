@@ -106,16 +106,17 @@ const WorkListCardList = (props) => {
             }}
           />
         </Tooltip>
-
-        <AiFillEdit
-          style={{
-            float: 'right',
-            fontSize: '1.5rem',
-          }}
-          onClick={(e) => {
-            dispatch(listUpdate({ ...list, list_name: listName }));
-          }}
-        />
+        <Tooltip title='바뀐 List 이름 저장'>
+          <AiFillEdit
+            style={{
+              float: 'right',
+              fontSize: '1.5rem',
+            }}
+            onClick={(e) => {
+              dispatch(listUpdate({ ...list, list_name: listName }));
+            }}
+          />
+        </Tooltip>
       </Card.Header>
 
       {/*<Menu*/}
@@ -161,7 +162,7 @@ const WorkListCardList = (props) => {
               onKeyPress={(e) => {
                 if (e.key === 'Enter') {
                   if (e.target.value !== '') {
-                    console.log('TTTTTTTTTTTTTTTT', cardTitle);
+               
                     onCardAdd();
                     e.target.value = '';
                     setCardTitle('');
@@ -170,18 +171,7 @@ const WorkListCardList = (props) => {
                 }
               }}
             />
-            {/*<Button*/}
-            {/*  onClick={(e) => {*/}
-            {/*    if (cardInputEl.current.value !== '') {*/}
-            {/*      onCardAdd();*/}
-            {/*      cardInputEl.current.value = '';*/}
-            {/*      setCardTitle('');*/}
-            {/*    }*/}
-            {/*    setShowCardInput(!showCardInput);*/}
-            {/*  }}*/}
-            {/*>*/}
-            {/*  save*/}
-            {/*</Button>*/}
+           
           </div>
         )}
       </Card.Body>

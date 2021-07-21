@@ -6,6 +6,8 @@ import { updateCardTodo, deleteCardTodo } from '../../../../modules/cardTodo';
 import TodoDate from './TodoDate';
 import { AiOutlineCalendar, AiOutlineDelete } from 'react-icons/ai';
 import { HiOutlineSave } from 'react-icons/all';
+import 'antd/dist/antd.css';
+import { Tooltip } from 'antd';
 
 const listButton = {
   backgroundColor: '#7986CB',
@@ -31,23 +33,29 @@ const TodoCheckFalse = (props) => {
 
   const dispatch = useDispatch();
 
-  const updateTodoIsdone = useCallback((todoIsdone) => {
-    dispatch(
-      updateCardTodo({
-        ...todo,
-        todo_isdone: todoIsdone,
-      }),
-    );
-  }, []);
+  const updateTodoIsdone = useCallback(
+    (todoIsdone) => {
+      dispatch(
+        updateCardTodo({
+          ...todo,
+          todo_isdone: todoIsdone,
+        }),
+      );
+    },
+    [todo],
+  );
 
-  const updateTodoName = useCallback((todoName) => {
-    dispatch(
-      updateCardTodo({
-        ...todo,
-        todo_name: todoName,
-      }),
-    );
-  }, []);
+  const updateTodoName = useCallback(
+    (todoName) => {
+      dispatch(
+        updateCardTodo({
+          ...todo,
+          todo_name: todoName,
+        }),
+      );
+    },
+    [todo],
+  );
 
   const deleteTodos = useCallback(
     (todo_id) =>
@@ -56,21 +64,26 @@ const TodoCheckFalse = (props) => {
           todo_id: todo_id,
         }),
       ),
-    []);
+    [todo],
+  );
 
   return (
     <div style={{ display: 'flex' }}>
       <Form.Check
-        type='checkbox'
-        id='autoSizingCheck'
-        className='mb-2'
-        onClick={() =>
-          updateTodoIsdone('1')
-        }
+        type="checkbox"
+        id="autoSizingCheck"
+        className="mb-2"
+        onClick={() => updateTodoIsdone('1')}
       />
       <span contentEditable style={{ width: 200 }}>
         <textarea
-          style={{ border: 'none', resize: 'none', height: 30, width:200, margin:0 }}
+          style={{
+            border: 'none',
+            resize: 'none',
+            height: 30,
+            width: 200,
+            margin: 0,
+          }}
           onFocus={onFocusState}
           onBlur={outFocusState}
           onChange={(e) => setTodoName(e.target.value)}
@@ -80,22 +93,22 @@ const TodoCheckFalse = (props) => {
       </span>{' '}
       &nbsp;
       <Button onClick={handleShow} style={listButton}>
-        <AiOutlineCalendar
-          size={15}
-        />
+        <AiOutlineCalendar size={18} style={{ marginBottom: 5 }} />
       </Button>{' '}
-
-      <br/>
+      <br />
       &nbsp;
       {isFocus ? (
         <>
+          &ensp;
           <span
             onMouseDown={handleMouseDown}
             onClick={() => {
-                updateTodoName(todoName);
+              updateTodoName(todoName);
             }}
           >
-            <HiOutlineSave size={25}/>
+            <Tooltip title="save renamed">
+              <HiOutlineSave size={25} color='blue'/>
+            </Tooltip>
           </span>{' '}
           &nbsp;
           <span
@@ -104,14 +117,18 @@ const TodoCheckFalse = (props) => {
             }}
             onMouseDown={handleMouseDown}
           >
-            <AiOutlineDelete size={25}/>
+             <Tooltip title="delete todo">
+              <AiOutlineDelete size={25} color='red'/>
+            </Tooltip>
           </span>
         </>
       ) : null}
-      {
-        todo.todo_start_date !== null && todo.todo_start_date !== "" &&
-        <TodoDate startDate={todo?.todo_start_date} endDate={todo?.todo_end_date}/>
-      }
+      {todo.todo_start_date !== null && todo.todo_start_date !== '' && (
+        <TodoDate
+          startDate={todo?.todo_start_date}
+          endDate={todo?.todo_end_date}
+        />
+      )}
       {listDateShow && (
         <TodoPeriodModal
           todo={todo}
