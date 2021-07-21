@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import HelpCarousel from './HelpCarousel';
 import { Button, Modal } from 'react-bootstrap';
-import Tooltip from '@material-ui/core/Tooltip';
+import 'antd/dist/antd.css';
+import { Tooltip } from 'antd';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
